@@ -1,5 +1,4 @@
 package core;
-//test
 import controller.Controller;
 
 public class Motion {
