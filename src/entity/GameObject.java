@@ -3,7 +3,6 @@ package entity;
 import core.Position;
 import core.ScreenSize;
 import core.Size;
-//test
 import java.awt.*;
 
 public abstract class GameObject {
