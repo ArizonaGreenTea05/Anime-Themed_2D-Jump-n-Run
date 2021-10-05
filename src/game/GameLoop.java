@@ -1,5 +1,6 @@
 package game;
 
+import display.GameDisplay;
 import menu.Menu;
 
 public class GameLoop implements Runnable {
@@ -11,11 +12,9 @@ public class GameLoop implements Runnable {
     private final double updateRate = 1.0d/60.0d;
 
     private long nextStatTime;
-    private int fps, ups;
+    private static int fps;
+    private int ups;
 
-    public GameLoop(Menu menu) {
-        this.menu = menu;
-    }
     public GameLoop(Game game) {
         this.game = game;
     }
@@ -44,14 +43,17 @@ public class GameLoop implements Runnable {
         }
     }
 
+
     private void printStats() {
         if(System.currentTimeMillis() > nextStatTime) {
-            System.out.println(String.format("FPS: %d, UPS: %d", fps, ups));
+            //System.out.println(String.format("FPS: %d, UPS: %d", fps, ups));
+            GameDisplay.setFPS(String.format("FPS: %d", fps));
             fps = 0;
             ups = 0;
             nextStatTime = System.currentTimeMillis() + 1000;
         }
     }
+
 
     private void update() {
         game.update();

@@ -17,6 +17,7 @@ public class GameDisplay extends JFrame {
     private final JButton back;
     private final JLabel theme = Menu.getThemeLabel();
     private final JLabel player = Menu.getPlayerLabel();
+    private static JLabel fps = new JLabel();
 
     public GameDisplay(int width, int height, Input input, String title) {
         setTitle(title);
@@ -32,6 +33,10 @@ public class GameDisplay extends JFrame {
         player.setBackground(Color.WHITE);
         player.setForeground(Menu.getBGColor());
 
+        fps.setBounds(10, 38, 60, 15);
+        fps.setBackground(Color.WHITE);
+        fps.setForeground(Menu.getBGColor());
+
         back = new JButton("<<back");
         back.setBounds(10, 10, 76, 20);
         back.addActionListener(getActionListenerBack());
@@ -41,6 +46,7 @@ public class GameDisplay extends JFrame {
         canvas.setPreferredSize(new Dimension(width, height));
         canvas.setFocusable(false);
 
+        add(fps);
         add(theme);
         add(player);
         add(back);
@@ -68,6 +74,7 @@ public class GameDisplay extends JFrame {
         // -> an dieser Stelle nicht notwendig, dass diese Sequenz ausgeführt wird
         // -> try-catch, damit an der Stelle kein error ausgegeben wird
         try {
+
             Graphics graphics = bufferStrategy.getDrawGraphics();
 
             graphics.setColor(Menu.getBGColor());
@@ -80,5 +87,9 @@ public class GameDisplay extends JFrame {
             bufferStrategy.show();
 
         } catch(IllegalStateException e) {}
+    }
+
+    public static void setFPS(String frames){
+        fps.setText(frames);
     }
 }
