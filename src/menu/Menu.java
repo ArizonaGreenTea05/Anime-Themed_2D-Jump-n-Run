@@ -9,25 +9,37 @@ import java.awt.event.ActionListener;
 import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
 
 public class Menu {
-    public static final String[] playerNameAoT = new String[] {"levi_ackerman", "mikasa_ackerman", "sasha_braus"};
-    public static final String[] playerNameJojo = new String[] {"dio", "kakyoin_noriaki"};
 
     public static String[] playerName;
 
+
+    private static final String[] playerSheetsInFolder = new String[] {"stand.png", "walk.png"};
+
+
+    private final JFrame menu=new JFrame("Menu");
+    private final JButton startGame;
+    private JButton[] players;
+    private final JButton[] themes = new JButton[gameTheme.length];
+    private final JButton backPlayers;
+    private final JButton backThemes;
+    private final int width, height;
+
+
+    /**
+     * declaration of themes, player names and colors
+     **/
+    public static final String[] playerNameAoT = new String[] {"levi_ackerman", "mikasa_ackerman", "sasha_braus"};
+    //public static final String[] playerNameJojo = new String[] {"dio", "kakyoin_noriaki"};
     private static int name;
     public static final String[] gameTheme = new String[] {"attack_on_titan"};
     private static int theme;
     private static final Color[] bgColor = new Color[]{(new Color(70, 90, 120))};
 
-    private static final String[] playerSheetsInFolder = new String[] {"stand.png", "walk.png"};
+    private static void setPlayerName(int i){
+        if(i==0) playerName = playerNameAoT;
+        //if(i==1) playerName = playerNameJojo;
+    }
 
-    private final JFrame menu=new JFrame("Menu");
-    private final JButton startGame;
-    private static JButton[] players;
-    private final JButton[] themes = new JButton[gameTheme.length];
-    private final JButton backPlayers;
-    private final JButton backThemes;
-    private final int width, height;
 
     public Menu(int width, int height){
         this.width = width;
@@ -109,15 +121,6 @@ public class Menu {
         };
     }
 
-    private ActionListener getActionListenerBackPlayers() {
-        return e -> {
-            menu.remove(startGame);
-            menu.remove(backPlayers);
-            menu.repaint();
-            addPlayers();
-        };
-    }
-
     private ActionListener getActionListenerBackThemes(){
         return e-> {
             for (JButton button : players) {
@@ -127,6 +130,15 @@ public class Menu {
             menu.repaint();
             menu.remove(backThemes);
             menu.repaint();
+        };
+    }
+
+    private ActionListener getActionListenerBackPlayers() {
+        return e -> {
+            menu.remove(startGame);
+            menu.remove(backPlayers);
+            menu.repaint();
+            addPlayers();
         };
     }
 
@@ -173,11 +185,6 @@ public class Menu {
         }
 
         return out.toString();
-    }
-
-    private static void setPlayerName(int i){
-        if(i==0) playerName = playerNameAoT;
-        if(i==1) playerName = playerNameJojo;
     }
 
     public static String getGameTheme(){
