@@ -26,9 +26,11 @@ public class GameDisplay extends JFrame {
         this.renderer = new Renderer();
 
         theme.setBounds(width-200, 5, 200, 15);
-        theme.setFocusable(false);
+        theme.setBackground(Color.WHITE);
+        theme.setForeground(Menu.getBGColor());
         player.setBounds(width-200, 22, 200, 15);
-        player.setFocusable(false);
+        player.setBackground(Color.WHITE);
+        player.setForeground(Menu.getBGColor());
 
         back = new JButton("<<back");
         back.setBounds(10, 10, 76, 20);

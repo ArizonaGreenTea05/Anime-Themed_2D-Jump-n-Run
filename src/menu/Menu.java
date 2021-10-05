@@ -81,7 +81,9 @@ public class Menu {
         backPlayers.addActionListener(getActionListenerBackPlayers());
 
         themeLabel.setBounds(width/2-200, 5, 200, 15);
+        themeLabel.setForeground(Color.WHITE);
         playerLabel.setBounds(width/2-200, 22, 200, 15);
+        playerLabel.setForeground(Color.WHITE);
 
         addThemes();
 
