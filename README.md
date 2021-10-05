@@ -18,7 +18,7 @@ Game:
 - Münzen zum Sammeln (mit counter, Highscore, etc.),
 - Zeitmesser (zu Highscore),
 - Lebensanzeige (best. Anzahl an Leben),
-- min. ein Typ von Gegner (NPC, verfolgt Spieler, kann Blöcke hoch & runter laufen/springen, erkennt void aber nicht, fügt Schaden hinzu -> ziehen Leben ab, kann Schaden nehmen wenn geschlagen, Design hängt von Theme ab),
+- min. ein Typ von Gegner (NPC, verfolgt Spieler, kann Blöcke hoch & runter laufen/springen, erkennt void aber nicht, fügt Schaden hinzu -> zieht Leben ab, kann Schaden nehmen wenn geschlagen, Design hängt von Theme ab),
 - verschiedene Animationen für verschiedene Schaden-Stadien des Spielers,
 
 #how to run:
