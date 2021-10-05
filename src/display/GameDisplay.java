@@ -15,6 +15,8 @@ public class GameDisplay extends JFrame {
     private final Canvas canvas;
     private final Renderer renderer;
     private final JButton back;
+    private final JLabel theme = Menu.getThemeLabel();
+    private final JLabel player = Menu.getPlayerLabel();
 
     public GameDisplay(int width, int height, Input input, String title) {
         setTitle(title);
@@ -23,6 +25,10 @@ public class GameDisplay extends JFrame {
 
         this.renderer = new Renderer();
 
+        theme.setBounds(width-200, 5, 200, 15);
+        theme.setFocusable(false);
+        player.setBounds(width-200, 22, 200, 15);
+        player.setFocusable(false);
 
         back = new JButton("<<back");
         back.setBounds(10, 10, 76, 20);
@@ -33,7 +39,8 @@ public class GameDisplay extends JFrame {
         canvas.setPreferredSize(new Dimension(width, height));
         canvas.setFocusable(false);
 
-
+        add(theme);
+        add(player);
         add(back);
         add(canvas);
         addKeyListener(input);

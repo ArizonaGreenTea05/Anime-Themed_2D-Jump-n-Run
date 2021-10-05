@@ -2,6 +2,7 @@ package menu;
 
 import game.Game;
 import game.GameLoop;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
@@ -24,6 +25,8 @@ public class Menu {
     private final JButton backThemes;
     private final int width, height;
 
+    private static JLabel themeLabel = new JLabel("Theme:");
+    private static JLabel playerLabel = new JLabel("Character:");
 
     /**
      * declaration of themes, player names and colors
@@ -77,8 +80,13 @@ public class Menu {
         backPlayers.setBounds(10, 10, backWidth, backHeight);
         backPlayers.addActionListener(getActionListenerBackPlayers());
 
+        themeLabel.setBounds(width/2-200, 5, 200, 15);
+        playerLabel.setBounds(width/2-200, 22, 200, 15);
 
         addThemes();
+
+        menu.add(themeLabel);
+        menu.add(playerLabel);
 
         menu.setVisible(true);
     }
@@ -94,7 +102,9 @@ public class Menu {
             menu.getContentPane().setBackground(getBGColor());
             menu.repaint();
         }
+        themeLabel.setText("Theme:        " + makeNameNice(getGameTheme()));
         menu.add(backThemes);
+        menu.repaint();
     }
 
     private void addThemes(){
@@ -163,6 +173,7 @@ public class Menu {
                 menu.remove(button);
             }
             menu.remove(backThemes);
+            playerLabel.setText("Character:  " + makeNameNice(getPlayerName()));
             menu.add(backPlayers);
             menu.add(startGame);
             menu.repaint();
@@ -186,6 +197,15 @@ public class Menu {
 
         return out.toString();
     }
+
+    public static JLabel getThemeLabel(){
+        return themeLabel;
+    }
+
+    public static JLabel getPlayerLabel(){
+        return playerLabel;
+    }
+
 
     public static String getGameTheme(){
         return gameTheme[theme];
