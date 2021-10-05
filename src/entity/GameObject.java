@@ -1,8 +1,8 @@
 package entity;
 
 import core.Position;
-import core.ScreenSize;
 import core.Size;
+
 import java.awt.*;
 
 public abstract class GameObject {
@@ -24,4 +24,5 @@ public abstract class GameObject {
     public Size getSize() {
         return size;
     }
+
 }

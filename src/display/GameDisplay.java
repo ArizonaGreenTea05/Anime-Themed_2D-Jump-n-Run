@@ -1,7 +1,7 @@
 package display;
 
 import core.ScreenSize;
-import game.Game;
+import game.state.State;
 import input.Input;
 import menu.Menu;
 
@@ -68,7 +68,7 @@ public class GameDisplay extends JFrame {
         };
     }
 
-    public void render(Game game){
+    public void render(State state){
         BufferStrategy bufferStrategy = canvas.getBufferStrategy();
         // Exception handling: wenn der button "back" gedrückt und das Fenster geschlossen wird, gibt "bufferStrategy.getDrawGraphics()" eine IllegalStateException aus, das Programm macht jedoch was es soll.
         // -> an dieser Stelle nicht notwendig, dass diese Sequenz ausgeführt wird
@@ -81,7 +81,7 @@ public class GameDisplay extends JFrame {
 
             graphics.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
 
-            renderer.render(game, graphics);
+            renderer.render(state, graphics);
 
             graphics.dispose();
             bufferStrategy.show();
