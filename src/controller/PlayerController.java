@@ -14,7 +14,7 @@ public class PlayerController implements Controller {
 
     @Override
     public boolean isRequestingUp() {
-        return input.isPressed(KeyEvent.VK_UP) || input.isPressed(KeyEvent.VK_W);
+        return input.isPressed(KeyEvent.VK_UP) || input.isPressed(KeyEvent.VK_W) || input.isPressed(KeyEvent.VK_SPACE);
     }
 
     @Override
