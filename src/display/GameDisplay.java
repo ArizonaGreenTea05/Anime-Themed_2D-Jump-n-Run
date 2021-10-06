@@ -26,14 +26,15 @@ public class GameDisplay extends JFrame {
 
         this.renderer = new Renderer();
 
-        theme.setBounds(width-200, 5, 200, 15);
+        theme.setBounds(ScreenSize.getWidth() - theme.getWidth() - 5, 5 , theme.getWidth(), theme.getHeight());
         theme.setBackground(Color.WHITE);
         theme.setForeground(Menu.getBGColor());
-        player.setBounds(width-200, 22, 200, 15);
+        player.setBounds(ScreenSize.getWidth() - player.getWidth() - 5,7 + theme.getHeight() , player.getWidth(), player.getHeight());
         player.setBackground(Color.WHITE);
         player.setForeground(Menu.getBGColor());
 
-        fps.setBounds(10, 38, 60, 15);
+        fps.setBounds(10, 38, player.getHeight()*5, player.getHeight());
+        fps.setFont(new Font("", Font.PLAIN, fps.getHeight()));
         fps.setBackground(Color.WHITE);
         fps.setForeground(Menu.getBGColor());
 
