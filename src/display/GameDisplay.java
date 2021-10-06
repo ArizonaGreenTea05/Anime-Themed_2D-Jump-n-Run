@@ -1,6 +1,7 @@
 package display;
 
 import core.ScreenSize;
+import game.GameLoop;
 import game.state.State;
 import input.Input;
 import menu.Menu;
@@ -65,6 +66,7 @@ public class GameDisplay extends JFrame {
     private ActionListener getActionListenerBack() {
         return e-> {
             new Menu(ScreenSize.getWidth(), ScreenSize.getHeight());
+            GameLoop.setRunning(false);
             dispose();
         };
     }

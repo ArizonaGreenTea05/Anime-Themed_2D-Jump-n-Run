@@ -10,7 +10,7 @@ public class GameState extends State {
     public GameState(Input input) {
         super(input);
 
-        gameObjects.add(new Player(new PlayerController(input), spriteLibrary));
-        //gameObjects.add(new Block());
+        Player player = new Player(new PlayerController(input), spriteLibrary);
+        gameObjects.add(player);
     }
 }

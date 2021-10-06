@@ -82,10 +82,10 @@ public class Menu {
 
         int labelHeight = menu.getHeight()/35;
         int labelWidth = menu.getWidth()/4;
-        themeLabel.setBounds(menu.getWidth()/4*3, 5, labelWidth, labelHeight);
+        themeLabel.setBounds(menu.getWidth()/4*3+10, 10, labelWidth, labelHeight);
         themeLabel.setForeground(Color.WHITE);
         themeLabel.setFont(new Font("", Font.PLAIN, labelHeight));
-        playerLabel.setBounds(menu.getWidth()/4*3, 8+labelHeight, labelWidth, labelHeight);
+        playerLabel.setBounds(menu.getWidth()/4*3+10, 13+labelHeight, labelWidth, labelHeight);
         playerLabel.setForeground(Color.WHITE);
         playerLabel.setFont(new Font("", Font.PLAIN, labelHeight));
 

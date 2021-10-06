@@ -1,14 +1,12 @@
 package game;
 
 import display.GameDisplay;
-import menu.Menu;
 
 public class GameLoop implements Runnable {
 
     private Game game;
-    private Menu menu;
 
-    private boolean running;
+    private static boolean running;
     private final double updateRate = 1.0d/60.0d;
 
     private long nextStatTime;
@@ -63,5 +61,9 @@ public class GameLoop implements Runnable {
     private void render() {
         game.render();
         fps++;
+    }
+
+    public static void setRunning(boolean b){
+        running = b;
     }
 }
