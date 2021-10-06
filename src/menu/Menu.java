@@ -80,10 +80,14 @@ public class Menu {
         backPlayers.setBounds(10, 10, backWidth, backHeight);
         backPlayers.addActionListener(getActionListenerBackPlayers());
 
-        themeLabel.setBounds(width/2-200, 5, 200, 15);
+        int labelHeight = menu.getHeight()/35;
+        int labelWidth = menu.getWidth()/4;
+        themeLabel.setBounds(menu.getWidth()/4*3, 5, labelWidth, labelHeight);
         themeLabel.setForeground(Color.WHITE);
-        playerLabel.setBounds(width/2-200, 22, 200, 15);
+        themeLabel.setFont(new Font("", Font.PLAIN, labelHeight));
+        playerLabel.setBounds(menu.getWidth()/4*3, 8+labelHeight, labelWidth, labelHeight);
         playerLabel.setForeground(Color.WHITE);
+        playerLabel.setFont(new Font("", Font.PLAIN, labelHeight));
 
         addThemes();
 
@@ -104,7 +108,7 @@ public class Menu {
             menu.getContentPane().setBackground(getBGColor());
             menu.repaint();
         }
-        themeLabel.setText("Theme:        " + makeNameNice(getGameTheme()));
+        themeLabel.setText("Theme:       " + makeNameNice(getGameTheme()));
         menu.add(backThemes);
         menu.repaint();
     }
