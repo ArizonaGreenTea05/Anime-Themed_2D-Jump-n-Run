@@ -16,6 +16,7 @@ public class Menu {
 
     private static final String[] playerSheetsInFolder = new String[] {"stand.png", "walk.png"};
 
+    private JButton exit = new JButton("EXIT");
 
     private final JFrame menu=new JFrame("Menu");
     private final JButton startGame;
@@ -80,6 +81,10 @@ public class Menu {
         backPlayers.setBounds(10, 10, backWidth, backHeight);
         backPlayers.addActionListener(getActionListenerBackPlayers());
 
+
+        exit.setBounds(10, menu.getHeight()-backHeight-45, backWidth, backHeight);
+        exit.addActionListener(getActionListenerExit());
+
         int labelHeight = menu.getHeight()/35;
         int labelWidth = menu.getWidth()/4;
         themeLabel.setBounds(menu.getWidth()/4*3+10, 10, labelWidth, labelHeight);
@@ -93,7 +98,7 @@ public class Menu {
 
         menu.add(themeLabel);
         menu.add(playerLabel);
-
+        menu.add(exit);
         menu.setVisible(true);
     }
 
@@ -128,6 +133,12 @@ public class Menu {
 
     public static String[] getPlayerSheetsInFolder() {
         return playerSheetsInFolder;
+    }
+
+    private ActionListener getActionListenerExit() {
+        return e -> {
+          System.exit(1);
+        };
     }
 
     private ActionListener getActionListenerStart() {
