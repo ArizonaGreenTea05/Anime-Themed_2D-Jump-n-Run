@@ -28,7 +28,7 @@ public class Menu {
     private final JButton backPlayers;
     private final JButton backThemes;
     private final int width, height;
-    private JLabel background = new JLabel();
+    //private JLabel background = new JLabel();
 
     private static JLabel themeLabel = new JLabel("Theme:");
     private static JLabel playerLabel = new JLabel("Character:");
@@ -60,8 +60,8 @@ public class Menu {
         menu.setLayout(null);
         menu.setLocationRelativeTo(null);
 
-        background.setBounds(0,0,menu.getWidth(), menu.getHeight());
-        background.setDisabledIcon(getBackground());
+        //background.setBounds(0,0,menu.getWidth(), menu.getHeight());
+        //background.setDisabledIcon(getBackground());
 
 
         startGame = new JButton("START GAME");
@@ -90,6 +90,7 @@ public class Menu {
 
 
         exit.setBounds(10, menu.getHeight()-backHeight-45, backWidth, backHeight);
+        exit.setFont(new Font("", Font.PLAIN, backHeight/3*2));
         exit.addActionListener(getActionListenerExit());
 
         int labelHeight = menu.getHeight()/35;
@@ -103,7 +104,7 @@ public class Menu {
 
         addThemes();
 
-        menu.add(background);
+        //menu.add(background);
         menu.add(themeLabel);
         menu.add(playerLabel);
         menu.add(exit);
@@ -160,7 +161,7 @@ public class Menu {
 
     private ActionListener getActionListenerExit() {
         return e -> {
-          System.exit(1);
+          System.exit(0);
         };
     }
 
