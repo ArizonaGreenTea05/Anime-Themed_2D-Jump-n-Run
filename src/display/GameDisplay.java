@@ -80,8 +80,8 @@ public class GameDisplay extends JFrame {
         player.setBackground(Color.WHITE);
         player.setForeground(Menu.getBGColor());
 
-        fps.setBounds(10, 38, player.getHeight()*5, player.getHeight());
-        fps.setFont(new Font("", Font.PLAIN, fps.getHeight()));
+        fps.setBounds(10, 38, player.getHeight()*4, player.getHeight());
+        fps.setFont(new Font("", Font.PLAIN, fps.getHeight()/6*5));
         fps.setBackground(Color.WHITE);
         fps.setForeground(Menu.getBGColor());
     }
