@@ -13,23 +13,69 @@ import java.awt.image.BufferStrategy;
 
 public class GameDisplay extends JFrame {
 
-    private final Canvas canvas;
+    private Canvas canvas;
     private final Renderer renderer;
-    private final JButton back;
+    private int width, height;
+    private JButton back;
     private final JLabel theme = Menu.getThemeLabel();
     private final JLabel player = Menu.getPlayerLabel();
     private static JLabel fps = new JLabel();
 
     public GameDisplay(int width, int height, Input input, String title) {
+        this.width = width;
+        this.height = height;
+
         setTitle(title);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setResizable(true);
 
         this.renderer = new Renderer();
 
+        initializeLabels();
+
+        initializeBackButton();
+
+        initializeCanvas();
+
+        addAll();
+
+        addKeyListener(input);
+        pack();
+
+        canvas.createBufferStrategy(3);
+
+        setLocationRelativeTo(null);
+        setVisible(true);
+    }
+
+
+    private void addAll() {
+        add(fps);
+        add(theme);
+        add(player);
+        add(back);
+        add(canvas);
+    }
+
+    private void initializeCanvas() {
+        canvas = new Canvas();
+        canvas.setPreferredSize(new Dimension(width, height));
+        canvas.setFocusable(false);
+    }
+
+    private void initializeBackButton() {
+        back = new JButton("<<back");
+        back.setBounds(10, 10, 76, 20);
+        back.addActionListener(getActionListenerBack());
+        back.setFocusable(false);
+    }
+
+    private void initializeLabels() {
+
         theme.setBounds(ScreenSize.getWidth() - theme.getWidth() - 5, 5 , theme.getWidth(), theme.getHeight());
         theme.setBackground(Color.WHITE);
         theme.setForeground(Menu.getBGColor());
+
         player.setBounds(ScreenSize.getWidth() - player.getWidth() - 5,7 + theme.getHeight() , player.getWidth(), player.getHeight());
         player.setBackground(Color.WHITE);
         player.setForeground(Menu.getBGColor());
@@ -38,29 +84,6 @@ public class GameDisplay extends JFrame {
         fps.setFont(new Font("", Font.PLAIN, fps.getHeight()));
         fps.setBackground(Color.WHITE);
         fps.setForeground(Menu.getBGColor());
-
-        back = new JButton("<<back");
-        back.setBounds(10, 10, 76, 20);
-        back.addActionListener(getActionListenerBack());
-        back.setFocusable(false);
-
-        canvas = new Canvas();
-        canvas.setPreferredSize(new Dimension(width, height));
-        canvas.setFocusable(false);
-
-        add(fps);
-        add(theme);
-        add(player);
-        add(back);
-        add(canvas);
-        addKeyListener(input);
-        pack();
-
-        canvas.createBufferStrategy(3);
-
-
-        setLocationRelativeTo(null);
-        setVisible(true);
     }
 
     private ActionListener getActionListenerBack() {
