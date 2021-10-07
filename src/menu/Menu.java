@@ -43,6 +43,10 @@ public class Menu {
     private static int theme;
     private static final Color[] bgColor = new Color[]{(new Color(70, 90, 120))};
 
+    private Color buttonColor1 = new Color(250, 200, 230);
+    private Color buttonColor2 = new Color(4, 162, 236);
+    private String textFont = "Comic Sans MS";
+
     private static void setPlayerName(int i){
         if(i==0) playerName = playerNameAoT;
         //if(i==1) playerName = playerNameJojo;
@@ -84,13 +88,13 @@ public class Menu {
         int fontSize = labelHeight-4;
         themeLabel.setBounds(menu.getWidth()/4*3+10, 10, labelWidth, labelHeight);
         themeLabel.setForeground(Color.WHITE);
-        themeLabel.setFont(new Font("", Font.PLAIN, fontSize));
+        themeLabel.setFont(new Font(textFont, Font.PLAIN, fontSize));
         playerLabel.setBounds(menu.getWidth()/4*3+10, 13+labelHeight, labelWidth, labelHeight);
         playerLabel.setForeground(Color.WHITE);
-        playerLabel.setFont(new Font("", Font.PLAIN, fontSize));
+        playerLabel.setFont(new Font(textFont, Font.PLAIN, fontSize));
         highScoreLabel.setBounds(menu.getWidth()/4*3+10, 16+2*labelHeight, labelWidth, labelHeight);
         highScoreLabel.setForeground(Color.WHITE);
-        highScoreLabel.setFont(new Font("", Font.PLAIN, fontSize));
+        highScoreLabel.setFont(new Font(textFont, Font.PLAIN, fontSize));
         // -Status-Anzeige-
     }
 
@@ -113,6 +117,9 @@ public class Menu {
         // start Button
         startGame = new JButton("START GAME");
         startGame.setBounds(menu.getWidth()/3,menu.getHeight()/3,menu.getWidth()/3,menu.getHeight()/5);
+        startGame.setBackground(buttonColor1);
+        startGame.setForeground(Color.WHITE);
+        startGame.setFont(new Font(textFont, Font.PLAIN, startGame.getHeight()/4));
         startGame.addActionListener(getActionListenerStart());
         // -start Button-
 
@@ -122,20 +129,26 @@ public class Menu {
          min Größe so groß, dass Text angezeigt werden kann: 76 * 10
         -> wenn relative Maße größer werden diese benutzt, wenn nicht die min Maße
          */
-        int backWidth = 76;
+        int backWidth = 100;
         int backHeight = 10;
-        if (menu.getHeight()/20 > backWidth){
-            backWidth = menu.getHeight()/20;
+        if (menu.getHeight()/6 > backWidth){
+            backWidth = menu.getHeight()/6;
         }
         if(menu.getHeight()/20 > backHeight){
             backHeight = menu.getHeight()/20;
         }
         backThemes = new JButton("<<back");
         backThemes.setBounds(10, 10, backWidth, backHeight);
+        backThemes.setFont(new Font(textFont, Font.PLAIN, backHeight/5*3));
+        backThemes.setBackground(buttonColor2);
+        backThemes.setForeground(Color.WHITE);
         backThemes.addActionListener(getActionListenerBackThemes());
 
         backPlayers = new JButton("<<back");
         backPlayers.setBounds(10, 10, backWidth, backHeight);
+        backPlayers.setFont(new Font(textFont, Font.PLAIN, backHeight/5*3));
+        backPlayers.setBackground(buttonColor2);
+        backPlayers.setForeground(Color.WHITE);
         backPlayers.addActionListener(getActionListenerBackPlayers());
 
         // -back Buttons-
@@ -143,7 +156,9 @@ public class Menu {
 
         // exit Button
         exit.setBounds(10, menu.getHeight()-backHeight-45, backWidth, backHeight);
-        exit.setFont(new Font("", Font.PLAIN, backHeight/3*2));
+        exit.setFont(new Font(textFont, Font.PLAIN, backHeight/5*3));
+        exit.setBackground(buttonColor2);
+        exit.setForeground(Color.WHITE);
         exit.addActionListener(getActionListenerExit());
         // - exit Button-
     }
@@ -167,10 +182,14 @@ public class Menu {
 
     private void addPlayers(){
         players = new JButton[playerName.length];
+
         for (int i = 0; i < playerName.length; i++) {
             players[i] = new JButton(makeNameNice(playerName[i]));
 
             players[i].setBounds(menu.getWidth()/4,menu.getHeight()/10+i*(menu.getHeight()/12 + 5),menu.getWidth()/2,menu.getHeight()/12);
+            players[i].setFont(new Font(textFont, Font.PLAIN, players[i].getHeight()/3));
+            players[i].setBackground(buttonColor1);
+            players[i].setForeground(Color.WHITE);
             players[i].addActionListener(getActionListenerPlayers(i));
             menu.add(players[i]);
             menu.getContentPane().setBackground(getBGColor());
@@ -186,6 +205,9 @@ public class Menu {
             themes[i] = new JButton(makeNameNice(gameTheme[i]));
 
             themes[i].setBounds(menu.getWidth()/4,menu.getHeight()/10+i*(menu.getHeight()/12 + 5),menu.getWidth()/2,menu.getHeight()/12);
+            themes[i].setFont(new Font(textFont, Font.PLAIN, themes[i].getHeight()/3));
+            themes[i].setBackground(buttonColor1);
+            themes[i].setForeground(Color.WHITE);
             themes[i].addActionListener(getActionListenerThemes(i));
             menu.add(themes[i]);
         }
