@@ -28,7 +28,7 @@ public class Menu {
     private final JButton backPlayers;
     private final JButton backThemes;
     private final int width, height;
-    //private JLabel background = new JLabel();
+    private JLabel background = new JLabel();
 
     private static JLabel themeLabel = new JLabel("Theme:");
     private static JLabel playerLabel = new JLabel("Character:");
@@ -60,8 +60,8 @@ public class Menu {
         menu.setLayout(null);
         menu.setLocationRelativeTo(null);
 
-        //background.setBounds(0,0,menu.getWidth(), menu.getHeight());
-        //background.setDisabledIcon(getBackground());
+        background.setBounds(0,0,menu.getWidth(), menu.getHeight());
+        background.setIcon(getBackground());
 
 
         startGame = new JButton("START GAME");
@@ -102,9 +102,11 @@ public class Menu {
         playerLabel.setForeground(Color.WHITE);
         playerLabel.setFont(new Font("", Font.PLAIN, labelHeight));
 
+
+        menu.add(background);
+
         addThemes();
 
-        //menu.add(background);
         menu.add(themeLabel);
         menu.add(playerLabel);
         menu.add(exit);
@@ -113,13 +115,17 @@ public class Menu {
 
 
 
-    //Versuch, Hintergrund per JLabel Icon zu setzen, aber file Loading funktioniert nicht, egal wie ich es probiere
 
     private Icon getBackground() {
         Image img = null;
+        try {
+            img = ImageIO.read(getClass().getResource("/menu/bg.gif"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        Image scaledImage = img.getScaledInstance(menu.getWidth(), menu.getHeight(), Image.SCALE_DEFAULT);
+        ImageIcon icon = new ImageIcon(scaledImage);
 
-
-        Icon icon = new ImageIcon(img);
         return icon;
     }
 
