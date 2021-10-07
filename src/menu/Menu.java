@@ -2,7 +2,6 @@ package menu;
 
 import game.Game;
 import game.GameLoop;
-import gfx.ImageUtils;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -22,13 +21,13 @@ public class Menu {
     private JButton exit = new JButton("EXIT");
 
     private final JFrame menu=new JFrame("Menu");
-    private final JButton startGame;
+    private JButton startGame = new JButton();
     private JButton[] players;
-    private final JButton[] themes = new JButton[gameTheme.length];
-    private final JButton backPlayers;
-    private final JButton backThemes;
+    private  JButton[] themes = new JButton[gameTheme.length];
+    private JButton backPlayers = new JButton();
+    private JButton backThemes = new JButton();
     private final int width, height;
-    private JLabel background = new JLabel();
+    private final JLabel background = new JLabel();
 
     private static JLabel themeLabel = new JLabel("Theme:");
     private static JLabel playerLabel = new JLabel("Character:");
@@ -53,24 +52,56 @@ public class Menu {
         this.width = width;
         this.height = height;
 
-        menu.setSize(width/2,height/2);
+        initializeMenu();
+
+        initializeButtons();
+
+        initializeBackground();
+
+        addButtons();
+
+        menu.setVisible(true);
+    }
+
+
+    private void initializeMenu() {
+        // 16/9-Format, halb so breit wie Bildschirm, Höhe dementsprechend angepasst
+        menu.setSize(width/2,width/32*9);
         menu.setDefaultCloseOperation(EXIT_ON_CLOSE);
         menu.getContentPane().setBackground(new Color(23, 139, 221));
         menu.setResizable(false);
         menu.setLayout(null);
         menu.setLocationRelativeTo(null);
+    }
 
+    private void addButtons() {
+        addThemes();
+        menu.add(themeLabel);
+        menu.add(playerLabel);
+        menu.add(exit);
+    }
+
+    private void initializeBackground() {
         background.setBounds(0,0,menu.getWidth(), menu.getHeight());
         background.setIcon(getBackground());
+        menu.setContentPane(background);
+    }
+
+    private void initializeButtons() {
 
 
+        // start Button
         startGame = new JButton("START GAME");
         startGame.setBounds(menu.getWidth()/3,menu.getHeight()/3,menu.getWidth()/3,menu.getHeight()/5);
         startGame.addActionListener(getActionListenerStart());
+        // -start Button-
 
 
-        // min Größe dass Text angezeigt werden kann: 76*10
-        // -> wenn relative Maße größer werden diese benutzt, wenn nicht die min Maße
+        // back Buttons
+        /*
+         min Größe so groß, dass Text angezeigt werden kann: 76 * 10
+        -> wenn relative Maße größer werden diese benutzt, wenn nicht die min Maße
+         */
         int backWidth = 76;
         int backHeight = 10;
         if (menu.getHeight()/20 > backWidth){
@@ -88,11 +119,17 @@ public class Menu {
         backPlayers.setBounds(10, 10, backWidth, backHeight);
         backPlayers.addActionListener(getActionListenerBackPlayers());
 
+        // -back Buttons-
 
+
+        // exit Button
         exit.setBounds(10, menu.getHeight()-backHeight-45, backWidth, backHeight);
         exit.setFont(new Font("", Font.PLAIN, backHeight/3*2));
         exit.addActionListener(getActionListenerExit());
+        // - exit Button-
 
+
+        // Status-Anzeige
         int labelHeight = menu.getHeight()/35;
         int labelWidth = menu.getWidth()/4;
         themeLabel.setBounds(menu.getWidth()/4*3+10, 10, labelWidth, labelHeight);
@@ -101,20 +138,9 @@ public class Menu {
         playerLabel.setBounds(menu.getWidth()/4*3+10, 13+labelHeight, labelWidth, labelHeight);
         playerLabel.setForeground(Color.WHITE);
         playerLabel.setFont(new Font("", Font.PLAIN, labelHeight));
+        // -Status-Anzeige-
 
-
-
-
-        addThemes();
-
-        menu.add(themeLabel);
-        menu.add(playerLabel);
-        menu.add(exit);
-        menu.add(background);
-        menu.setVisible(true);
     }
-
-
 
 
     private Icon getBackground() {
@@ -124,8 +150,8 @@ public class Menu {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        Image scaledImage = img.getScaledInstance(menu.getWidth(), menu.getHeight(), Image.SCALE_DEFAULT);
-        ImageIcon icon = new ImageIcon(scaledImage);
+        img = img.getScaledInstance(menu.getWidth(), menu.getHeight(), Image.SCALE_DEFAULT);
+        ImageIcon icon = new ImageIcon(img);
 
         return icon;
     }
@@ -146,7 +172,6 @@ public class Menu {
         }
         themeLabel.setText("Theme:       " + makeNameNice(getGameTheme()));
         menu.add(backThemes);
-        menu.add(background);
         menu.repaint();
     }
 
@@ -158,7 +183,6 @@ public class Menu {
             themes[i].addActionListener(getActionListenerThemes(i));
             menu.add(themes[i]);
         }
-        menu.add(background);
         menu.repaint();
     }
 
@@ -189,7 +213,6 @@ public class Menu {
             addThemes();
             menu.repaint();
             menu.remove(backThemes);
-            menu.add(background);
             menu.repaint();
         };
     }
@@ -198,7 +221,6 @@ public class Menu {
         return e -> {
             menu.remove(startGame);
             menu.remove(backPlayers);
-            menu.add(background);
             menu.repaint();
             addPlayers();
         };
@@ -213,7 +235,6 @@ public class Menu {
             }
             addPlayers();
             menu.add(backThemes);
-            menu.add(background);
             menu.repaint();
         };
     }
@@ -229,7 +250,6 @@ public class Menu {
             playerLabel.setText("Character:  " + makeNameNice(getPlayerName()));
             menu.add(backPlayers);
             menu.add(startGame);
-            menu.add(background);
             menu.repaint();
         };
     }
