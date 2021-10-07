@@ -2,10 +2,13 @@ package menu;
 
 import game.Game;
 import game.GameLoop;
+import gfx.ImageUtils;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 
 import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
 
@@ -25,6 +28,7 @@ public class Menu {
     private final JButton backPlayers;
     private final JButton backThemes;
     private final int width, height;
+    private JLabel background = new JLabel();
 
     private static JLabel themeLabel = new JLabel("Theme:");
     private static JLabel playerLabel = new JLabel("Character:");
@@ -55,6 +59,9 @@ public class Menu {
         menu.setResizable(false);
         menu.setLayout(null);
         menu.setLocationRelativeTo(null);
+
+        background.setBounds(0,0,menu.getWidth(), menu.getHeight());
+        background.setDisabledIcon(getBackground());
 
 
         startGame = new JButton("START GAME");
@@ -96,11 +103,27 @@ public class Menu {
 
         addThemes();
 
+        menu.add(background);
         menu.add(themeLabel);
         menu.add(playerLabel);
         menu.add(exit);
         menu.setVisible(true);
     }
+
+
+
+    //Versuch, Hintergrund per JLabel Icon zu setzen, aber file Loading funktioniert nicht, egal wie ich es probiere
+
+    private Icon getBackground() {
+        Image img = null;
+
+
+        Icon icon = new ImageIcon(img);
+        return icon;
+    }
+
+
+
 
     private void addPlayers(){
         players = new JButton[playerName.length];
