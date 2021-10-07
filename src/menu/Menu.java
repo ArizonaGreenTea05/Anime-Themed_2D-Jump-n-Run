@@ -31,6 +31,7 @@ public class Menu {
 
     private static JLabel themeLabel = new JLabel("Theme:");
     private static JLabel playerLabel = new JLabel("Character:");
+    private static JLabel highScoreLabel = new JLabel("High Score:");
 
     /**
      * declaration of themes, player names and colors
@@ -56,9 +57,11 @@ public class Menu {
 
         initializeButtons();
 
+        initializeLabels();
+
         initializeBackground();
 
-        addButtons();
+        addAll();
 
         menu.setVisible(true);
     }
@@ -74,10 +77,28 @@ public class Menu {
         menu.setLocationRelativeTo(null);
     }
 
-    private void addButtons() {
+    private void initializeLabels() {
+        // Status-Anzeige
+        int labelHeight = menu.getHeight()/30;
+        int labelWidth = menu.getWidth()/4;
+        int fontSize = labelHeight-4;
+        themeLabel.setBounds(menu.getWidth()/4*3+10, 10, labelWidth, labelHeight);
+        themeLabel.setForeground(Color.WHITE);
+        themeLabel.setFont(new Font("", Font.PLAIN, fontSize));
+        playerLabel.setBounds(menu.getWidth()/4*3+10, 13+labelHeight, labelWidth, labelHeight);
+        playerLabel.setForeground(Color.WHITE);
+        playerLabel.setFont(new Font("", Font.PLAIN, fontSize));
+        highScoreLabel.setBounds(menu.getWidth()/4*3+10, 16+2*labelHeight, labelWidth, labelHeight);
+        highScoreLabel.setForeground(Color.WHITE);
+        highScoreLabel.setFont(new Font("", Font.PLAIN, fontSize));
+        // -Status-Anzeige-
+    }
+
+    private void addAll() {
         addThemes();
         menu.add(themeLabel);
         menu.add(playerLabel);
+        menu.add(highScoreLabel);
         menu.add(exit);
     }
 
@@ -88,7 +109,6 @@ public class Menu {
     }
 
     private void initializeButtons() {
-
 
         // start Button
         startGame = new JButton("START GAME");
@@ -110,7 +130,6 @@ public class Menu {
         if(menu.getHeight()/20 > backHeight){
             backHeight = menu.getHeight()/20;
         }
-
         backThemes = new JButton("<<back");
         backThemes.setBounds(10, 10, backWidth, backHeight);
         backThemes.addActionListener(getActionListenerBackThemes());
@@ -127,19 +146,6 @@ public class Menu {
         exit.setFont(new Font("", Font.PLAIN, backHeight/3*2));
         exit.addActionListener(getActionListenerExit());
         // - exit Button-
-
-
-        // Status-Anzeige
-        int labelHeight = menu.getHeight()/35;
-        int labelWidth = menu.getWidth()/4;
-        themeLabel.setBounds(menu.getWidth()/4*3+10, 10, labelWidth, labelHeight);
-        themeLabel.setForeground(Color.WHITE);
-        themeLabel.setFont(new Font("", Font.PLAIN, labelHeight));
-        playerLabel.setBounds(menu.getWidth()/4*3+10, 13+labelHeight, labelWidth, labelHeight);
-        playerLabel.setForeground(Color.WHITE);
-        playerLabel.setFont(new Font("", Font.PLAIN, labelHeight));
-        // -Status-Anzeige-
-
     }
 
 
