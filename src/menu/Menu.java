@@ -103,13 +103,14 @@ public class Menu {
         playerLabel.setFont(new Font("", Font.PLAIN, labelHeight));
 
 
-        menu.add(background);
+
 
         addThemes();
 
         menu.add(themeLabel);
         menu.add(playerLabel);
         menu.add(exit);
+        menu.add(background);
         menu.setVisible(true);
     }
 
@@ -119,7 +120,7 @@ public class Menu {
     private Icon getBackground() {
         Image img = null;
         try {
-            img = ImageIO.read(getClass().getResource("/menu/bg.gif"));
+            img = ImageIO.read(getClass().getResource("/menu/bg.png"));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -145,6 +146,7 @@ public class Menu {
         }
         themeLabel.setText("Theme:       " + makeNameNice(getGameTheme()));
         menu.add(backThemes);
+        menu.add(background);
         menu.repaint();
     }
 
@@ -156,6 +158,7 @@ public class Menu {
             themes[i].addActionListener(getActionListenerThemes(i));
             menu.add(themes[i]);
         }
+        menu.add(background);
         menu.repaint();
     }
 
@@ -186,6 +189,7 @@ public class Menu {
             addThemes();
             menu.repaint();
             menu.remove(backThemes);
+            menu.add(background);
             menu.repaint();
         };
     }
@@ -194,6 +198,7 @@ public class Menu {
         return e -> {
             menu.remove(startGame);
             menu.remove(backPlayers);
+            menu.add(background);
             menu.repaint();
             addPlayers();
         };
@@ -208,6 +213,7 @@ public class Menu {
             }
             addPlayers();
             menu.add(backThemes);
+            menu.add(background);
             menu.repaint();
         };
     }
@@ -223,6 +229,7 @@ public class Menu {
             playerLabel.setText("Character:  " + makeNameNice(getPlayerName()));
             menu.add(backPlayers);
             menu.add(startGame);
+            menu.add(background);
             menu.repaint();
         };
     }
