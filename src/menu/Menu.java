@@ -74,6 +74,7 @@ public class Menu {
     private void initializeMenu() {
         // 16/9-Format, halb so breit wie Bildschirm, Höhe dementsprechend angepasst
         menu.setSize(width/2,width/32*9);
+        menu.setIconImage(getImage("sakura_icon.png"));
         menu.setDefaultCloseOperation(EXIT_ON_CLOSE);
         menu.getContentPane().setBackground(new Color(23, 139, 221));
         menu.setResizable(false);
@@ -108,7 +109,7 @@ public class Menu {
 
     private void initializeBackground() {
         background.setBounds(0,0,menu.getWidth(), menu.getHeight());
-        background.setIcon(getImage("bg.png", menu.getWidth(), menu.getHeight()));
+        background.setIcon(getIcon("bg.png", menu.getWidth(), menu.getHeight()));
         menu.setContentPane(background);
     }
 
@@ -164,7 +165,7 @@ public class Menu {
     }
 
 
-    private Icon getImage(String image, int width, int height) {
+    private Icon getIcon(String image, int width, int height) {
         Image img = null;
         try {
             img = ImageIO.read(getClass().getResource("/menu/" + image));
@@ -175,6 +176,17 @@ public class Menu {
         ImageIcon icon = new ImageIcon(img);
 
         return icon;
+    }
+
+    private Image getImage(String image) {
+        Image img = null;
+        try {
+            img = ImageIO.read(getClass().getResource("/menu/" + image));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return img;
     }
 
 
@@ -201,6 +213,7 @@ public class Menu {
     }
 
     private void addThemes(){
+
         for (int i = 0; i < gameTheme.length; i++) {
             themes[i] = new JButton(makeNameNice(gameTheme[i]));
 
@@ -208,6 +221,7 @@ public class Menu {
             themes[i].setFont(new Font(textFont, Font.PLAIN, themes[i].getHeight()/3));
             themes[i].setBackground(buttonColor1);
             themes[i].setForeground(Color.WHITE);
+
             themes[i].addActionListener(getActionListenerThemes(i));
             menu.add(themes[i]);
         }
