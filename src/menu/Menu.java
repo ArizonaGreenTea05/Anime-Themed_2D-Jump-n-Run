@@ -195,7 +195,7 @@ public class Menu {
             menu.getContentPane().setBackground(getBGColor());
             menu.repaint();
         }
-        themeLabel.setText("Theme:       " + makeNameNice(getGameTheme()));
+        themeLabel.setText("Theme:        " + makeNameNice(getGameTheme()));
         menu.add(backThemes);
         menu.repaint();
     }
@@ -275,7 +275,7 @@ public class Menu {
                 menu.remove(button);
             }
             menu.remove(backThemes);
-            playerLabel.setText("Character:  " + makeNameNice(getPlayerName()));
+            playerLabel.setText("Character:   " + makeNameNice(getPlayerName()));
             menu.add(backPlayers);
             menu.add(startGame);
             menu.repaint();
