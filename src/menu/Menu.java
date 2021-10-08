@@ -108,7 +108,7 @@ public class Menu {
 
     private void initializeBackground() {
         background.setBounds(0,0,menu.getWidth(), menu.getHeight());
-        background.setIcon(getBackground());
+        background.setIcon(getImage("bg.png", menu.getWidth(), menu.getHeight()));
         menu.setContentPane(background);
     }
 
@@ -164,14 +164,14 @@ public class Menu {
     }
 
 
-    private Icon getBackground() {
+    private Icon getImage(String image, int width, int height) {
         Image img = null;
         try {
-            img = ImageIO.read(getClass().getResource("/menu/bg.png"));
+            img = ImageIO.read(getClass().getResource("/menu/" + image));
         } catch (IOException e) {
             e.printStackTrace();
         }
-        img = img.getScaledInstance(menu.getWidth(), menu.getHeight(), Image.SCALE_DEFAULT);
+        img = img.getScaledInstance(width, height, Image.SCALE_DEFAULT);
         ImageIcon icon = new ImageIcon(img);
 
         return icon;
