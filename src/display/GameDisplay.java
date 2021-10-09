@@ -20,6 +20,7 @@ public class GameDisplay extends JFrame {
     private final JLabel theme = Menu.getThemeLabel();
     private final JLabel player = Menu.getPlayerLabel();
     private static JLabel fps = new JLabel();
+    private final JLabel background = new JLabel();
 
     public GameDisplay(int width, int height, Input input, String title) {
         this.width = width;
@@ -67,6 +68,8 @@ public class GameDisplay extends JFrame {
         back = new JButton("<<back");
         back.setBounds(10, 10, 76, 20);
         back.addActionListener(getActionListenerBack());
+        back.setBackground(Menu.getBGColor());
+        back.setForeground(Color.WHITE);
         back.setFocusable(false);
     }
 

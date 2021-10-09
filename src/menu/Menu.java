@@ -43,9 +43,11 @@ public class Menu {
     private static int theme;
     private static final Color[] bgColor = new Color[]{(new Color(70, 90, 120))};
 
+
     private Color buttonColor1 = new Color(250, 200, 230);
     private Color buttonColor2 = new Color(4, 162, 236);
     private String textFont = "Comic Sans MS";
+
 
     private static void setPlayerName(int i){
         if(i==0) playerName = playerNameAoT;
