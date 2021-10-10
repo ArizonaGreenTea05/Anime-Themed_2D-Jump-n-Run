@@ -13,9 +13,13 @@ public abstract class Block extends GameObject {
         this.block = block;
     }
 
+    @Override
+    public void update() {
+    }
+
 
     @Override
     public Image getSprite() {
-        return ImageUtils.loadImage("/sprites/units/attack_on_titan/blocks/" + block + ".png");
+        return ImageUtils.loadImage("/sprites/units/" + menu.Menu.getGameTheme() + "/blocks/" + block + ".png");
     }
 }
