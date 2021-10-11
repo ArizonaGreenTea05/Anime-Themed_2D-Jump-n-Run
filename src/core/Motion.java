@@ -43,7 +43,7 @@ public class Motion {
         }
 
         if(controller.isRequestingDown()) {
-            deltaY += 0.1;
+            deltaY -= 1E-100;
             sitting = true;
         }
 

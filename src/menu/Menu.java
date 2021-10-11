@@ -160,7 +160,7 @@ public class Menu {
         // exit Button
         exit.setBounds(10, menu.getHeight()-backHeight-45, backWidth, backHeight);
         exit.setFont(new Font(textFont, Font.PLAIN, backHeight/5*3));
-        exit.setBackground(buttonColor2);
+        exit.setBackground(buttonColor1);
         exit.setForeground(Color.WHITE);
         exit.addActionListener(getActionListenerExit());
         // - exit Button-
