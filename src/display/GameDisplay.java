@@ -17,8 +17,11 @@ public class GameDisplay extends JFrame {
     private final Renderer renderer;
     private int width, height;
     private JButton back;
+    private static double score = 0;
     private final JLabel theme = Menu.getThemeLabel();
     private final JLabel player = Menu.getPlayerLabel();
+    private static JLabel highScore = Menu.getHighScore();
+    private static JLabel scoreLabel = Menu.getScore();
     private static JLabel fps = new JLabel();
     private final JLabel background = new JLabel();
 
@@ -54,6 +57,8 @@ public class GameDisplay extends JFrame {
         add(fps);
         add(theme);
         add(player);
+        add(highScore);
+        add(scoreLabel);
         add(back);
         add(canvas);
     }
@@ -75,13 +80,25 @@ public class GameDisplay extends JFrame {
 
     private void initializeLabels() {
 
+        int gap = 2;
+
         theme.setBounds(ScreenSize.getWidth() - theme.getWidth() - 5, 5 , theme.getWidth(), theme.getHeight());
         theme.setBackground(Color.WHITE);
         theme.setForeground(Menu.getBGColor());
 
-        player.setBounds(ScreenSize.getWidth() - player.getWidth() - 5,7 + theme.getHeight() , player.getWidth(), player.getHeight());
+        player.setBounds(ScreenSize.getWidth() - player.getWidth() - 5,5 + gap + theme.getHeight() , player.getWidth(), player.getHeight());
         player.setBackground(Color.WHITE);
         player.setForeground(Menu.getBGColor());
+
+        highScore.setBounds(ScreenSize.getWidth() - player.getWidth() - 5,5 + 2 * gap + 2 * theme.getHeight() , player.getWidth(), player.getHeight());
+        highScore.setBackground(Color.WHITE);
+        highScore.setForeground(Menu.getBGColor());
+        highScore.setText("HighScore:      ");
+
+        scoreLabel.setBounds(ScreenSize.getWidth() - player.getWidth() - 5,5 + 3 * gap + 3 * theme.getHeight() , player.getWidth(), player.getHeight());
+        scoreLabel.setBackground(Color.WHITE);
+        scoreLabel.setForeground(Menu.getBGColor());
+        scoreLabel.setText("Score:");
 
         fps.setBounds(10, 38, player.getHeight()*4, player.getHeight());
         fps.setFont(new Font("", Font.PLAIN, fps.getHeight()/6*5));
@@ -120,5 +137,14 @@ public class GameDisplay extends JFrame {
 
     public static void setFPS(String frames){
         fps.setText(frames);
+    }
+
+    public static void setScoreLabel(int i) {
+        score = i;
+        scoreLabel.setText("Score:          " + score);
+    }
+
+    public static double getScore(){
+        return score;
     }
 }

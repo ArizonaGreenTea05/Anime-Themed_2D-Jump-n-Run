@@ -1,5 +1,6 @@
 package menu;
 
+import display.GameDisplay;
 import game.Game;
 import game.GameLoop;
 
@@ -32,6 +33,7 @@ public class Menu {
     private static JLabel themeLabel = new JLabel("Theme:");
     private static JLabel playerLabel = new JLabel("Character:");
     private static JLabel highScoreLabel = new JLabel("High Score:");
+    private static JLabel scoreLabel = new JLabel("Score:");
 
     /**
      * declaration of themes, player names and colors
@@ -98,6 +100,10 @@ public class Menu {
         highScoreLabel.setBounds(menu.getWidth()/4*3+10, 16+2*labelHeight, labelWidth, labelHeight);
         highScoreLabel.setForeground(Color.WHITE);
         highScoreLabel.setFont(new Font(textFont, Font.PLAIN, fontSize));
+        scoreLabel.setBounds(menu.getWidth()/4*3+10, 19+3*labelHeight, labelWidth, labelHeight);
+        scoreLabel.setForeground(Color.WHITE);
+        scoreLabel.setFont(new Font(textFont, Font.PLAIN, fontSize));
+        scoreLabel.setText("Score:          " + GameDisplay.getScore());
         // -Status-Anzeige-
     }
 
@@ -106,6 +112,7 @@ public class Menu {
         menu.add(themeLabel);
         menu.add(playerLabel);
         menu.add(highScoreLabel);
+        menu.add(scoreLabel);
         menu.add(exit);
     }
 
@@ -322,6 +329,14 @@ public class Menu {
 
     public static JLabel getPlayerLabel(){
         return playerLabel;
+    }
+
+    public static JLabel getHighScore() {
+        return highScoreLabel;
+    }
+
+    public static JLabel getScore() {
+        return scoreLabel;
     }
 
 

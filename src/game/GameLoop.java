@@ -4,6 +4,8 @@ import display.GameDisplay;
 
 public class GameLoop implements Runnable {
 
+    private int score = 0;
+
     private Game game;
 
     private static boolean running;
@@ -48,6 +50,8 @@ public class GameLoop implements Runnable {
             GameDisplay.setFPS(String.format("FPS: %d", fps));
             fps = 0;
             ups = 0;
+            score++;
+            GameDisplay.setScoreLabel(score);
             nextStatTime = System.currentTimeMillis() + 1000;
         }
     }
