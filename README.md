@@ -1,13 +1,14 @@
 #Java Real Time Game (Facharbeit Informatik)
+
 Echtzeit Jump'n'Run in Anlehnung an Super Mario
 
 #Ziele:
 
 Start Menü:
 
-- min. 2 wählbare Themes, a min. 2 wählbare Characters & min. 2 wählbare Levels,
-  - Levels: gespeichert in Textdokument und atumomatisch eingelesen -> Veränderung des Textdokuments = veränderung der Map
-- Start-Button,
+- min. 2 wählbare Themes, a min. 2 wählbare Characters & min. 2 wählbare Levels
+  - Levels: gespeichert in Textdokument und atumomatisch eingelesen -> Veränderung des Textdokuments = Veränderung der Map
+- Start-Button
 - Highscore-Anzeige
   - siehe Game
 
