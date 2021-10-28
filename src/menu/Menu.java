@@ -1,5 +1,6 @@
 package menu;
 
+import core.FileLoader;
 import display.GameDisplay;
 import game.Game;
 import game.GameLoop;
@@ -30,9 +31,11 @@ public class Menu {
     private final int width, height;
     private final JLabel background = new JLabel();
 
+    private static double highScore = Double.parseDouble(FileLoader.load("HighScore.txt"));
+
     private static JLabel themeLabel = new JLabel("Theme:");
     private static JLabel playerLabel = new JLabel("Character:");
-    private static JLabel highScoreLabel = new JLabel("High Score:");
+    private static JLabel highScoreLabel = new JLabel("High Score:  " + highScore);
     private static JLabel scoreLabel = new JLabel("Score:");
 
     /**
