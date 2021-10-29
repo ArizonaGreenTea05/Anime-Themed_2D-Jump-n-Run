@@ -1,11 +1,9 @@
 package core;
 
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.File;
+import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
+
 public class FileLoader{
 
     public static void save(String data, String filename){
