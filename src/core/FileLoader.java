@@ -4,7 +4,7 @@ import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
-public class FileLoader{
+public class FileLoader {
 
     public static void save(String data, String filename){
         try {
