@@ -15,9 +15,9 @@ public class Game {
     private State state;
 
 
-    public Game(int width, int height) {
+    public Game() {
         input = new Input();
-        gameDisplay = new GameDisplay(width, height, input, "Jump'n'Run - "+ Menu.makeNameNice(Menu.getGameTheme()) +" styled");
+        gameDisplay = new GameDisplay(input, "Jump'n'Run - "+ Menu.makeNameNice(Menu.getGameTheme()) +" styled");
         state = new GameState(input);
     }
 

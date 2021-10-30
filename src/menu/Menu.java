@@ -1,6 +1,7 @@
 package menu;
 
 import core.FileLoader;
+import core.ScreenSize;
 import display.GameDisplay;
 import game.Game;
 import game.GameLoop;
@@ -60,9 +61,9 @@ public class Menu {
     }
 
 
-    public Menu(int width, int height){
-        this.width = width;
-        this.height = height;
+    public Menu(){
+        this.width = ScreenSize.getWidth();
+        this.height = ScreenSize.getHeight();
 
         double highscore = Double.parseDouble(FileLoader.load("HighScore.txt"));
         double score = GameDisplay.getScore();
@@ -268,7 +269,7 @@ public class Menu {
 
     private ActionListener getActionListenerStart() {
         return e -> {
-            new Thread(new GameLoop(new Game(width, height))).start();
+            new Thread(new GameLoop(new Game())).start();
             menu.dispose();
         };
     }

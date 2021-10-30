@@ -25,9 +25,9 @@ public class GameDisplay extends JFrame {
     private static JLabel fps = new JLabel();
     private final JLabel background = new JLabel();
 
-    public GameDisplay(int width, int height, Input input, String title) {
-        this.width = width;
-        this.height = height;
+    public GameDisplay(Input input, String title) {
+        this.width = ScreenSize.getWidth();
+        this.height = ScreenSize.getHeight();
 
         setTitle(title);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -109,7 +109,7 @@ public class GameDisplay extends JFrame {
     private ActionListener getActionListenerBack() {
         return e-> {
             GameLoop.setRunning(false);
-            new Menu(ScreenSize.getWidth(), ScreenSize.getHeight());
+            new Menu();
             dispose();
         };
     }
