@@ -14,8 +14,7 @@ public class FileLoader{
             writer.write(data);
             writer.close();
         } catch (IOException e) {
-            System.err.println("FEHLER: Beim Speichernvon " + filename + " ist ein Fehler aufgetreten,");
-            //e.printStackTrace();
+            System.err.println("ERROR! failed to save file '" + filename + "'");
         }
     }
     
@@ -24,26 +23,17 @@ public class FileLoader{
         
         File file = new File(filename);
         if(!file.exists()){
-            System.err.println("FEHLER: Datei " + filename + " nicht gefunden!");
+            System.err.println("ERROR! file '" + filename + "' not found");
             return null;
         }
         
         try {
             input = new String(Files.readAllBytes(Path.of(filename)));
         } catch (IOException e) {
-            System.err.println("FEHLER: Beim Lesen der Datei " + filename + " ist ein Fehler aufgetreten,");
+            System.err.println("ERROR! failed to load file '" + filename + "'");
             return null;
         }
         return input;
-    }
-
-
-    public static void main(String[] args){
-        String out = "Das ist ein Test vom Laden und Speichern";
-        System.out.println("SAVE: " + out);
-        save(out, "FileLoader.txt");
-        String in = load("FileLoader.txt");
-        System.out.println("LOAD: " + in);
     }
 
 }

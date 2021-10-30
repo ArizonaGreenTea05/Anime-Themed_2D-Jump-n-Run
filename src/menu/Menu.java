@@ -20,23 +20,23 @@ public class Menu {
 
     private static final String[] playerSheetsInFolder = new String[] {"stand.png", "walk.png"};
 
-    private JButton exit = new JButton("EXIT");
+    private final JButton exit = new JButton("EXIT");
 
     private final JFrame menu=new JFrame("Menu");
     private JButton startGame = new JButton();
     private JButton[] players;
-    private  JButton[] themes = new JButton[gameTheme.length];
+    private final JButton[] themes = new JButton[gameTheme.length];
     private JButton backPlayers = new JButton();
     private JButton backThemes = new JButton();
     private final int width, height;
     private final JLabel background = new JLabel();
 
-    private static double highScore = Double.parseDouble(FileLoader.load("HighScore.txt"));
+    private static double highScore;
 
-    private static JLabel themeLabel = new JLabel("Theme:");
-    private static JLabel playerLabel = new JLabel("Character:");
-    private static JLabel highScoreLabel = new JLabel("High Score:  " + highScore);
-    private static JLabel scoreLabel = new JLabel("Score:");
+    private static final JLabel themeLabel = new JLabel("Theme:");
+    private static final JLabel playerLabel = new JLabel("Character:");
+    private static final JLabel highScoreLabel = new JLabel("High Score:");
+    private static final JLabel scoreLabel = new JLabel("Score:");
 
     /**
      * declaration of themes, player names and colors
@@ -49,9 +49,9 @@ public class Menu {
     private static final Color[] bgColor = new Color[]{(new Color(70, 90, 120))};
 
 
-    private Color buttonColor1 = new Color(250, 200, 230);
-    private Color buttonColor2 = new Color(4, 162, 236);
-    private String textFont = "Comic Sans MS";
+    private final Color buttonColor1 = new Color(250, 200, 230);
+    private final Color buttonColor2 = new Color(4, 162, 236);
+    private final String textFont = "Comic Sans MS";
 
 
     private static void setPlayerName(int i){
@@ -63,6 +63,16 @@ public class Menu {
     public Menu(int width, int height){
         this.width = width;
         this.height = height;
+
+        double highscore = Double.parseDouble(FileLoader.load("HighScore.txt"));
+        double score = GameDisplay.getScore();
+
+        if (highscore >= score) {
+            highScore = highscore;
+        } else {
+            FileLoader.save(String.valueOf(score), "HighScore.txt");
+            highScore = score;
+        }
 
         initializeMenu();
 
@@ -103,6 +113,7 @@ public class Menu {
         highScoreLabel.setBounds(menu.getWidth()/4*3+10, 16+2*labelHeight, labelWidth, labelHeight);
         highScoreLabel.setForeground(Color.WHITE);
         highScoreLabel.setFont(new Font(textFont, Font.PLAIN, fontSize));
+        highScoreLabel.setText("High Score:  " + highScore);
         scoreLabel.setBounds(menu.getWidth()/4*3+10, 19+3*labelHeight, labelWidth, labelHeight);
         scoreLabel.setForeground(Color.WHITE);
         scoreLabel.setFont(new Font(textFont, Font.PLAIN, fontSize));
@@ -150,16 +161,19 @@ public class Menu {
         if(menu.getHeight()/20 > backHeight){
             backHeight = menu.getHeight()/20;
         }
+
+        Font font = new Font(textFont, Font.PLAIN, backHeight/5*3);
+
         backThemes = new JButton("<<back");
         backThemes.setBounds(10, 10, backWidth, backHeight);
-        backThemes.setFont(new Font(textFont, Font.PLAIN, backHeight/5*3));
+        backThemes.setFont(font);
         backThemes.setBackground(buttonColor2);
         backThemes.setForeground(Color.WHITE);
         backThemes.addActionListener(getActionListenerBackThemes());
 
         backPlayers = new JButton("<<back");
         backPlayers.setBounds(10, 10, backWidth, backHeight);
-        backPlayers.setFont(new Font(textFont, Font.PLAIN, backHeight/5*3));
+        backPlayers.setFont(font);
         backPlayers.setBackground(buttonColor2);
         backPlayers.setForeground(Color.WHITE);
         backPlayers.addActionListener(getActionListenerBackPlayers());
@@ -169,7 +183,7 @@ public class Menu {
 
         // exit Button
         exit.setBounds(10, menu.getHeight()-backHeight-45, backWidth, backHeight);
-        exit.setFont(new Font(textFont, Font.PLAIN, backHeight/5*3));
+        exit.setFont(font);
         exit.setBackground(buttonColor1);
         exit.setForeground(Color.WHITE);
         exit.addActionListener(getActionListenerExit());

@@ -108,8 +108,8 @@ public class GameDisplay extends JFrame {
 
     private ActionListener getActionListenerBack() {
         return e-> {
-            new Menu(ScreenSize.getWidth(), ScreenSize.getHeight());
             GameLoop.setRunning(false);
+            new Menu(ScreenSize.getWidth(), ScreenSize.getHeight());
             dispose();
         };
     }
