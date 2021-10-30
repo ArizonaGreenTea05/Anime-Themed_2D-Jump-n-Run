@@ -20,9 +20,9 @@ public class GameDisplay extends JFrame {
     private static double score = 0;
     private final JLabel theme = Menu.getThemeLabel();
     private final JLabel player = Menu.getPlayerLabel();
-    private static JLabel highScore = Menu.getHighScore();
-    private static JLabel scoreLabel = Menu.getScore();
-    private static JLabel fps = new JLabel();
+    private static final JLabel highScore = Menu.getHighScore();
+    private static final JLabel scoreLabel = Menu.getScore();
+    private static final JLabel fps = new JLabel();
     private final JLabel background = new JLabel();
 
     public GameDisplay(Input input, String title) {
@@ -93,7 +93,6 @@ public class GameDisplay extends JFrame {
         highScore.setBounds(ScreenSize.getWidth() - player.getWidth() - 5,5 + 2 * gap + 2 * theme.getHeight() , player.getWidth(), player.getHeight());
         highScore.setBackground(Color.WHITE);
         highScore.setForeground(Menu.getBGColor());
-        highScore.setText("HighScore:      ");
 
         scoreLabel.setBounds(ScreenSize.getWidth() - player.getWidth() - 5,5 + 3 * gap + 3 * theme.getHeight() , player.getWidth(), player.getHeight());
         scoreLabel.setBackground(Color.WHITE);
