@@ -150,8 +150,8 @@ public class Menu {
 
         // back Buttons
         /*
-         min Größe so groß, dass Text angezeigt werden kann: 76 * 10
-        -> wenn relative Maße größer werden diese benutzt, wenn nicht die min Maße
+         min Größe so groß, dass Text angezeigt werden kann: 76 · 10
+        → wenn relative Maße größer werden diese benutzt, wenn nicht die min Maße
          */
         int backWidth = 100;
         int backHeight = 10;
