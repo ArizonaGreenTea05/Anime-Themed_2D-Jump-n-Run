@@ -16,7 +16,6 @@ public class FileLoader {
         }
     }
 
-
     public static String load(String filename){
         String input = null;
         
