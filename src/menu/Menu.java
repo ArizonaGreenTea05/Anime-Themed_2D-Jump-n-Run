@@ -34,10 +34,14 @@ public class Menu {
 
     private static double highScore;
 
-    private static final JLabel themeLabel = new JLabel("Theme:");
-    private static final JLabel playerLabel = new JLabel("Character:");
-    private static final JLabel highScoreLabel = new JLabel("High Score:");
-    private static final JLabel scoreLabel = new JLabel("Score:");
+    private static final JLabel themeTextLabel = new JLabel("Theme:");
+    private static final JLabel playerTextLabel = new JLabel("Character:");
+    private static final JLabel highScoreTextLabel = new JLabel("Highscore:");
+    private static final JLabel scoreTextLabel = new JLabel("Score:");
+    private static final JLabel themeLabel = new JLabel("");
+    private static final JLabel playerLabel = new JLabel("");
+    private static final JLabel highScoreLabel = new JLabel("");
+    private static final JLabel scoreLabel = new JLabel("");
 
     /**
      * declaration of themes, player names and colors
@@ -55,7 +59,7 @@ public class Menu {
     private final String textFont = "Comic Sans MS";
 
 
-    private static void setPlayerName(int i){
+    private static void setPlayerNames(int i){
         if(i==0) playerName = playerNameAoT;
         //if(i==1) playerName = playerNameJojo;
     }
@@ -105,28 +109,51 @@ public class Menu {
         int labelHeight = menu.getHeight()/30;
         int labelWidth = menu.getWidth()/4;
         int fontSize = labelHeight-4;
-        themeLabel.setBounds(menu.getWidth()/4*3+10, 10, labelWidth, labelHeight);
+        themeTextLabel.setBounds(menu.getWidth()/4*3+10, 10, labelWidth, labelHeight);
+        themeTextLabel.setForeground(Color.WHITE);
+        themeTextLabel.setFont(new Font(textFont, Font.PLAIN, fontSize));
+
+        themeLabel.setBounds(menu.getWidth()/7*6-5, 10, labelWidth, labelHeight);
         themeLabel.setForeground(Color.WHITE);
         themeLabel.setFont(new Font(textFont, Font.PLAIN, fontSize));
-        playerLabel.setBounds(menu.getWidth()/4*3+10, 13+labelHeight, labelWidth, labelHeight);
+
+        playerTextLabel.setBounds(menu.getWidth()/4*3+10, 13+labelHeight, labelWidth, labelHeight);
+        playerTextLabel.setForeground(Color.WHITE);
+        playerTextLabel.setFont(new Font(textFont, Font.PLAIN, fontSize));
+
+        playerLabel.setBounds(menu.getWidth()/7*6-5, 13+labelHeight, labelWidth, labelHeight);
         playerLabel.setForeground(Color.WHITE);
         playerLabel.setFont(new Font(textFont, Font.PLAIN, fontSize));
-        highScoreLabel.setBounds(menu.getWidth()/4*3+10, 16+2*labelHeight, labelWidth, labelHeight);
+
+        highScoreTextLabel.setBounds(menu.getWidth()/4*3+10, 16+2*labelHeight, labelWidth, labelHeight);
+        highScoreTextLabel.setForeground(Color.WHITE);
+        highScoreTextLabel.setFont(new Font(textFont, Font.PLAIN, fontSize));
+
+        highScoreLabel.setBounds(menu.getWidth()/7*6-5, 16+2*labelHeight, labelWidth, labelHeight);
         highScoreLabel.setForeground(Color.WHITE);
         highScoreLabel.setFont(new Font(textFont, Font.PLAIN, fontSize));
-        highScoreLabel.setText("High Score:  " + highScore);
-        scoreLabel.setBounds(menu.getWidth()/4*3+10, 19+3*labelHeight, labelWidth, labelHeight);
+        highScoreLabel.setText("" + highScore);
+
+        scoreTextLabel.setBounds(menu.getWidth()/4*3+10, 19+3*labelHeight, labelWidth, labelHeight);
+        scoreTextLabel.setForeground(Color.WHITE);
+        scoreTextLabel.setFont(new Font(textFont, Font.PLAIN, fontSize));
+
+        scoreLabel.setBounds(menu.getWidth()/7*6-5, 19+3*labelHeight, labelWidth, labelHeight);
         scoreLabel.setForeground(Color.WHITE);
         scoreLabel.setFont(new Font(textFont, Font.PLAIN, fontSize));
-        scoreLabel.setText("Score:          " + GameDisplay.getScore());
+        scoreLabel.setText("" + GameDisplay.getScore());
         // -Status-Anzeige-
     }
 
     private void addAll() {
         addThemes();
+        menu.add(themeTextLabel);
         menu.add(themeLabel);
+        menu.add(playerTextLabel);
         menu.add(playerLabel);
+        menu.add(highScoreTextLabel);
         menu.add(highScoreLabel);
+        menu.add(scoreTextLabel);
         menu.add(scoreLabel);
         menu.add(exit);
     }
@@ -234,7 +261,7 @@ public class Menu {
             menu.getContentPane().setBackground(getBGColor());
             menu.repaint();
         }
-        themeLabel.setText("Theme:        " + makeNameNice(getGameTheme()));
+        themeLabel.setText(makeNameNice(getGameTheme()));
         menu.add(backThemes);
         menu.repaint();
     }
@@ -298,7 +325,7 @@ public class Menu {
     private ActionListener getActionListenerThemes(int in){
         return e -> {
             theme = in;
-            setPlayerName(theme);
+            setPlayerNames(theme);
             for (JButton button : themes) {
                 menu.remove(button);
             }
@@ -316,7 +343,7 @@ public class Menu {
                 menu.remove(button);
             }
             menu.remove(backThemes);
-            playerLabel.setText("Character:   " + makeNameNice(getPlayerName()));
+            playerLabel.setText(makeNameNice(getPlayerName()));
             menu.add(backPlayers);
             menu.add(startGame);
             menu.repaint();
@@ -341,22 +368,22 @@ public class Menu {
         return out.toString();
     }
 
-    public static JLabel getThemeLabel(){
+
+    public static JLabel getHighscore(){
+        return highScoreLabel;
+    }
+
+    public static JLabel getThemeLabel() {
         return themeLabel;
     }
 
-    public static JLabel getPlayerLabel(){
+    public static JLabel getPlayerLabel() {
         return playerLabel;
-    }
-
-    public static JLabel getHighScore() {
-        return highScoreLabel;
     }
 
     public static JLabel getScore() {
         return scoreLabel;
     }
-
 
     public static String getGameTheme(){
         return gameTheme[theme];

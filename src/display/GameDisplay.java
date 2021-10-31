@@ -18,10 +18,14 @@ public class GameDisplay extends JFrame {
     private int width, height;
     private JButton back;
     private static double score = 0;
+    private final JLabel themeText = new JLabel("Theme:");
     private final JLabel theme = Menu.getThemeLabel();
+    private final JLabel playerText = new JLabel("Player:");
     private final JLabel player = Menu.getPlayerLabel();
-    private static final JLabel highScore = Menu.getHighScore();
-    private static final JLabel scoreLabel = Menu.getScore();
+    private final JLabel highScoreText = new JLabel("Highscore:");
+    private final JLabel highScore = Menu.getHighscore();
+    private final JLabel scoreLabelText = new JLabel("Score:");
+    private static JLabel scoreLabel = Menu.getScore();
     private static final JLabel fps = new JLabel();
     private final JLabel background = new JLabel();
 
@@ -55,9 +59,11 @@ public class GameDisplay extends JFrame {
 
     private void addAll() {
         add(fps);
+        add(themeText);
         add(theme);
-        add(player);
-        add(highScore);
+        add(playerText);
+        add(highScoreText);
+        add(scoreLabelText);
         add(scoreLabel);
         add(back);
         add(canvas);
@@ -82,24 +88,28 @@ public class GameDisplay extends JFrame {
 
         int gap = 2;
 
-        theme.setBounds(ScreenSize.getWidth() - theme.getWidth() - 5, 5 , theme.getWidth(), theme.getHeight());
+        themeText.setBounds(ScreenSize.getWidth() - themeText.getWidth() - 5, 5 , themeText.getWidth(), themeText.getHeight());
+        themeText.setBackground(Color.WHITE);
+        themeText.setForeground(Menu.getBGColor());
+
+        theme.setBounds(ScreenSize.getWidth() - themeText.getWidth()/2, 5 , themeText.getWidth(), themeText.getHeight());
         theme.setBackground(Color.WHITE);
         theme.setForeground(Menu.getBGColor());
 
-        player.setBounds(ScreenSize.getWidth() - player.getWidth() - 5,5 + gap + theme.getHeight() , player.getWidth(), player.getHeight());
-        player.setBackground(Color.WHITE);
-        player.setForeground(Menu.getBGColor());
+        playerText.setBounds(ScreenSize.getWidth() - playerText.getWidth() - 5,5 + gap + themeText.getHeight() , playerText.getWidth(), playerText.getHeight());
+        playerText.setBackground(Color.WHITE);
+        playerText.setForeground(Menu.getBGColor());
 
-        highScore.setBounds(ScreenSize.getWidth() - player.getWidth() - 5,5 + 2 * gap + 2 * theme.getHeight() , player.getWidth(), player.getHeight());
-        highScore.setBackground(Color.WHITE);
-        highScore.setForeground(Menu.getBGColor());
+        highScoreText.setBounds(ScreenSize.getWidth() - playerText.getWidth() - 5,5 + 2 * gap + 2 * themeText.getHeight() , playerText.getWidth(), playerText.getHeight());
+        highScoreText.setBackground(Color.WHITE);
+        highScoreText.setForeground(Menu.getBGColor());
 
-        scoreLabel.setBounds(ScreenSize.getWidth() - player.getWidth() - 5,5 + 3 * gap + 3 * theme.getHeight() , player.getWidth(), player.getHeight());
-        scoreLabel.setBackground(Color.WHITE);
-        scoreLabel.setForeground(Menu.getBGColor());
-        scoreLabel.setText("Score:");
+        scoreLabelText.setBounds(ScreenSize.getWidth() - playerText.getWidth() - 5,5 + 3 * gap + 3 * themeText.getHeight() , playerText.getWidth(), playerText.getHeight());
+        scoreLabelText.setBackground(Color.WHITE);
+        scoreLabelText.setForeground(Menu.getBGColor());
+        scoreLabelText.setText("Score:");
 
-        fps.setBounds(10, 38, player.getHeight()*4, player.getHeight());
+        fps.setBounds(10, 38, playerText.getHeight()*4, playerText.getHeight());
         fps.setFont(new Font("", Font.PLAIN, fps.getHeight()/6*5));
         fps.setBackground(Color.WHITE);
         fps.setForeground(Menu.getBGColor());
@@ -140,7 +150,7 @@ public class GameDisplay extends JFrame {
 
     public static void setScoreLabel(int i) {
         score = i;
-        scoreLabel.setText("Score:          " + score);
+        scoreLabel.setText("" + score);
     }
 
     public static double getScore(){
