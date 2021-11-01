@@ -56,7 +56,7 @@ public class Menu {
 
     private final Color buttonColor1 = new Color(250, 200, 230);
     private final Color buttonColor2 = new Color(4, 162, 236);
-    private final String textFont = "Comic Sans MS";
+    public static final String textFont = "Comic Sans MS";
 
 
     private static void setPlayerNames(int i){
