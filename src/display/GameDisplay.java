@@ -159,7 +159,7 @@ public class GameDisplay extends JFrame {
             graphics.dispose();
             bufferStrategy.show();
 
-        } catch(IllegalStateException e) {}
+        } catch(IllegalStateException ignored) {}
     }
 
     public static void setFPS(String frames){
