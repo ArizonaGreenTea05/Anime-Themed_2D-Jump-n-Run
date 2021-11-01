@@ -26,7 +26,7 @@ public class GameDisplay extends JFrame {
     private final JLabel highScore = Menu.getHighscore();
     private final JLabel scoreLabelText = new JLabel("Score:");
     private static JLabel scoreLabel = Menu.getScore();
-    private static final JLabel fps = new JLabel();
+    private static JLabel fps = new JLabel();
     private final JLabel background = new JLabel();
 
     public GameDisplay(Input input, String title) {
