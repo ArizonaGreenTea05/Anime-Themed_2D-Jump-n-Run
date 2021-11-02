@@ -4,7 +4,7 @@ import display.GameDisplay;
 
 public class GameLoop implements Runnable {
 
-    private int score = 0;
+    private int score = 100;
 
     private Game game;
 
@@ -50,7 +50,7 @@ public class GameLoop implements Runnable {
             GameDisplay.setFPS(String.format("FPS: %d", fps));
             fps = 0;
             ups = 0;
-            score++;
+            score--;
             GameDisplay.setScoreLabel(score);
             nextStatTime = System.currentTimeMillis() + 1000;
         }
