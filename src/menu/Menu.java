@@ -47,11 +47,12 @@ public class Menu {
      * declaration of themes, player names and colors
      **/
     public static final String[] playerNameAoT = new String[] {"levi_ackerman", "mikasa_ackerman", "sasha_braus"};
+    public static final String[] playerNameAoD = new String[] {"rachel_gardner"};
     //public static final String[] playerNameJojo = new String[] {"dio", "kakyoin_noriaki"};
     private static int name;
-    public static final String[] gameTheme = new String[] {"attack_on_titan"};
+    public static final String[] gameTheme = new String[] {"attack_on_titan", "angels_of_death"};
     private static int theme;
-    private static final Color[] bgColor = new Color[]{(new Color(70, 90, 120))};
+    private static final Color[] bgColor = new Color[]{(new Color(70, 90, 120)), (new Color(128, 186, 224))};
 
 
     private final Color buttonColor1 = new Color(250, 200, 230);
@@ -61,7 +62,7 @@ public class Menu {
 
     private static void setPlayerNames(int i){
         if(i==0) playerName = playerNameAoT;
-        //if(i==1) playerName = playerNameJojo;
+        if(i==1) playerName = playerNameAoD;
     }
 
 
