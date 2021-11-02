@@ -40,6 +40,7 @@ public class GameLoop implements Runnable {
                 render();
             }
             printStats();
+            if (score == 0) stop();
         }
     }
 
@@ -54,6 +55,11 @@ public class GameLoop implements Runnable {
             GameDisplay.setScoreLabel(score);
             nextStatTime = System.currentTimeMillis() + 1000;
         }
+    }
+
+    private void stop() {
+        running = false;
+        GameDisplay.showFailed();
     }
 
 

@@ -27,6 +27,7 @@ public class GameDisplay extends JFrame {
     private final JLabel scoreLabelText = new JLabel("Score:");
     private static JLabel scoreLabel = Menu.getScore();
     private static JLabel fps = new JLabel();
+    private static final JLabel failed = new JLabel("!you failed!");
     private final JLabel background = new JLabel();
 
     public GameDisplay(Input input, String title) {
@@ -68,6 +69,7 @@ public class GameDisplay extends JFrame {
         add(scoreLabelText);
         add(scoreLabel);
         add(back);
+        add(failed);
         add(canvas);
     }
 
@@ -127,6 +129,12 @@ public class GameDisplay extends JFrame {
         scoreLabel.setBackground(Color.WHITE);
         scoreLabel.setForeground(Menu.getBGColor());
 
+        failed.setVisible(false);
+        failed.setBounds(0,0,width, height);
+        failed.setFont(new Font(Menu.textFont, Font.PLAIN, failed.getHeight()/4));
+        failed.setForeground(Color.RED);
+        failed.setHorizontalAlignment(SwingConstants.CENTER);
+
         fps.setBounds(10, 38, playerText.getHeight()*4, playerText.getHeight());
         fps.setFont(new Font("", Font.PLAIN, fps.getHeight()/6*5));
         fps.setBackground(Color.WHITE);
@@ -160,6 +168,10 @@ public class GameDisplay extends JFrame {
             bufferStrategy.show();
 
         } catch(IllegalStateException ignored) {}
+    }
+
+    public static void showFailed(){
+        failed.setVisible(true);
     }
 
     public static void setFPS(String frames){
