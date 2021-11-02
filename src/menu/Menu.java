@@ -228,9 +228,8 @@ public class Menu {
             e.printStackTrace();
         }
         img = img.getScaledInstance(width, height, Image.SCALE_DEFAULT);
-        ImageIcon icon = new ImageIcon(img);
 
-        return icon;
+        return new ImageIcon(img);
     }
 
     private Image getImage(String image) {
