@@ -17,6 +17,7 @@ import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
 public class Menu {
 
     public static String[] playerName;
+    public static String[] maps;
 
 
     private static final String[] playerSheetsInFolder = new String[] {"stand.png", "walk.png"};
@@ -26,9 +27,11 @@ public class Menu {
     private final JFrame menu=new JFrame("Menu");
     private JButton startGame = new JButton();
     private JButton[] players;
+    private JButton[] mapButton;
     private final JButton[] themes = new JButton[gameTheme.length];
     private JButton backPlayers = new JButton();
     private JButton backThemes = new JButton();
+    private JButton backMaps = new JButton();
     private final int width, height;
     private final JLabel background = new JLabel();
 
@@ -36,23 +39,29 @@ public class Menu {
 
     private static final JLabel themeTextLabel = new JLabel("Theme:");
     private static final JLabel playerTextLabel = new JLabel("Character:");
+    private static final JLabel mapTextLabel = new JLabel("Map:");
     private static final JLabel highScoreTextLabel = new JLabel("Highscore:");
     private static final JLabel scoreTextLabel = new JLabel("Score:");
     private static final JLabel themeLabel = new JLabel("");
     private static final JLabel playerLabel = new JLabel("");
+    private static final JLabel mapLabel = new JLabel("");
     private static final JLabel highScoreLabel = new JLabel("");
     private static final JLabel scoreLabel = new JLabel("");
 
     /**
      * declaration of themes, player names and colors
      **/
-    public static final String[] playerNameAoT = new String[] {"levi_ackerman", "mikasa_ackerman", "sasha_braus"};
-    public static final String[] playerNameAoD = new String[] {"rachel_gardner"};
-    //public static final String[] playerNameJojo = new String[] {"dio", "kakyoin_noriaki"};
-    private static int name;
     public static final String[] gameTheme = new String[] {"attack_on_titan", "angels_of_death"};
-    private static int theme;
+
+    public static final String[] playerNameAoT = new String[] {"levi_ackerman", "mikasa_ackerman", "sasha_braus"};
+    public static final String[] mapsAoT = new String[] {"test"};
+    public static final String[] playerNameAoD = new String[] {"rachel_gardner"};
+    public static final String[] mapsAoD = new String[] {"test"};
+    //public static final String[] playerNameJojo = new String[] {"dio", "kakyoin_noriaki"};
     private static final Color[] bgColor = new Color[]{(new Color(70, 90, 120)), (new Color(128, 186, 224))};
+    private static int name;
+    private static int theme;
+    private static int map;
 
 
     private final Color buttonColor1 = new Color(250, 200, 230);
@@ -63,6 +72,11 @@ public class Menu {
     private static void setPlayerNames(int i){
         if(i==0) playerName = playerNameAoT;
         if(i==1) playerName = playerNameAoD;
+    }
+
+    private static void setMaps(int i){
+        if(i==0) maps = mapsAoT;
+        if(i==1) maps = mapsAoD;
     }
 
 
@@ -207,6 +221,13 @@ public class Menu {
         backPlayers.setForeground(Color.WHITE);
         backPlayers.addActionListener(getActionListenerBackPlayers());
 
+        backMaps = new JButton("<<back");
+        backMaps.setBounds(10, 10, backWidth, backHeight);
+        backMaps.setFont(font);
+        backMaps.setBackground(buttonColor2);
+        backMaps.setForeground(Color.WHITE);
+        backMaps.addActionListener(getActionListenerBackMaps());
+
         // -back Buttons-
 
 
@@ -282,6 +303,23 @@ public class Menu {
         menu.repaint();
     }
 
+    private void addMaps(){
+        mapButton = new JButton[maps.length];
+
+        for (int i = 0; i < maps.length; i++) {
+            mapButton[i] = new JButton(makeNameNice(maps[i]));
+
+            mapButton[i].setBounds(menu.getWidth()/4,menu.getHeight()/10+i*(menu.getHeight()/12 + 5),menu.getWidth()/2,menu.getHeight()/12);
+            mapButton[i].setFont(new Font(textFont, Font.PLAIN, mapButton[i].getHeight()/3));
+            mapButton[i].setBackground(buttonColor1);
+            mapButton[i].setForeground(Color.WHITE);
+
+            mapButton[i].addActionListener(getActionListenerMaps(i));
+            menu.add(mapButton[i]);
+        }
+        menu.repaint();
+    }
+
 
 
     public static String[] getPlayerSheetsInFolder() {
@@ -315,10 +353,21 @@ public class Menu {
 
     private ActionListener getActionListenerBackPlayers() {
         return e -> {
-            menu.remove(startGame);
+            for (JButton button : mapButton) {
+                menu.remove(button);
+            }
             menu.remove(backPlayers);
             menu.repaint();
             addPlayers();
+        };
+    }
+
+    private ActionListener getActionListenerBackMaps() {
+        return e -> {
+            menu.remove(startGame);
+            menu.remove(backMaps);
+            menu.repaint();
+            addMaps();
         };
     }
 
@@ -326,6 +375,7 @@ public class Menu {
         return e -> {
             theme = in;
             setPlayerNames(theme);
+            setMaps(theme);
             for (JButton button : themes) {
                 menu.remove(button);
             }
@@ -344,7 +394,22 @@ public class Menu {
             }
             menu.remove(backThemes);
             playerLabel.setText(makeNameNice(getPlayerName()));
+            addMaps();
             menu.add(backPlayers);
+            menu.repaint();
+        };
+    }
+
+
+    private ActionListener getActionListenerMaps(int in) {
+        return e -> {
+            name = in;
+            for (JButton button : mapButton) {
+                menu.remove(button);
+            }
+            menu.remove(backPlayers);
+            playerLabel.setText(makeNameNice(getMapName()));
+            menu.add(backMaps);
             menu.add(startGame);
             menu.repaint();
         };
@@ -393,6 +458,9 @@ public class Menu {
         return playerName[name];
     }
 
+    public static String getMapName(){
+        return maps[map];
+    }
 
     public static Color getBGColor(){
         return bgColor[theme];
