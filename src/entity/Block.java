@@ -20,6 +20,6 @@ public abstract class Block extends GameObject {
 
     @Override
     public Image getSprite() {
-        return ImageUtils.loadImage("/sprites/units/" + menu.Menu.getGameTheme() + "/blocks/" + block + ".png");
+        return ImageUtils.loadImage("/game/themes/" + menu.Menu.getGameTheme() + "/blocks/" + block + ".png");
     }
 }

@@ -7,7 +7,7 @@ import java.util.Map;
 
 public class SpriteLibrary {
 
-    private final static String PATH_TO_UNITS = "/sprites/units/" + Menu.getGameTheme() + "/characters";
+    private final static String PATH_TO_UNITS = "/game/themes/" + Menu.getGameTheme() + "/characters";
 
     private Map<String, SpriteSet> units;
 
