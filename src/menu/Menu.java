@@ -58,6 +58,7 @@ public class Menu {
     public static final String[] playerNameAoD = new String[] {"rachel_gardner"};
     public static final String[] mapsAoD = new String[] {"test"};
     //public static final String[] playerNameJojo = new String[] {"dio", "kakyoin_noriaki"};
+    //public static final String[] MapsJojo = new String[] {"test"};
     private static final Color[] bgColor = new Color[]{(new Color(70, 90, 120)), (new Color(128, 186, 224))};
     private static int name;
     private static int theme;
@@ -414,7 +415,7 @@ public class Menu {
 
     private ActionListener getActionListenerMaps(int in) {
         return e -> {
-            name = in;
+            map = in;
             for (JButton button : mapButton) {
                 menu.remove(button);
             }
