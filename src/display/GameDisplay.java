@@ -144,6 +144,7 @@ public class GameDisplay extends JFrame {
     private ActionListener getActionListenerBack() {
         return e-> {
             GameLoop.setRunning(false);
+            score = 0;
             new Menu();
             dispose();
         };
