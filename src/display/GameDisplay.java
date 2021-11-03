@@ -22,6 +22,8 @@ public class GameDisplay extends JFrame {
     private final JLabel theme = Menu.getThemeLabel();
     private final JLabel playerText = new JLabel("Player:");
     private final JLabel player = Menu.getPlayerLabel();
+    private final JLabel mapText = new JLabel("Map:");
+    private final JLabel mapLabel = Menu.getMapLabel();
     private final JLabel highScoreText = new JLabel("Highscore:");
     private final JLabel highScore = Menu.getHighscore();
     private final JLabel scoreLabelText = new JLabel("Score:");
@@ -64,6 +66,8 @@ public class GameDisplay extends JFrame {
         add(theme);
         add(playerText);
         add(player);
+        add(mapText);
+        add(mapLabel);
         add(highScoreText);
         add(highScore);
         add(scoreLabelText);
@@ -110,22 +114,31 @@ public class GameDisplay extends JFrame {
         player.setBackground(Color.WHITE);
         player.setForeground(Menu.getBGColor());
 
-        highScoreText.setBounds(ScreenSize.getWidth() - themeText.getWidth() - 5,5 + 2 * gap + 2 * themeText.getHeight() , themeText.getWidth(), themeText.getHeight());
+        mapText.setBounds(ScreenSize.getWidth() - themeText.getWidth() - 5,5 + 2*gap + 2*themeText.getHeight() , themeText.getWidth(), themeText.getHeight());
+        mapText.setBackground(Color.WHITE);
+        mapText.setForeground(Menu.getBGColor());
+        mapText.setFont(new Font(Menu.textFont, Font.PLAIN, theme.getHeight()-4));
+
+        mapLabel.setBounds(ScreenSize.getWidth() - themeText.getWidth()/2, 5 + 2*gap +2* themeText.getHeight() , themeText.getWidth(), themeText.getHeight());
+        mapLabel.setBackground(Color.WHITE);
+        mapLabel.setForeground(Menu.getBGColor());
+
+        highScoreText.setBounds(ScreenSize.getWidth() - themeText.getWidth() - 5,5 + 3 * gap + 3 * themeText.getHeight() , themeText.getWidth(), themeText.getHeight());
         highScoreText.setBackground(Color.WHITE);
         highScoreText.setForeground(Menu.getBGColor());
         highScoreText.setFont(new Font(Menu.textFont, Font.PLAIN, theme.getHeight()-4));
 
-        highScore.setBounds(ScreenSize.getWidth() - themeText.getWidth()/2, 5 + 2 * gap + 2 * themeText.getHeight() , themeText.getWidth(), themeText.getHeight());
+        highScore.setBounds(ScreenSize.getWidth() - themeText.getWidth()/2, 5 + 3 * gap + 3 * themeText.getHeight() , themeText.getWidth(), themeText.getHeight());
         highScore.setBackground(Color.WHITE);
         highScore.setForeground(Menu.getBGColor());
 
-        scoreLabelText.setBounds(ScreenSize.getWidth() - themeText.getWidth() - 5,5 + 3 * gap + 3 * themeText.getHeight() , themeText.getWidth(), themeText.getHeight());
+        scoreLabelText.setBounds(ScreenSize.getWidth() - themeText.getWidth() - 5,5 + 4 * gap + 4 * themeText.getHeight() , themeText.getWidth(), themeText.getHeight());
         scoreLabelText.setBackground(Color.WHITE);
         scoreLabelText.setForeground(Menu.getBGColor());
         scoreLabelText.setText("Score:");
         scoreLabelText.setFont(new Font(Menu.textFont, Font.PLAIN, theme.getHeight()-4));
 
-        scoreLabel.setBounds(ScreenSize.getWidth() - themeText.getWidth()/2, 5 + 3 * gap + 3 * themeText.getHeight() , themeText.getWidth(), themeText.getHeight());
+        scoreLabel.setBounds(ScreenSize.getWidth() - themeText.getWidth()/2, 5 + 4 * gap + 4 * themeText.getHeight() , themeText.getWidth(), themeText.getHeight());
         scoreLabel.setBackground(Color.WHITE);
         scoreLabel.setForeground(Menu.getBGColor());
 

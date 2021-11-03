@@ -140,20 +140,28 @@ public class Menu {
         playerLabel.setForeground(Color.WHITE);
         playerLabel.setFont(new Font(textFont, Font.PLAIN, fontSize));
 
-        highScoreTextLabel.setBounds(menu.getWidth()/4*3+10, 16+2*labelHeight, labelWidth, labelHeight);
+        mapTextLabel.setBounds(menu.getWidth()/4*3+10, 16+2*labelHeight, labelWidth, labelHeight);
+        mapTextLabel.setForeground(Color.WHITE);
+        mapTextLabel.setFont(new Font(textFont, Font.PLAIN, fontSize));
+
+        mapLabel.setBounds(menu.getWidth()/7*6-5, 16+2*labelHeight, labelWidth, labelHeight);
+        mapLabel.setForeground(Color.WHITE);
+        mapLabel.setFont(new Font(textFont, Font.PLAIN, fontSize));
+
+        highScoreTextLabel.setBounds(menu.getWidth()/4*3+10, 19+3*labelHeight, labelWidth, labelHeight);
         highScoreTextLabel.setForeground(Color.WHITE);
         highScoreTextLabel.setFont(new Font(textFont, Font.PLAIN, fontSize));
 
-        highScoreLabel.setBounds(menu.getWidth()/7*6-5, 16+2*labelHeight, labelWidth, labelHeight);
+        highScoreLabel.setBounds(menu.getWidth()/7*6-5, 19+3*labelHeight, labelWidth, labelHeight);
         highScoreLabel.setForeground(Color.WHITE);
         highScoreLabel.setFont(new Font(textFont, Font.PLAIN, fontSize));
         highScoreLabel.setText("" + highScore);
 
-        scoreTextLabel.setBounds(menu.getWidth()/4*3+10, 19+3*labelHeight, labelWidth, labelHeight);
+        scoreTextLabel.setBounds(menu.getWidth()/4*3+10, 22+4*labelHeight, labelWidth, labelHeight);
         scoreTextLabel.setForeground(Color.WHITE);
         scoreTextLabel.setFont(new Font(textFont, Font.PLAIN, fontSize));
 
-        scoreLabel.setBounds(menu.getWidth()/7*6-5, 19+3*labelHeight, labelWidth, labelHeight);
+        scoreLabel.setBounds(menu.getWidth()/7*6-5, 22+4*labelHeight, labelWidth, labelHeight);
         scoreLabel.setForeground(Color.WHITE);
         scoreLabel.setFont(new Font(textFont, Font.PLAIN, fontSize));
         scoreLabel.setText("" + GameDisplay.getScore());
@@ -166,6 +174,8 @@ public class Menu {
         menu.add(themeLabel);
         menu.add(playerTextLabel);
         menu.add(playerLabel);
+        menu.add(mapTextLabel);
+        menu.add(mapLabel);
         menu.add(highScoreTextLabel);
         menu.add(highScoreLabel);
         menu.add(scoreTextLabel);
@@ -317,6 +327,7 @@ public class Menu {
             mapButton[i].addActionListener(getActionListenerMaps(i));
             menu.add(mapButton[i]);
         }
+        menu.add(backPlayers);
         menu.repaint();
     }
 
@@ -408,7 +419,7 @@ public class Menu {
                 menu.remove(button);
             }
             menu.remove(backPlayers);
-            playerLabel.setText(makeNameNice(getMapName()));
+            mapLabel.setText(makeNameNice(getMapName()));
             menu.add(backMaps);
             menu.add(startGame);
             menu.repaint();
@@ -444,6 +455,10 @@ public class Menu {
 
     public static JLabel getPlayerLabel() {
         return playerLabel;
+    }
+
+    public static JLabel getMapLabel(){
+        return mapLabel;
     }
 
     public static JLabel getScore() {
