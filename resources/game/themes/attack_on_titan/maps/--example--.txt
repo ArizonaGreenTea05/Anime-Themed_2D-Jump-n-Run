@@ -1,9 +1,0 @@
-//Layer7://   XXXXXX.............................................................................I...XXXXXX
-//Layer6://   XXXXXX....................................................................XXX......I...XXXXXX
-//Layer5://   XXXXXX...................................................................XXXX......I...XXXXXX
-//Layer4://   XXXXXX.............XX..XX...............................................XXXXX......I...XXXXXX
-//Layer3://   XXXXXX.................................................................XXXXXX......I...XXXXXX
-//Layer2://   XXXXXX.........XXXX...................................................XXXXXXX......I...XXXXXX
-//Layer1://   XXXXXX...............................................................XXXXXXXX......I...XXXXXX
-//Ground://   XXXXXXXXXXXXXXXXX...XXXXXXXXXXXXXXXXXXXX....XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-//Ground-1:// XXXXXXXXXXXXXXXXX...XXXXXXXXXXXXXXXXXXXX....XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
