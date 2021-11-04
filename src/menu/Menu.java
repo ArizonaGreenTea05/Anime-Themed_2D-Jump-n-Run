@@ -68,7 +68,7 @@ public class Menu {
 
     public static int colorSetting = 0;
     private final Color[] buttonColor = {new Color(250, 200, 230),Color.BLACK};
-    private final Color backButtonColor = new Color(4, 162, 236);
+    private final Color[] backButtonColor = {new Color(4, 162, 236), Color.BLACK};
     private final Color[] textColor = {Color.WHITE, new Color(255,50,174)};
     public static final String textFont = "Comic Sans MS";
 
@@ -226,21 +226,21 @@ public class Menu {
         backThemes = new JButton("<<back");
         backThemes.setBounds(10, 10, backWidth, backHeight);
         backThemes.setFont(font);
-        backThemes.setBackground(backButtonColor);
+        backThemes.setBackground(backButtonColor[colorSetting]);
         backThemes.setForeground(textColor[colorSetting]);
         backThemes.addActionListener(getActionListenerBackThemes());
 
         backPlayers = new JButton("<<back");
         backPlayers.setBounds(10, 10, backWidth, backHeight);
         backPlayers.setFont(font);
-        backPlayers.setBackground(backButtonColor);
+        backPlayers.setBackground(backButtonColor[colorSetting]);
         backPlayers.setForeground(textColor[colorSetting]);
         backPlayers.addActionListener(getActionListenerBackPlayers());
 
         backMaps = new JButton("<<back");
         backMaps.setBounds(10, 10, backWidth, backHeight);
         backMaps.setFont(font);
-        backMaps.setBackground(backButtonColor);
+        backMaps.setBackground(backButtonColor[colorSetting]);
         backMaps.setForeground(textColor[colorSetting]);
         backMaps.addActionListener(getActionListenerBackMaps());
 
