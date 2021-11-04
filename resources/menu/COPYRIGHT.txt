@@ -1,0 +1,2 @@
+sakura_icon.png: https://pixabay.com/de/vectors/kirschbaum-baum-des-lebens-logo-6171383/
+bg.png:          https://pixelins.tumblr.com/post/117531295937/cherry-blossom-this-may-have-taken-over-on-the
