@@ -1,4 +1,4 @@
-#Copyright (Images):
+Copyright (Images):
 
 http://kilkakon.com/
 
@@ -11,11 +11,11 @@ The Software is provided "as is" and without warranty, express or implied. The a
 以下の制限に従う限り、商用アプリケーションを含めて、本ソフトウェアを任意の目的に使用し、自由に改変して再頒布することをすべての人に許可します。
 We allow everyone, including commercial applications, to use the Software for any purpose and to freely modify and redistribute it, subject to the following restrictions.
 
-1. 本ソフトウェアの出自について虚偽の表示をしてはなりません。あなたがオリジナルのソフトウェアを作成したと主張してはなりません。 あなたが本ソフトウェアを製品内で使用する場合、製品の文書に謝辞を入れていただければ幸いですが、必須ではありません。 
+1. 本ソフトウェアの出自について虚偽の表示をしてはなりません。あなたがオリジナルのソフトウェアを作成したと主張してはなりません。 あなたが本ソフトウェアを製品内で使用する場合、製品の文書に謝辞を入れていただければ幸いですが、必須ではありません。
 You must not misrepresent the origin of this software. Do not claim that you created the original software. If you use the software within a product, we would appreciate it if you could acknowledge the product documentation, but it is not required.
 
 2. ソースを変更した場合は、そのことを明示しなければなりません。オリジナルのソフトウェアであるという虚偽の表示をしてはなりません。
 If you change the source, you must make it clear. Do not misrepresent that it is the original software.
 
-3.ソースの頒布物から、この表示を削除したり、表示の内容を変更したりしてはなりません。
+3. ソースの頒布物から、この表示を削除したり、表示の内容を変更したりしてはなりません。
 You may not remove this display or change the content of the display from the source distribution.
