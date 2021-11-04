@@ -11,6 +11,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
 import java.io.IOException;
+import java.util.Objects;
 
 import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
 
@@ -67,7 +68,7 @@ public class Menu {
 
     public static int colorSetting = 0;
     private final Color[] buttonColor = {new Color(250, 200, 230),Color.BLACK};
-    private final Color backButtonColor = buttonColor[1];
+    private final Color backButtonColor = new Color(4, 162, 236);
     private final Color[] textColor = {Color.WHITE, new Color(255,50,174)};
     public static final String textFont = "Comic Sans MS";
 
@@ -268,11 +269,11 @@ public class Menu {
     private Icon getIcon(String image, int width, int height) {
         Image img = null;
         try {
-            img = ImageIO.read(getClass().getResource("/menu/" + image));
+            img = ImageIO.read(Objects.requireNonNull(getClass().getResource("/menu/" + image)));
         } catch (IOException e) {
             e.printStackTrace();
         }
-        img = img.getScaledInstance(width, height, Image.SCALE_DEFAULT);
+        img = Objects.requireNonNull(img).getScaledInstance(width, height, Image.SCALE_DEFAULT);
 
         return new ImageIcon(img);
     }
@@ -280,7 +281,7 @@ public class Menu {
     private Image getImage(String image) {
         Image img = null;
         try {
-            img = ImageIO.read(getClass().getResource("/menu/" + image));
+            img = ImageIO.read(Objects.requireNonNull(getClass().getResource("/menu/" + image)));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -298,7 +299,7 @@ public class Menu {
             players[i] = new JButton(makeNameNice(playerName[i]));
 
             players[i].setBounds(menu.getWidth()/4,menu.getHeight()/10+i*(menu.getHeight()/12 + 5),menu.getWidth()/2,menu.getHeight()/12);
-            players[i].setFont(new Font(textFont, Font.PLAIN, players[i].getHeight()/5*2));
+            players[i].setFont(new Font(textFont, Font.PLAIN, players[i].getHeight()/3));
             players[i].setBackground(buttonColor[colorSetting]);
             players[i].setForeground(textColor[colorSetting]);
             players[i].addActionListener(getActionListenerPlayers(i));
@@ -317,7 +318,7 @@ public class Menu {
             themes[i] = new JButton(makeNameNice(gameTheme[i]));
 
             themes[i].setBounds(menu.getWidth()/4,menu.getHeight()/10+i*(menu.getHeight()/12 + 5),menu.getWidth()/2,menu.getHeight()/12);
-            themes[i].setFont(new Font(textFont, Font.PLAIN, themes[i].getHeight()/5*2));
+            themes[i].setFont(new Font(textFont, Font.PLAIN, themes[i].getHeight()/3));
             themes[i].setBackground(buttonColor[colorSetting]);
             themes[i].setForeground(textColor[colorSetting]);
 
@@ -334,7 +335,7 @@ public class Menu {
             mapButton[i] = new JButton(makeNameNice(maps[i]));
 
             mapButton[i].setBounds(menu.getWidth()/4,menu.getHeight()/10+i*(menu.getHeight()/12 + 5),menu.getWidth()/2,menu.getHeight()/12);
-            mapButton[i].setFont(new Font(textFont, Font.PLAIN, mapButton[i].getHeight()/5*2));
+            mapButton[i].setFont(new Font(textFont, Font.PLAIN, mapButton[i].getHeight()/3));
             mapButton[i].setBackground(buttonColor[colorSetting]);
             mapButton[i].setForeground(textColor[colorSetting]);
 
@@ -364,9 +365,7 @@ public class Menu {
     }
 
     private ActionListener getActionListenerExit() {
-        return e -> {
-          System.exit(0);
-        };
+        return e -> System.exit(0);
     }
 
     private ActionListener getActionListenerStart() {
