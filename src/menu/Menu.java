@@ -23,6 +23,7 @@ public class Menu {
     private static final String[] playerSheetsInFolder = new String[] {"stand.png", "walk.png"};
 
     private final JButton exit = new JButton("EXIT");
+    private final JButton color = new JButton("change colors");
 
     private final JFrame menu=new JFrame("Menu");
     private JButton startGame = new JButton();
@@ -64,9 +65,10 @@ public class Menu {
     private static int theme;
     private static int map;
 
-
-    private final Color buttonColor1 = new Color(250, 200, 230);
-    private final Color buttonColor2 = new Color(4, 162, 236);
+    public static int colorSetting = 0;
+    private final Color[] buttonColor = {new Color(250, 200, 230),Color.BLACK};
+    private final Color backButtonColor = buttonColor[1];
+    private final Color[] textColor = {Color.WHITE, new Color(255,50,174)};
     public static final String textFont = "Comic Sans MS";
 
 
@@ -81,7 +83,8 @@ public class Menu {
     }
 
 
-    public Menu(){
+    public Menu(int colorSetting){
+        this.colorSetting = colorSetting;
         this.width = ScreenSize.getWidth();
         this.height = ScreenSize.getHeight();
 
@@ -126,44 +129,44 @@ public class Menu {
         int labelWidth = menu.getWidth()/4;
         int fontSize = labelHeight-4;
         themeTextLabel.setBounds(menu.getWidth()/4*3+10, 10, labelWidth, labelHeight);
-        themeTextLabel.setForeground(Color.WHITE);
+        themeTextLabel.setForeground(textColor[colorSetting]);
         themeTextLabel.setFont(new Font(textFont, Font.PLAIN, fontSize));
 
         themeLabel.setBounds(menu.getWidth()/7*6-5, 10, labelWidth, labelHeight);
-        themeLabel.setForeground(Color.WHITE);
+        themeLabel.setForeground(textColor[colorSetting]);
         themeLabel.setFont(new Font(textFont, Font.PLAIN, fontSize));
 
         playerTextLabel.setBounds(menu.getWidth()/4*3+10, 13+labelHeight, labelWidth, labelHeight);
-        playerTextLabel.setForeground(Color.WHITE);
+        playerTextLabel.setForeground(textColor[colorSetting]);
         playerTextLabel.setFont(new Font(textFont, Font.PLAIN, fontSize));
 
         playerLabel.setBounds(menu.getWidth()/7*6-5, 13+labelHeight, labelWidth, labelHeight);
-        playerLabel.setForeground(Color.WHITE);
+        playerLabel.setForeground(textColor[colorSetting]);
         playerLabel.setFont(new Font(textFont, Font.PLAIN, fontSize));
 
         mapTextLabel.setBounds(menu.getWidth()/4*3+10, 16+2*labelHeight, labelWidth, labelHeight);
-        mapTextLabel.setForeground(Color.WHITE);
+        mapTextLabel.setForeground(textColor[colorSetting]);
         mapTextLabel.setFont(new Font(textFont, Font.PLAIN, fontSize));
 
         mapLabel.setBounds(menu.getWidth()/7*6-5, 16+2*labelHeight, labelWidth, labelHeight);
-        mapLabel.setForeground(Color.WHITE);
+        mapLabel.setForeground(textColor[colorSetting]);
         mapLabel.setFont(new Font(textFont, Font.PLAIN, fontSize));
 
         highScoreTextLabel.setBounds(menu.getWidth()/4*3+10, 19+3*labelHeight, labelWidth, labelHeight);
-        highScoreTextLabel.setForeground(Color.WHITE);
+        highScoreTextLabel.setForeground(textColor[colorSetting]);
         highScoreTextLabel.setFont(new Font(textFont, Font.PLAIN, fontSize));
 
         highScoreLabel.setBounds(menu.getWidth()/7*6-5, 19+3*labelHeight, labelWidth, labelHeight);
-        highScoreLabel.setForeground(Color.WHITE);
+        highScoreLabel.setForeground(textColor[colorSetting]);
         highScoreLabel.setFont(new Font(textFont, Font.PLAIN, fontSize));
         highScoreLabel.setText("" + highScore);
 
         scoreTextLabel.setBounds(menu.getWidth()/4*3+10, 22+4*labelHeight, labelWidth, labelHeight);
-        scoreTextLabel.setForeground(Color.WHITE);
+        scoreTextLabel.setForeground(textColor[colorSetting]);
         scoreTextLabel.setFont(new Font(textFont, Font.PLAIN, fontSize));
 
         scoreLabel.setBounds(menu.getWidth()/7*6-5, 22+4*labelHeight, labelWidth, labelHeight);
-        scoreLabel.setForeground(Color.WHITE);
+        scoreLabel.setForeground(textColor[colorSetting]);
         scoreLabel.setFont(new Font(textFont, Font.PLAIN, fontSize));
         scoreLabel.setText("" + GameDisplay.getScore());
         // -Status-Anzeige-
@@ -181,6 +184,7 @@ public class Menu {
         menu.add(highScoreLabel);
         menu.add(scoreTextLabel);
         menu.add(scoreLabel);
+        menu.add(color);
         menu.add(exit);
     }
 
@@ -195,8 +199,8 @@ public class Menu {
         // start Button
         startGame = new JButton("START GAME");
         startGame.setBounds(menu.getWidth()/3,menu.getHeight()/3,menu.getWidth()/3,menu.getHeight()/5);
-        startGame.setBackground(buttonColor1);
-        startGame.setForeground(Color.WHITE);
+        startGame.setBackground(buttonColor[colorSetting]);
+        startGame.setForeground(textColor[colorSetting]);
         startGame.setFont(new Font(textFont, Font.PLAIN, startGame.getHeight()/4));
         startGame.addActionListener(getActionListenerStart());
         // -start Button-
@@ -221,32 +225,41 @@ public class Menu {
         backThemes = new JButton("<<back");
         backThemes.setBounds(10, 10, backWidth, backHeight);
         backThemes.setFont(font);
-        backThemes.setBackground(buttonColor2);
-        backThemes.setForeground(Color.WHITE);
+        backThemes.setBackground(backButtonColor);
+        backThemes.setForeground(textColor[colorSetting]);
         backThemes.addActionListener(getActionListenerBackThemes());
 
         backPlayers = new JButton("<<back");
         backPlayers.setBounds(10, 10, backWidth, backHeight);
         backPlayers.setFont(font);
-        backPlayers.setBackground(buttonColor2);
-        backPlayers.setForeground(Color.WHITE);
+        backPlayers.setBackground(backButtonColor);
+        backPlayers.setForeground(textColor[colorSetting]);
         backPlayers.addActionListener(getActionListenerBackPlayers());
 
         backMaps = new JButton("<<back");
         backMaps.setBounds(10, 10, backWidth, backHeight);
         backMaps.setFont(font);
-        backMaps.setBackground(buttonColor2);
-        backMaps.setForeground(Color.WHITE);
+        backMaps.setBackground(backButtonColor);
+        backMaps.setForeground(textColor[colorSetting]);
         backMaps.addActionListener(getActionListenerBackMaps());
 
         // -back Buttons-
 
 
+        // color change Button
+        color.setBounds(menu.getWidth()-25-backWidth*3/2, menu.getHeight()-backHeight-45, backWidth*3/2, backHeight);
+        color.setFont(font);
+        color.setBackground(buttonColor[colorSetting]);
+        color.setForeground(textColor[colorSetting]);
+        color.addActionListener(getActionListenerColor());
+        // - color change Button-
+
+
         // exit Button
         exit.setBounds(10, menu.getHeight()-backHeight-45, backWidth, backHeight);
         exit.setFont(font);
-        exit.setBackground(buttonColor1);
-        exit.setForeground(Color.WHITE);
+        exit.setBackground(buttonColor[colorSetting]);
+        exit.setForeground(textColor[colorSetting]);
         exit.addActionListener(getActionListenerExit());
         // - exit Button-
     }
@@ -285,9 +298,9 @@ public class Menu {
             players[i] = new JButton(makeNameNice(playerName[i]));
 
             players[i].setBounds(menu.getWidth()/4,menu.getHeight()/10+i*(menu.getHeight()/12 + 5),menu.getWidth()/2,menu.getHeight()/12);
-            players[i].setFont(new Font(textFont, Font.PLAIN, players[i].getHeight()/3));
-            players[i].setBackground(buttonColor1);
-            players[i].setForeground(Color.WHITE);
+            players[i].setFont(new Font(textFont, Font.PLAIN, players[i].getHeight()/5*2));
+            players[i].setBackground(buttonColor[colorSetting]);
+            players[i].setForeground(textColor[colorSetting]);
             players[i].addActionListener(getActionListenerPlayers(i));
             menu.add(players[i]);
             menu.getContentPane().setBackground(getBGColor());
@@ -304,9 +317,9 @@ public class Menu {
             themes[i] = new JButton(makeNameNice(gameTheme[i]));
 
             themes[i].setBounds(menu.getWidth()/4,menu.getHeight()/10+i*(menu.getHeight()/12 + 5),menu.getWidth()/2,menu.getHeight()/12);
-            themes[i].setFont(new Font(textFont, Font.PLAIN, themes[i].getHeight()/3));
-            themes[i].setBackground(buttonColor1);
-            themes[i].setForeground(Color.WHITE);
+            themes[i].setFont(new Font(textFont, Font.PLAIN, themes[i].getHeight()/5*2));
+            themes[i].setBackground(buttonColor[colorSetting]);
+            themes[i].setForeground(textColor[colorSetting]);
 
             themes[i].addActionListener(getActionListenerThemes(i));
             menu.add(themes[i]);
@@ -321,9 +334,9 @@ public class Menu {
             mapButton[i] = new JButton(makeNameNice(maps[i]));
 
             mapButton[i].setBounds(menu.getWidth()/4,menu.getHeight()/10+i*(menu.getHeight()/12 + 5),menu.getWidth()/2,menu.getHeight()/12);
-            mapButton[i].setFont(new Font(textFont, Font.PLAIN, mapButton[i].getHeight()/3));
-            mapButton[i].setBackground(buttonColor1);
-            mapButton[i].setForeground(Color.WHITE);
+            mapButton[i].setFont(new Font(textFont, Font.PLAIN, mapButton[i].getHeight()/5*2));
+            mapButton[i].setBackground(buttonColor[colorSetting]);
+            mapButton[i].setForeground(textColor[colorSetting]);
 
             mapButton[i].addActionListener(getActionListenerMaps(i));
             menu.add(mapButton[i]);
@@ -336,6 +349,18 @@ public class Menu {
 
     public static String[] getPlayerSheetsInFolder() {
         return playerSheetsInFolder;
+    }
+
+    private ActionListener getActionListenerColor() {
+        return e -> {
+            menu.dispose();
+            if(colorSetting < buttonColor.length-1) {
+                colorSetting++;
+            } else {
+                colorSetting = 0;
+            }
+            new Menu(colorSetting);
+        };
     }
 
     private ActionListener getActionListenerExit() {
@@ -357,7 +382,6 @@ public class Menu {
                 menu.remove(button);
             }
             addThemes();
-            menu.repaint();
             menu.remove(backThemes);
             menu.repaint();
         };
