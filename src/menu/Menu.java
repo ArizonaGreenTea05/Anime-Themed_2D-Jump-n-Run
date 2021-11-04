@@ -358,7 +358,7 @@ public class Menu {
             } else {
                 colorSetting = 0;
             }
-            FileLoader.save("" + colorSetting,"color.txt");
+            FileLoader.save("" + colorSetting, "color.txt");
             new Menu();
         };
     }
