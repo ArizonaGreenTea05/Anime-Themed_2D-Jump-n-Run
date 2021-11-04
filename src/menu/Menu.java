@@ -69,8 +69,8 @@ public class Menu {
     public static int colorSetting = 0;
     private final Color[] buttonColor = {new Color(250, 200, 230),Color.BLACK};
     private final Color[] backButtonColor = {new Color(4, 162, 236), Color.BLACK};
-    private final Color[] labelColor = {new Color(0,0,0,0), Color.BLACK};
-    private final Color[] textColor = {Color.WHITE, new Color(255,50,174)};
+    public static final Color[] labelColor = {new Color(0,0,0,0), Color.BLACK};
+    public static final Color[] textColor = {Color.WHITE, new Color(255,50,174)};
     public static final String textFont = "Comic Sans MS";
     private final String[] bgImage = {"bg_light.png", "bg_dark.png"};
 
@@ -116,7 +116,7 @@ public class Menu {
     private void initializeMenu() {
         // 16/9-Format, halb so breit wie Bildschirm, Höhe dementsprechend angepasst
         menu.setSize(width/2,width/32*9);
-        menu.setIconImage(getImage("sakura_icon.png"));
+        menu.setIconImage(getImage("../sakura_icon.png"));
         menu.setDefaultCloseOperation(EXIT_ON_CLOSE);
         menu.getContentPane().setBackground(new Color(23, 139, 221));
         menu.setResizable(false);
@@ -291,7 +291,7 @@ public class Menu {
     public static Image getImage(String image) {
         Image img = null;
         try {
-            img = ImageIO.read(Objects.requireNonNull(Menu.class.getResource("/" + image)));
+            img = ImageIO.read(Objects.requireNonNull(Menu.class.getResource("/menu/" + image)));
         } catch (IOException e) {
             e.printStackTrace();
         }

@@ -30,7 +30,10 @@ public class GameDisplay extends JFrame {
     private static JLabel scoreLabel = Menu.getScore();
     private static JLabel fps = new JLabel();
     private static final JLabel failed = new JLabel("!you failed!");
-    private final JLabel background = new JLabel();
+    private final Color[] labelColor = {Color.WHITE, Menu.labelColor[1]};
+    private final Color[] textColor = {Menu.getBGColor(), Menu.textColor[1]};
+    private final Color[] buttonColor = {Menu.getBGColor(), Menu.labelColor[1]};
+    private final Color[] buttonTextColor = {Color.WHITE, Menu.textColor[1]};
 
     public GameDisplay(Input input, String title) {
         this.width = ScreenSize.getWidth();
@@ -39,7 +42,7 @@ public class GameDisplay extends JFrame {
         setTitle(title);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setResizable(true);
-        setIconImage(Menu.getImage("sakura_icon.png"));
+        setIconImage(Menu.getImage("../sakura_icon.png"));
 
         this.renderer = new Renderer();
 
@@ -88,8 +91,8 @@ public class GameDisplay extends JFrame {
         back = new JButton("<<back");
         back.setBounds(10, 10, 76, 20);
         back.addActionListener(getActionListenerBack());
-        back.setBackground(Menu.getBGColor());
-        back.setForeground(Color.WHITE);
+        back.setBackground(buttonColor[Menu.colorSetting]);
+        back.setForeground(buttonTextColor[Menu.colorSetting]);
         back.setFocusable(false);
     }
 
@@ -98,50 +101,50 @@ public class GameDisplay extends JFrame {
         int gap = 2;
 
         themeText.setBounds(ScreenSize.getWidth() - theme.getWidth() - 5, 5 , theme.getWidth(), theme.getHeight());
-        themeText.setBackground(Color.WHITE);
-        themeText.setForeground(Menu.getBGColor());
+        themeText.setBackground(labelColor[Menu.colorSetting]);
+        themeText.setForeground(textColor[Menu.colorSetting]);
         themeText.setFont(new Font(Menu.textFont, Font.PLAIN, theme.getHeight()-4));
 
         theme.setBounds(ScreenSize.getWidth() - themeText.getWidth()/2, 5 , themeText.getWidth(), themeText.getHeight());
-        theme.setBackground(Color.WHITE);
-        theme.setForeground(Menu.getBGColor());
+        theme.setBackground(labelColor[Menu.colorSetting]);
+        theme.setForeground(textColor[Menu.colorSetting]);
 
         playerText.setBounds(ScreenSize.getWidth() - themeText.getWidth() - 5,5 + gap + themeText.getHeight() , themeText.getWidth(), themeText.getHeight());
-        playerText.setBackground(Color.WHITE);
-        playerText.setForeground(Menu.getBGColor());
+        playerText.setBackground(labelColor[Menu.colorSetting]);
+        playerText.setForeground(textColor[Menu.colorSetting]);
         playerText.setFont(new Font(Menu.textFont, Font.PLAIN, theme.getHeight()-4));
 
         player.setBounds(ScreenSize.getWidth() - themeText.getWidth()/2, 5 + gap + themeText.getHeight() , themeText.getWidth(), themeText.getHeight());
-        player.setBackground(Color.WHITE);
-        player.setForeground(Menu.getBGColor());
+        player.setBackground(labelColor[Menu.colorSetting]);
+        player.setForeground(textColor[Menu.colorSetting]);
 
         mapText.setBounds(ScreenSize.getWidth() - themeText.getWidth() - 5,5 + 2*gap + 2*themeText.getHeight() , themeText.getWidth(), themeText.getHeight());
-        mapText.setBackground(Color.WHITE);
-        mapText.setForeground(Menu.getBGColor());
+        mapText.setBackground(labelColor[Menu.colorSetting]);
+        mapText.setForeground(textColor[Menu.colorSetting]);
         mapText.setFont(new Font(Menu.textFont, Font.PLAIN, theme.getHeight()-4));
 
         mapLabel.setBounds(ScreenSize.getWidth() - themeText.getWidth()/2, 5 + 2*gap +2* themeText.getHeight() , themeText.getWidth(), themeText.getHeight());
-        mapLabel.setBackground(Color.WHITE);
-        mapLabel.setForeground(Menu.getBGColor());
+        mapLabel.setBackground(labelColor[Menu.colorSetting]);
+        mapLabel.setForeground(textColor[Menu.colorSetting]);
 
         highScoreText.setBounds(ScreenSize.getWidth() - themeText.getWidth() - 5,5 + 3 * gap + 3 * themeText.getHeight() , themeText.getWidth(), themeText.getHeight());
-        highScoreText.setBackground(Color.WHITE);
-        highScoreText.setForeground(Menu.getBGColor());
+        highScoreText.setBackground(labelColor[Menu.colorSetting]);
+        highScoreText.setForeground(textColor[Menu.colorSetting]);
         highScoreText.setFont(new Font(Menu.textFont, Font.PLAIN, theme.getHeight()-4));
 
         highScore.setBounds(ScreenSize.getWidth() - themeText.getWidth()/2, 5 + 3 * gap + 3 * themeText.getHeight() , themeText.getWidth(), themeText.getHeight());
-        highScore.setBackground(Color.WHITE);
-        highScore.setForeground(Menu.getBGColor());
+        highScore.setBackground(labelColor[Menu.colorSetting]);
+        highScore.setForeground(textColor[Menu.colorSetting]);
 
         scoreLabelText.setBounds(ScreenSize.getWidth() - themeText.getWidth() - 5,5 + 4 * gap + 4 * themeText.getHeight() , themeText.getWidth(), themeText.getHeight());
-        scoreLabelText.setBackground(Color.WHITE);
-        scoreLabelText.setForeground(Menu.getBGColor());
+        scoreLabelText.setBackground(labelColor[Menu.colorSetting]);
+        scoreLabelText.setForeground(textColor[Menu.colorSetting]);
         scoreLabelText.setText("Score:");
         scoreLabelText.setFont(new Font(Menu.textFont, Font.PLAIN, theme.getHeight()-4));
 
         scoreLabel.setBounds(ScreenSize.getWidth() - themeText.getWidth()/2, 5 + 4 * gap + 4 * themeText.getHeight() , themeText.getWidth(), themeText.getHeight());
-        scoreLabel.setBackground(Color.WHITE);
-        scoreLabel.setForeground(Menu.getBGColor());
+        scoreLabel.setBackground(labelColor[Menu.colorSetting]);
+        scoreLabel.setForeground(textColor[Menu.colorSetting]);
 
         failed.setVisible(false);
         failed.setBounds(0,0,width, height);
@@ -151,8 +154,8 @@ public class GameDisplay extends JFrame {
 
         fps.setBounds(10, 38, playerText.getHeight()*4, playerText.getHeight());
         fps.setFont(new Font("", Font.PLAIN, fps.getHeight()/6*5));
-        fps.setBackground(Color.WHITE);
-        fps.setForeground(Menu.getBGColor());
+        fps.setBackground(labelColor[Menu.colorSetting]);
+        fps.setForeground(textColor[Menu.colorSetting]);
     }
 
     private ActionListener getActionListenerBack() {
