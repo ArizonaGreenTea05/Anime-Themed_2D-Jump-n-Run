@@ -158,7 +158,7 @@ public class GameDisplay extends JFrame {
         return e-> {
             GameLoop.setRunning(false);
             score = 0;
-            new Menu(Menu.colorSetting);
+            new Menu();
             dispose();
         };
     }

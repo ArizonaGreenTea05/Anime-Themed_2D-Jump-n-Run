@@ -34,7 +34,7 @@ public class Menu {
     private JButton backPlayers = new JButton();
     private JButton backThemes = new JButton();
     private JButton backMaps = new JButton();
-    private final int width, height;
+    private int width, height;
     private final JLabel background = new JLabel();
 
     private static double highScore;
@@ -82,10 +82,8 @@ public class Menu {
         if(i==0) maps = mapsAoT;
         if(i==1) maps = mapsAoD;
     }
-
-
-    public Menu(int colorSetting){
-        this.colorSetting = colorSetting;
+    public Menu(){
+        this.colorSetting = Integer.parseInt(FileLoader.load("color.txt"));
         this.width = ScreenSize.getWidth();
         this.height = ScreenSize.getHeight();
 
@@ -360,7 +358,8 @@ public class Menu {
             } else {
                 colorSetting = 0;
             }
-            new Menu(colorSetting);
+            FileLoader.save("" + colorSetting,"color.txt");
+            new Menu();
         };
     }
 
