@@ -11,6 +11,10 @@ Start Menü:
 - Start-Button
 - Highscore-Anzeige
   - siehe Game
+- Exit-Button
+- Color-Change Button
+  - ändert Farbe zu höherem Kontrast (und zurück)
+  - -> Barrierefreiheit für Farbenblinde, etc.
 
 Game:
 
