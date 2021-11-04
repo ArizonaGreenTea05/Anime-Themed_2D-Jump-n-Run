@@ -39,6 +39,7 @@ public class GameDisplay extends JFrame {
         setTitle(title);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setResizable(true);
+        setIconImage(Menu.getImage("sakura_icon.png"));
 
         this.renderer = new Renderer();
 

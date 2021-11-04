@@ -288,10 +288,10 @@ public class Menu {
         return new ImageIcon(img);
     }
 
-    private Image getImage(String image) {
+    public static Image getImage(String image) {
         Image img = null;
         try {
-            img = ImageIO.read(Objects.requireNonNull(getClass().getResource("/menu/" + image)));
+            img = ImageIO.read(Objects.requireNonNull(Menu.class.getResource("/" + image)));
         } catch (IOException e) {
             e.printStackTrace();
         }
