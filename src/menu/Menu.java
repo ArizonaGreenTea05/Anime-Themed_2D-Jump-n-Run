@@ -69,8 +69,10 @@ public class Menu {
     public static int colorSetting = 0;
     private final Color[] buttonColor = {new Color(250, 200, 230),Color.BLACK};
     private final Color[] backButtonColor = {new Color(4, 162, 236), Color.BLACK};
-    private final Color[] textColor = {Color.WHITE, new Color(255,50,174)};
+    public static final Color[] labelColor = {new Color(0,0,0,0), Color.BLACK};
+    public static final Color[] textColor = {Color.WHITE, new Color(255,50,174)};
     public static final String textFont = "Comic Sans MS";
+    private final String[] bgImage = {"bg_light.png", "bg_dark.png"};
 
 
     private static void setPlayerNames(int i){
@@ -114,7 +116,7 @@ public class Menu {
     private void initializeMenu() {
         // 16/9-Format, halb so breit wie Bildschirm, Höhe dementsprechend angepasst
         menu.setSize(width/2,width/32*9);
-        menu.setIconImage(getImage("sakura_icon.png"));
+        menu.setIconImage(getImage("../sakura_icon.png"));
         menu.setDefaultCloseOperation(EXIT_ON_CLOSE);
         menu.getContentPane().setBackground(new Color(23, 139, 221));
         menu.setResizable(false);
@@ -129,43 +131,53 @@ public class Menu {
         int fontSize = labelHeight-4;
         themeTextLabel.setBounds(menu.getWidth()/4*3+10, 10, labelWidth, labelHeight);
         themeTextLabel.setForeground(textColor[colorSetting]);
+        themeTextLabel.setBackground(labelColor[colorSetting]);
         themeTextLabel.setFont(new Font(textFont, Font.PLAIN, fontSize));
 
         themeLabel.setBounds(menu.getWidth()/7*6-5, 10, labelWidth, labelHeight);
         themeLabel.setForeground(textColor[colorSetting]);
+        themeLabel.setBackground(labelColor[colorSetting]);
         themeLabel.setFont(new Font(textFont, Font.PLAIN, fontSize));
 
         playerTextLabel.setBounds(menu.getWidth()/4*3+10, 13+labelHeight, labelWidth, labelHeight);
         playerTextLabel.setForeground(textColor[colorSetting]);
+        playerTextLabel.setBackground(labelColor[colorSetting]);
         playerTextLabel.setFont(new Font(textFont, Font.PLAIN, fontSize));
 
         playerLabel.setBounds(menu.getWidth()/7*6-5, 13+labelHeight, labelWidth, labelHeight);
         playerLabel.setForeground(textColor[colorSetting]);
+        playerLabel.setBackground(labelColor[colorSetting]);
         playerLabel.setFont(new Font(textFont, Font.PLAIN, fontSize));
 
         mapTextLabel.setBounds(menu.getWidth()/4*3+10, 16+2*labelHeight, labelWidth, labelHeight);
         mapTextLabel.setForeground(textColor[colorSetting]);
+        mapTextLabel.setBackground(labelColor[colorSetting]);
         mapTextLabel.setFont(new Font(textFont, Font.PLAIN, fontSize));
 
         mapLabel.setBounds(menu.getWidth()/7*6-5, 16+2*labelHeight, labelWidth, labelHeight);
         mapLabel.setForeground(textColor[colorSetting]);
+        mapLabel.setBackground(labelColor[colorSetting]);
         mapLabel.setFont(new Font(textFont, Font.PLAIN, fontSize));
 
         highScoreTextLabel.setBounds(menu.getWidth()/4*3+10, 19+3*labelHeight, labelWidth, labelHeight);
         highScoreTextLabel.setForeground(textColor[colorSetting]);
+        highScoreTextLabel.setBackground(labelColor[colorSetting]);
         highScoreTextLabel.setFont(new Font(textFont, Font.PLAIN, fontSize));
 
         highScoreLabel.setBounds(menu.getWidth()/7*6-5, 19+3*labelHeight, labelWidth, labelHeight);
         highScoreLabel.setForeground(textColor[colorSetting]);
+        highScoreLabel.setBackground(labelColor[colorSetting]);
         highScoreLabel.setFont(new Font(textFont, Font.PLAIN, fontSize));
         highScoreLabel.setText("" + highScore);
 
         scoreTextLabel.setBounds(menu.getWidth()/4*3+10, 22+4*labelHeight, labelWidth, labelHeight);
         scoreTextLabel.setForeground(textColor[colorSetting]);
+        scoreTextLabel.setBackground(labelColor[colorSetting]);
         scoreTextLabel.setFont(new Font(textFont, Font.PLAIN, fontSize));
 
         scoreLabel.setBounds(menu.getWidth()/7*6-5, 22+4*labelHeight, labelWidth, labelHeight);
         scoreLabel.setForeground(textColor[colorSetting]);
+        scoreLabel.setBackground(labelColor[colorSetting]);
         scoreLabel.setFont(new Font(textFont, Font.PLAIN, fontSize));
         scoreLabel.setText("" + GameDisplay.getScore());
         // -Status-Anzeige-
@@ -189,7 +201,7 @@ public class Menu {
 
     private void initializeBackground() {
         background.setBounds(0,0,menu.getWidth(), menu.getHeight());
-        background.setIcon(getIcon("bg.png", menu.getWidth(), menu.getHeight()));
+        background.setIcon(getIcon(bgImage[colorSetting], menu.getWidth(), menu.getHeight()));
         menu.setContentPane(background);
     }
 
@@ -276,10 +288,10 @@ public class Menu {
         return new ImageIcon(img);
     }
 
-    private Image getImage(String image) {
+    public static Image getImage(String image) {
         Image img = null;
         try {
-            img = ImageIO.read(Objects.requireNonNull(getClass().getResource("/menu/" + image)));
+            img = ImageIO.read(Objects.requireNonNull(Menu.class.getResource("/menu/" + image)));
         } catch (IOException e) {
             e.printStackTrace();
         }
