@@ -93,6 +93,7 @@ public class Menu {
         if(i==0) maps = mapsAoT;
         if(i==1) maps = mapsAoD;
     }
+
     public Menu(){
         this.colorSetting = Integer.parseInt(FileLoader.load("color.txt"));
         this.width = ScreenSize.getWidth();
@@ -415,6 +416,7 @@ public class Menu {
             for (JButton button : playerButtons) {
                 menu.remove(button);
             }
+            themeLabel.setText("");
             addThemes();
             menu.remove(backThemes);
             menu.repaint();
@@ -426,6 +428,7 @@ public class Menu {
             for (JButton button : mapButtons) {
                 menu.remove(button);
             }
+            playerLabel.setText("");
             menu.remove(backPlayers);
             menu.repaint();
             addPlayers();
@@ -434,6 +437,7 @@ public class Menu {
 
     private ActionListener getActionListenerBackMaps() {
         return e -> {
+            mapLabel.setText("");
             menu.remove(startGame);
             menu.remove(backMaps);
             menu.repaint();
