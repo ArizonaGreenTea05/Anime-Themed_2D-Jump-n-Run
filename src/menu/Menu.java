@@ -57,9 +57,11 @@ public class Menu {
 
     public static final String[] playerNamesAoT = new String[] {"levi_ackerman", "mikasa_ackerman", "sasha_braus"};
     public static final String[] mapsAoT = new String[] {"test"};
+    public static final Color bgColorAoT = new Color(70, 90, 120);
     public static final String[] playerNamesAoD = new String[] {"rachel_gardner"};
     public static final String[] mapsAoD = new String[] {"test"};
-    private static final Color[] bgColors = new Color[]{(new Color(70, 90, 120)), (new Color(128, 186, 224))};
+    public static final Color bgColorAoD = new Color(128, 186, 224);
+    private static final Color[] bgColors = new Color[]{bgColorAoT, bgColorAoD};
     private static int name;
     private static int theme;
     private static int map;
