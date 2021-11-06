@@ -75,8 +75,8 @@ public class Menu {
     private static final Color color5 = new Color(255, 111, 197);
     private static final Color clear = new Color(0,0,0,0);
 
-    private final Color[] buttonColor =         { color1,         color2,         color3,         color3,        Color.BLACK};
-    private final Color[] backButtonColor =     { color2,         color2,         color3,         color4,        Color.BLACK};
+    public static final Color[] buttonColor =         { color1,         color2,         color3,         color3,        Color.BLACK};
+    private static final Color[] backButtonColor =     { color2,         color2,         color3,         color4,        Color.BLACK};
     public static final Color[] labelColor =    { clear,          clear,          color3,         color5,        Color.BLACK};
     public static final Color[] textColor =     { Color.WHITE,    Color.WHITE,    Color.WHITE,    Color.BLACK,   color5};
     private final String[] bgImage =            {"bg_light.png", "bg_light.png", "bg_light.png", "bg_dark.png", "bg_dark.png"};

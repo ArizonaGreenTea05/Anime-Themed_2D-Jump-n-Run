@@ -30,10 +30,9 @@ public class GameDisplay extends JFrame {
     private static JLabel scoreLabel = Menu.getScore();
     private static JLabel fps = new JLabel();
     private static final JLabel failed = new JLabel("!you failed!");
-    private final Color[] labelColor = {Color.WHITE, Menu.labelColor[1]};
-    private final Color[] textColor = {Menu.getBGColor(), Menu.textColor[1]};
-    private final Color[] buttonColor = {Menu.getBGColor(), Menu.labelColor[1]};
-    private final Color[] buttonTextColor = {Color.WHITE, Menu.textColor[1]};
+    private final Color[] labelColor = Menu.labelColor;
+    private final Color[] textColor = Menu.textColor;
+    private final Color[] buttonColor = Menu.buttonColor;
 
     public GameDisplay(Input input, String title) {
         this.width = ScreenSize.getWidth();
@@ -92,7 +91,7 @@ public class GameDisplay extends JFrame {
         back.setBounds(10, 10, 76, 20);
         back.addActionListener(getActionListenerBack());
         back.setBackground(buttonColor[Menu.colorSetting]);
-        back.setForeground(buttonTextColor[Menu.colorSetting]);
+        back.setForeground(textColor[Menu.colorSetting]);
         back.setFocusable(false);
     }
 
