@@ -34,7 +34,7 @@ public class Menu {
     private JButton backPlayers = new JButton();
     private JButton backThemes = new JButton();
     private JButton backMaps = new JButton();
-    private int width, height;
+    private final int width, height;
     private final JLabel background = new JLabel();
 
     private static double highScore;
@@ -99,15 +99,7 @@ public class Menu {
         this.width = ScreenSize.getWidth();
         this.height = ScreenSize.getHeight();
 
-        double highscore = Double.parseDouble(FileLoader.load("HighScore.txt"));
-        double score = GameDisplay.getScore();
-
-        if (highscore >= score) {
-            highScore = highscore;
-        } else {
-            FileLoader.save(String.valueOf(score), "HighScore.txt");
-            highScore = score;
-        }
+        setHighscore();
 
         initializeMenu();
 
@@ -507,6 +499,17 @@ public class Menu {
         return out.toString();
     }
 
+    private void setHighscore(){
+        double highscore = Double.parseDouble(FileLoader.load("HighScore.txt"));
+        double score = GameDisplay.getScore();
+
+        if (highscore >= score) {
+            highScore = highscore;
+        } else {
+            FileLoader.save(String.valueOf(score), "HighScore.txt");
+            highScore = score;
+        }
+    }
 
     public static JLabel getHighscore(){
         return highScoreLabel;
