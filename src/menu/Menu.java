@@ -26,11 +26,11 @@ public class Menu {
     private final JButton exit = new JButton("EXIT");
     private final JButton color = new JButton("change colors");
 
-    private final JFrame menu=new JFrame("Menu");
+    private final JFrame menu = new JFrame("Menu");
     private JButton startGame = new JButton();
-    private JButton[] players;
-    private JButton[] mapButton;
-    private final JButton[] themes = new JButton[gameTheme.length];
+    private JButton[] playerButtons;
+    private JButton[] mapButtons;
+    private final JButton[] themeButtons = new JButton[gameThemes.length];
     private JButton backPlayers = new JButton();
     private JButton backThemes = new JButton();
     private JButton backMaps = new JButton();
@@ -53,31 +53,38 @@ public class Menu {
     /**
      * declaration of themes, player names and colors
      **/
-    public static final String[] gameTheme = new String[] {"attack_on_titan", "angels_of_death"};
+    public static final String[] gameThemes = new String[] {"attack_on_titan", "angels_of_death"};
 
-    public static final String[] playerNameAoT = new String[] {"levi_ackerman", "mikasa_ackerman", "sasha_braus"};
+    public static final String[] playerNamesAoT = new String[] {"levi_ackerman", "mikasa_ackerman", "sasha_braus"};
     public static final String[] mapsAoT = new String[] {"test"};
-    public static final String[] playerNameAoD = new String[] {"rachel_gardner"};
+    public static final String[] playerNamesAoD = new String[] {"rachel_gardner"};
     public static final String[] mapsAoD = new String[] {"test"};
-    //public static final String[] playerNameJojo = new String[] {"dio", "kakyoin_noriaki"};
-    //public static final String[] MapsJojo = new String[] {"test"};
-    private static final Color[] bgColor = new Color[]{(new Color(70, 90, 120)), (new Color(128, 186, 224))};
+    private static final Color[] bgColors = new Color[]{(new Color(70, 90, 120)), (new Color(128, 186, 224))};
     private static int name;
     private static int theme;
     private static int map;
 
     public static int colorSetting = 0;
-    private final Color[] buttonColor = {new Color(250, 200, 230),Color.BLACK};
-    private final Color[] backButtonColor = {new Color(4, 162, 236), Color.BLACK};
-    public static final Color[] labelColor = {new Color(0,0,0,0), Color.BLACK};
-    public static final Color[] textColor = {Color.WHITE, new Color(255,50,174)};
+
+    private static final Color color1 = new Color(250, 200, 230);
+    private static final Color color2 = new Color(4, 162, 236);
+    private static final Color color3 = new Color(187, 120, 160);
+    private static final Color color4 = new Color(2, 73, 134);
+    private static final Color color5 = new Color(255, 111, 197);
+    private static final Color clear = new Color(0,0,0,0);
+
+    private final Color[] buttonColor =         { color1,         color2,         color3,         color3,        Color.BLACK};
+    private final Color[] backButtonColor =     { color2,         color2,         color3,         color4,        Color.BLACK};
+    public static final Color[] labelColor =    { clear,          clear,          color3,         color5,        Color.BLACK};
+    public static final Color[] textColor =     { Color.WHITE,    Color.WHITE,    Color.WHITE,    Color.BLACK,   color5};
+    private final String[] bgImage =            {"bg_light.png", "bg_light.png", "bg_light.png", "bg_dark.png", "bg_dark.png"};
+
     public static final String textFont = "Comic Sans MS";
-    private final String[] bgImage = {"bg_light.png", "bg_dark.png"};
 
 
     private static void setPlayerNames(int i){
-        if(i==0) playerName = playerNameAoT;
-        if(i==1) playerName = playerNameAoD;
+        if(i==0) playerName = playerNamesAoT;
+        if(i==1) playerName = playerNamesAoD;
     }
 
     private static void setMaps(int i){
@@ -184,7 +191,22 @@ public class Menu {
     }
 
     private void addAll() {
-        addThemes();
+
+        //bei Farbwechsel wird vorheriger Punkt beibehalten
+        if(!mapLabel.getText().equals("")) {
+            menu.add(startGame);
+            menu.add(backMaps);
+        } else if(!playerLabel.getText().equals("")) {
+            addMaps();
+            menu.add(backPlayers);
+        } else if(!themeLabel.getText().equals("")) {
+            addPlayers();
+            menu.add(backThemes);
+        } else {
+            addThemes();
+        }
+
+
         menu.add(themeTextLabel);
         menu.add(themeLabel);
         menu.add(playerTextLabel);
@@ -303,17 +325,17 @@ public class Menu {
 
 
     private void addPlayers(){
-        players = new JButton[playerName.length];
+        playerButtons = new JButton[playerName.length];
 
         for (int i = 0; i < playerName.length; i++) {
-            players[i] = new JButton(makeNameNice(playerName[i]));
+            playerButtons[i] = new JButton(makeNameNice(playerName[i]));
 
-            players[i].setBounds(menu.getWidth()/4,menu.getHeight()/10+i*(menu.getHeight()/12 + 5),menu.getWidth()/2,menu.getHeight()/12);
-            players[i].setFont(new Font(textFont, Font.PLAIN, players[i].getHeight()/3));
-            players[i].setBackground(buttonColor[colorSetting]);
-            players[i].setForeground(textColor[colorSetting]);
-            players[i].addActionListener(getActionListenerPlayers(i));
-            menu.add(players[i]);
+            playerButtons[i].setBounds(menu.getWidth()/4,menu.getHeight()/10+i*(menu.getHeight()/12 + 5),menu.getWidth()/2,menu.getHeight()/12);
+            playerButtons[i].setFont(new Font(textFont, Font.PLAIN, playerButtons[i].getHeight()/3));
+            playerButtons[i].setBackground(buttonColor[colorSetting]);
+            playerButtons[i].setForeground(textColor[colorSetting]);
+            playerButtons[i].addActionListener(getActionListenerPlayers(i));
+            menu.add(playerButtons[i]);
             menu.getContentPane().setBackground(getBGColor());
             menu.repaint();
         }
@@ -324,33 +346,33 @@ public class Menu {
 
     private void addThemes(){
 
-        for (int i = 0; i < gameTheme.length; i++) {
-            themes[i] = new JButton(makeNameNice(gameTheme[i]));
+        for (int i = 0; i < gameThemes.length; i++) {
+            themeButtons[i] = new JButton(makeNameNice(gameThemes[i]));
 
-            themes[i].setBounds(menu.getWidth()/4,menu.getHeight()/10+i*(menu.getHeight()/12 + 5),menu.getWidth()/2,menu.getHeight()/12);
-            themes[i].setFont(new Font(textFont, Font.PLAIN, themes[i].getHeight()/3));
-            themes[i].setBackground(buttonColor[colorSetting]);
-            themes[i].setForeground(textColor[colorSetting]);
+            themeButtons[i].setBounds(menu.getWidth()/4,menu.getHeight()/10+i*(menu.getHeight()/12 + 5),menu.getWidth()/2,menu.getHeight()/12);
+            themeButtons[i].setFont(new Font(textFont, Font.PLAIN, themeButtons[i].getHeight()/3));
+            themeButtons[i].setBackground(buttonColor[colorSetting]);
+            themeButtons[i].setForeground(textColor[colorSetting]);
 
-            themes[i].addActionListener(getActionListenerThemes(i));
-            menu.add(themes[i]);
+            themeButtons[i].addActionListener(getActionListenerThemes(i));
+            menu.add(themeButtons[i]);
         }
         menu.repaint();
     }
 
     private void addMaps(){
-        mapButton = new JButton[maps.length];
+        mapButtons = new JButton[maps.length];
 
         for (int i = 0; i < maps.length; i++) {
-            mapButton[i] = new JButton(makeNameNice(maps[i]));
+            mapButtons[i] = new JButton(makeNameNice(maps[i]));
 
-            mapButton[i].setBounds(menu.getWidth()/4,menu.getHeight()/10+i*(menu.getHeight()/12 + 5),menu.getWidth()/2,menu.getHeight()/12);
-            mapButton[i].setFont(new Font(textFont, Font.PLAIN, mapButton[i].getHeight()/3));
-            mapButton[i].setBackground(buttonColor[colorSetting]);
-            mapButton[i].setForeground(textColor[colorSetting]);
+            mapButtons[i].setBounds(menu.getWidth()/4,menu.getHeight()/10+i*(menu.getHeight()/12 + 5),menu.getWidth()/2,menu.getHeight()/12);
+            mapButtons[i].setFont(new Font(textFont, Font.PLAIN, mapButtons[i].getHeight()/3));
+            mapButtons[i].setBackground(buttonColor[colorSetting]);
+            mapButtons[i].setForeground(textColor[colorSetting]);
 
-            mapButton[i].addActionListener(getActionListenerMaps(i));
-            menu.add(mapButton[i]);
+            mapButtons[i].addActionListener(getActionListenerMaps(i));
+            menu.add(mapButtons[i]);
         }
         menu.add(backPlayers);
         menu.repaint();
@@ -388,7 +410,7 @@ public class Menu {
 
     private ActionListener getActionListenerBackThemes(){
         return e-> {
-            for (JButton button : players) {
+            for (JButton button : playerButtons) {
                 menu.remove(button);
             }
             addThemes();
@@ -399,7 +421,7 @@ public class Menu {
 
     private ActionListener getActionListenerBackPlayers() {
         return e -> {
-            for (JButton button : mapButton) {
+            for (JButton button : mapButtons) {
                 menu.remove(button);
             }
             menu.remove(backPlayers);
@@ -422,7 +444,7 @@ public class Menu {
             theme = in;
             setPlayerNames(theme);
             setMaps(theme);
-            for (JButton button : themes) {
+            for (JButton button : themeButtons) {
                 menu.remove(button);
             }
             addPlayers();
@@ -435,7 +457,7 @@ public class Menu {
     private ActionListener getActionListenerPlayers(int in) {
         return e -> {
             name = in;
-            for (JButton button : players) {
+            for (JButton button : playerButtons) {
                 menu.remove(button);
             }
             menu.remove(backThemes);
@@ -450,7 +472,7 @@ public class Menu {
     private ActionListener getActionListenerMaps(int in) {
         return e -> {
             map = in;
-            for (JButton button : mapButton) {
+            for (JButton button : mapButtons) {
                 menu.remove(button);
             }
             menu.remove(backPlayers);
@@ -501,7 +523,7 @@ public class Menu {
     }
 
     public static String getGameTheme(){
-        return gameTheme[theme];
+        return gameThemes[theme];
     }
 
     public static String getPlayerName(){
@@ -513,7 +535,7 @@ public class Menu {
     }
 
     public static Color getBGColor(){
-        return bgColor[theme];
+        return bgColors[theme];
     }
 
 
