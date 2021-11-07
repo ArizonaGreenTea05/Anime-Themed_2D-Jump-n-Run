@@ -136,7 +136,7 @@ public class Menu {
         labelHeight = menu.getHeight()/30;
         labelWidth1 = menu.getWidth()/8-30;
         labelWidth2 = menu.getWidth()/8-5;
-        fontSize = labelHeight-4;
+        fontSize = labelHeight-6;
 
         themeTextLabel.setBounds(menu.getWidth()-labelWidth1-labelWidth2-22, 10, labelWidth1, labelHeight);
         themeTextLabel.setOpaque(true);

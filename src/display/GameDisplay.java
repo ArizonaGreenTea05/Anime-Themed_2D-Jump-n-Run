@@ -17,20 +17,23 @@ public class GameDisplay extends JFrame {
     private final Renderer renderer;
     private int width, height;
     private JButton back;
+    private JButton info;
     private static double score = 0;
-    private static final JLabel box1 = new JLabel("");
-    private static final JLabel box2 = new JLabel("");
-    private static final JLabel themeText = new JLabel("Theme:");
+    private static final JLabel themeText = new JLabel(" Theme:");
     private static final JLabel theme = Menu.getThemeLabel();
-    private static final JLabel playerText = new JLabel("Player:");
+    private static final JLabel playerText = new JLabel(" Player:");
     private static final JLabel player = Menu.getPlayerLabel();
-    private static final JLabel mapText = new JLabel("Map:");
+    private static final JLabel mapText = new JLabel(" Map:");
     private static final JLabel mapLabel = Menu.getMapLabel();
-    private static final JLabel highScoreText = new JLabel("Highscore:");
+    private static final JLabel highScoreText = new JLabel(" Highscore:");
     private static final JLabel highScore = Menu.getHighscore();
-    private static final JLabel scoreLabelText = new JLabel("Score:");
+    private static final JLabel scoreLabelText = new JLabel(" Score:");
     private static JLabel scoreLabel = Menu.getScore();
     private static JLabel fps = new JLabel();
+
+    private Rectangle scorePos;
+    private Rectangle scoreTextPos;
+
     private static final JLabel failed = new JLabel("!you failed!");
     private final Color[] labelColor = Menu.labelColor;
     private final Color[] textColor = Menu.textColor;
@@ -49,7 +52,7 @@ public class GameDisplay extends JFrame {
 
         initializeLabels();
 
-        initializeBackButton();
+        initializeButtons();
 
         initializeCanvas();
 
@@ -78,9 +81,8 @@ public class GameDisplay extends JFrame {
         add(scoreLabel);
         add(scoreLabelText);
         add(back);
+        add(info);
         add(failed);
-        add(box1);
-        add(box2);
         add(canvas);
     }
 
@@ -90,13 +92,20 @@ public class GameDisplay extends JFrame {
         canvas.setFocusable(false);
     }
 
-    private void initializeBackButton() {
+    private void initializeButtons() {
         back = new JButton("<<back");
         back.setBounds(10, 10, 76, 20);
         back.addActionListener(getActionListenerBack());
         back.setBackground(labelColor[Menu.colorSetting]);
         back.setForeground(textColor[Menu.colorSetting]);
         back.setFocusable(false);
+
+        info = new JButton("hide info");
+        info.setBounds(ScreenSize.getWidth()-Menu.labelWidth1-Menu.labelWidth2-200, 5 , 120, Menu.labelHeight);
+        info.addActionListener(getActionListenerInfo());
+        info.setBackground(labelColor[Menu.colorSetting]);
+        info.setForeground(textColor[Menu.colorSetting]);
+        info.setFocusable(false);
     }
 
     private void initializeLabels() {
@@ -106,16 +115,6 @@ public class GameDisplay extends JFrame {
         int labelHeight = Menu.labelHeight;
         int labelWidth1 = Menu.labelWidth2;
         int labelWidth2 = Menu.labelWidth2;
-
-        box1.setBounds(-3, -3, labelWidth2+36, 16+4*gap+4*labelHeight);
-        box1.setOpaque(true);
-        box1.setBackground(buttonColor[Menu.colorSetting]);
-        box1.setBorder(BorderFactory.createLineBorder(labelColor[Menu.colorSetting], 3));
-
-        box2.setBounds(ScreenSize.getWidth()-labelWidth1-labelWidth2-33, -3, labelWidth1+labelWidth2+36, 16+5*gap+5*labelHeight);
-        box2.setOpaque(true);
-        box2.setBackground(buttonColor[Menu.colorSetting]);
-        box2.setBorder(BorderFactory.createLineBorder(labelColor[Menu.colorSetting], 3));
 
         themeText.setBounds(ScreenSize.getWidth()-labelWidth1-labelWidth2-22, 5 , labelWidth1, labelHeight);
         themeText.setOpaque(true);
@@ -154,8 +153,10 @@ public class GameDisplay extends JFrame {
         scoreLabelText.setBackground(labelColor[Menu.colorSetting]);
         scoreLabelText.setForeground(textColor[Menu.colorSetting]);
         scoreLabelText.setFont(new Font(Menu.textFont, Font.PLAIN, theme.getHeight()-4));
+        scoreTextPos = scoreLabelText.getBounds();
 
         scoreLabel.setBounds(ScreenSize.getWidth()-labelWidth2-20, 5 + 4*gap + 4*labelHeight , labelWidth2, labelHeight);
+        scorePos = scoreLabel.getBounds();
 
         failed.setVisible(false);
         failed.setBounds(0,0,width, height);
@@ -176,6 +177,37 @@ public class GameDisplay extends JFrame {
             score = 0;
             new Menu();
             dispose();
+        };
+    }
+
+    private ActionListener getActionListenerInfo() {
+        return e-> {
+            if(theme.isVisible()) {
+                theme.setVisible(false);
+                themeText.setVisible(false);
+                player.setVisible(false);
+                playerText.setVisible(false);
+                mapLabel.setVisible(false);
+                mapText.setVisible(false);
+                highScore.setVisible(false);
+                highScoreText.setVisible(false);
+                scoreLabel.setBounds(theme.getBounds());
+                scoreLabelText.setBounds(themeText.getBounds());
+                repaint();
+                info.setText("show info");
+            } else {
+                theme.setVisible(true);
+                themeText.setVisible(true);
+                player.setVisible(true);
+                playerText.setVisible(true);
+                mapLabel.setVisible(true);
+                mapText.setVisible(true);
+                highScore.setVisible(true);
+                highScoreText.setVisible(true);
+                scoreLabel.setBounds(scorePos);
+                scoreLabelText.setBounds(scoreTextPos);
+                info.setText("hide info");
+            }
         };
     }
 
@@ -210,32 +242,10 @@ public class GameDisplay extends JFrame {
 
     public static void setScoreLabel(int i) {
         score = i;
-        scoreLabel.setText("" + score);
+        scoreLabel.setText(" " + score);
     }
 
     public static double getScore(){
         return score;
-    }
-
-    public static void setInfo(){
-        if(box1.isVisible()) {
-            box1.setVisible(false);
-            box2.setVisible(false);
-            theme.setVisible(false);
-            themeText.setVisible(false);
-            player.setVisible(false);
-            playerText.setVisible(false);
-            mapLabel.setVisible(false);
-            mapText.setVisible(false);
-        } else {
-            box1.setVisible(true);
-            box2.setVisible(true);
-            theme.setVisible(true);
-            themeText.setVisible(true);
-            player.setVisible(true);
-            playerText.setVisible(true);
-            mapLabel.setVisible(true);
-            mapText.setVisible(true);
-        }
     }
 }
