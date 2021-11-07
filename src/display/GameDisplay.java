@@ -193,7 +193,6 @@ public class GameDisplay extends JFrame {
                 highScoreText.setVisible(false);
                 scoreLabel.setBounds(theme.getBounds());
                 scoreLabelText.setBounds(themeText.getBounds());
-                repaint();
                 info.setText("show info");
             } else {
                 theme.setVisible(true);
