@@ -72,12 +72,16 @@ public class GameDisplay extends JFrame {
         add(fps);
         add(theme);
         add(themeText);
+        themeText.setVisible(true);
         add(player);
         add(playerText);
+        playerText.setVisible(true);
         add(mapLabel);
         add(mapText);
+        mapText.setVisible(true);
         add(highScore);
         add(highScoreText);
+        highScoreText.setVisible(true);
         add(scoreLabel);
         add(scoreLabelText);
         add(back);

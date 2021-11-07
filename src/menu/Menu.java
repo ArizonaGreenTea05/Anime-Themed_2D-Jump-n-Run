@@ -220,12 +220,16 @@ public class Menu {
 
 
         menu.add(themeLabel);
+        themeLabel.setVisible(true);
         menu.add(themeTextLabel);
         menu.add(playerLabel);
+        playerLabel.setVisible(true);
         menu.add(playerTextLabel);
         menu.add(mapLabel);
+        mapLabel.setVisible(true);
         menu.add(mapTextLabel);
         menu.add(highScoreLabel);
+        highScoreLabel.setVisible(true);
         menu.add(highScoreTextLabel);
         menu.add(scoreLabel);
         menu.add(scoreTextLabel);
