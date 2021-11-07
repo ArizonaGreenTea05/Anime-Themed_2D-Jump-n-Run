@@ -1,6 +1,9 @@
 package game;
 
+import controller.Controller;
 import display.GameDisplay;
+
+import java.awt.event.KeyEvent;
 
 public class GameLoop implements Runnable {
 

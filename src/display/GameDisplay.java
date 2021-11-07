@@ -18,17 +18,17 @@ public class GameDisplay extends JFrame {
     private int width, height;
     private JButton back;
     private static double score = 0;
-    private final JLabel box1 = new JLabel("");
-    private final JLabel box2 = new JLabel("");
-    private final JLabel themeText = new JLabel("Theme:");
-    private final JLabel theme = Menu.getThemeLabel();
-    private final JLabel playerText = new JLabel("Player:");
-    private final JLabel player = Menu.getPlayerLabel();
-    private final JLabel mapText = new JLabel("Map:");
-    private final JLabel mapLabel = Menu.getMapLabel();
-    private final JLabel highScoreText = new JLabel("Highscore:");
-    private final JLabel highScore = Menu.getHighscore();
-    private final JLabel scoreLabelText = new JLabel("Score:");
+    private static final JLabel box1 = new JLabel("");
+    private static final JLabel box2 = new JLabel("");
+    private static final JLabel themeText = new JLabel("Theme:");
+    private static final JLabel theme = Menu.getThemeLabel();
+    private static final JLabel playerText = new JLabel("Player:");
+    private static final JLabel player = Menu.getPlayerLabel();
+    private static final JLabel mapText = new JLabel("Map:");
+    private static final JLabel mapLabel = Menu.getMapLabel();
+    private static final JLabel highScoreText = new JLabel("Highscore:");
+    private static final JLabel highScore = Menu.getHighscore();
+    private static final JLabel scoreLabelText = new JLabel("Score:");
     private static JLabel scoreLabel = Menu.getScore();
     private static JLabel fps = new JLabel();
     private static final JLabel failed = new JLabel("!you failed!");
@@ -215,5 +215,27 @@ public class GameDisplay extends JFrame {
 
     public static double getScore(){
         return score;
+    }
+
+    public static void setInfo(){
+        if(box1.isVisible()) {
+            box1.setVisible(false);
+            box2.setVisible(false);
+            theme.setVisible(false);
+            themeText.setVisible(false);
+            player.setVisible(false);
+            playerText.setVisible(false);
+            mapLabel.setVisible(false);
+            mapText.setVisible(false);
+        } else {
+            box1.setVisible(true);
+            box2.setVisible(true);
+            theme.setVisible(true);
+            themeText.setVisible(true);
+            player.setVisible(true);
+            playerText.setVisible(true);
+            mapLabel.setVisible(true);
+            mapText.setVisible(true);
+        }
     }
 }

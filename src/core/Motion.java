@@ -1,5 +1,6 @@
 package core;
 import controller.Controller;
+import display.GameDisplay;
 
 public class Motion {
 
