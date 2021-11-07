@@ -17,6 +17,10 @@ public abstract class GameObject {
     public abstract void update();
     public abstract Image getSprite();
 
+    public void setPosition(Position position) {
+        this.position = position;
+    }
+
     public Position getPosition() {
         return position;
     }
