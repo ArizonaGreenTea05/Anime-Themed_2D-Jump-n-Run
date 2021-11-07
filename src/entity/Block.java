@@ -15,6 +15,7 @@ public abstract class Block extends GameObject {
 
     @Override
     public void update() {
+
     }
 
 

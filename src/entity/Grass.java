@@ -8,6 +8,6 @@ public class Grass extends Block{
 
     @Override
     public void update() {
-
+        super.update();
     }
 }
