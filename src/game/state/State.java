@@ -17,11 +17,10 @@ public abstract class State {
         this.input = input;
         gameObjects = new ArrayList<>();
         spriteLibrary = new SpriteLibrary();
-
     }
 
     public void update() {
-        gameObjects.forEach(GameObject::update);
+        gameObjects.forEach(gameObject -> gameObject.update());
     }
 
     public List<GameObject> getGameObjects() {
