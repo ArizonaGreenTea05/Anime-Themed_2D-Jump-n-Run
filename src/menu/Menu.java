@@ -76,15 +76,14 @@ public class Menu {
     private static final Color color1 = new Color(250, 200, 230);
     private static final Color color2 = new Color(4, 162, 236);
     private static final Color color3 = new Color(187, 120, 160);
-    private static final Color color4 = new Color(2, 73, 134);
-    private static final Color color5 = new Color(255, 111, 197);
+    private static final Color color4 = new Color(255, 111, 197);
     private static final Color clear = new Color(0,0,0,0);
 
-    public static final Color[] buttonColor =           { color1,         color2,         color3,         color3,        Color.BLACK};
-    private static final Color[] backButtonColor =      { color2,         color2,         color3,         color4,        Color.BLACK};
-    public static final Color[] labelColor =            { color2,         color2,         color3,         color5,        Color.BLACK};
-    public static final Color[] textColor =             { Color.WHITE,    Color.WHITE,    Color.WHITE,    Color.BLACK,   color5};
-    private final String[] bgImage =                    {"bg_light.png", "bg_light.png", "bg_light.png", "bg_dark.png", "bg_dark.png"};
+    public static final Color[] buttonColor =           { color1,         color1,         color3,        Color.BLACK};
+    private static final Color[] backButtonColor =      { color2,         color2,         color3,        Color.BLACK};
+    public static final Color[] labelColor =            { color2,         color2,         color3,        Color.BLACK};
+    public static final Color[] textColor =             { Color.WHITE,    Color.BLACK,    Color.BLACK,   color4};
+    private final String[] bgImage =                    {"bg_light.png", "bg_light.png", "bg_dark.png", "bg_dark.png"};
 
     public static final String textFont = "Comic Sans MS";
 
