@@ -58,15 +58,18 @@ public class Menu {
     /**
      * declaration of themes, player names and colors
      **/
-    public static final String[] gameThemes = new String[] {"attack_on_titan", "angels_of_death"};
 
     public static final String[] playerNamesAoT = new String[] {"levi_ackerman", "mikasa_ackerman", "sasha_braus"};
     public static final String[] mapsAoT = new String[] {"test"};
     public static final Color bgColorAoT = new Color(70, 90, 120);
-    public static final String[] playerNamesAoD = new String[] {"rachel_gardner", "isaac_foster"};
+
+    public static final String[] playerNamesAoD = new String[] {"isaac_foster", "rachel_gardner"};
     public static final String[] mapsAoD = new String[] {"test"};
     public static final Color bgColorAoD = new Color(128, 186, 224);
-    private static final Color[] bgColors = new Color[]{bgColorAoT, bgColorAoD};
+
+    public static final String[] gameThemes = new String[] {"angels_of_death", "attack_on_titan"};
+    private static final Color[] bgColors = new Color[]{bgColorAoD, bgColorAoT};
+
     private static int name;
     private static int theme;
     private static int map;
@@ -89,13 +92,13 @@ public class Menu {
 
 
     private static void setPlayerNames(int i){
-        if(i==0) playerName = playerNamesAoT;
-        if(i==1) playerName = playerNamesAoD;
+        if(i==0) playerName = playerNamesAoD;
+        if(i==1) playerName = playerNamesAoT;
     }
 
     private static void setMaps(int i){
-        if(i==0) maps = mapsAoT;
-        if(i==1) maps = mapsAoD;
+        if(i==0) maps = mapsAoD;
+        if(i==1) maps = mapsAoT;
     }
 
     public Menu(){
