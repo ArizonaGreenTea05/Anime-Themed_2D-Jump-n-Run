@@ -58,7 +58,6 @@ public class Motion {
         }
 
 
-
         vector = new Vector2D(deltaX, deltaY);
         vector.multiply(speed);
 
