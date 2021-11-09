@@ -27,7 +27,7 @@ public class Menu {
     private final JButton color = new JButton("change colors");
 
     private final JFrame menu = new JFrame("Menu");
-    private JButton startGame = new JButton();
+    private JButton startGame;
     private JButton[] playerButtons;
     private JButton[] mapButtons;
     private final JButton[] themeButtons = new JButton[gameThemes.length];
