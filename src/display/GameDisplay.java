@@ -45,7 +45,9 @@ public class GameDisplay extends JFrame {
 
         setTitle(title);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
-        setResizable(true);
+        setResizable(false);
+        setExtendedState(JFrame.MAXIMIZED_BOTH);
+        setUndecorated(true);
         setIconImage(Menu.getImage("../sakura_icon.png"));
 
         this.renderer = new Renderer();
@@ -59,6 +61,7 @@ public class GameDisplay extends JFrame {
         addAll();
 
         addKeyListener(input);
+
         pack();
 
         canvas.createBufferStrategy(3);
