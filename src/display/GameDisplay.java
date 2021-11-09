@@ -64,7 +64,7 @@ public class GameDisplay extends JFrame {
 
         pack();
 
-        canvas.createBufferStrategy(3);
+        canvas.createBufferStrategy(4);
 
         setLocationRelativeTo(null);
         setVisible(true);

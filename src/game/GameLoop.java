@@ -1,9 +1,6 @@
 package game;
 
-import controller.Controller;
 import display.GameDisplay;
-
-import java.awt.event.KeyEvent;
 
 public class GameLoop implements Runnable {
 
@@ -12,7 +9,7 @@ public class GameLoop implements Runnable {
     private Game game;
 
     private static boolean running;
-    private final double updateRate = 1.0d/60.0d;
+    private final double updateRate = 1.0d/100.0d;
 
     private long nextStatTime;
     private static int fps;

@@ -1,6 +1,5 @@
 package core;
 import controller.Controller;
-import display.GameDisplay;
 
 public class Motion {
 
@@ -66,7 +65,7 @@ public class Motion {
     }
 
     private double getFallSpeed(double x){
-        double d = 1.4 * (-0.01* x*x + 2.4);
+        double d = -0.01 * x*x + 2.8;
         if( d >= 0 ) return d;
         return 1;
     }
