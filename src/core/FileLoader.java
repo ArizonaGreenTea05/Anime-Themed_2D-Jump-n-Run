@@ -1,8 +1,14 @@
 package core;
 
+import menu.Menu;
+
+import javax.imageio.ImageIO;
+import javax.swing.*;
+import java.awt.*;
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.Objects;
 
 public class FileLoader {
 
@@ -34,4 +40,29 @@ public class FileLoader {
         return input;
     }
 
+
+
+
+    public static Icon getIcon(String image, int width, int height) {
+        Image img = null;
+        try {
+            img = ImageIO.read(Objects.requireNonNull(FileLoader.class.getResource("/menu/" + image)));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        img = Objects.requireNonNull(img).getScaledInstance(width, height, Image.SCALE_DEFAULT);
+
+        return new ImageIcon(img);
+    }
+
+    public static Image getImage(String image) {
+        Image img = null;
+        try {
+            img = ImageIO.read(Objects.requireNonNull(FileLoader.class.getResource("/menu/" + image)));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return img;
+    }
 }

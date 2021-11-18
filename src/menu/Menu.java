@@ -125,7 +125,7 @@ public class Menu {
     private void initializeMenu() {
         // 16/9-Format, halb so breit wie Bildschirm, Höhe dementsprechend angepasst
         menu.setSize(width/2,width/32*9);
-        menu.setIconImage(getImage("../sakura_icon.png"));
+        menu.setIconImage(FileLoader.getImage("../sakura_icon.png"));
         menu.setDefaultCloseOperation(EXIT_ON_CLOSE);
         menu.getContentPane().setBackground(new Color(23, 139, 221));
         menu.setResizable(false);
@@ -241,7 +241,7 @@ public class Menu {
 
     private void initializeBackground() {
         background.setBounds(0,0,menu.getWidth(), menu.getHeight());
-        background.setIcon(getIcon(bgImage[colorSetting], menu.getWidth(), menu.getHeight()));
+        background.setIcon(FileLoader.getIcon(bgImage[colorSetting], menu.getWidth(), menu.getHeight()));
         menu.setContentPane(background);
     }
 
@@ -313,30 +313,6 @@ public class Menu {
         exit.setForeground(textColor[colorSetting]);
         exit.addActionListener(getActionListenerExit());
         // - exit Button-
-    }
-
-
-    private Icon getIcon(String image, int width, int height) {
-        Image img = null;
-        try {
-            img = ImageIO.read(Objects.requireNonNull(getClass().getResource("/menu/" + image)));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        img = Objects.requireNonNull(img).getScaledInstance(width, height, Image.SCALE_DEFAULT);
-
-        return new ImageIcon(img);
-    }
-
-    public static Image getImage(String image) {
-        Image img = null;
-        try {
-            img = ImageIO.read(Objects.requireNonNull(Menu.class.getResource("/menu/" + image)));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        return img;
     }
 
 
