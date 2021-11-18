@@ -1,6 +1,6 @@
 package display;
 
-import Utils.FileLoader;
+import utils.FileLoader;
 import core.ScreenSize;
 import game.GameLoop;
 import game.state.State;
@@ -49,7 +49,7 @@ public class GameDisplay extends JFrame {
         setResizable(false);
         setExtendedState(JFrame.MAXIMIZED_BOTH);
         setUndecorated(true);
-        setIconImage(FileLoader.getImage("../sakura_icon.png"));
+        setIconImage(FileLoader.loadImage("sakura_icon.png","/"));
 
         this.renderer = new Renderer();
 

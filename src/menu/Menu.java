@@ -1,6 +1,6 @@
 package menu;
 
-import Utils.FileLoader;
+import utils.FileLoader;
 import core.ScreenSize;
 import display.GameDisplay;
 import game.Game;
@@ -122,7 +122,7 @@ public class Menu {
     private void initializeMenu() {
         // 16/9-Format, halb so breit wie Bildschirm, Höhe dementsprechend angepasst
         menu.setSize(width/2,width/32*9);
-        menu.setIconImage(FileLoader.getImage("../sakura_icon.png"));
+        menu.setIconImage(FileLoader.loadImage("sakura_icon.png", "/"));
         menu.setDefaultCloseOperation(EXIT_ON_CLOSE);
         menu.getContentPane().setBackground(new Color(23, 139, 221));
         menu.setResizable(false);
@@ -238,7 +238,7 @@ public class Menu {
 
     private void initializeBackground() {
         background.setBounds(0,0,menu.getWidth(), menu.getHeight());
-        background.setIcon(FileLoader.getIcon(bgImage[colorSetting], menu.getWidth(), menu.getHeight()));
+        background.setIcon(FileLoader.loadIcon(bgImage[colorSetting],"/menu/", menu.getWidth(), menu.getHeight()));
         menu.setContentPane(background);
     }
 
