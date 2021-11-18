@@ -1,6 +1,4 @@
-package core;
-
-import menu.Menu;
+package Utils;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;

@@ -1,6 +1,6 @@
 package display;
 
-import core.FileLoader;
+import Utils.FileLoader;
 import core.ScreenSize;
 import game.GameLoop;
 import game.state.State;

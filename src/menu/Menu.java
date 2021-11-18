@@ -1,17 +1,14 @@
 package menu;
 
-import core.FileLoader;
+import Utils.FileLoader;
 import core.ScreenSize;
 import display.GameDisplay;
 import game.Game;
 import game.GameLoop;
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
-import java.io.IOException;
-import java.util.Objects;
 
 import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
 
