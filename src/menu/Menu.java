@@ -1,16 +1,14 @@
 package menu;
 
-import utils.FileLoader;
 import core.ScreenSize;
 import display.GameDisplay;
 import game.Game;
 import game.GameLoop;
+import utils.FileLoader;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
-
-import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
 
 public class Menu {
 
@@ -123,7 +121,7 @@ public class Menu {
         // 16/9-Format, halb so breit wie Bildschirm, Höhe dementsprechend angepasst
         menu.setSize(width/2,width/32*9);
         menu.setIconImage(FileLoader.loadImage("sakura_icon.png", "/"));
-        menu.setDefaultCloseOperation(EXIT_ON_CLOSE);
+        menu.setUndecorated(true);
         menu.getContentPane().setBackground(new Color(23, 139, 221));
         menu.setResizable(false);
         menu.setLayout(null);
@@ -133,66 +131,66 @@ public class Menu {
     private void initializeLabels() {
         // Status-Anzeige
         labelHeight = menu.getHeight()/30;
-        labelWidth1 = menu.getWidth()/8-30;
-        labelWidth2 = menu.getWidth()/8-5;
+        labelWidth1 = labelHeight*4;
+        labelWidth2 = (int) ((double) labelHeight*6.3);
         fontSize = labelHeight-6;
 
-        lThemeText.setBounds(menu.getWidth()-labelWidth1-labelWidth2-22, 10, labelWidth1, labelHeight);
+        lThemeText.setBounds(menu.getWidth()-labelWidth1-labelWidth2-22, 35, labelWidth1, labelHeight);
         lThemeText.setOpaque(true);
         lThemeText.setForeground(textColor[colorSetting]);
         lThemeText.setBackground(labelColor[colorSetting]);
         lThemeText.setFont(new Font(textFont, Font.PLAIN, fontSize));
 
-        lTheme.setBounds(menu.getWidth()-labelWidth2-20, 10, labelWidth2, labelHeight);
+        lTheme.setBounds(menu.getWidth()-labelWidth2-20, 35, labelWidth2, labelHeight);
         lTheme.setOpaque(true);
         lTheme.setForeground(textColor[colorSetting]);
         lTheme.setBackground(labelColor[colorSetting]);
         lTheme.setFont(new Font(textFont, Font.PLAIN, fontSize));
 
-        lPlayerText.setBounds(menu.getWidth()-labelWidth1-labelWidth2-22, 13+labelHeight, labelWidth1, labelHeight);
+        lPlayerText.setBounds(menu.getWidth()-labelWidth1-labelWidth2-22, 38+labelHeight, labelWidth1, labelHeight);
         lPlayerText.setOpaque(true);
         lPlayerText.setForeground(textColor[colorSetting]);
         lPlayerText.setBackground(labelColor[colorSetting]);
         lPlayerText.setFont(new Font(textFont, Font.PLAIN, fontSize));
 
-        lPlayer.setBounds(menu.getWidth()-labelWidth2-20, 13+labelHeight, labelWidth2, labelHeight);
+        lPlayer.setBounds(menu.getWidth()-labelWidth2-20, 38+labelHeight, labelWidth2, labelHeight);
         lPlayer.setOpaque(true);
         lPlayer.setForeground(textColor[colorSetting]);
         lPlayer.setBackground(labelColor[colorSetting]);
         lPlayer.setFont(new Font(textFont, Font.PLAIN, fontSize));
 
-        lMapText.setBounds(menu.getWidth()-labelWidth1-labelWidth2-22, 16+2*labelHeight, labelWidth1, labelHeight);
+        lMapText.setBounds(menu.getWidth()-labelWidth1-labelWidth2-22, 41+2*labelHeight, labelWidth1, labelHeight);
         lMapText.setOpaque(true);
         lMapText.setForeground(textColor[colorSetting]);
         lMapText.setBackground(labelColor[colorSetting]);
         lMapText.setFont(new Font(textFont, Font.PLAIN, fontSize));
 
-        lMap.setBounds(menu.getWidth()-labelWidth2-20, 16+2*labelHeight, labelWidth2, labelHeight);
+        lMap.setBounds(menu.getWidth()-labelWidth2-20, 41+2*labelHeight, labelWidth2, labelHeight);
         lMap.setOpaque(true);
         lMap.setForeground(textColor[colorSetting]);
         lMap.setBackground(labelColor[colorSetting]);
         lMap.setFont(new Font(textFont, Font.PLAIN, fontSize));
 
-        lHighscoreText.setBounds(menu.getWidth()-labelWidth1-labelWidth2-22, 19+3*labelHeight, labelWidth1, labelHeight);
+        lHighscoreText.setBounds(menu.getWidth()-labelWidth1-labelWidth2-22, 44+3*labelHeight, labelWidth1, labelHeight);
         lHighscoreText.setOpaque(true);
         lHighscoreText.setForeground(textColor[colorSetting]);
         lHighscoreText.setBackground(labelColor[colorSetting]);
         lHighscoreText.setFont(new Font(textFont, Font.PLAIN, fontSize));
 
-        lHighscore.setBounds(menu.getWidth()-labelWidth2-20, 19+3*labelHeight, labelWidth2, labelHeight);
+        lHighscore.setBounds(menu.getWidth()-labelWidth2-20, 44+3*labelHeight, labelWidth2, labelHeight);
         lHighscore.setOpaque(true);
         lHighscore.setForeground(textColor[colorSetting]);
         lHighscore.setBackground(labelColor[colorSetting]);
         lHighscore.setFont(new Font(textFont, Font.PLAIN, fontSize));
         lHighscore.setText(" " + highScore);
 
-        lScoreText.setBounds(menu.getWidth()-labelWidth1-labelWidth2-22, 22+4*labelHeight, labelWidth1, labelHeight);
+        lScoreText.setBounds(menu.getWidth()-labelWidth1-labelWidth2-22, 47+4*labelHeight, labelWidth1, labelHeight);
         lScoreText.setOpaque(true);
         lScoreText.setForeground(textColor[colorSetting]);
         lScoreText.setBackground(labelColor[colorSetting]);
         lScoreText.setFont(new Font(textFont, Font.PLAIN, fontSize));
 
-        lScore.setBounds(menu.getWidth()-labelWidth2-20, 22+4*labelHeight, labelWidth2, labelHeight);
+        lScore.setBounds(menu.getWidth()-labelWidth2-20, 47+4*labelHeight, labelWidth2, labelHeight);
         lScore.setOpaque(true);
         lScore.setForeground(textColor[colorSetting]);
         lScore.setBackground(labelColor[colorSetting]);
@@ -295,7 +293,7 @@ public class Menu {
 
 
         // color change Button
-        bChangeColor.setBounds(menu.getWidth()-25-backWidth*3/2, menu.getHeight()-backHeight-45, backWidth*3/2, backHeight);
+        bChangeColor.setBounds(menu.getWidth()-25-backWidth*3/2, menu.getHeight()-backHeight-10, backWidth*3/2, backHeight);
         bChangeColor.setFont(font);
         bChangeColor.setBackground(buttonColor[colorSetting]);
         bChangeColor.setForeground(textColor[colorSetting]);
@@ -304,7 +302,7 @@ public class Menu {
 
 
         // exit Button
-        bExit.setBounds(10, menu.getHeight()-backHeight-45, backWidth, backHeight);
+        bExit.setBounds(10, menu.getHeight()-backHeight-10, backWidth, backHeight);
         bExit.setFont(font);
         bExit.setBackground(buttonColor[colorSetting]);
         bExit.setForeground(textColor[colorSetting]);
@@ -318,10 +316,13 @@ public class Menu {
     private void addPlayers(){
         bPlayers = new JButton[playerName.length];
 
+        int height = menu.getHeight()/12;
+        int width = height*10;
+
         for (int i = 0; i < playerName.length; i++) {
             bPlayers[i] = new JButton(makeNameNice(playerName[i]));
 
-            bPlayers[i].setBounds(menu.getWidth()/4,menu.getHeight()/10+i*(menu.getHeight()/12 + 5),menu.getWidth()/2,menu.getHeight()/12);
+            bPlayers[i].setBounds(menu.getWidth()/4,menu.getHeight()/10+i*(menu.getHeight()/12 + 5),width,height);
             bPlayers[i].setFont(new Font(textFont, Font.PLAIN, bPlayers[i].getHeight()/3));
             bPlayers[i].setBackground(buttonColor[colorSetting]);
             bPlayers[i].setForeground(textColor[colorSetting]);
@@ -337,10 +338,13 @@ public class Menu {
 
     private void addThemes(){
 
+        int height = menu.getHeight()/12;
+        int width = height*10;
+
         for (int i = 0; i < gameThemes.length; i++) {
             bThemes[i] = new JButton(makeNameNice(gameThemes[i]));
 
-            bThemes[i].setBounds(menu.getWidth()/4,menu.getHeight()/10+i*(menu.getHeight()/12 + 5),menu.getWidth()/2,menu.getHeight()/12);
+            bThemes[i].setBounds(menu.getWidth()/4,menu.getHeight()/10+i*(menu.getHeight()/12 + 5),width,height);
             bThemes[i].setFont(new Font(textFont, Font.PLAIN, bThemes[i].getHeight()/3));
             bThemes[i].setBackground(buttonColor[colorSetting]);
             bThemes[i].setForeground(textColor[colorSetting]);
@@ -354,10 +358,13 @@ public class Menu {
     private void addMaps(){
         bMaps = new JButton[maps.length];
 
+        int width = menu.getWidth()/2;
+        int height = menu.getHeight()/12;
+
         for (int i = 0; i < maps.length; i++) {
             bMaps[i] = new JButton(makeNameNice(maps[i]));
 
-            bMaps[i].setBounds(menu.getWidth()/4,menu.getHeight()/10+i*(menu.getHeight()/12 + 5),menu.getWidth()/2,menu.getHeight()/12);
+            bMaps[i].setBounds(menu.getWidth()/4,menu.getHeight()/10+i*(menu.getHeight()/12 + 5),width,height);
             bMaps[i].setFont(new Font(textFont, Font.PLAIN, bMaps[i].getHeight()/3));
             bMaps[i].setBackground(buttonColor[colorSetting]);
             bMaps[i].setForeground(textColor[colorSetting]);
