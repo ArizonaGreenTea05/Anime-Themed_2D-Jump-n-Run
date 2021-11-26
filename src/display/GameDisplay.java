@@ -53,9 +53,9 @@ public class GameDisplay extends JFrame {
 
         this.renderer = new Renderer();
 
-        initializeLabels();
-
         initializeButtons();
+
+        initializeLabels();
 
         initializeCanvas();
 
@@ -103,6 +103,7 @@ public class GameDisplay extends JFrame {
     private void initializeButtons() {
         bBack = new JButton("<<back");
         bBack.setBounds(Menu.getBackBounds());
+        bBack.setFont(new Font(Menu.textFont, Font.PLAIN,bBack.getHeight()/2));
         bBack.addActionListener(getActionListenerBack());
         bBack.setBackground(labelColor[Menu.colorSetting]);
         bBack.setForeground(textColor[Menu.colorSetting]);
@@ -110,6 +111,7 @@ public class GameDisplay extends JFrame {
 
         bInfo = new JButton("hide info");
         bInfo.setBounds(ScreenSize.getWidth()-Menu.labelWidth1-Menu.labelWidth2-200, 5 , 120, Menu.labelHeight);
+        bInfo.setFont(new Font(Menu.textFont, Font.PLAIN,bInfo.getHeight()/3*2));
         bInfo.addActionListener(getActionListenerInfo());
         bInfo.setBackground(labelColor[Menu.colorSetting]);
         bInfo.setForeground(textColor[Menu.colorSetting]);
@@ -172,8 +174,8 @@ public class GameDisplay extends JFrame {
         lFailed.setForeground(Color.RED);
         lFailed.setHorizontalAlignment(SwingConstants.CENTER);
 
-        lFps.setBounds(10, 38, lPlayerText.getHeight()*4, lPlayerText.getHeight());
-        lFps.setFont(new Font("", Font.PLAIN, lFps.getHeight()/6*5));
+        lFps.setBounds(10, bBack.getHeight()+15, lPlayerText.getHeight()*4, lPlayerText.getHeight());
+        lFps.setFont(new Font(Menu.textFont, Font.PLAIN, lFps.getHeight()/3*2));
         lFps.setOpaque(true);
         lFps.setBackground(labelColor[Menu.colorSetting]);
         lFps.setForeground(textColor[Menu.colorSetting]);
