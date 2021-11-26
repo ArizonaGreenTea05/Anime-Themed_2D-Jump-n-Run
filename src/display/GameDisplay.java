@@ -102,7 +102,7 @@ public class GameDisplay extends JFrame {
 
     private void initializeButtons() {
         bBack = new JButton("<<back");
-        bBack.setBounds(10, 10, 76, 20);
+        bBack.setBounds(Menu.getBackBounds());
         bBack.addActionListener(getActionListenerBack());
         bBack.setBackground(labelColor[Menu.colorSetting]);
         bBack.setForeground(textColor[Menu.colorSetting]);

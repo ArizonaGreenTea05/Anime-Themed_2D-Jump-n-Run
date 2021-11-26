@@ -30,7 +30,7 @@ public class Menu {
     private final JButton[] bThemes = new JButton[gameThemes.length];
     private JButton bBackPlayers = new JButton();
     private JButton bBackThemes = new JButton();
-    private JButton bBackMaps = new JButton();
+    private static JButton bBackMaps = new JButton();
 
     public static int labelHeight;
     public static int labelWidth1;
@@ -119,7 +119,7 @@ public class Menu {
 
     private void initializeMenu() {
         // 16/9-Format, halb so breit wie Bildschirm, Höhe dementsprechend angepasst
-        menu.setSize(width/2,width/32*9);
+        menu.setSize(width,height);
         menu.setIconImage(FileLoader.loadImage("sakura_icon.png", "/"));
         menu.setUndecorated(true);
         menu.getContentPane().setBackground(new Color(23, 139, 221));
@@ -550,5 +550,10 @@ public class Menu {
         return bgColors[theme];
     }
 
+
+
+    public static Rectangle getBackBounds() {
+        return bBackMaps.getBounds();
+    }
 
 }
