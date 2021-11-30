@@ -18,7 +18,7 @@ public class Menu {
     private static final String[] playerSheetsInFolder = new String[] {"stand.png", "walk.png"};
 
 
-    private final JFrame menu = new JFrame("Menu");
+    private final JFrame menu = new JFrame("GameMenu");
     private final int width, height;
     private final JLabel background = new JLabel();
 
@@ -130,10 +130,10 @@ public class Menu {
 
     private void initializeLabels() {
         // Status-Anzeige
-        labelHeight = menu.getHeight()/30;
+        labelHeight = menu.getHeight()/35;
         labelWidth1 = labelHeight*4;
         labelWidth2 = (int) ((double) labelHeight*6.3);
-        fontSize = labelHeight-6;
+        fontSize = labelHeight-8;
 
         lThemeText.setBounds(menu.getWidth()-labelWidth1-labelWidth2-22, 35, labelWidth1, labelHeight);
         lThemeText.setOpaque(true);
@@ -253,18 +253,8 @@ public class Menu {
 
 
         // back Buttons
-        /*
-         min Größe so groß, dass Text angezeigt werden kann: 76 · 10
-        → wenn relative Maße größer werden diese benutzt, wenn nicht die min Maße
-         */
-        int backWidth = 100;
-        int backHeight = 10;
-        if (menu.getHeight()/6 > backWidth){
-            backWidth = menu.getHeight()/6;
-        }
-        if(menu.getHeight()/20 > backHeight){
-            backHeight = menu.getHeight()/20;
-        }
+        int backHeight = menu.getHeight()/22;
+        int backWidth = backHeight*4;
 
         Font font = new Font(textFont, Font.PLAIN, backHeight/5*3);
 
@@ -293,8 +283,8 @@ public class Menu {
 
 
         // color change Button
-        bChangeColor.setBounds(menu.getWidth()-25-backWidth*3/2, menu.getHeight()-backHeight-10, backWidth*3/2, backHeight);
-        bChangeColor.setFont(font);
+        bChangeColor.setBounds(menu.getWidth()-25-backWidth, menu.getHeight()-backHeight-10, backWidth, backHeight);
+        bChangeColor.setFont(new Font(textFont, Font.PLAIN, backHeight/2));
         bChangeColor.setBackground(buttonColor[colorSetting]);
         bChangeColor.setForeground(textColor[colorSetting]);
         bChangeColor.addActionListener(getActionListenerColor());
