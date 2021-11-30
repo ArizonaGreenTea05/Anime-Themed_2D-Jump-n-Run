@@ -312,7 +312,7 @@ public class Menu {
         for (int i = 0; i < playerName.length; i++) {
             bPlayers[i] = new JButton(makeNameNice(playerName[i]));
 
-            bPlayers[i].setBounds(menu.getWidth()/4,menu.getHeight()/10+i*(menu.getHeight()/12 + 5),width,height);
+            bPlayers[i].setBounds(menu.getWidth()/4,menu.getHeight()/10+i*(menu.getHeight()/12 + 10),width,height);
             bPlayers[i].setFont(new Font(textFont, Font.PLAIN, bPlayers[i].getHeight()/3));
             bPlayers[i].setBackground(buttonColor[colorSetting]);
             bPlayers[i].setForeground(textColor[colorSetting]);
@@ -334,7 +334,7 @@ public class Menu {
         for (int i = 0; i < gameThemes.length; i++) {
             bThemes[i] = new JButton(makeNameNice(gameThemes[i]));
 
-            bThemes[i].setBounds(menu.getWidth()/4,menu.getHeight()/10+i*(menu.getHeight()/12 + 5),width,height);
+            bThemes[i].setBounds(menu.getWidth()/4,menu.getHeight()/10+i*(menu.getHeight()/12 + 10),width,height);
             bThemes[i].setFont(new Font(textFont, Font.PLAIN, bThemes[i].getHeight()/3));
             bThemes[i].setBackground(buttonColor[colorSetting]);
             bThemes[i].setForeground(textColor[colorSetting]);
@@ -354,7 +354,7 @@ public class Menu {
         for (int i = 0; i < maps.length; i++) {
             bMaps[i] = new JButton(makeNameNice(maps[i]));
 
-            bMaps[i].setBounds(menu.getWidth()/4,menu.getHeight()/10+i*(menu.getHeight()/12 + 5),width,height);
+            bMaps[i].setBounds(menu.getWidth()/4,menu.getHeight()/10+i*(menu.getHeight()/12 + 10),width,height);
             bMaps[i].setFont(new Font(textFont, Font.PLAIN, bMaps[i].getHeight()/3));
             bMaps[i].setBackground(buttonColor[colorSetting]);
             bMaps[i].setForeground(textColor[colorSetting]);

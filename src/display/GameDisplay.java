@@ -22,7 +22,7 @@ public class GameDisplay extends JFrame {
     private static double score = 0;
     private static final JLabel lThemeText = new JLabel(" Theme:");
     private static final JLabel lTheme = Menu.getThemeLabel();
-    private static final JLabel lPlayerText = new JLabel(" Player:");
+    private static final JLabel lPlayerText = new JLabel(" Character:");
     private static final JLabel lPlayer = Menu.getPlayerLabel();
     private static final JLabel lMapText = new JLabel(" Map:");
     private static final JLabel lMapLabel = Menu.getMapLabel();
@@ -34,8 +34,8 @@ public class GameDisplay extends JFrame {
 
     private Color bgColor = Menu.getBGColor();
 
-    private Rectangle scorePos;
-    private Rectangle scoreTextPos;
+    private Rectangle scorePos = new Rectangle();
+    private Rectangle scoreTextPos = new Rectangle();
 
     private static final JLabel lFailed = new JLabel("!you failed!");
     private final Color[] labelColor = Menu.labelColor;
@@ -77,17 +77,21 @@ public class GameDisplay extends JFrame {
     private void addAll() {
         add(lFps);
         add(lTheme);
+        lTheme.setVisible(false);
         add(lThemeText);
-        lThemeText.setVisible(true);
+        lThemeText.setVisible(false);
         add(lPlayer);
+        lPlayer.setVisible(false);
         add(lPlayerText);
-        lPlayerText.setVisible(true);
+        lPlayerText.setVisible(false);
         add(lMapLabel);
+        lMapLabel.setVisible(false);
         add(lMapText);
-        lMapText.setVisible(true);
+        lMapText.setVisible(false);
         add(lHighScore);
+        lHighScore.setVisible(false);
         add(lHighScoreText);
-        lHighScoreText.setVisible(true);
+        lHighScoreText.setVisible(false);
         add(lScore);
         add(lScoreLabelText);
         add(bBack);
@@ -111,7 +115,7 @@ public class GameDisplay extends JFrame {
         bBack.setForeground(textColor[Menu.colorSetting]);
         bBack.setFocusable(false);
 
-        bInfo = new JButton("hide info");
+        bInfo = new JButton("show info");
         bInfo.setBounds(ScreenSize.getWidth()-Menu.labelWidth1-Menu.labelWidth2-100-bBack.getWidth(), 5 , bBack.getWidth(), Menu.labelHeight);
         bInfo.setFont(new Font(Menu.textFont, Font.PLAIN,bInfo.getHeight()/3*2));
         bInfo.addActionListener(getActionListenerInfo());
@@ -132,7 +136,7 @@ public class GameDisplay extends JFrame {
         lThemeText.setOpaque(true);
         lThemeText.setBackground(bgColor);
         lThemeText.setForeground(textColor[Menu.colorSetting]);
-        lThemeText.setFont(new Font(Menu.textFont, Font.PLAIN, lTheme.getHeight()-4));
+        lThemeText.setFont(lTheme.getFont());
 
         lTheme.setBounds(ScreenSize.getWidth()-labelWidth2-20, 5 , labelWidth2, labelHeight);
         lTheme.setBackground(bgColor);
@@ -141,7 +145,7 @@ public class GameDisplay extends JFrame {
         lPlayerText.setOpaque(true);
         lPlayerText.setBackground(bgColor);
         lPlayerText.setForeground(textColor[Menu.colorSetting]);
-        lPlayerText.setFont(new Font(Menu.textFont, Font.PLAIN, lTheme.getHeight()-4));
+        lPlayerText.setFont(lTheme.getFont());
 
         lPlayer.setBounds(ScreenSize.getWidth()-labelWidth2-20, 5 + gap +labelHeight , labelWidth2, labelHeight);
         lPlayer.setBackground(bgColor);
@@ -150,7 +154,7 @@ public class GameDisplay extends JFrame {
         lMapText.setOpaque(true);
         lMapText.setBackground(bgColor);
         lMapText.setForeground(textColor[Menu.colorSetting]);
-        lMapText.setFont(new Font(Menu.textFont, Font.PLAIN, lTheme.getHeight()-4));
+        lMapText.setFont(lTheme.getFont());
 
         lMapLabel.setBounds(ScreenSize.getWidth()-labelWidth2-20, 5 + 2*gap +2*labelHeight , labelWidth2, labelHeight);
         lMapLabel.setBackground(bgColor);
@@ -159,21 +163,21 @@ public class GameDisplay extends JFrame {
         lHighScoreText.setOpaque(true);
         lHighScoreText.setBackground(bgColor);
         lHighScoreText.setForeground(textColor[Menu.colorSetting]);
-        lHighScoreText.setFont(new Font(Menu.textFont, Font.PLAIN, lTheme.getHeight()-4));
+        lHighScoreText.setFont(lTheme.getFont());
 
         lHighScore.setBounds(ScreenSize.getWidth()-labelWidth2-20, 5 + 3*gap + 3*labelHeight , labelWidth2, labelHeight);
         lHighScore.setBackground(bgColor);
 
-        lScoreLabelText.setBounds(ScreenSize.getWidth()-labelWidth1-labelWidth2-22,5 + 4*gap + 4*labelHeight , labelWidth1, labelHeight);
+        lScoreLabelText.setBounds(lThemeText.getBounds());
         lScoreLabelText.setOpaque(true);
         lScoreLabelText.setBackground(bgColor);
         lScoreLabelText.setForeground(textColor[Menu.colorSetting]);
-        lScoreLabelText.setFont(new Font(Menu.textFont, Font.PLAIN, lTheme.getHeight()-4));
-        scoreTextPos = lScoreLabelText.getBounds();
+        lScoreLabelText.setFont(lTheme.getFont());
+        scoreTextPos.setBounds(ScreenSize.getWidth()-labelWidth1-labelWidth2-22,5 + 4*gap + 4*labelHeight , labelWidth1, labelHeight);
 
-        lScore.setBounds(ScreenSize.getWidth()-labelWidth2-20, 5 + 4*gap + 4*labelHeight , labelWidth2, labelHeight);
+        lScore.setBounds(lTheme.getBounds());
         lScore.setBackground(bgColor);
-        scorePos = lScore.getBounds();
+        scorePos.setBounds(ScreenSize.getWidth()-labelWidth2-20, 5 + 4*gap + 4*labelHeight , labelWidth2, labelHeight);
 
         lFailed.setVisible(false);
         lFailed.setBounds(0,0,width, height);
