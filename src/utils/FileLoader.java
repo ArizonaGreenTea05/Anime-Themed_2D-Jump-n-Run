@@ -60,13 +60,7 @@ public class FileLoader {
 
     public static Icon loadIcon(String image, String path, int width, int height) {
         Image img = null;
-        try {
-            img = ImageIO.read(Objects.requireNonNull(FileLoader.class.getResource(path + image)));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        img = Objects.requireNonNull(img).getScaledInstance(width, height, Image.SCALE_DEFAULT);
-
+        img = Objects.requireNonNull(loadImage(image, path)).getScaledInstance(width, height, Image.SCALE_DEFAULT);
         return new ImageIcon(img);
     }
 
