@@ -4,6 +4,7 @@ import core.ScreenSize;
 import display.GameDisplay;
 import game.Game;
 import game.GameLoop;
+import utils.ElseUtils;
 import utils.FileLoader;
 
 import javax.swing.*;
@@ -11,6 +12,9 @@ import java.awt.*;
 import java.awt.event.ActionListener;
 
 public class Menu {
+
+    private static final int AOD = 0;
+    private static final int AOT = 1;
 
     public static String[] playerName;
     public static String[] maps;
@@ -87,13 +91,13 @@ public class Menu {
 
 
     private static void setPlayerNames(int i){
-        if(i==0) playerName = playerNamesAoD;
-        if(i==1) playerName = playerNamesAoT;
+        if(i==AOD) playerName = playerNamesAoD;
+        if(i==AOT) playerName = playerNamesAoT;
     }
 
     private static void setMaps(int i){
-        if(i==0) maps = mapsAoD;
-        if(i==1) maps = mapsAoT;
+        if(i==AOD) maps = mapsAoD;
+        if(i==AOT) maps = mapsAoT;
     }
 
     public Menu(){
@@ -266,14 +270,14 @@ public class Menu {
         bBackThemes.addActionListener(getActionListenerBackThemes());
 
         bBackPlayers = new JButton("<<back");
-        bBackPlayers.setBounds(10, 10, backWidth, backHeight);
+        bBackPlayers.setBounds(bBackThemes.getBounds());
         bBackPlayers.setFont(font);
         bBackPlayers.setBackground(backButtonColor[colorSetting]);
         bBackPlayers.setForeground(textColor[colorSetting]);
         bBackPlayers.addActionListener(getActionListenerBackPlayers());
 
         bBackMaps = new JButton("<<back");
-        bBackMaps.setBounds(10, 10, backWidth, backHeight);
+        bBackMaps.setBounds(bBackThemes.getBounds());
         bBackMaps.setFont(font);
         bBackMaps.setBackground(backButtonColor[colorSetting]);
         bBackMaps.setForeground(textColor[colorSetting]);
@@ -310,7 +314,7 @@ public class Menu {
         int width = height*10;
 
         for (int i = 0; i < playerName.length; i++) {
-            bPlayers[i] = new JButton(makeNameNice(playerName[i]));
+            bPlayers[i] = new JButton(ElseUtils.makeNameNice(playerName[i]));
 
             bPlayers[i].setBounds(menu.getWidth()/4,menu.getHeight()/10+i*(menu.getHeight()/12 + 10),width,height);
             bPlayers[i].setFont(new Font(textFont, Font.PLAIN, bPlayers[i].getHeight()/3));
@@ -321,7 +325,7 @@ public class Menu {
             menu.getContentPane().setBackground(getBGColor());
             menu.repaint();
         }
-        lTheme.setText(" " + makeNameNice(getGameTheme()));
+        lTheme.setText(" " + ElseUtils.makeNameNice(getGameTheme()));
         menu.add(bBackThemes);
         menu.repaint();
     }
@@ -332,7 +336,7 @@ public class Menu {
         int width = height*10;
 
         for (int i = 0; i < gameThemes.length; i++) {
-            bThemes[i] = new JButton(makeNameNice(gameThemes[i]));
+            bThemes[i] = new JButton(ElseUtils.makeNameNice(gameThemes[i]));
 
             bThemes[i].setBounds(menu.getWidth()/4,menu.getHeight()/10+i*(menu.getHeight()/12 + 10),width,height);
             bThemes[i].setFont(new Font(textFont, Font.PLAIN, bThemes[i].getHeight()/3));
@@ -352,7 +356,7 @@ public class Menu {
         int height = menu.getHeight()/12;
 
         for (int i = 0; i < maps.length; i++) {
-            bMaps[i] = new JButton(makeNameNice(maps[i]));
+            bMaps[i] = new JButton(ElseUtils.makeNameNice(maps[i]));
 
             bMaps[i].setBounds(menu.getWidth()/4,menu.getHeight()/10+i*(menu.getHeight()/12 + 10),width,height);
             bMaps[i].setFont(new Font(textFont, Font.PLAIN, bMaps[i].getHeight()/3));
@@ -452,7 +456,7 @@ public class Menu {
                 menu.remove(button);
             }
             menu.remove(bBackThemes);
-            lPlayer.setText(" " + makeNameNice(getPlayerName()));
+            lPlayer.setText(" " + ElseUtils.makeNameNice(getPlayerName()));
             addMaps();
             menu.add(bBackPlayers);
             menu.repaint();
@@ -467,29 +471,11 @@ public class Menu {
                 menu.remove(button);
             }
             menu.remove(bBackPlayers);
-            lMap.setText(" " + makeNameNice(getMapName()));
+            lMap.setText(" " + ElseUtils.makeNameNice(getMapName()));
             menu.add(bBackMaps);
             menu.add(bStartGame);
             menu.repaint();
         };
-    }
-
-
-
-    public static String makeNameNice(String s){
-        char[] c = s.toCharArray();
-        StringBuilder out = new StringBuilder("" + (char) (c[0] - 32));
-
-        for (int i = 1; i < c.length; i++) {
-            if(c[i] != '_'){
-                out.append(c[i]);
-            } else {
-                out.append(" ").append((char) (c[i + 1] - 32));
-                i++;
-            }
-        }
-
-        return out.toString();
     }
 
     private void setHighscore(){
