@@ -1,5 +1,6 @@
 package display;
 
+import game.Game;
 import game.state.State;
 
 import java.awt.*;

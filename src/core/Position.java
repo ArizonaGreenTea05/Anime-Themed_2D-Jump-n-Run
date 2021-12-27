@@ -17,22 +17,25 @@ public class Position {
         return (int) Math.round(y);
     }
 
-    public static double getX() {
+    public double getX() {
         return x;
     }
 
-    public static double getY() {
+    public double getY() {
         return y;
+    }
+
+    public void setX(double x){
+        this.x = x;
+    }
+
+    public void setY(double y){
+        this.y = y;
     }
 
     public void apply(Motion motion) {
         Vector2D vector = motion.getVector();
         this.x += vector.getX();
         this.y += vector.getY();
-    }
-
-    public void apply(double x, double y) {
-        this.x += x;
-        this.y += y;
     }
 }

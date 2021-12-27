@@ -9,6 +9,7 @@ import java.util.List;
 
 public abstract class State {
 
+    protected GameMap gameMap;
     protected List<GameObject> gameObjects;
     protected SpriteLibrary spriteLibrary;
     protected Input input;
@@ -25,5 +26,9 @@ public abstract class State {
 
     public List<GameObject> getGameObjects() {
         return gameObjects;
+    }
+
+    public GameMap getGameMap(){
+        return gameMap;
     }
 }

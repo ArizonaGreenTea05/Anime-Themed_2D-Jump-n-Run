@@ -1,6 +1,8 @@
 package game.state;
 
 import controller.PlayerController;
+import core.ScreenSize;
+import core.Size;
 import entity.Grass;
 import entity.Player;
 import input.Input;
@@ -16,5 +18,10 @@ public class GameState extends State {
 
         gameObjects.add(grass);
         gameObjects.add(player);
+
+        gameMap = new GameMap((new Size(
+                ScreenSize.getMapWidth(),
+                ScreenSize.getMapHeight()
+        )),spriteLibrary);
     }
 }

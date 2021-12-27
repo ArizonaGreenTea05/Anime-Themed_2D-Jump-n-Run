@@ -1,5 +1,6 @@
 package core;
 import controller.Controller;
+import entity.Player;
 
 public class Motion {
 
