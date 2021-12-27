@@ -14,12 +14,12 @@ public class Motion {
         this.vector = new Vector2D(0, 0);
     }
 
-    public void update(Controller controller) {
+    public void update(Controller controller, Position position) {
         double deltaX = 0;
         double deltaY = 0;
 
-        double x = Position.getX();
-        double y = Position.getY();
+        double x = position.getX();
+        double y = position.getY();
 
         //wenn Position 64p (Character-Größe = 64, deswegen 128) über Boden wird fallling true
         //wenn Position größer als Boden und nicht Up requestet wird wird falling true

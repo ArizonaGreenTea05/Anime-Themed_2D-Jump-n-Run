@@ -27,15 +27,18 @@ public abstract class MovingEntity extends GameObject {
 
     @Override
     public void update() {
-        motion.update(controller);
+        motion.update(controller, position);
         position.apply(motion);
         manageDirection();
-        decideAnimation();
+        decideAnimation(position);
         animationManager.update(direction);
     }
 
-    private void decideAnimation() {
-        if(motion.isMoving() || (controller.isRequestingRight() && Position.getX() >= ScreenSize.getRightBorder())|| (controller.isRequestingLeft() && Position.getX() <= ScreenSize.getLeftBorder())){
+    private void decideAnimation(Position position) {
+
+        double x = position.getX();
+
+        if(motion.isMoving() || (controller.isRequestingRight() && x >= ScreenSize.getRightBorder())|| (controller.isRequestingLeft() && x <= ScreenSize.getLeftBorder())){
             animationManager.playAnimation("walk");
         } else {
             animationManager.playAnimation("stand");
