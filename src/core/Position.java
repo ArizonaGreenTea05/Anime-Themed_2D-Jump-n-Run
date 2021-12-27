@@ -17,11 +17,11 @@ public class Position {
         return (int) Math.round(y);
     }
 
-    public double getX() {
+    public static double getX() {
         return x;
     }
 
-    public double getY() {
+    public static double getY() {
         return y;
     }
 

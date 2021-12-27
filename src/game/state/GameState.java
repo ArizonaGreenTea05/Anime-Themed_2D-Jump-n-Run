@@ -18,10 +18,5 @@ public class GameState extends State {
 
         gameObjects.add(grass);
         gameObjects.add(player);
-
-        gameMap = new GameMap((new Size(
-                ScreenSize.getMapWidth(),
-                ScreenSize.getMapHeight()
-        )),spriteLibrary);
     }
 }
