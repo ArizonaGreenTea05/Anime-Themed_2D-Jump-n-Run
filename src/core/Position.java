@@ -1,8 +1,8 @@
 package core;
 
 public class Position {
-    private static double x;
-    private static double y;
+    private double x;
+    private double y;
 
     public Position(int x, int y) {
         this.x = x;
@@ -17,11 +17,11 @@ public class Position {
         return (int) Math.round(y);
     }
 
-    public static double getX() {
+    public double getX() {
         return x;
     }
 
-    public static double getY() {
+    public double getY() {
         return y;
     }
 

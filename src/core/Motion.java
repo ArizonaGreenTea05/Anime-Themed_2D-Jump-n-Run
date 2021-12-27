@@ -18,14 +18,17 @@ public class Motion {
         double deltaX = 0;
         double deltaY = 0;
 
+        double x = Position.getX();
+        double y = Position.getY();
+
         //wenn Position 64p (Character-Größe = 64, deswegen 128) über Boden wird fallling true
         //wenn Position größer als Boden und nicht Up requestet wird wird falling true
-        if(Position.getY() < ScreenSize.getGround()-128 || (!controller.isRequestingUp() && Position.getY() < ScreenSize.getGround())){
+        if(y < ScreenSize.getGround()-128 || (!controller.isRequestingUp() && y < ScreenSize.getGround())){
             falling = true;
         }
 
         //wenn Position kleiner-gleich Boden wird falling false und gravity auf 0
-        if(Position.getY() >= ScreenSize.getGround()){
+        if(y >= ScreenSize.getGround()){
             falling = false;
             gravity = 0;
         }
@@ -47,12 +50,12 @@ public class Motion {
             sitting = true;
         }
 
-        if(controller.isRequestingLeft() && Position.getX() > ScreenSize.getLeftBorder()) {
+        if(controller.isRequestingLeft() && x > ScreenSize.getLeftBorder()) {
             deltaX -= 1.5;
             sitting = false;
         }
 
-        if(controller.isRequestingRight() && Position.getX() < ScreenSize.getRightBorder()) {
+        if(controller.isRequestingRight() && x < ScreenSize.getRightBorder()) {
             deltaX  += 1.5;
             sitting = false;
         }
