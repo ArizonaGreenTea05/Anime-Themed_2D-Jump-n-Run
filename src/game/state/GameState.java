@@ -1,15 +1,18 @@
 package game.state;
 
+import controller.NPCController;
 import controller.PlayerController;
 import core.ScreenSize;
 import core.Size;
 import entity.Grass;
+import entity.NPC;
 import entity.Player;
 import input.Input;
 import org.apache.groovy.parser.antlr4.GroovyParser;
 import utils.FileLoader;
 
 import java.util.Arrays;
+import java.util.List;
 
 public class GameState extends State {
 
@@ -19,9 +22,17 @@ public class GameState extends State {
 
         createMap();
 
-        Player player = new Player(new PlayerController(input), spriteLibrary);
-        gameObjects.add(player);
+        initializeCharacters();
     }
+
+    private void initializeCharacters() {
+
+        Player player = new Player(new PlayerController(input), spriteLibrary);
+        NPC npc = new NPC(new NPCController(), spriteLibrary);
+
+        gameObjects.addAll(List.of(player,npc));
+    }
+
 
     private void createMap() {
         int ground = ScreenSize.getGround();

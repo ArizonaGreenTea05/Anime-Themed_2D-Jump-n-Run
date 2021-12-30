@@ -12,9 +12,9 @@ import java.awt.*;
 
 public abstract class MovingEntity extends GameObject {
 
-    private Controller controller;
+    protected Controller controller;
+    protected AnimationManager animationManager;
     private Motion motion;
-    private AnimationManager animationManager;
     private Direction direction;
 
     public MovingEntity(Controller controller, SpriteLibrary spriteLibrary) {
@@ -22,7 +22,6 @@ public abstract class MovingEntity extends GameObject {
         this.controller = controller;
         this.motion = new Motion(2);
         this.direction = Direction.R;
-        animationManager = new AnimationManager(spriteLibrary.getUnit());
     }
 
     @Override

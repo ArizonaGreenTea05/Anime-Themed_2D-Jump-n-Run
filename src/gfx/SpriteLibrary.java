@@ -21,7 +21,6 @@ public class SpriteLibrary {
 
     private void loadSpritesFromDisk() {
         loadUnits();
-        loadTiles();
     }
 
     private void loadUnits() {
@@ -42,24 +41,13 @@ public class SpriteLibrary {
         }
     }
 
-    private void loadTiles(){
-        BufferedImage image = new BufferedImage(Game.SPRITE_SIZE,Game.SPRITE_SIZE,BufferedImage.TYPE_INT_RGB);
-        Graphics2D graphics = image.createGraphics();
-
-        graphics.setColor(Color.red);
-        graphics.drawRect(0,0,Game.SPRITE_SIZE,Game.SPRITE_SIZE);
-
-        graphics.dispose();
-        tiles.put("default",image);
-    }
-
     private static String[] getSheetsInFolder() {
         return Menu.getPlayerSheetsInFolder();
     }
 
 
-    public SpriteSet getUnit() {
-        return units.get(Menu.getPlayerName());
+    public SpriteSet getUnit(String name) {
+        return units.get(name);
     }
 
     public  Image getTile(String name){
