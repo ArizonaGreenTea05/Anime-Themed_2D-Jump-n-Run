@@ -8,9 +8,9 @@ public abstract class Block extends GameObject {
 
     private String block;
 
-    public Block(int posX, int posY, String block) {
+    public Block(int posX, int posY, String texture) {
         super(64, 64, posX, posY);
-        this.block = block;
+        this.block = texture;
     }
 
     @Override
