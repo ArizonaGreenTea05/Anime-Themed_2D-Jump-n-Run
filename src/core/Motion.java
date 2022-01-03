@@ -1,5 +1,10 @@
 package core;
 import controller.Controller;
+import entity.GameObject;
+import game.Game;
+import game.state.State;
+
+import java.util.List;
 
 public class Motion {
 

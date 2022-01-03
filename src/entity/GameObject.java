@@ -8,6 +8,7 @@ import java.awt.*;
 public abstract class GameObject {
     protected Position position;
     protected Size size;
+    protected boolean solid;
 
     public GameObject(int width, int height, int posX, int posY) {
         position = new Position(posX, posY);

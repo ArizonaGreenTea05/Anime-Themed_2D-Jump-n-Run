@@ -9,6 +9,7 @@ public class NPC extends MovingEntity {
     public NPC(Controller controller, SpriteLibrary spriteLibrary) {
         super(controller, spriteLibrary);
         animationManager = new AnimationManager(spriteLibrary.getUnit("npc_1"));
+        solid = true;
     }
 
     @Override

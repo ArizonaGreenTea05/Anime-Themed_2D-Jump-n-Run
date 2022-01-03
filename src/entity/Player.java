@@ -10,6 +10,7 @@ public class Player extends MovingEntity {
     public Player(Controller controller, SpriteLibrary spriteLibrary) {
         super(controller, spriteLibrary);
         animationManager = new AnimationManager(spriteLibrary.getUnit(Menu.getPlayerName()));
+        solid = true;
     }
 
     @Override
