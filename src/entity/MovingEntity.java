@@ -37,7 +37,9 @@ public abstract class MovingEntity extends GameObject {
 
         double x = position.getX();
 
-        if(motion.isMoving() || (controller.isRequestingRight() && x >= ScreenSize.getRightBorder())|| (controller.isRequestingLeft() && x <= ScreenSize.getLeftBorder())){
+        if(motion.isHitting()){
+            animationManager.playAnimation("hit");
+        } else if(motion.isMoving() || (controller.isRequestingRight() && x >= ScreenSize.getRightBorder())|| (controller.isRequestingLeft() && x <= ScreenSize.getLeftBorder())){
             animationManager.playAnimation("walk");
         } else {
             animationManager.playAnimation("stand");

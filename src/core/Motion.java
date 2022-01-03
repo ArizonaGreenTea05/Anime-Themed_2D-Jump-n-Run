@@ -8,6 +8,7 @@ public class Motion {
     public static boolean falling;
     public static boolean sitting;
     private double gravity;
+    private Controller controller;
 
     public Motion(double speed) {
         this.speed = speed;
@@ -15,6 +16,8 @@ public class Motion {
     }
 
     public void update(Controller controller, Position position) {
+        this.controller = controller;
+
         double deltaX = 0;
         double deltaY = 0;
 
@@ -60,6 +63,10 @@ public class Motion {
             sitting = false;
         }
 
+        if(isHitting()) {
+            sitting = false;
+        }
+
 
         vector = new Vector2D(deltaX, deltaY);
         vector.multiply(speed);
@@ -78,6 +85,10 @@ public class Motion {
 
     public boolean isMoving() {
         return vector.length() > 0;
+    }
+
+    public boolean isHitting() {
+        return controller.isRequestingHit();
     }
 
     public static boolean getIsSitting(){

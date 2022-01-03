@@ -1,21 +1,15 @@
 package gfx;
 
-import game.Game;
 import menu.Menu;
-
-import java.awt.*;
-import java.awt.image.BufferedImage;
 import java.util.HashMap;
 import java.util.Map;
 
 public class SpriteLibrary {
 
     private Map<String, SpriteSet> units;
-    private Map<String, Image> tiles;
 
     public SpriteLibrary() {
         units = new HashMap<>();
-        tiles = new HashMap<>();
         loadSpritesFromDisk();
     }
 
@@ -40,7 +34,7 @@ public class SpriteLibrary {
         for(String folderName: folderNames) {
             SpriteSet spriteSet = new SpriteSet();
             String pathToFolder = "/game/themes/" + Menu.getGameTheme() + "/characters/" + folderName;
-            String[] sheetsInFolder = getSheetsInFolder();
+            String[] sheetsInFolder = Menu.getPlayerSheetsInFolder();
 
             for(String sheetName: sheetsInFolder) {
                 spriteSet.addSheet(
@@ -52,16 +46,8 @@ public class SpriteLibrary {
         }
     }
 
-    private static String[] getSheetsInFolder() {
-        return Menu.getPlayerSheetsInFolder();
-    }
-
 
     public SpriteSet getUnit(String name) {
         return units.get(name);
-    }
-
-    public  Image getTile(String name){
-        return tiles.get(name);
     }
 }

@@ -19,7 +19,7 @@ public class Menu {
     public static String[] playerName;
     public static String[] maps;
 
-    private static final String[] playerSheetsInFolder = new String[] {"stand.png", "walk.png"};
+    private static final String[] playerSheetsInFolder = new String[] {"stand.png", "walk.png", "hit.png"};
 
     private static final int npccount = 1;
 
