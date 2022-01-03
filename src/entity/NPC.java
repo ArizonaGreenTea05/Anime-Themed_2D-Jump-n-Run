@@ -4,11 +4,11 @@ import controller.Controller;
 import gfx.AnimationManager;
 import gfx.SpriteLibrary;
 
-public class NPC  extends MovingEntity {
+public class NPC extends MovingEntity {
 
     public NPC(Controller controller, SpriteLibrary spriteLibrary) {
         super(controller, spriteLibrary);
-        animationManager = new AnimationManager(spriteLibrary.getUnit("rachel_gardner"));
+        animationManager = new AnimationManager(spriteLibrary.getUnit("npc_1"));
     }
 
     @Override

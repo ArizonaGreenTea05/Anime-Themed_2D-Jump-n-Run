@@ -21,6 +21,8 @@ public class Menu {
 
     private static final String[] playerSheetsInFolder = new String[] {"stand.png", "walk.png"};
 
+    private static final int npccount = 1;
+
 
     private final JFrame menu = new JFrame("GameMenu");
     private final int width, height;
@@ -516,6 +518,16 @@ public class Menu {
 
     public static String getPlayerName(){
         return playerName[name];
+    }
+
+    public static String[] getNPCs(){
+        String[] npcs = new String[npccount];
+
+        for (int i = 0; i < npccount; i++) {
+            npcs[i] = "npc_" + (i+1);
+        }
+
+        return npcs;
     }
 
     public static String getMapName(){

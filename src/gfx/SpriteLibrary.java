@@ -24,7 +24,18 @@ public class SpriteLibrary {
     }
 
     private void loadUnits() {
-        String[] folderNames = Menu.playerName;
+        String[] pn = Menu.playerName;
+        String[] npcn = Menu.getNPCs();
+
+        int pnl = pn.length;
+        int npcnl = npcn.length;
+
+        int l = pnl + npcnl;
+
+        String[] folderNames = new String[l];
+
+        System.arraycopy(pn, 0, folderNames, 0, pnl);
+        System.arraycopy(npcn, 0, folderNames, pnl, npcnl);
 
         for(String folderName: folderNames) {
             SpriteSet spriteSet = new SpriteSet();

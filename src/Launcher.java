@@ -1,5 +1,3 @@
-import game.Game;
-import game.GameLoop;
 import menu.Menu;
 
 public class Launcher {
