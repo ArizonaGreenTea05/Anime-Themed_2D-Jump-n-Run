@@ -20,7 +20,7 @@ public class GameState extends State {
     public GameState(Input input) {
         super(input);
 
-        createMap();
+        //createMap();
 
         initializeCharacters();
     }

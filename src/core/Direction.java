@@ -19,7 +19,7 @@ public enum Direction {
         double x = motion.getVector().getX();
         double y = motion.getVector().getY();
 
-        if(Motion.getIsSitting()) return D;
+        if(motion.isSitting()) return D;
         if(x < 0 && y >= 0) return L;
         if(x == 0 && y < 0) return O;
         if(x > 0 && y >= 0) return R;

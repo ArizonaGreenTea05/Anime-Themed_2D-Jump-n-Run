@@ -5,8 +5,8 @@ public class Motion {
 
     private Vector2D vector;
     private final double speed;
-    public static boolean falling;
-    public static boolean sitting;
+    private boolean falling;
+    private boolean sitting;
     private double gravity;
     private Controller controller;
 
@@ -24,22 +24,18 @@ public class Motion {
         double x = position.getX();
         double y = position.getY();
 
+        int ground = ScreenSize.getGround();
+
         //wenn Position 64p (Character-Größe = 64, deswegen 128) über Boden wird fallling true
         //wenn Position größer als Boden und nicht Up requestet wird wird falling true
-        if(y < ScreenSize.getGround()-128 || (!controller.isRequestingUp() && y < ScreenSize.getGround())){
+        if(y < ground-128 || (!controller.isRequestingUp() && y < ground)){
             falling = true;
         }
 
         //wenn Position kleiner-gleich Boden wird falling false und gravity auf 0
-        if(y >= ScreenSize.getGround()){
+        if(y >= ground){
             falling = false;
             gravity = 0;
-        }
-
-        if(controller.isRequestingUp() && !falling) {
-            deltaY -= getFallSpeed(gravity);
-            gravity += 0.5;
-            sitting = false;
         }
 
         if(falling) {
@@ -48,23 +44,30 @@ public class Motion {
             sitting = false;
         }
 
-        if(controller.isRequestingDown()) {
-            deltaY -= 1E-100;
-            sitting = true;
-        }
-
-        if(controller.isRequestingLeft() && x > ScreenSize.getLeftBorder()) {
-            deltaX -= 1.5;
-            sitting = false;
-        }
-
-        if(controller.isRequestingRight() && x < ScreenSize.getRightBorder()) {
-            deltaX  += 1.5;
+        if (controller.isRequestingUp() && !falling) {
+            deltaY -= getFallSpeed(gravity);
+            gravity += 0.5;
             sitting = false;
         }
 
         if(isHitting()) {
             sitting = false;
+        } else {
+
+            if (controller.isRequestingDown()) {
+                deltaY -= 1E-100;
+                sitting = true;
+            }
+
+            if (controller.isRequestingLeft() && x > ScreenSize.getLeftBorder()) {
+                deltaX -= 1.5;
+                sitting = false;
+            }
+
+            if (controller.isRequestingRight() && x < ScreenSize.getRightBorder()) {
+                deltaX += 1.5;
+                sitting = false;
+            }
         }
 
 
@@ -91,7 +94,7 @@ public class Motion {
         return controller.isRequestingHit();
     }
 
-    public static boolean getIsSitting(){
+    public boolean isSitting(){
         return sitting;
     }
 }
