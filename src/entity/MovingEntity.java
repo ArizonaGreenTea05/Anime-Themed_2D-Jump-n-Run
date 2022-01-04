@@ -5,10 +5,12 @@ import core.Direction;
 import core.Motion;
 import core.Position;
 import core.ScreenSize;
+import game.state.State;
 import gfx.AnimationManager;
 import gfx.SpriteLibrary;
 
 import java.awt.*;
+import java.util.List;
 
 public abstract class MovingEntity extends GameObject {
 
@@ -16,17 +18,19 @@ public abstract class MovingEntity extends GameObject {
     protected AnimationManager animationManager;
     private Motion motion;
     private Direction direction;
+    private List<GameObject> mapObjects;
 
-    public MovingEntity(Controller controller, SpriteLibrary spriteLibrary) {
+    public MovingEntity(Controller controller, SpriteLibrary spriteLibrary, List<GameObject> mapObjects) {
         super(64,64, ScreenSize.getLeftBorder(), ScreenSize.getGround()-64);
         this.controller = controller;
         this.motion = new Motion(2);
         this.direction = Direction.R;
+        this.mapObjects = mapObjects;
     }
 
     @Override
     public void update() {
-        motion.update(controller, position);
+        motion.update(controller, position, mapObjects);
         position.apply(motion);
         manageDirection();
         decideAnimation(position);

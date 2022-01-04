@@ -25,8 +25,8 @@ public class GameState extends State {
 
     private void initializeCharacters() {
 
-        Player player = new Player(new PlayerController(input), spriteLibrary);
-        NPC npc = new NPC(new NPCController(), spriteLibrary);
+        Player player = new Player(new PlayerController(input), spriteLibrary, mapObjects);
+        NPC npc = new NPC(new NPCController(), spriteLibrary, mapObjects);
 
         gameObjects.addAll(List.of(player,npc));
     }
@@ -47,7 +47,7 @@ public class GameState extends State {
 
                 if(sMap[0][j].equalsIgnoreCase("G")){
                     Grass grass = new Grass(posX, posY, "grass");
-                    gameObjects.add(grass);
+                    mapObjects.add(grass);
                 }
 
                 posX += 64;
@@ -58,13 +58,14 @@ public class GameState extends State {
 
 
         Ground groundBlock = new Ground(sMap[0].length*64,screenHeight-ground, 0, ground+64, "ground");
-        gameObjects.add(groundBlock);
+        mapObjects.add(groundBlock);
+
 
         for (int i = 1; i < sMap.length; i++) {
             for (int j = 0; j < sMap[i].length; j++) {
                 if(sMap[i][j].equalsIgnoreCase("G")){
                     Grass grass = new Grass(j*64, ground-(i-1)*64, "grass");
-                    gameObjects.add(grass);
+                    mapObjects.add(grass);
                 }
             }
         }

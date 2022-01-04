@@ -26,6 +26,10 @@ public abstract class GameObject {
         return position;
     }
 
+    public boolean isSolid(){
+        return solid;
+    }
+
     public Size getSize() {
         return size;
     }

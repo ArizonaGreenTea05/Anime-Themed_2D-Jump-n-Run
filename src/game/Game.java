@@ -24,7 +24,7 @@ public class Game {
 
 
     public void update(){
-        state.update();
+        state.updateObjects();
     }
 
     public State getState(){

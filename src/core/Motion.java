@@ -1,7 +1,6 @@
 package core;
 import controller.Controller;
 import entity.GameObject;
-import game.Game;
 import game.state.State;
 
 import java.util.List;
@@ -14,20 +13,24 @@ public class Motion {
     private boolean sitting;
     private double gravity;
     private Controller controller;
+    private List<GameObject> mapObjects;
+    private double x;
+    private double y;
 
     public Motion(double speed) {
         this.speed = speed;
         this.vector = new Vector2D(0, 0);
     }
 
-    public void update(Controller controller, Position position) {
+    public void update(Controller controller, Position position, List<GameObject> mapObjects) {
         this.controller = controller;
+        this.mapObjects = mapObjects;
 
         double deltaX = 0;
         double deltaY = 0;
 
-        double x = position.getX();
-        double y = position.getY();
+        x = position.getX();
+        y = position.getY();
 
         int ground = ScreenSize.getGround();
 
@@ -64,12 +67,12 @@ public class Motion {
                 sitting = true;
             }
 
-            if (controller.isRequestingLeft() && x > ScreenSize.getLeftBorder()) {
+            if (controller.isRequestingLeft()  && leftSpace()) {
                 deltaX -= 1.5;
                 sitting = false;
             }
 
-            if (controller.isRequestingRight() && x < ScreenSize.getRightBorder()) {
+            if (controller.isRequestingRight() && rightSpace()) {
                 deltaX += 1.5;
                 sitting = false;
             }
@@ -81,11 +84,45 @@ public class Motion {
 
     }
 
+    private boolean rightSpace() {
+        for (int i = 0; i < mapObjects.size(); i++) {
+
+            if(mapObjects.get(i).isSolid()) {
+                int blockPosX = mapObjects.get(i).getPosition().intX();
+                int blockPosY = mapObjects.get(i).getPosition().intY();
+
+                if(blockPosY <= y+62 && blockPosY >= y-62){
+                    if(blockPosX <= x+64 && blockPosX > x-32){
+                        return false;
+                    }
+                }
+            }
+        }
+        return true;
+    }
+
+    private boolean leftSpace() {
+        for (int i = 0; i < mapObjects.size(); i++) {
+            if(mapObjects.get(i).isSolid()) {
+                int blockPosX = mapObjects.get(i).getPosition().intX();
+                int blockPosY = mapObjects.get(i).getPosition().intY();
+
+                if (blockPosY <= y + 62 && blockPosY >= y - 62) {
+                    if (blockPosX >= x - 64 && blockPosX < x + 32) {
+                        return false;
+                    }
+                }
+            }
+        }
+        return true;
+    }
+
     private double getFallSpeed(double x){
         double d = -0.01 * x*x + 2.8;
         if( d >= 0 ) return d;
         return 1;
     }
+
 
     public Vector2D getVector() {
         return vector;

@@ -12,6 +12,19 @@ public class Renderer {
     public void render(State state, Graphics graphics) {
 
         List<GameObject> gameObjects = state.getGameObjects();
+        List<GameObject> mapObjects = state.getMapObjects();
+
+        for (GameObject mapObject : mapObjects) {
+            if (shown(mapObject)) {
+                graphics.drawImage(
+                        mapObject.getSprite(),
+                        mapObject.getPosition().intX(),
+                        mapObject.getPosition().intY(),
+                        null
+                );
+            }
+        }
+
 
         for (GameObject gameObject : gameObjects) {
             if (shown(gameObject)) {
@@ -22,13 +35,13 @@ public class Renderer {
                         null
                 );
             }
-
         }
     }
 
-    private boolean shown(GameObject gameObject) {
-        int x =  gameObject.getPosition().intX();
-        int y =  gameObject.getPosition().intY();
+
+    private boolean shown(GameObject object) {
+        int x =  object.getPosition().intX();
+        int y =  object.getPosition().intY();
         int width = ScreenSize.getWidth();
         int height = ScreenSize.getHeight();
 
