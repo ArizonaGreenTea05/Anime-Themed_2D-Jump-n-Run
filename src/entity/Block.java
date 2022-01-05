@@ -1,6 +1,5 @@
 package entity;
 
-import core.Motion;
 import gfx.ImageUtils;
 
 import java.awt.*;

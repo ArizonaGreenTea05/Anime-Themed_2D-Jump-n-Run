@@ -22,8 +22,10 @@ public class Renderer {
                         mapObject.getPosition().intY(),
                         null
                 );
+
             }
         }
+
 
 
         for (GameObject gameObject : gameObjects) {
@@ -45,6 +47,6 @@ public class Renderer {
         int width = ScreenSize.getWidth();
         int height = ScreenSize.getHeight();
 
-        return x >= 0 && x < width && y >= 0 && y < height;
+        return x >= -object.getSize().getWidth() && x < width && y >= 0 && y < height;
     }
 }

@@ -20,7 +20,7 @@ public abstract class MovingEntity extends GameObject {
     private Direction direction;
     private List<GameObject> mapObjects;
 
-    public MovingEntity(Controller controller, SpriteLibrary spriteLibrary, List<GameObject> mapObjects) {
+    public MovingEntity(Controller controller, List<GameObject> mapObjects) {
         super(64,64, ScreenSize.getLeftBorder(), ScreenSize.getGround()-64);
         this.controller = controller;
         this.motion = new Motion(2);

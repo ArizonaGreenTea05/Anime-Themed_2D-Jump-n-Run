@@ -13,7 +13,7 @@ public class Player extends MovingEntity {
     private static Controller controller;
 
     public Player(Controller controller, SpriteLibrary spriteLibrary, List<GameObject> mapObjects) {
-        super(controller, spriteLibrary, mapObjects);
+        super(controller, mapObjects);
         animationManager = new AnimationManager(spriteLibrary.getUnit(Menu.getPlayerName()));
         solid = true;
         this.controller = controller;

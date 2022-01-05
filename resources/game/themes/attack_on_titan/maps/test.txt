@@ -1,8 +1,9 @@
-GGGGGG.................................................................................I...GGGGGG
-GGGGGG.....GGG............................GGGG....GGG.........................GGG......I...GGGGGG
-GGGGGG............................GGGG............GGG........................GGGG......I...GGGGGG
-GGGGGG.............GG..GG.........................GGG.......................GGGGG......I...GGGGGG
-GGGGGG.......................GGG..................GGG......................GGGGGG......I...GGGGGG
-GGGGGG.........GGGG...............................GGG.....................GGGGGGG......I...GGGGGG
-GGGGGG............................................GGG....................GGGGGGGG......I...GGGGGG
-GGGGGGGGGGGGGGGGG...GGGGGGGGGGGGGGGGGGGG....GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG
+GGGGGGGG.....................................................................................GGGGGG
+GGGGGGGG.................................................................................I...GGGGGG
+GGGGGGGG....GGGGGG..........................GGGG....GGG.........................GGG......I...GGGGGG
+GGGGGGGG............................GGGG............GGG........................GGGG......I...GGGGGG
+GGGGGGGG.............GG..GG.........................GGG.......................GGGGG......I...GGGGGG
+GGGGGGGG.......................GGG..................GGG......................GGGGGG......I...GGGGGG
+GGGGGGGG.........GGGG...............................GGG.....................GGGGGGG......I...GGGGGG
+GGGGGGGG...................................................................GGGGGGGG......I...GGGGGG
+GGGGGGGGGGGGGGGGGGG...GGGGGGGGGGGGGGGGGGGG....GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG

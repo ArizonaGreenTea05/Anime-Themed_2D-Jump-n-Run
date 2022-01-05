@@ -29,5 +29,7 @@ public class NPCController implements Controller {
         return false;
     }
 
+    @Override
+    public boolean isPlayer(){return false;}
 
 }

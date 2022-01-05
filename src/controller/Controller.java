@@ -6,4 +6,5 @@ public interface Controller {
     boolean isRequestingLeft();
     boolean isRequestingRight();
     boolean isRequestingHit();
+    boolean isPlayer();
 }
