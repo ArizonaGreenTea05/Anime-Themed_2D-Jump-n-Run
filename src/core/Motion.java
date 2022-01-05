@@ -112,26 +112,26 @@ public class Motion {
     }
 
     private void moveMap(int x, int y) {
-        for (int i = 0; i < mapObjects.size(); i++) {
-            int blockPosX = mapObjects.get(i).getPosition().intX();
-            int blockPosY = mapObjects.get(i).getPosition().intY();
+        for (GameObject mapObject : mapObjects) {
+            int blockPosX = mapObject.getPosition().intX();
+            int blockPosY = mapObject.getPosition().intY();
 
-            mapObjects.get(i).setPosition(new Position(blockPosX + x, blockPosY + y));
+            mapObject.setPosition(new Position(blockPosX + x, blockPosY + y));
         }
     }
 
     private boolean hasGround() {
         if(y>=ground) {return true;}
 
-        for (int i = 0; i < mapObjects.size(); i++) {
+        for (GameObject mapObject : mapObjects) {
 
-            if(mapObjects.get(i).isSolid()) {
-                int blockPosX = mapObjects.get(i).getPosition().intX();
-                int blockPosY = mapObjects.get(i).getPosition().intY();
+            if (mapObject.isSolid()) {
+                int blockPosX = mapObject.getPosition().intX();
+                int blockPosY = mapObject.getPosition().intY();
 
-                if(blockPosX <= x+64 && blockPosX >= x-64){
-                    if(blockPosY < y+66 && blockPosY > y+60){
-                        position.setY(blockPosY-64);
+                if (blockPosX <= x + 64 && blockPosX >= x - 64) {
+                    if (blockPosY < y + 66 && blockPosY > y + 60) {
+                        position.setY(blockPosY - 64);
                         return true;
                     }
                 }
@@ -142,14 +142,14 @@ public class Motion {
     }
 
     private boolean rightSpace() {
-        for (int i = 0; i < mapObjects.size(); i++) {
+        for (GameObject mapObject : mapObjects) {
 
-            if(mapObjects.get(i).isSolid()) {
-                int blockPosX = mapObjects.get(i).getPosition().intX();
-                int blockPosY = mapObjects.get(i).getPosition().intY();
+            if (mapObject.isSolid()) {
+                int blockPosX = mapObject.getPosition().intX();
+                int blockPosY = mapObject.getPosition().intY();
 
-                if(blockPosY < y+62 && blockPosY > y-62){
-                    if(blockPosX <= x+64 && blockPosX > x-32){
+                if (blockPosY < y + 62 && blockPosY > y - 62) {
+                    if (blockPosX <= x + 64 && blockPosX > x - 32) {
                         return false;
                     }
                 }
@@ -159,10 +159,10 @@ public class Motion {
     }
 
     private boolean leftSpace() {
-        for (int i = 0; i < mapObjects.size(); i++) {
-            if(mapObjects.get(i).isSolid()) {
-                int blockPosX = mapObjects.get(i).getPosition().intX();
-                int blockPosY = mapObjects.get(i).getPosition().intY();
+        for (GameObject mapObject : mapObjects) {
+            if (mapObject.isSolid()) {
+                int blockPosX = mapObject.getPosition().intX();
+                int blockPosY = mapObject.getPosition().intY();
 
                 if (blockPosY < y + 62 && blockPosY > y - 62) {
                     if (blockPosX > x - 64 && blockPosX < x + 32) {
