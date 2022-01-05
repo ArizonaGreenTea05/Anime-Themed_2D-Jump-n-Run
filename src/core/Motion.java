@@ -16,7 +16,7 @@ public class Motion {
     private List<GameObject> mapObjects;
     private double x;
     private double y;
-    private int ground = ScreenSize.getGround();
+    private final int ground = ScreenSize.getGround();
     private int savePosYJump = ground;
 
     public Motion(double speed) {
