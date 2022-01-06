@@ -6,13 +6,13 @@ import java.awt.*;
 
 public class ScreenSize {
     private static Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-    private static int width = (int) screenSize.getWidth();
-    private static int height = (int) screenSize.getHeight();
-    private static int ground = (height-512 > height/2) ? height-512 : height-128;
-    private static int leftBorder = width/4;
-    private static int rightBorder = width/3*2;
-    private static int mapWidth = mapWidth();
-    private static int mapHeight = mapHeight();
+    private static final int width = (int) screenSize.getWidth();
+    private static final int height = (int) screenSize.getHeight();
+    private static final int ground = (height-512 > height/2) ? height-512 : height-128;
+    private static final int leftBorder = 9*64;
+    private static final int rightBorder = width-9*64;
+    private static final int mapWidth = mapWidth();
+    private static final int mapHeight = mapHeight();
 
     private static int mapWidth(){
 

@@ -42,7 +42,7 @@ public class GameState extends State {
         /*
         //everything underneath the ground
         for (int posY = screenHeight; posY >= ground+64; posY-=64) {
-            int posX = 0;
+            int posX = -64;
             for (int j = 0; j < sMap[0].length-1; j++) {
 
                 if(sMap[0][j].equalsIgnoreCase("G")){
@@ -57,14 +57,14 @@ public class GameState extends State {
          */
 
 
-        Ground groundBlock = new Ground(sMap[0].length*64,screenHeight-ground, 0, ground+64, "ground");
+        Ground groundBlock = new Ground(sMap[0].length*64,screenHeight-ground, -64, ground+64, "ground");
         mapObjects.add(groundBlock);
 
 
         for (int i = 1; i < sMap.length; i++) {
             for (int j = 0; j < sMap[i].length; j++) {
                 if(sMap[i][j].equalsIgnoreCase("G")){
-                    Grass grass = new Grass(j*64, ground-(i-1)*64, "grass");
+                    Grass grass = new Grass((j-1)*64, ground-(i-1)*64, "grass");
                     mapObjects.add(grass);
                 }
             }

@@ -47,6 +47,6 @@ public class Renderer {
         int width = ScreenSize.getWidth();
         int height = ScreenSize.getHeight();
 
-        return x >= -object.getSize().getWidth() && x < width && y >= 0 && y < height;
+        return x >= -object.getSize().getWidth() && x < width && y >= -object.getSize().getHeight() && y <= height;
     }
 }
