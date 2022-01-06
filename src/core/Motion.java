@@ -42,7 +42,7 @@ public class Motion {
 
         //wenn Position 64p (Character-Größe = 64, deswegen 128) über Boden wird fallling true
         //wenn Position größer als Boden und nicht Up requestet wird wird falling true
-        if(y < savePosYJump-160 || (!controller.isRequestingUp() && !hasGround())){
+        if(y < savePosYJump-160 || (!controller.isRequestingUp() && !hasGround()) || !topSpace()){
             falling = true;
         }
 
@@ -76,34 +76,34 @@ public class Motion {
 
             if(controller.isPlayer()) {
                 if (controller.isRequestingLeft() && leftSpace() && x > leftBorder) {
-                    deltaX -= 1.5;
+                    deltaX -= 1.6;
                     sitting = false;
                 }
 
                 if (controller.isRequestingLeft() && leftSpace() && x <= leftBorder) {
-                    deltaX -= 1.5;
+                    deltaX -= 1.6;
                     moveMap(new Vector2D(1.5,0));
                     sitting = false;
                 }
 
                 if (controller.isRequestingRight() && rightSpace() && x < rightBorder) {
-                    deltaX += 1.5;
+                    deltaX += 1.6;
                     sitting = false;
                 }
 
                 if (controller.isRequestingRight() && rightSpace() && x >= rightBorder) {
-                    deltaX += 1.5;
+                    deltaX += 1.6;
                     moveMap(new Vector2D(-1.5,0));
                     sitting = false;
                 }
             } else {
                 if (controller.isRequestingLeft() && leftSpace()) {
-                    deltaX -= 1.5;
+                    deltaX -= 1.6;
                     sitting = false;
                 }
 
                 if (controller.isRequestingRight() && rightSpace()) {
-                    deltaX += 1.5;
+                    deltaX += 1.6;
                     sitting = false;
                 }
             }
@@ -151,6 +151,24 @@ public class Motion {
         }
 
         return false;
+    }
+
+
+    private boolean topSpace() {
+        for (GameObject mapObject : mapObjects) {
+
+            if (mapObject.isSolid()) {
+                int blockPosX = mapObject.getPosition().intX();
+                int blockPosY = mapObject.getPosition().intY();
+
+                if (blockPosX < x + 61 && blockPosX > x - mapObject.getSize().getWidth()+3) {
+                    if (blockPosY < y - 58 && blockPosY > y - 68) {
+                        return false;
+                    }
+                }
+            }
+        }
+        return true;
     }
 
     private boolean rightSpace() {

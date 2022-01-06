@@ -1,7 +1,6 @@
 package entity;
 
 import controller.Controller;
-import game.state.State;
 import gfx.AnimationManager;
 import gfx.SpriteLibrary;
 
