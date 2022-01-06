@@ -9,8 +9,8 @@ import java.util.List;
 
 public class NPC extends MovingEntity {
 
-    public NPC(Controller controller, SpriteLibrary spriteLibrary, List<GameObject> mapObjects) {
-        super(controller, mapObjects);
+    public NPC(Controller controller, SpriteLibrary spriteLibrary, List<GameObject> mapObjects, List<GameObject> gameObjects) {
+        super(controller, mapObjects, gameObjects);
         animationManager = new AnimationManager(spriteLibrary.getUnit("npc_1"));
         solid = true;
     }

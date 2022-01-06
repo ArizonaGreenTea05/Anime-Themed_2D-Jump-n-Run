@@ -19,18 +19,20 @@ public abstract class MovingEntity extends GameObject {
     private Motion motion;
     private Direction direction;
     private List<GameObject> mapObjects;
+    private List<GameObject> gameObjects;
 
-    public MovingEntity(Controller controller, List<GameObject> mapObjects) {
+    public MovingEntity(Controller controller, List<GameObject> mapObjects, List<GameObject> gameObjects) {
         super(64,64, ScreenSize.getLeftBorder(), ScreenSize.getGround()-64);
         this.controller = controller;
         this.motion = new Motion(2);
         this.direction = Direction.R;
         this.mapObjects = mapObjects;
+        this.gameObjects = gameObjects;
     }
 
     @Override
     public void update() {
-        motion.update(controller, position, mapObjects);
+        motion.update(controller, position, mapObjects, gameObjects);
         position.apply(motion);
         manageDirection();
         decideAnimation(position);

@@ -14,6 +14,7 @@ public class Motion {
     private Controller controller;
     private Position position;
     private List<GameObject> mapObjects;
+    private List<GameObject> gameObjects;
     private double x;
     private double y;
     private final int ground = ScreenSize.getGround();
@@ -24,9 +25,10 @@ public class Motion {
         this.vector = new Vector2D(0, 0);
     }
 
-    public void update(Controller controller, Position position, List<GameObject> mapObjects) {
+    public void update(Controller controller, Position position, List<GameObject> mapObjects, List<GameObject> gameObjects) {
         this.controller = controller;
         this.mapObjects = mapObjects;
+        this.gameObjects = gameObjects;
         this.position = position;
 
         double deltaX = 0;
@@ -79,7 +81,8 @@ public class Motion {
                 }
 
                 if (controller.isRequestingLeft() && leftSpace() && x <= leftBorder) {
-                    moveMap(2, 0);
+                    deltaX -= 1.5;
+                    moveMap(new Vector2D(1.5,0));
                     sitting = false;
                 }
 
@@ -89,7 +92,8 @@ public class Motion {
                 }
 
                 if (controller.isRequestingRight() && rightSpace() && x >= rightBorder) {
-                    moveMap(-2, 0);
+                    deltaX += 1.5;
+                    moveMap(new Vector2D(-1.5,0));
                     sitting = false;
                 }
             } else {
@@ -111,12 +115,21 @@ public class Motion {
 
     }
 
-    private void moveMap(int x, int y) {
+    private void moveMap(Vector2D mapVector) {
+
+        mapVector.multiply(speed);
+
         for (GameObject mapObject : mapObjects) {
             int blockPosX = mapObject.getPosition().intX();
             int blockPosY = mapObject.getPosition().intY();
 
-            mapObject.setPosition(new Position(blockPosX + x, blockPosY + y));
+            mapObject.setPosition(new Position(blockPosX + (int) mapVector.getX(), blockPosY + (int) mapVector.getY()));
+        }
+        for (GameObject gameObject : gameObjects) {
+            int objPosX = gameObject.getPosition().intX();
+            int objPosY = gameObject.getPosition().intY();
+
+            gameObject.setPosition(new Position(objPosX + (int) mapVector.getX(), objPosY + (int) mapVector.getY()));
         }
     }
 

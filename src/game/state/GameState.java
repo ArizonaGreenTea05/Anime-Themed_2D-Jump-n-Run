@@ -25,8 +25,8 @@ public class GameState extends State {
 
     private void initializeCharacters() {
 
-        Player player = new Player(new PlayerController(input), spriteLibrary, mapObjects);
-        NPC npc = new NPC(new NPCController(), spriteLibrary, mapObjects);
+        Player player = new Player(new PlayerController(input), spriteLibrary, mapObjects, gameObjects);
+        NPC npc = new NPC(new NPCController(), spriteLibrary, mapObjects, gameObjects);
 
         gameObjects.addAll(List.of(player, npc));
     }

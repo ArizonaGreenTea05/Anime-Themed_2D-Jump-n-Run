@@ -1,7 +1,6 @@
 package entity;
 
 import controller.Controller;
-import game.state.State;
 import gfx.AnimationManager;
 import gfx.SpriteLibrary;
 import menu.Menu;
@@ -12,8 +11,8 @@ public class Player extends MovingEntity {
 
     private static Controller controller;
 
-    public Player(Controller controller, SpriteLibrary spriteLibrary, List<GameObject> mapObjects) {
-        super(controller, mapObjects);
+    public Player(Controller controller, SpriteLibrary spriteLibrary, List<GameObject> mapObjects, List<GameObject> gameObjects) {
+        super(controller, mapObjects, gameObjects);
         animationManager = new AnimationManager(spriteLibrary.getUnit(Menu.getPlayerName()));
         solid = true;
         this.controller = controller;
