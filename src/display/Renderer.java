@@ -27,7 +27,6 @@ public class Renderer {
         }
 
 
-
         for (GameObject gameObject : gameObjects) {
             if (shown(gameObject)) {
                 graphics.drawImage(
