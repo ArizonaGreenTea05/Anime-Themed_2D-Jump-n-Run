@@ -134,7 +134,6 @@ public class Motion {
     }
 
     private boolean hasGround() {
-        if(y>=ground) {return true;}
 
         for (GameObject mapObject : mapObjects) {
 
@@ -142,7 +141,7 @@ public class Motion {
                 int blockPosX = mapObject.getPosition().intX();
                 int blockPosY = mapObject.getPosition().intY();
 
-                if (blockPosX <= x + 64 && blockPosX >= x - 64) {
+                if (blockPosX <= x + 64 && blockPosX >= x - mapObject.getSize().getWidth()) {
                     if (blockPosY < y + 66 && blockPosY > y + 60) {
                         position.setY(blockPosY - 64);
                         return true;
@@ -189,8 +188,8 @@ public class Motion {
 
     private double getFallSpeed(double x){
         double d = -0.01 * x*x + 2.9;
-        if( d >= 0 ) return d;
-        return 5;
+        if(d < 5 && d >= 0 ) return d;
+        return 4;
     }
 
 
