@@ -27,7 +27,6 @@ public class Game {
         state.updateObjects();
     }
 
-
     public void render() {
         gameDisplay.render(state);
     }
