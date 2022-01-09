@@ -27,13 +27,13 @@ public class Game {
         state.updateObjects();
     }
 
-    public State getState(){
-        return state;
-    }
-
 
     public void render() {
         gameDisplay.render(state);
+    }
+
+    public State getState(){
+        return state;
     }
 
 }
