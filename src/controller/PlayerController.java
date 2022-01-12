@@ -37,8 +37,5 @@ public class PlayerController implements Controller {
         return input.isPressed(KeyEvent.VK_J);
     }
 
-    @Override
-    public boolean isPlayer(){return true;}
-
 
 }

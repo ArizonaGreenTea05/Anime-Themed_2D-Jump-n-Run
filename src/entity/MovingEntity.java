@@ -2,12 +2,11 @@ package entity;
 
 import controller.Controller;
 import core.Direction;
-import core.Motion;
+import core.motion.Motion;
+import core.motion.PlayerMotion;
 import core.Position;
 import core.ScreenSize;
-import game.state.State;
 import gfx.AnimationManager;
-import gfx.SpriteLibrary;
 
 import java.awt.*;
 import java.util.List;
@@ -21,10 +20,10 @@ public abstract class MovingEntity extends GameObject {
     private List<GameObject> mapObjects;
     private List<GameObject> gameObjects;
 
-    public MovingEntity(Controller controller, List<GameObject> mapObjects, List<GameObject> gameObjects) {
+    public MovingEntity(Controller controller, Motion motion, List<GameObject> mapObjects, List<GameObject> gameObjects) {
         super(64,64, ScreenSize.getLeftBorder(), ScreenSize.getGround()-64);
         this.controller = controller;
-        this.motion = new Motion(2);
+        this.motion = motion;
         this.direction = Direction.R;
         this.mapObjects = mapObjects;
         this.gameObjects = gameObjects;

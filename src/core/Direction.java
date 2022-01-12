@@ -1,5 +1,7 @@
 package core;
 
+import core.motion.Motion;
+
 public enum Direction {
 
     L(0),

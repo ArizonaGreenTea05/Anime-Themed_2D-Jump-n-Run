@@ -1,5 +1,7 @@
 package core;
 
+import core.motion.Motion;
+
 public class Position {
     private double x;
     private double y;
