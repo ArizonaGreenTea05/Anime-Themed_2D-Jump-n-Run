@@ -25,14 +25,21 @@ public abstract class Motion {
     public abstract void update(Controller controller, Position position, List<GameObject> mapObjects, List<GameObject> gameObjects);
 
     protected boolean hasGround() {
+        if(testHasGround(mapObjects)){
+            return true;
+        } else {
+            return testHasGround(gameObjects);
+        }
+    }
 
-        for (GameObject mapObject : mapObjects) {
+    private boolean testHasGround(List<GameObject> objects){
+        for (GameObject object : objects) {
 
-            if (mapObject.isSolid()) {
-                int blockPosX = mapObject.getPosition().intX();
-                int blockPosY = mapObject.getPosition().intY();
+            if (object.isSolid()) {
+                int blockPosX = object.getPosition().intX();
+                int blockPosY = object.getPosition().intY();
 
-                if (blockPosX < x + 61 && blockPosX > x - mapObject.getSize().getWidth()+3) {
+                if (blockPosX < x + 61 && blockPosX > x - object.getSize().getWidth()+3) {
                     if (blockPosY < y + 66 && blockPosY > y + 60) {
                         position.setY(blockPosY - 64);
                         return true;
@@ -46,14 +53,24 @@ public abstract class Motion {
 
 
     protected boolean topSpace() {
-        for (GameObject mapObject : mapObjects) {
 
-            if (mapObject.isSolid()) {
-                int blockPosX = mapObject.getPosition().intX();
-                int blockPosY = mapObject.getPosition().intY();
+        if(!testTopSpace(mapObjects)){
+            return false;
+        } else {
+            return testTopSpace(gameObjects);
+        }
 
-                if (blockPosX < x + 61 && blockPosX > x - mapObject.getSize().getWidth()+3) {
-                    if (blockPosY < y - 56 && blockPosY > y - 66) {
+    }
+
+    private boolean testTopSpace(List<GameObject> objects){
+        for (GameObject object : objects) {
+
+            if (object.isSolid()) {
+                int blockPosX = object.getPosition().intX();
+                int blockPosY = object.getPosition().intY();
+
+                if (blockPosX < x + 61 && blockPosX > x - object.getSize().getWidth()+3) {
+                    if (blockPosY < y - 50 && blockPosY > y - 66) {
                         return false;
                     }
                 }
@@ -63,11 +80,19 @@ public abstract class Motion {
     }
 
     protected boolean rightSpace() {
-        for (GameObject mapObject : mapObjects) {
+        if(testRightSpace(mapObjects)){
+            return true;
+        } else {
+            return testRightSpace(gameObjects);
+        }
+    }
 
-            if (mapObject.isSolid()) {
-                int blockPosX = mapObject.getPosition().intX();
-                int blockPosY = mapObject.getPosition().intY();
+    private boolean testRightSpace(List<GameObject> objects){
+        for (GameObject object : objects) {
+
+            if (object.isSolid()) {
+                int blockPosX = object.getPosition().intX();
+                int blockPosY = object.getPosition().intY();
 
                 if (blockPosY < y + 62 && blockPosY > y - 62) {
                     if (blockPosX < x + 64 && blockPosX > x - 32) {
@@ -80,10 +105,18 @@ public abstract class Motion {
     }
 
     protected boolean leftSpace() {
-        for (GameObject mapObject : mapObjects) {
-            if (mapObject.isSolid()) {
-                int blockPosX = mapObject.getPosition().intX();
-                int blockPosY = mapObject.getPosition().intY();
+        if(testLeftSpace(mapObjects)){
+            return true;
+        } else {
+            return testLeftSpace(gameObjects);
+        }
+    }
+
+    private boolean testLeftSpace(List<GameObject> objects){
+        for (GameObject object : objects) {
+            if (object.isSolid()) {
+                int blockPosX = object.getPosition().intX();
+                int blockPosY = object.getPosition().intY();
 
                 if (blockPosY < y + 62 && blockPosY > y - 62) {
                     if (blockPosX > x - 64 && blockPosX < x + 32) {

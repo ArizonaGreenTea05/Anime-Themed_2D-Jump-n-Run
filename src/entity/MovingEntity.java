@@ -26,6 +26,7 @@ public abstract class MovingEntity extends GameObject {
         this.direction = Direction.R;
         this.mapObjects = mapObjects;
         this.gameObjects = gameObjects;
+        hasBlockAction = false;
     }
 
     @Override

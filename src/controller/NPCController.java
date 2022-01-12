@@ -7,7 +7,7 @@ public class NPCController implements Controller {
 
     @Override
     public boolean isRequestingUp() {
-        return true;
+        return false;
     }
 
     @Override

@@ -9,6 +9,8 @@ public abstract class GameObject {
     protected Position position;
     protected Size size;
     protected boolean solid;
+    protected boolean hasBlockAction;
+    protected boolean blockActionCauseAble;
 
     public GameObject(int width, int height, int posX, int posY) {
         position = new Position(posX, posY);
@@ -28,6 +30,14 @@ public abstract class GameObject {
 
     public boolean isSolid(){
         return solid;
+    }
+
+    public boolean hasBlockAction(){
+        return hasBlockAction;
+    }
+
+    public boolean canCauseBlockAction(){
+        return blockActionCauseAble;
     }
 
     public Size getSize() {
