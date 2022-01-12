@@ -1,7 +1,7 @@
 package entity;
 
 import controller.Controller;
-import core.motion.Motion;
+import entity.motion.Motion;
 import gfx.AnimationManager;
 import gfx.SpriteLibrary;
 import menu.Menu;

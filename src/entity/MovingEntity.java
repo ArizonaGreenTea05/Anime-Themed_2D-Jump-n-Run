@@ -2,8 +2,7 @@ package entity;
 
 import controller.Controller;
 import core.Direction;
-import core.motion.Motion;
-import core.motion.PlayerMotion;
+import entity.motion.Motion;
 import core.Position;
 import core.ScreenSize;
 import gfx.AnimationManager;
