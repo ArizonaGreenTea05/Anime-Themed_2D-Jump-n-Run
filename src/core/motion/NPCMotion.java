@@ -32,9 +32,6 @@ public class NPCMotion extends Motion {
         x = position.getX();
         y = position.getY();
 
-        int leftBorder = ScreenSize.getLeftBorder();
-        int rightBorder = ScreenSize.getRightBorder();
-
         //wenn Position 64p (Character-Größe = 64, deswegen 128) über Boden wird fallling true
         //wenn Position größer als Boden und nicht Up requestet wird wird falling true
         if(y < savePosYJump-160 || (!controller.isRequestingUp() && !hasGround()) || !topSpace()){
