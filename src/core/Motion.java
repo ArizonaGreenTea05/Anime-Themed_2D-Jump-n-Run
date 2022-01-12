@@ -162,7 +162,7 @@ public class Motion {
                 int blockPosY = mapObject.getPosition().intY();
 
                 if (blockPosX < x + 61 && blockPosX > x - mapObject.getSize().getWidth()+3) {
-                    if (blockPosY < y - 58 && blockPosY > y - 68) {
+                    if (blockPosY < y - 56 && blockPosY > y - 66) {
                         return false;
                     }
                 }
