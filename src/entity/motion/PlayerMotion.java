@@ -4,6 +4,7 @@ import core.Position;
 import core.ScreenSize;
 import core.Vector2D;
 import entity.GameObject;
+import game.state.State;
 
 import java.util.List;
 
@@ -20,10 +21,10 @@ public class PlayerMotion extends Motion {
     }
 
     @Override
-    public void update(Controller controller, Position position, List<GameObject> mapObjects, List<GameObject> gameObjects) {
+    public void update(Controller controller, Position position, State state) {
         this.controller = controller;
-        this.mapObjects = mapObjects;
-        this.gameObjects = gameObjects;
+        this.mapObjects = state.getMapObjects();
+        this.gameObjects = state.getGameObjects();
         this.position = position;
 
         double deltaX = 0;

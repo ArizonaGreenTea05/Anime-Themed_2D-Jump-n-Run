@@ -28,8 +28,8 @@ public class GameState extends State {
 
     private void initializeCharacters() {
 
-        Player player = new Player(new PlayerController(input), new PlayerMotion(2), new Position(ScreenSize.getLeftBorder(),ScreenSize.getGround()-64), spriteLibrary, mapObjects, gameObjects);
-        NPC npc = new NPC(new NPCController(), new NPCMotion(2), new Position(ScreenSize.getLeftBorder()+64,ScreenSize.getGround()-64), spriteLibrary, mapObjects, gameObjects);
+        Player player = new Player(new PlayerController(input), new PlayerMotion(2), new Position(ScreenSize.getLeftBorder(),ScreenSize.getGround()-64), spriteLibrary, this);
+        NPC npc = new NPC(new NPCController(), new NPCMotion(2), new Position(ScreenSize.getLeftBorder()+64,ScreenSize.getGround()-64), spriteLibrary, this);
 
         gameObjects.addAll(List.of(player, npc));
     }

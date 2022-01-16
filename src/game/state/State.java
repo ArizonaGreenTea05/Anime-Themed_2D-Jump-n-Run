@@ -36,4 +36,8 @@ public abstract class State {
     public List<GameObject> getMapObjects() {
         return mapObjects;
     }
+
+    public SpriteLibrary getSpriteLibrary(){
+        return spriteLibrary;
+    }
 }

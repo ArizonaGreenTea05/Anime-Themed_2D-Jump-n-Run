@@ -1,9 +1,11 @@
 package entity;
 
 import entity.motion.Motion;
+import game.state.State;
 import gfx.ImageUtils;
 
 import java.awt.*;
+import java.util.List;
 
 public abstract class Block extends GameObject {
 
@@ -20,7 +22,6 @@ public abstract class Block extends GameObject {
 
     }
 
-
     @Override
     public Image getSprite() {
         return ImageUtils.loadImage("/game/themes/" + menu.Menu.getGameTheme() + "/blocks/" + block + ".png");
@@ -30,4 +31,7 @@ public abstract class Block extends GameObject {
     public Motion getMotion() {
         return null;
     }
+
+
+    public abstract void doAction(State state);
 }

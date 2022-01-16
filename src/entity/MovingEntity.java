@@ -5,6 +5,7 @@ import core.Direction;
 import entity.motion.Motion;
 import core.Position;
 import core.ScreenSize;
+import game.state.State;
 import gfx.AnimationManager;
 
 import java.awt.*;
@@ -16,21 +17,18 @@ public abstract class MovingEntity extends GameObject {
     protected AnimationManager animationManager;
     private Motion motion;
     private Direction direction;
-    private List<GameObject> mapObjects;
-    private List<GameObject> gameObjects;
+    private State state;
 
-    public MovingEntity(Controller controller, Motion motion, Position position, List<GameObject> mapObjects, List<GameObject> gameObjects) {
+    public MovingEntity(Controller controller, Motion motion, Position position, State state) {
         super(64,64, position.intX(), position.intY());
         this.controller = controller;
         this.motion = motion;
         this.direction = Direction.R;
-        this.mapObjects = mapObjects;
-        this.gameObjects = gameObjects;
-        hasBlockAction = false;
+        this.state = state;
     }
     @Override
     public void update() {
-        motion.update(controller, position, mapObjects, gameObjects);
+        motion.update(controller, position, state);
         position.apply(motion);
         manageDirection();
         decideAnimation(position);

@@ -4,6 +4,7 @@ import controller.Controller;
 import core.Position;
 import core.Vector2D;
 import entity.GameObject;
+import game.state.State;
 
 import java.util.List;
 
@@ -22,7 +23,7 @@ public abstract class Motion {
         this.vector = new Vector2D(0, 0);
     }
 
-    public abstract void update(Controller controller, Position position, List<GameObject> mapObjects, List<GameObject> gameObjects);
+    public abstract void update(Controller controller, Position position, State state);
 
     protected boolean hasGround() {
         if(testHasGround(mapObjects)){
