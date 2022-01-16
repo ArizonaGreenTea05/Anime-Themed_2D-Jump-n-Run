@@ -1,5 +1,7 @@
 package entity;
 
+import game.state.State;
+
 public class Ground extends CustomSizeBlock{
 
     public Ground(int width, int height, int posX, int posY, String texture){
@@ -10,5 +12,10 @@ public class Ground extends CustomSizeBlock{
     @Override
     public void update() {
         super.update();
+    }
+
+    @Override
+    public void doAction(State state) {
+
     }
 }

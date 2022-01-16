@@ -5,7 +5,6 @@ import game.state.State;
 import gfx.ImageUtils;
 
 import java.awt.*;
-import java.util.List;
 
 public abstract class Block extends GameObject {
 
@@ -33,5 +32,4 @@ public abstract class Block extends GameObject {
     }
 
 
-    public abstract void doAction(State state);
 }

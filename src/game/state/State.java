@@ -22,7 +22,7 @@ public abstract class State {
     }
 
     public void updateObjects() {
-        gameObjects.forEach(gameObject -> gameObject.update());
+        gameObjects.forEach(GameObject::update);
     }
 
     public void updateMap() {

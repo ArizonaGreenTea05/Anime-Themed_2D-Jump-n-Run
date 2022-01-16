@@ -7,8 +7,6 @@ import game.state.State;
 import gfx.AnimationManager;
 import gfx.SpriteLibrary;
 
-import java.util.List;
-
 public class NPC extends MovingEntity {
 
     public NPC(Controller controller, Motion motion, Position position, SpriteLibrary spriteLibrary, State state) {
@@ -20,5 +18,10 @@ public class NPC extends MovingEntity {
     @Override
     public void update() {
         super.update();
+    }
+
+    @Override
+    public void doAction(State state) {
+
     }
 }

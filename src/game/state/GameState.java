@@ -4,12 +4,9 @@ import controller.NPCController;
 import controller.PlayerController;
 import core.Position;
 import core.ScreenSize;
+import entity.*;
 import entity.motion.NPCMotion;
 import entity.motion.PlayerMotion;
-import entity.Grass;
-import entity.Ground;
-import entity.NPC;
-import entity.Player;
 import input.Input;
 import utils.FileLoader;
 
@@ -66,10 +63,25 @@ public class GameState extends State {
 
         for (int i = 1; i < sMap.length; i++) {
             for (int j = 0; j < sMap[i].length; j++) {
+
                 if(sMap[i][j].equalsIgnoreCase("G")){
-                    Grass grass = new Grass((j-1)*64, ground-(i-1)*64, "grass");
-                    mapObjects.add(grass);
+                    mapObjects.add(
+                        new Grass(
+                            (j-1)*64,
+                            ground-(i-1)*64,
+                            "grass"
+                        )
+                    );
+                } else if(sMap[i][j].equalsIgnoreCase("A")){
+                    mapObjects.add(
+                        new ActionBlock(
+                            (j-1)*64,
+                            ground-(i-1)*64,
+                            "action"
+                        )
+                    );
                 }
+
             }
         }
 

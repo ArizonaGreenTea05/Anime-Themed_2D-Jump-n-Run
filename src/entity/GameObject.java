@@ -3,6 +3,7 @@ package entity;
 import core.Position;
 import core.Size;
 import entity.motion.Motion;
+import game.state.State;
 
 import java.awt.*;
 
@@ -41,5 +42,7 @@ public abstract class GameObject {
     public Size getSize() {
         return size;
     }
+
+    public abstract void doAction(State state);
 
 }

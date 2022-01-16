@@ -6,8 +6,6 @@ import core.Vector2D;
 import entity.GameObject;
 import game.state.State;
 
-import java.util.List;
-
 public class PlayerMotion extends Motion {
     private boolean falling;
     private boolean sitting;
@@ -62,6 +60,9 @@ public class PlayerMotion extends Motion {
         }
 
         if(isHitting()) {
+            for (GameObject mapObject : mapObjects) {
+                mapObject.doAction(state);
+            }
             sitting = false;
         } else {
 

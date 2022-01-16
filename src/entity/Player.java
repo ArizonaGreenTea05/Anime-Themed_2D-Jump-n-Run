@@ -26,6 +26,11 @@ public class Player extends MovingEntity {
         super.update();
     }
 
+    @Override
+    public void doAction(State state) {
+
+    }
+
     public static Controller getController(){
         return controller;
     }
