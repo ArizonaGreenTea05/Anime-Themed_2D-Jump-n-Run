@@ -19,8 +19,8 @@ public abstract class MovingEntity extends GameObject {
     private List<GameObject> mapObjects;
     private List<GameObject> gameObjects;
 
-    public MovingEntity(Controller controller, Motion motion, List<GameObject> mapObjects, List<GameObject> gameObjects) {
-        super(64,64, ScreenSize.getLeftBorder(), ScreenSize.getGround()-64);
+    public MovingEntity(Controller controller, Motion motion, Position position, List<GameObject> mapObjects, List<GameObject> gameObjects) {
+        super(64,64, position.intX(), position.intY());
         this.controller = controller;
         this.motion = motion;
         this.direction = Direction.R;
@@ -28,7 +28,6 @@ public abstract class MovingEntity extends GameObject {
         this.gameObjects = gameObjects;
         hasBlockAction = false;
     }
-
     @Override
     public void update() {
         motion.update(controller, position, mapObjects, gameObjects);
@@ -60,5 +59,10 @@ public abstract class MovingEntity extends GameObject {
     @Override
     public Image getSprite() {
         return animationManager.getSprite();
+    }
+
+    @Override
+    public Motion getMotion() {
+        return motion;
     }
 }

@@ -1,5 +1,6 @@
 package entity;
 
+import entity.motion.Motion;
 import gfx.ImageUtils;
 
 import java.awt.*;
@@ -23,5 +24,10 @@ public abstract class Block extends GameObject {
     @Override
     public Image getSprite() {
         return ImageUtils.loadImage("/game/themes/" + menu.Menu.getGameTheme() + "/blocks/" + block + ".png");
+    }
+
+    @Override
+    public Motion getMotion() {
+        return null;
     }
 }

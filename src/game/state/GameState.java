@@ -2,6 +2,7 @@ package game.state;
 
 import controller.NPCController;
 import controller.PlayerController;
+import core.Position;
 import core.ScreenSize;
 import entity.motion.NPCMotion;
 import entity.motion.PlayerMotion;
@@ -27,8 +28,8 @@ public class GameState extends State {
 
     private void initializeCharacters() {
 
-        Player player = new Player(new PlayerController(input), new PlayerMotion(2), spriteLibrary, mapObjects, gameObjects);
-        NPC npc = new NPC(new NPCController(), new NPCMotion(2), spriteLibrary, mapObjects, gameObjects);
+        Player player = new Player(new PlayerController(input), new PlayerMotion(2), new Position(ScreenSize.getLeftBorder(),ScreenSize.getGround()-64), spriteLibrary, mapObjects, gameObjects);
+        NPC npc = new NPC(new NPCController(), new NPCMotion(2), new Position(ScreenSize.getLeftBorder()+64,ScreenSize.getGround()-64), spriteLibrary, mapObjects, gameObjects);
 
         gameObjects.addAll(List.of(player, npc));
     }

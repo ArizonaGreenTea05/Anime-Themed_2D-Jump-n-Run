@@ -2,6 +2,7 @@ package entity;
 
 import core.Position;
 import core.Size;
+import entity.motion.Motion;
 
 import java.awt.*;
 
@@ -19,6 +20,8 @@ public abstract class GameObject {
 
     public abstract void update();
     public abstract Image getSprite();
+
+    public abstract Motion getMotion();
 
     public void setPosition(Position position) {
         this.position = position;

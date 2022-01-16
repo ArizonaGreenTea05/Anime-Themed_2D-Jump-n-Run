@@ -37,7 +37,7 @@ public abstract class Motion {
 
             //TODO: nur ausführen, wenn object != das object, zu dem diese Motion gehört (auch für alle anderen "test" Methoden)
 
-            if (object.isSolid()) {
+            if (object.getMotion() != this && object.isSolid()) {
                 int blockPosX = object.getPosition().intX();
                 int blockPosY = object.getPosition().intY();
 
@@ -67,7 +67,7 @@ public abstract class Motion {
     private boolean testTopSpace(List<GameObject> objects){
         for (GameObject object : objects) {
 
-            if (object.isSolid()) {
+            if (object.getMotion() != this && object.isSolid()) {
                 int blockPosX = object.getPosition().intX();
                 int blockPosY = object.getPosition().intY();
 
@@ -92,7 +92,7 @@ public abstract class Motion {
     private boolean testRightSpace(List<GameObject> objects){
         for (GameObject object : objects) {
 
-            if (object.isSolid()) {
+            if (object.getMotion() != this && object.isSolid()) {
                 int blockPosX = object.getPosition().intX();
                 int blockPosY = object.getPosition().intY();
 
@@ -116,7 +116,7 @@ public abstract class Motion {
 
     private boolean testLeftSpace(List<GameObject> objects){
         for (GameObject object : objects) {
-            if (object.isSolid()) {
+            if (object.getMotion() != this && object.isSolid()) {
                 int blockPosX = object.getPosition().intX();
                 int blockPosY = object.getPosition().intY();
 

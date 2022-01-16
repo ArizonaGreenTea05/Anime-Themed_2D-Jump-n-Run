@@ -1,5 +1,6 @@
 package entity;
 
+import entity.motion.Motion;
 import gfx.ImageUtils;
 
 import java.awt.*;
@@ -27,4 +28,10 @@ public abstract class CustomSizeBlock extends GameObject {
     public Image getSprite() {
         return ImageUtils.loadImage("/game/themes/" + menu.Menu.getGameTheme() + "/blocks/" + texture + ".png", width,height);
     }
+
+    @Override
+    public Motion getMotion() {
+        return null;
+    }
+
 }
