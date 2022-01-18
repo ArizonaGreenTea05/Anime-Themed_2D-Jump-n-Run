@@ -19,14 +19,19 @@ public class ActionBlock extends Block{
 
     @Override
     public void doAction(State state){
-        state.getGameObjects().add(
-            new NPC(
-                new NPCController(),
-                new NPCMotion(2),
-                new Position(position.intX(), position.intY()-64),
-                state.getSpriteLibrary(),
-                state
-            )
-        );
+        if(!actionUsed) {
+            state.setUpdatable(false);
+            state.getGameObjects().add(
+                    new NPC(
+                            new NPCController(),
+                            new NPCMotion(2),
+                            new Position(position.intX(), position.intY() - 66),
+                            state.getSpriteLibrary(),
+                            state
+                    )
+            );
+            state.setUpdatable(true);
+            actionUsed = true;
+        }
     }
 }

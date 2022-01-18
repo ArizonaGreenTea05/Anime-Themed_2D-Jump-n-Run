@@ -13,6 +13,7 @@ public abstract class State {
     protected List<GameObject> mapObjects;
     protected SpriteLibrary spriteLibrary;
     protected Input input;
+    private boolean updatable = true;
 
     public State(Input input){
         this.input = input;
@@ -22,11 +23,14 @@ public abstract class State {
     }
 
     public void updateObjects() {
-        gameObjects.forEach(GameObject::update);
+        for (int i = 0; i < gameObjects.size() && updatable; i++) {
+            gameObjects.get(i).update();
+        }
+
     }
 
     public void updateMap() {
-        mapObjects.forEach(mapObject -> mapObject.update());
+        mapObjects.forEach(GameObject::update);
     }
 
     public List<GameObject> getGameObjects() {
@@ -39,5 +43,9 @@ public abstract class State {
 
     public SpriteLibrary getSpriteLibrary(){
         return spriteLibrary;
+    }
+
+    public void setUpdatable(boolean updatable){
+        this.updatable = updatable;
     }
 }
