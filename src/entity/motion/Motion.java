@@ -17,6 +17,7 @@ public abstract class Motion {
     protected double y;
     protected List<GameObject> mapObjects;
     protected List<GameObject> gameObjects;
+    protected State state;
 
     public Motion(double speed) {
         this.speed = speed;
@@ -54,7 +55,6 @@ public abstract class Motion {
 
 
     protected boolean topSpace() {
-
         if(!testTopSpace(mapObjects)){
             return false;
         } else {
@@ -71,13 +71,20 @@ public abstract class Motion {
                 int blockPosY = object.getPosition().intY();
 
                 if (blockPosX < x + 61 && blockPosX > x - object.getSize().getWidth()+3) {
-                    if (blockPosY < y - 50 && blockPosY > y - 66) {
+                    if (blockPosY < y - 56 && blockPosY > y - 66) {
+                        if(actionCaused()) {
+                            object.doAction(state);
+                        }
                         return false;
                     }
                 }
             }
         }
         return true;
+    }
+
+    private boolean actionCaused() {
+        return this.canCauseBlockAction() && this.isJumping();
     }
 
     protected boolean rightSpace() {
@@ -140,8 +147,12 @@ public abstract class Motion {
 
     public abstract boolean isMoving();
 
+    public abstract boolean isJumping();
+
     public abstract boolean isHitting();
 
     public abstract boolean isSitting();
+
+    public abstract boolean canCauseBlockAction();
 
 }

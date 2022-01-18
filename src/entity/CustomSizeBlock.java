@@ -15,7 +15,6 @@ public abstract class CustomSizeBlock extends GameObject {
         this.texture = texture;
         this.width = width;
         this.height = height;
-        blockActionCauseAble = false;
     }
 
     @Override

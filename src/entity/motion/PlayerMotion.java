@@ -24,6 +24,7 @@ public class PlayerMotion extends Motion {
         this.mapObjects = state.getMapObjects();
         this.gameObjects = state.getGameObjects();
         this.position = position;
+        this.state = state;
 
         double deltaX = 0;
         double deltaY = 0;
@@ -135,7 +136,17 @@ public class PlayerMotion extends Motion {
     }
 
     @Override
+    public boolean isJumping() {
+        return controller.isRequestingUp();
+    }
+
+    @Override
     public boolean isSitting(){
         return sitting;
+    }
+
+    @Override
+    public boolean canCauseBlockAction() {
+        return true;
     }
 }

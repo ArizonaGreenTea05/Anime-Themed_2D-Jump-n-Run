@@ -14,7 +14,6 @@ public abstract class Block extends GameObject {
     public Block(int posX, int posY, String texture) {
         super(64, 64, posX, posY);
         this.block = texture;
-        blockActionCauseAble = false;
     }
 
     @Override
