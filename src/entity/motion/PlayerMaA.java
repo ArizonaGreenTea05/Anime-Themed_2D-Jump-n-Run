@@ -61,9 +61,6 @@ public class PlayerMaA extends MotionAndAction {
         }
 
         if(isHitting()) {
-            for (GameObject mapObject : mapObjects) {
-                mapObject.doAction(state);
-            }
             sitting = false;
         } else {
 
