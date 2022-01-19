@@ -1,8 +1,9 @@
 package entity;
 
 import core.Position;
+import core.ScreenSize;
 import core.Size;
-import entity.motion.MotionAndAction;
+import entity.motionAndAction.MotionAndAction;
 import game.state.State;
 
 import java.awt.*;
@@ -18,6 +19,9 @@ public abstract class GameObject {
     }
 
     public abstract void update();
+
+    public abstract void render(Graphics graphics);
+
     public abstract Image getSprite();
 
     public abstract MotionAndAction getMotion();
@@ -39,5 +43,15 @@ public abstract class GameObject {
     }
 
     public abstract void doAction(State state);
+
+
+    protected boolean shown(GameObject object) {
+        int x =  object.getPosition().intX();
+        int y =  object.getPosition().intY();
+        int width = ScreenSize.getWidth();
+        int height = ScreenSize.getHeight();
+
+        return x >= -object.getSize().getWidth() && x < width && y >= -object.getSize().getHeight() && y <= height;
+    }
 
 }

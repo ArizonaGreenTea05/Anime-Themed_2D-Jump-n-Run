@@ -2,10 +2,12 @@ package entity;
 
 import controller.Controller;
 import core.Position;
-import entity.motion.MotionAndAction;
+import entity.motionAndAction.MotionAndAction;
 import game.state.State;
 import gfx.AnimationManager;
 import gfx.SpriteLibrary;
+
+import java.awt.*;
 
 public class NPC extends MovingEntity {
 
@@ -18,6 +20,18 @@ public class NPC extends MovingEntity {
     @Override
     public void update() {
         super.update();
+    }
+
+    @Override
+    public void render(Graphics graphics) {
+        if (shown(this)) {
+            graphics.drawImage(
+                    this.getSprite(),
+                    this.getPosition().intX(),
+                    this.getPosition().intY(),
+                    null
+            );
+        }
     }
 
     @Override

@@ -2,7 +2,7 @@ package entity;
 
 import controller.Controller;
 import core.Direction;
-import entity.motion.MotionAndAction;
+import entity.motionAndAction.MotionAndAction;
 import core.Position;
 import core.ScreenSize;
 import game.state.State;

@@ -1,4 +1,4 @@
-package entity.motion;
+package entity.motionAndAction;
 
 import controller.Controller;
 import core.Position;

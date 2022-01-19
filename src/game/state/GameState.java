@@ -5,8 +5,8 @@ import controller.PlayerController;
 import core.Position;
 import core.ScreenSize;
 import entity.*;
-import entity.motion.NPCMaA;
-import entity.motion.PlayerMaA;
+import entity.motionAndAction.NPCMaA;
+import entity.motionAndAction.PlayerMaA;
 import input.Input;
 import utils.FileLoader;
 

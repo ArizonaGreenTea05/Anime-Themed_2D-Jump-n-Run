@@ -1,6 +1,5 @@
 package display;
 
-import core.ScreenSize;
 import entity.GameObject;
 import game.state.State;
 
@@ -15,37 +14,11 @@ public class Renderer {
         List<GameObject> mapObjects = state.getMapObjects();
 
         for (GameObject mapObject : mapObjects) {
-            if (shown(mapObject)) {
-                graphics.drawImage(
-                        mapObject.getSprite(),
-                        mapObject.getPosition().intX(),
-                        mapObject.getPosition().intY(),
-                        null
-                );
-
-            }
+            mapObject.render(graphics);
         }
-
 
         for (GameObject gameObject : gameObjects) {
-            if (shown(gameObject)) {
-                graphics.drawImage(
-                        gameObject.getSprite(),
-                        gameObject.getPosition().intX(),
-                        gameObject.getPosition().intY(),
-                        null
-                );
-            }
+            gameObject.render(graphics);
         }
-    }
-
-
-    private boolean shown(GameObject object) {
-        int x =  object.getPosition().intX();
-        int y =  object.getPosition().intY();
-        int width = ScreenSize.getWidth();
-        int height = ScreenSize.getHeight();
-
-        return x >= -object.getSize().getWidth() && x < width && y >= -object.getSize().getHeight() && y <= height;
     }
 }
