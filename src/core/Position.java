@@ -1,6 +1,6 @@
 package core;
 
-import entity.motion.Motion;
+import entity.motion.MotionAndAction;
 
 public class Position {
     private double x;
@@ -35,7 +35,7 @@ public class Position {
         this.y = y;
     }
 
-    public void apply(Motion motion) {
+    public void apply(MotionAndAction motion) {
         Vector2D vector = motion.getVector();
         this.x += vector.getX();
         this.y += vector.getY();

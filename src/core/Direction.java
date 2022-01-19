@@ -1,6 +1,6 @@
 package core;
 
-import entity.motion.Motion;
+import entity.motion.MotionAndAction;
 
 public enum Direction {
 
@@ -17,7 +17,7 @@ public enum Direction {
         this.animationRow = animationRow;
     }
 
-    public static Direction fromMotion(Motion motion){
+    public static Direction fromMotion(MotionAndAction motion){
         double x = motion.getVector().getX();
         double y = motion.getVector().getY();
 

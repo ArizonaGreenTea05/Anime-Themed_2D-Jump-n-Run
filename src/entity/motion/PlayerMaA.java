@@ -6,9 +6,7 @@ import core.Vector2D;
 import entity.GameObject;
 import game.state.State;
 
-import java.util.List;
-
-public class NPCMotion extends Motion {
+public class PlayerMaA extends MotionAndAction {
     private boolean falling;
     private boolean sitting;
     private double gravity;
@@ -16,7 +14,7 @@ public class NPCMotion extends Motion {
     private final int ground = ScreenSize.getGround();
     private int savePosYJump = ground;
 
-    public NPCMotion(double speed) {
+    public PlayerMaA(double speed) {
         super(speed);
     }
 
@@ -33,6 +31,9 @@ public class NPCMotion extends Motion {
 
         x = position.getX();
         y = position.getY();
+
+        int leftBorder = ScreenSize.getLeftBorder();
+        int rightBorder = ScreenSize.getRightBorder();
 
         //wenn Position 64p (Character-Größe = 64, deswegen 128) über Boden wird fallling true
         //wenn Position größer als Boden und nicht Up requestet wird wird falling true
@@ -60,6 +61,9 @@ public class NPCMotion extends Motion {
         }
 
         if(isHitting()) {
+            for (GameObject mapObject : mapObjects) {
+                mapObject.doAction(state);
+            }
             sitting = false;
         } else {
 
@@ -67,17 +71,27 @@ public class NPCMotion extends Motion {
                 deltaY -= 1E-100;
                 sitting = true;
             }
-
-            if (controller.isRequestingLeft() && leftSpace()) {
+            if (controller.isRequestingLeft() && leftSpace() && x > leftBorder) {
                 deltaX -= 1.6;
                 sitting = false;
             }
 
-            if (controller.isRequestingRight() && rightSpace()) {
+            if (controller.isRequestingLeft() && leftSpace() && x <= leftBorder) {
+                deltaX -= 1.6;
+                moveMap(new Vector2D(1.5,0));
+                sitting = false;
+            }
+
+            if (controller.isRequestingRight() && rightSpace() && x < rightBorder) {
                 deltaX += 1.6;
                 sitting = false;
             }
 
+            if (controller.isRequestingRight() && rightSpace() && x >= rightBorder) {
+                deltaX += 1.6;
+                moveMap(new Vector2D(-1.5,0));
+                sitting = false;
+            }
         }
 
 
@@ -85,6 +99,26 @@ public class NPCMotion extends Motion {
         vector.multiply(speed);
 
     }
+
+    private void moveMap(Vector2D mapVector) {
+
+        mapVector.multiply(speed);
+
+        for (GameObject mapObject : mapObjects) {
+            int blockPosX = mapObject.getPosition().intX();
+            int blockPosY = mapObject.getPosition().intY();
+
+            mapObject.setPosition(new Position(blockPosX + (int) mapVector.getX(), blockPosY + (int) mapVector.getY()));
+        }
+        for (GameObject gameObject : gameObjects) {
+            int objPosX = gameObject.getPosition().intX();
+            int objPosY = gameObject.getPosition().intY();
+
+            gameObject.setPosition(new Position(objPosX + (int) mapVector.getX(), objPosY + (int) mapVector.getY()));
+        }
+    }
+
+
 
     @Override
     public Vector2D getVector() {
@@ -97,13 +131,13 @@ public class NPCMotion extends Motion {
     }
 
     @Override
-    public boolean isJumping() {
-        return controller.isRequestingUp();
+    public boolean isHitting() {
+        return controller.isRequestingHit();
     }
 
     @Override
-    public boolean isHitting() {
-        return controller.isRequestingHit();
+    public boolean isJumping() {
+        return controller.isRequestingUp();
     }
 
     @Override
@@ -113,6 +147,6 @@ public class NPCMotion extends Motion {
 
     @Override
     public boolean canCauseBlockAction() {
-        return false;
+        return true;
     }
 }

@@ -1,7 +1,6 @@
 package entity;
 
-import entity.motion.Motion;
-import game.state.State;
+import entity.motion.MotionAndAction;
 import gfx.ImageUtils;
 
 import java.awt.*;
@@ -27,7 +26,7 @@ public abstract class Block extends GameObject {
     }
 
     @Override
-    public Motion getMotion() {
+    public MotionAndAction getMotion() {
         return null;
     }
 

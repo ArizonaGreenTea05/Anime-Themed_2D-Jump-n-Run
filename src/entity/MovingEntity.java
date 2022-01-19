@@ -2,24 +2,23 @@ package entity;
 
 import controller.Controller;
 import core.Direction;
-import entity.motion.Motion;
+import entity.motion.MotionAndAction;
 import core.Position;
 import core.ScreenSize;
 import game.state.State;
 import gfx.AnimationManager;
 
 import java.awt.*;
-import java.util.List;
 
 public abstract class MovingEntity extends GameObject {
 
     protected Controller controller;
     protected AnimationManager animationManager;
-    private Motion motion;
+    private MotionAndAction motion;
     private Direction direction;
     private State state;
 
-    public MovingEntity(Controller controller, Motion motion, Position position, State state) {
+    public MovingEntity(Controller controller, MotionAndAction motion, Position position, State state) {
         super(64,64, position.intX(), position.intY());
         this.controller = controller;
         this.motion = motion;
@@ -60,7 +59,7 @@ public abstract class MovingEntity extends GameObject {
     }
 
     @Override
-    public Motion getMotion() {
+    public MotionAndAction getMotion() {
         return motion;
     }
 }

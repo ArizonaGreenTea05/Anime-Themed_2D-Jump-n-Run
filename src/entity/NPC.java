@@ -2,14 +2,14 @@ package entity;
 
 import controller.Controller;
 import core.Position;
-import entity.motion.Motion;
+import entity.motion.MotionAndAction;
 import game.state.State;
 import gfx.AnimationManager;
 import gfx.SpriteLibrary;
 
 public class NPC extends MovingEntity {
 
-    public NPC(Controller controller, Motion motion, Position position, SpriteLibrary spriteLibrary, State state) {
+    public NPC(Controller controller, MotionAndAction motion, Position position, SpriteLibrary spriteLibrary, State state) {
         super(controller, motion, position, state);
         animationManager = new AnimationManager(spriteLibrary.getUnit("npc_1"));
         solid = true;

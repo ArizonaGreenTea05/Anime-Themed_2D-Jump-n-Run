@@ -2,7 +2,7 @@ package entity;
 
 import controller.NPCController;
 import core.Position;
-import entity.motion.NPCMotion;
+import entity.motion.NPCMaA;
 import game.state.State;
 
 public class ActionBlock extends Block{
@@ -24,7 +24,7 @@ public class ActionBlock extends Block{
             state.getGameObjects().add(
                     new NPC(
                             new NPCController(),
-                            new NPCMotion(2),
+                            new NPCMaA(2),
                             new Position(position.intX(), position.intY() - 66),
                             state.getSpriteLibrary(),
                             state

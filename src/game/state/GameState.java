@@ -5,8 +5,8 @@ import controller.PlayerController;
 import core.Position;
 import core.ScreenSize;
 import entity.*;
-import entity.motion.NPCMotion;
-import entity.motion.PlayerMotion;
+import entity.motion.NPCMaA;
+import entity.motion.PlayerMaA;
 import input.Input;
 import utils.FileLoader;
 
@@ -25,8 +25,8 @@ public class GameState extends State {
 
     private void initializeCharacters() {
 
-        Player player = new Player(new PlayerController(input), new PlayerMotion(2), new Position(ScreenSize.getLeftBorder(),ScreenSize.getGround()-64), spriteLibrary, this);
-        NPC npc = new NPC(new NPCController(), new NPCMotion(2), new Position(ScreenSize.getLeftBorder()+64,ScreenSize.getGround()-64), spriteLibrary, this);
+        Player player = new Player(new PlayerController(input), new PlayerMaA(2), new Position(ScreenSize.getLeftBorder(),ScreenSize.getGround()-64), spriteLibrary, this);
+        NPC npc = new NPC(new NPCController(), new NPCMaA(2), new Position(ScreenSize.getLeftBorder()+64,ScreenSize.getGround()-64), spriteLibrary, this);
 
         gameObjects.addAll(List.of(player, npc));
     }

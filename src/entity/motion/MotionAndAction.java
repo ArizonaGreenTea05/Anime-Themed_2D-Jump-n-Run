@@ -8,7 +8,7 @@ import game.state.State;
 
 import java.util.List;
 
-public abstract class Motion {
+public abstract class MotionAndAction {
 
     protected Vector2D vector;
     protected final double speed;
@@ -19,7 +19,7 @@ public abstract class Motion {
     protected List<GameObject> gameObjects;
     protected State state;
 
-    public Motion(double speed) {
+    public MotionAndAction(double speed) {
         this.speed = speed;
         this.vector = new Vector2D(0, 0);
     }
