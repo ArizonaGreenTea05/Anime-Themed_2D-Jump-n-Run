@@ -5,6 +5,7 @@ import game.state.State;
 
 import java.awt.*;
 import java.util.List;
+import java.util.function.Consumer;
 
 public class Renderer {
 
