@@ -4,9 +4,9 @@ import game.state.State;
 
 import java.awt.*;
 
-public class Grass extends Block{
+public class FinishBlock extends Block{
 
-    public Grass(int posX, int posY, int texture){
+    public FinishBlock(int posX, int posY, int texture){
         super(posX, posY, texture);
         solid = true;
     }
@@ -35,6 +35,6 @@ public class Grass extends Block{
 
     @Override
     public void doActionOnPosition(State state){
-
+        state.getGame().hasFinished();
     }
 }

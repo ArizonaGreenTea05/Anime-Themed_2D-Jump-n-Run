@@ -35,7 +35,12 @@ public class NPC extends MovingEntity {
     }
 
     @Override
-    public void doAction(State state) {
+    public void doActionOnContact(State state) {
+
+    }
+
+    @Override
+    public void doActionOnPosition(State state){
 
     }
 }

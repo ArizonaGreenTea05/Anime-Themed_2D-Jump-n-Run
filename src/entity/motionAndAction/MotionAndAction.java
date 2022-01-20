@@ -73,7 +73,7 @@ public abstract class MotionAndAction {
                 if (blockPosX < x + 61 && blockPosX > x - object.getSize().getWidth()+3) {
                     if (blockPosY < y - 56 && blockPosY > y - 66) {
                         if(actionCaused()) {
-                            object.doAction(state);
+                            object.doActionOnContact(state);
                         }
                         return false;
                     }

@@ -18,8 +18,14 @@ public class Game {
 
     public Game() {
         input = new Input();
-        gameDisplay = new GameDisplay(input, "Jump'n'Run - "+ ElseUtils.makeNameNice(Menu.getGameTheme()) +" styled");
-        state = new GameState(input);
+        gameDisplay = new GameDisplay(input, "Jump'n'Run - "+ ElseUtils.makeNameNice(Menu.getGameTheme()) +" styled", this);
+        state = new GameState(input, this);
+    }
+
+    public void hasFinished() {
+        GameLoop.setRunning(false);
+        new Menu();
+        gameDisplay.dispose();
     }
 
 

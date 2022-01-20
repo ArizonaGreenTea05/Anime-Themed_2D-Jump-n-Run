@@ -1,6 +1,7 @@
 package game.state;
 
 import entity.GameObject;
+import game.Game;
 import gfx.SpriteLibrary;
 import input.Input;
 
@@ -13,10 +14,12 @@ public abstract class State {
     protected List<GameObject> mapObjects;
     protected SpriteLibrary spriteLibrary;
     protected Input input;
+    private Game game;
     private boolean updatable = true;
 
-    public State(Input input){
+    public State(Input input, Game game){
         this.input = input;
+        this.game = game;
         gameObjects = new ArrayList<>();
         mapObjects = new ArrayList<>();
         spriteLibrary = new SpriteLibrary();
@@ -43,6 +46,10 @@ public abstract class State {
 
     public SpriteLibrary getSpriteLibrary(){
         return spriteLibrary;
+    }
+
+    public Game getGame(){
+        return game;
     }
 
     public void setUpdatable(boolean updatable){

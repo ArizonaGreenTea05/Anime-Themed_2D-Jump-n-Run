@@ -7,6 +7,7 @@ import core.ScreenSize;
 import entity.*;
 import entity.motionAndAction.NPCMaA;
 import entity.motionAndAction.PlayerMaA;
+import game.Game;
 import input.Input;
 import utils.FileLoader;
 
@@ -15,8 +16,8 @@ import java.util.List;
 public class GameState extends State {
 
 
-    public GameState(Input input) {
-        super(input);
+    public GameState(Input input, Game game) {
+        super(input, game);
 
         createMap();
 
@@ -66,19 +67,27 @@ public class GameState extends State {
 
                 if(sMap[i][j].equalsIgnoreCase("G")){
                     mapObjects.add(
-                        new Grass(
-                            (j-1)*64,
-                            ground-(i-1)*64,
-                            "grass"
-                        )
+                            new Grass(
+                                    (j-1)*64,
+                                    ground-(i-1)*64,
+                                    Block.GRASS_BLOCK
+                            )
                     );
                 } else if(sMap[i][j].equalsIgnoreCase("A")){
                     mapObjects.add(
-                        new ActionBlock(
-                            (j-1)*64,
-                            ground-(i-1)*64,
-                            "action"
-                        )
+                            new ActionBlock(
+                                    (j-1)*64,
+                                    ground-(i-1)*64,
+                                    Block.ACTION_BLOCK
+                            )
+                    );
+                } else if(sMap[i][j].equalsIgnoreCase("F")){
+                    mapObjects.add(
+                            new FinishBlock(
+                                    (j-1)*64,
+                                    ground-(i-1)*64,
+                                    Block.ACTION_BLOCK
+                            )
                     );
                 }
 

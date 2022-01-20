@@ -9,7 +9,7 @@ import java.awt.*;
 
 public class ActionBlock extends Block{
 
-    public ActionBlock(int posX, int posY, String texture){
+    public ActionBlock(int posX, int posY, int texture){
         super(posX, posY, texture);
         solid = true;
     }
@@ -32,7 +32,7 @@ public class ActionBlock extends Block{
     }
 
     @Override
-    public void doAction(State state){
+    public void doActionOnContact(State state){
         if(!actionUsed) {
             state.setUpdatable(false);
             state.getGameObjects().add(
@@ -47,5 +47,10 @@ public class ActionBlock extends Block{
             state.setUpdatable(true);
             actionUsed = true;
         }
+    }
+
+    @Override
+    public void doActionOnPosition(State state){
+
     }
 }

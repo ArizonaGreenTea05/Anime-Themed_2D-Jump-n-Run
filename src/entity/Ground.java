@@ -29,7 +29,12 @@ public class Ground extends CustomSizeBlock{
     }
 
     @Override
-    public void doAction(State state) {
+    public void doActionOnContact(State state) {
+
+    }
+
+    @Override
+    public void doActionOnPosition(State state){
 
     }
 }

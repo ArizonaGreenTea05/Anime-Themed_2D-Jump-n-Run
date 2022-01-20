@@ -1,5 +1,6 @@
 package display;
 
+import game.Game;
 import utils.FileLoader;
 import core.ScreenSize;
 import game.GameLoop;
@@ -16,6 +17,7 @@ public class GameDisplay extends JFrame {
 
     private Canvas canvas;
     private final Renderer renderer;
+    private Game game;
     private int width, height;
     private JButton bBack;
     private JButton bInfo;
@@ -40,7 +42,8 @@ public class GameDisplay extends JFrame {
     private static final JLabel lFailed = new JLabel("!you failed!");
     private final Color[] textColor = Menu.textColor;
 
-    public GameDisplay(Input input, String title) {
+    public GameDisplay(Input input, String title, Game game) {
+        this.game = game;
         this.width = ScreenSize.getWidth();
         this.height = ScreenSize.getHeight();
 
@@ -192,11 +195,8 @@ public class GameDisplay extends JFrame {
 
     private ActionListener getActionListenerBack() {
         return e-> {
-            GameLoop.setRunning(false);
-            getGraphics().dispose();
             score = 0;
-            new Menu();
-            dispose();
+            game.hasFinished();
         };
     }
 

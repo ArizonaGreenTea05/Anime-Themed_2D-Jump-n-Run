@@ -42,7 +42,9 @@ public abstract class GameObject {
         return size;
     }
 
-    public abstract void doAction(State state);
+    public abstract void doActionOnContact(State state);
+
+    public abstract void doActionOnPosition(State state);
 
 
     protected boolean shown(GameObject object) {

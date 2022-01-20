@@ -6,6 +6,8 @@ import core.Vector2D;
 import entity.GameObject;
 import game.state.State;
 
+import java.util.List;
+
 public class PlayerMaA extends MotionAndAction {
     private boolean falling;
     private boolean sitting;
@@ -91,6 +93,8 @@ public class PlayerMaA extends MotionAndAction {
             }
         }
 
+        doBlockPositionAction();
+
 
         vector = new Vector2D(deltaX, deltaY);
         vector.multiply(speed);
@@ -115,6 +119,20 @@ public class PlayerMaA extends MotionAndAction {
         }
     }
 
+    private void doBlockPositionAction() {
+        doBlockPositionAction(mapObjects);
+        doBlockPositionAction(gameObjects);
+    }
+
+    private void doBlockPositionAction(List<GameObject> objects) {
+
+        for (GameObject object : objects) {
+            int blockPosX = object.getPosition().intX();
+            if(x >= blockPosX && x <= blockPosX + 64) {
+                object.doActionOnPosition(state);
+            }
+        }
+    }
 
 
     @Override
