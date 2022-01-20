@@ -38,9 +38,7 @@ public class GameDisplay extends JFrame {
     private Rectangle scoreTextPos = new Rectangle();
 
     private static final JLabel lFailed = new JLabel("!you failed!");
-    private final Color[] labelColor = Menu.labelColor;
     private final Color[] textColor = Menu.textColor;
-    private final Color[] buttonColor = Menu.buttonColor;
 
     public GameDisplay(Input input, String title) {
         this.width = ScreenSize.getWidth();

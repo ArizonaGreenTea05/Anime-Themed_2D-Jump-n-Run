@@ -10,6 +10,7 @@ import utils.FileLoader;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
+import java.util.Objects;
 
 public class Menu {
 
@@ -103,7 +104,7 @@ public class Menu {
     }
 
     public Menu(){
-        this.colorSetting = Integer.parseInt(FileLoader.load("color.txt"));
+        this.colorSetting = Integer.parseInt(Objects.requireNonNull(FileLoader.load("color.txt")));
         this.width = ScreenSize.getWidth();
         this.height = ScreenSize.getHeight();
 
@@ -380,7 +381,6 @@ public class Menu {
 
     private ActionListener getActionListenerColor() {
         return e -> {
-            menu.dispose();
             if(colorSetting < buttonColor.length-1) {
                 colorSetting++;
             } else {
@@ -388,6 +388,7 @@ public class Menu {
             }
             FileLoader.save("" + colorSetting, "color.txt");
             new Menu();
+            menu.dispose();
         };
     }
 
