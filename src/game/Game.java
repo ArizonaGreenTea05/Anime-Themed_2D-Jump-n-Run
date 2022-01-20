@@ -41,4 +41,8 @@ public class Game {
         return state;
     }
 
+    public GameDisplay getGameDisplay(){
+        return gameDisplay;
+    }
+
 }

@@ -3,7 +3,6 @@ package display;
 import game.Game;
 import utils.FileLoader;
 import core.ScreenSize;
-import game.GameLoop;
 import game.state.State;
 import input.Input;
 import menu.Menu;
@@ -21,6 +20,7 @@ public class GameDisplay extends JFrame {
     private int width, height;
     private JButton bBack;
     private JButton bInfo;
+    private JLabel lFailedWindow = new JLabel();
     private static double score = 0;
     private static final JLabel lThemeText = new JLabel(" Theme:");
     private static final JLabel lTheme = Menu.getThemeLabel();
@@ -39,7 +39,7 @@ public class GameDisplay extends JFrame {
     private Rectangle scorePos = new Rectangle();
     private Rectangle scoreTextPos = new Rectangle();
 
-    private static final JLabel lFailed = new JLabel("!you failed!");
+    private static final JLabel lFailedText = new JLabel("!you failed!");
     private final Color[] textColor = Menu.textColor;
 
     public GameDisplay(Input input, String title, Game game) {
@@ -76,6 +76,8 @@ public class GameDisplay extends JFrame {
 
 
     private void addAll() {
+        lFailedWindow.add(lFailedText);
+        add(lFailedWindow);
         add(lFps);
         add(lTheme);
         lTheme.setVisible(false);
@@ -97,10 +99,8 @@ public class GameDisplay extends JFrame {
         add(lScoreLabelText);
         add(bBack);
         add(bInfo);
-        add(lFailed);
         add(canvas);
     }
-
     private void initializeCanvas() {
         canvas = new Canvas();
         canvas.setPreferredSize(new Dimension(width, height));
@@ -180,11 +180,15 @@ public class GameDisplay extends JFrame {
         lScore.setBackground(bgColor);
         scorePos.setBounds(ScreenSize.getWidth()-labelWidth2-20, 5 + 4*gap + 4*labelHeight , labelWidth2, labelHeight);
 
-        lFailed.setVisible(false);
-        lFailed.setBounds(0,0,width, height);
-        lFailed.setFont(new Font(Menu.textFont, Font.PLAIN, lFailed.getHeight()/4));
-        lFailed.setForeground(Color.RED);
-        lFailed.setHorizontalAlignment(SwingConstants.CENTER);
+        lFailedWindow.setVisible(false);
+        lFailedWindow.setBounds(50, 50, width-100, height-100);
+        lFailedWindow.setOpaque(true);
+        lFailedWindow.setBackground(Color.WHITE);
+
+        lFailedText.setBounds(0, lFailedWindow.getHeight()/4, lFailedWindow.getWidth(), lFailedWindow.getHeight()/2);
+        lFailedText.setFont(new Font("Consolas", Font.PLAIN, lFailedText.getHeight()/4));
+        lFailedText.setForeground(Color.RED);
+        lFailedText.setHorizontalAlignment(SwingConstants.CENTER);
 
         lFps.setBounds(10, bBack.getHeight()+15, lPlayerText.getHeight()*4, lPlayerText.getHeight());
         lFps.setFont(new Font(Menu.textFont, Font.PLAIN, lFps.getHeight()/3*2));
@@ -251,15 +255,15 @@ public class GameDisplay extends JFrame {
         } catch(IllegalStateException ignored) {}
     }
 
-    public static void showFailed(){
-        lFailed.setVisible(true);
+    public void showFailed(){
+        lFailedWindow.setVisible(true);
     }
 
-    public static void setFPS(String frames){
+    public void setFPS(String frames){
         lFps.setText(frames);
     }
 
-    public static void setScoreLabel(int i) {
+    public void setScoreLabel(int i) {
         score = i;
         lScore.setText(" " + score);
     }
