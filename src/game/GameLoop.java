@@ -4,7 +4,7 @@ import display.GameDisplay;
 
 public class GameLoop implements Runnable {
 
-    private int score = 10;
+    private int score = 100;
 
     private Game game;
     private GameDisplay gameDisplay;

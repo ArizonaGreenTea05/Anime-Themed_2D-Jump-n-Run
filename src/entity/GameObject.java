@@ -1,5 +1,6 @@
 package entity;
 
+import core.Direction;
 import core.Position;
 import core.ScreenSize;
 import core.Size;
@@ -21,6 +22,8 @@ public abstract class GameObject {
     public abstract void update();
 
     public abstract void render(Graphics graphics);
+
+    public abstract void subtractMaxLifes(int maxLifes);
 
     public abstract Image getSprite();
 
@@ -56,4 +59,15 @@ public abstract class GameObject {
         return x >= -object.getSize().getWidth() && x < width && y >= -object.getSize().getHeight() && y <= height;
     }
 
+    public abstract Direction getDirection();
+
+    public abstract void setLifes(int lifes);
+
+    public abstract void setMaxLifes(int maxLifes);
+
+    public abstract void addLifes(int lifes);
+
+    public abstract void addMaxLifes(int maxLifes);
+
+    public abstract void subtractLifes(int i);
 }

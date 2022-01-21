@@ -8,6 +8,8 @@ import game.state.State;
 
 import java.util.List;
 
+import static core.Direction.*;
+
 public abstract class MotionAndAction {
 
     protected Vector2D vector;
@@ -154,5 +156,20 @@ public abstract class MotionAndAction {
     public abstract boolean isSitting();
 
     public abstract boolean canCauseBlockAction();
+
+    protected void damage(State state){
+        List<GameObject> gameObjects = state.getGameObjects();
+        for (GameObject gameObject : gameObjects) {
+            int posX = gameObject.getPosition().intX();
+            int posY = gameObject.getPosition().intY();
+            if (posY < x +32 && posY > x -32) {
+                if (gameObject.getDirection() == R && posX < x + 92 && posX > x) {
+                    gameObject.subtractLifes(1);
+                } else if (gameObject.getDirection() == L && posX < x && posX > x - 92) {
+                    gameObject.subtractLifes(1);
+                }
+            }
+        }
+    }
 
 }

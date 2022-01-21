@@ -64,6 +64,7 @@ public class PlayerMaA extends MotionAndAction {
 
         if(isHitting()) {
             sitting = false;
+            damage(state);
         } else {
 
             if (controller.isRequestingDown()) {

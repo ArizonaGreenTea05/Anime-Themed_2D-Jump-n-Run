@@ -55,28 +55,39 @@ public abstract class MovingEntity extends GameObject {
         }
     }
 
+    @Override
+    public Direction getDirection(){
+        return direction;
+    }
+
+    @Override
     public void setLifes(int lifes){
-
+        this.lifes = lifes;
     }
 
+    @Override
     public void setMaxLifes(int maxLifes){
-
+        this.maxLifes = maxLifes;
     }
 
+    @Override
     public void addLifes(int lifes){
-
+        this.lifes += lifes;
     }
 
+    @Override
     public void addMaxLifes(int maxLifes){
-
+        this.maxLifes += maxLifes;
     }
 
+    @Override
     public void subtractLifes(int lifes){
-
+        this.lifes -= lifes;
     }
 
+    @Override
     public void subtractMaxLifes(int maxLifes){
-
+        this.maxLifes -= maxLifes;
     }
 
     @Override

@@ -1,5 +1,6 @@
 package entity;
 
+import core.Direction;
 import entity.motionAndAction.MotionAndAction;
 import gfx.ImageUtils;
 
@@ -33,4 +34,38 @@ public abstract class CustomSizeBlock extends GameObject {
         return null;
     }
 
+    @Override
+    public Direction getDirection(){
+        return null;
+    }
+
+    @Override
+    public void setLifes(int lifes){
+
+    }
+
+    @Override
+    public void setMaxLifes(int maxLifes){
+
+    }
+
+    @Override
+    public void addLifes(int lifes){
+
+    }
+
+    @Override
+    public void addMaxLifes(int maxLifes){
+
+    }
+
+    @Override
+    public void subtractLifes(int i){
+
+    }
+
+    @Override
+    public void subtractMaxLifes(int i){
+
+    }
 }
