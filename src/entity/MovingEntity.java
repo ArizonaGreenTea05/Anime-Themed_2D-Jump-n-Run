@@ -14,6 +14,8 @@ public abstract class MovingEntity extends GameObject {
 
     protected Controller controller;
     protected AnimationManager animationManager;
+    protected int lifes;
+    protected int maxLifes;
     private MotionAndAction motion;
     private Direction direction;
     private State state;
@@ -51,6 +53,30 @@ public abstract class MovingEntity extends GameObject {
         if(motion.isMoving()){
             this.direction = Direction.fromMotion(motion);
         }
+    }
+
+    public void setLifes(int lifes){
+
+    }
+
+    public void setMaxLifes(int maxLifes){
+
+    }
+
+    public void addLifes(int lifes){
+
+    }
+
+    public void addMaxLifes(int maxLifes){
+
+    }
+
+    public void subtractLifes(int lifes){
+
+    }
+
+    public void subtractMaxLifes(int maxLifes){
+
     }
 
     @Override

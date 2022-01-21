@@ -14,10 +14,12 @@ public class Player extends MovingEntity {
 
     private static Controller controller;
 
-    public Player(Controller controller, MotionAndAction motion, Position position, SpriteLibrary spriteLibrary, State state) {
+    public Player(Controller controller, MotionAndAction motion, Position position, SpriteLibrary spriteLibrary, int maxLifes, State state) {
         super(controller, motion, position, state);
         animationManager = new AnimationManager(spriteLibrary.getUnit(Menu.getPlayerName()));
         solid = true;
+        this.maxLifes = maxLifes;
+        lifes = maxLifes;
         this.controller = controller;
     }
 

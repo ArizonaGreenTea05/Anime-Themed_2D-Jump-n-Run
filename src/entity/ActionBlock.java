@@ -41,6 +41,7 @@ public class ActionBlock extends Block{
                             new NPCMaA(2),
                             new Position(position.intX(), position.intY() - 66),
                             state.getSpriteLibrary(),
+                            3,
                             state
                     )
             );
