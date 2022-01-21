@@ -162,7 +162,7 @@ public abstract class MotionAndAction {
         for (GameObject gameObject : gameObjects) {
             int posX = gameObject.getPosition().intX();
             int posY = gameObject.getPosition().intY();
-            if (posY < x +32 && posY > x -32) {
+            if (posY < y + 32 && posY > y - 32) {
                 if (gameObject.getDirection() == R && posX < x + 92 && posX > x) {
                     gameObject.subtractLifes(1);
                 } else if (gameObject.getDirection() == L && posX < x && posX > x - 92) {
