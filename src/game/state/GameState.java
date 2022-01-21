@@ -32,7 +32,7 @@ public class GameState extends State {
                 new Position(ScreenSize.getLeftBorder(),
                 ScreenSize.getGround()-64),
                 spriteLibrary,
-                3,
+                5,
                 this);
 
         NPC npc = new NPC(
@@ -41,7 +41,7 @@ public class GameState extends State {
                 new Position(ScreenSize.getLeftBorder()+64,
                 ScreenSize.getGround()-64),
                 spriteLibrary,
-                3,
+                5,
                 this);
 
         gameObjects.addAll(List.of(player, npc));

@@ -18,6 +18,7 @@ public class PlayerMaA extends MotionAndAction {
 
     public PlayerMaA(double speed) {
         super(speed);
+        canHit = true;
     }
 
     @Override

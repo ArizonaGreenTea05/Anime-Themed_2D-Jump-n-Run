@@ -83,6 +83,7 @@ public abstract class MovingEntity extends GameObject {
     @Override
     public void subtractLifes(int lifes){
         this.lifes -= lifes;
+        System.out.println(this.lifes);
     }
 
     @Override

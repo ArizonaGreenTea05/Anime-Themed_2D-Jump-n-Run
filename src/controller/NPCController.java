@@ -1,5 +1,7 @@
 package controller;
 
+import java.awt.event.KeyEvent;
+
 public class NPCController implements Controller {
 
     public NPCController() {
@@ -27,6 +29,11 @@ public class NPCController implements Controller {
     @Override
     public boolean isRequestingHit(){
         return false;
+    }
+
+    @Override
+    public boolean isNotRequestingHit() {
+        return !isRequestingHit();
     }
 
 }

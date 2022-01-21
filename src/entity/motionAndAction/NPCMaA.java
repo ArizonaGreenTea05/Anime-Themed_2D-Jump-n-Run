@@ -15,6 +15,7 @@ public class NPCMaA extends MotionAndAction {
 
     public NPCMaA(double speed) {
         super(speed);
+        canHit = true;
     }
 
     @Override
