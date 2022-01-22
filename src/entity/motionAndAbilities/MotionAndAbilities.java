@@ -9,7 +9,6 @@ import game.state.State;
 import java.util.List;
 
 import static core.Direction.*;
-import static java.lang.Thread.sleep;
 
 public abstract class MotionAndAbilities {
 
