@@ -2,7 +2,7 @@ package entity;
 
 import controller.NPCController;
 import core.Position;
-import entity.motionAndAction.NPCMaA;
+import entity.motionAndAbilities.NPCMaA;
 import game.state.State;
 
 import java.awt.*;

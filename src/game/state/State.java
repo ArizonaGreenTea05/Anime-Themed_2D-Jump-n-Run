@@ -1,6 +1,7 @@
 package game.state;
 
 import entity.GameObject;
+import entity.MovingEntity;
 import game.Game;
 import gfx.SpriteLibrary;
 import input.Input;
@@ -55,4 +56,10 @@ public abstract class State {
     public void setUpdatable(boolean updatable){
         this.updatable = updatable;
     }
+
+    public boolean getUpdatable(){
+        return updatable;
+    }
+
+    public abstract MovingEntity getPlayer();
 }

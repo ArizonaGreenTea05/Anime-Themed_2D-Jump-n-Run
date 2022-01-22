@@ -27,17 +27,21 @@ public class GameDisplay extends JFrame {
     private static final JLabel lPlayerText = new JLabel(" Character:");
     private static final JLabel lPlayer = Menu.getPlayerLabel();
     private static final JLabel lMapText = new JLabel(" Map:");
-    private static final JLabel lMapLabel = Menu.getMapLabel();
+    private static final JLabel lMap = Menu.getMapLabel();
     private static final JLabel lHighScoreText = new JLabel(" Highscore:");
     private static final JLabel lHighScore = Menu.getHighscore();
-    private static final JLabel lScoreLabelText = new JLabel(" Score:");
+    private static final JLabel lScoreText = new JLabel(" Score:");
     private static JLabel lScore = Menu.getScore();
+    private static final JLabel lLifesText = new JLabel(" Lifes:");
+    private static JLabel lLifes = new JLabel(" 5/5");
     private static JLabel lFps = new JLabel();
 
     private Color bgColor = Menu.getBGColor();
 
     private Rectangle scorePos = new Rectangle();
     private Rectangle scoreTextPos = new Rectangle();
+    private Rectangle lifesPos = new Rectangle();
+    private Rectangle lifesTextPos = new Rectangle();
 
     private static final JLabel lFailedText = new JLabel("!you failed!");
     private final Color[] textColor = Menu.textColor;
@@ -87,8 +91,8 @@ public class GameDisplay extends JFrame {
         lPlayer.setVisible(false);
         add(lPlayerText);
         lPlayerText.setVisible(false);
-        add(lMapLabel);
-        lMapLabel.setVisible(false);
+        add(lMap);
+        lMap.setVisible(false);
         add(lMapText);
         lMapText.setVisible(false);
         add(lHighScore);
@@ -96,7 +100,9 @@ public class GameDisplay extends JFrame {
         add(lHighScoreText);
         lHighScoreText.setVisible(false);
         add(lScore);
-        add(lScoreLabelText);
+        add(lScoreText);
+        add(lLifes);
+        add(lLifesText);
         add(bBack);
         add(bInfo);
         add(canvas);
@@ -157,8 +163,8 @@ public class GameDisplay extends JFrame {
         lMapText.setForeground(textColor[Menu.colorSetting]);
         lMapText.setFont(lTheme.getFont());
 
-        lMapLabel.setBounds(ScreenSize.getWidth()-labelWidth2-20, 5 + 2*gap +2*labelHeight , labelWidth2, labelHeight);
-        lMapLabel.setBackground(bgColor);
+        lMap.setBounds(ScreenSize.getWidth()-labelWidth2-20, 5 + 2*gap +2*labelHeight , labelWidth2, labelHeight);
+        lMap.setBackground(bgColor);
 
         lHighScoreText.setBounds(ScreenSize.getWidth()-labelWidth1-labelWidth2-22,5 + 3*gap + 3*labelHeight , labelWidth1, labelHeight);
         lHighScoreText.setOpaque(true);
@@ -169,16 +175,29 @@ public class GameDisplay extends JFrame {
         lHighScore.setBounds(ScreenSize.getWidth()-labelWidth2-20, 5 + 3*gap + 3*labelHeight , labelWidth2, labelHeight);
         lHighScore.setBackground(bgColor);
 
-        lScoreLabelText.setBounds(lThemeText.getBounds());
-        lScoreLabelText.setOpaque(true);
-        lScoreLabelText.setBackground(bgColor);
-        lScoreLabelText.setForeground(textColor[Menu.colorSetting]);
-        lScoreLabelText.setFont(lTheme.getFont());
+        lScoreText.setBounds(lThemeText.getBounds());
+        lScoreText.setOpaque(true);
+        lScoreText.setBackground(bgColor);
+        lScoreText.setForeground(textColor[Menu.colorSetting]);
+        lScoreText.setFont(lTheme.getFont());
         scoreTextPos.setBounds(ScreenSize.getWidth()-labelWidth1-labelWidth2-22,5 + 4*gap + 4*labelHeight , labelWidth1, labelHeight);
 
         lScore.setBounds(lTheme.getBounds());
         lScore.setBackground(bgColor);
         scorePos.setBounds(ScreenSize.getWidth()-labelWidth2-20, 5 + 4*gap + 4*labelHeight , labelWidth2, labelHeight);
+
+        lLifesText.setBounds(lPlayerText.getBounds());
+        lLifesText.setOpaque(true);
+        lLifesText.setBackground(bgColor);
+        lLifesText.setForeground(textColor[Menu.colorSetting]);
+        lLifesText.setFont(lTheme.getFont());
+        lifesTextPos.setBounds(ScreenSize.getWidth()-labelWidth1-labelWidth2-22,5 + 5*gap + 5*labelHeight , labelWidth1, labelHeight);
+
+        lLifes.setBounds(lPlayer.getBounds());
+        lLifes.setOpaque(true);
+        lLifes.setBackground(bgColor);
+        lLifes.setFont(lScore.getFont());
+        lifesPos.setBounds(ScreenSize.getWidth()-labelWidth2-20, 5 + 5*gap + 5*labelHeight , labelWidth2, labelHeight);
 
         lFailedWindow.setVisible(false);
         lFailedWindow.setBounds(50, 50, width-100, height-100);
@@ -211,24 +230,28 @@ public class GameDisplay extends JFrame {
                 lThemeText.setVisible(false);
                 lPlayer.setVisible(false);
                 lPlayerText.setVisible(false);
-                lMapLabel.setVisible(false);
+                lMap.setVisible(false);
                 lMapText.setVisible(false);
                 lHighScore.setVisible(false);
                 lHighScoreText.setVisible(false);
                 lScore.setBounds(lTheme.getBounds());
-                lScoreLabelText.setBounds(lThemeText.getBounds());
+                lScoreText.setBounds(lThemeText.getBounds());
+                lLifes.setBounds(lPlayer.getBounds());
+                lLifesText.setBounds(lPlayerText.getBounds());
                 bInfo.setText("show info");
             } else {
                 lTheme.setVisible(true);
                 lThemeText.setVisible(true);
                 lPlayer.setVisible(true);
                 lPlayerText.setVisible(true);
-                lMapLabel.setVisible(true);
+                lMap.setVisible(true);
                 lMapText.setVisible(true);
                 lHighScore.setVisible(true);
                 lHighScoreText.setVisible(true);
                 lScore.setBounds(scorePos);
-                lScoreLabelText.setBounds(scoreTextPos);
+                lScoreText.setBounds(scoreTextPos);
+                lLifes.setBounds(lifesPos);
+                lLifesText.setBounds(lifesTextPos);
                 bInfo.setText("hide info");
             }
         };
@@ -261,6 +284,10 @@ public class GameDisplay extends JFrame {
 
     public void setFPS(String frames){
         lFps.setText(frames);
+    }
+
+    public static void setLifes(String lifes){
+        lLifes.setText(" " + lifes);
     }
 
     public void setScoreLabel(int i) {

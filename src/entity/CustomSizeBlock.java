@@ -1,7 +1,7 @@
 package entity;
 
 import core.Direction;
-import entity.motionAndAction.MotionAndAction;
+import entity.motionAndAbilities.MotionAndAbilities;
 import gfx.ImageUtils;
 
 import java.awt.*;
@@ -30,7 +30,7 @@ public abstract class CustomSizeBlock extends GameObject {
     }
 
     @Override
-    public MotionAndAction getMotion() {
+    public MotionAndAbilities getMotionAndAbilities() {
         return null;
     }
 

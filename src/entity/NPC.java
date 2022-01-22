@@ -2,7 +2,7 @@ package entity;
 
 import controller.Controller;
 import core.Position;
-import entity.motionAndAction.MotionAndAction;
+import entity.motionAndAbilities.MotionAndAbilities;
 import game.state.State;
 import gfx.AnimationManager;
 import gfx.SpriteLibrary;
@@ -11,8 +11,8 @@ import java.awt.*;
 
 public class NPC extends MovingEntity {
 
-    public NPC(Controller controller, MotionAndAction motion, Position position, SpriteLibrary spriteLibrary, int maxLifes, State state) {
-        super(controller, motion, position, state);
+    public NPC(Controller controller, MotionAndAbilities mAndA, Position position, SpriteLibrary spriteLibrary, int maxLifes, State state) {
+        super(controller, mAndA, position, state);
         animationManager = new AnimationManager(spriteLibrary.getUnit("npc_1"));
         solid = true;
         this.maxLifes = maxLifes;
@@ -44,5 +44,38 @@ public class NPC extends MovingEntity {
     @Override
     public void doActionOnPosition(State state){
 
+    }
+
+
+    @Override
+    public void setLifes(int lifes){
+        this.lifes = lifes;
+    }
+
+    @Override
+    public void setMaxLifes(int maxLifes){
+        this.maxLifes = maxLifes;
+    }
+
+    @Override
+    public void addLifes(int lifes){
+        this.lifes += lifes;
+    }
+
+    @Override
+    public void addMaxLifes(int maxLifes){
+        this.maxLifes += maxLifes;
+    }
+
+    @Override
+    public void subtractLifes(int lifes){
+        this.lifes -= lifes;
+        System.out.println(this.lifes);
+        testIfAlive();
+    }
+
+    @Override
+    public void subtractMaxLifes(int maxLifes){
+        this.maxLifes -= maxLifes;
     }
 }

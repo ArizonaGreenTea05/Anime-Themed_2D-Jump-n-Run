@@ -5,8 +5,8 @@ import controller.PlayerController;
 import core.Position;
 import core.ScreenSize;
 import entity.*;
-import entity.motionAndAction.NPCMaA;
-import entity.motionAndAction.PlayerMaA;
+import entity.motionAndAbilities.NPCMaA;
+import entity.motionAndAbilities.PlayerMaA;
 import game.Game;
 import input.Input;
 import utils.FileLoader;
@@ -14,6 +14,8 @@ import utils.FileLoader;
 import java.util.List;
 
 public class GameState extends State {
+
+    private Player player;
 
 
     public GameState(Input input, Game game) {
@@ -34,6 +36,7 @@ public class GameState extends State {
                 spriteLibrary,
                 5,
                 this);
+        this.player = player;
 
         NPC npc = new NPC(
                 new NPCController(),
@@ -109,5 +112,9 @@ public class GameState extends State {
             }
         }
 
+    }
+
+    public MovingEntity getPlayer() {
+        return player;
     }
 }

@@ -2,7 +2,8 @@ package entity;
 
 import controller.Controller;
 import core.Direction;
-import entity.motionAndAction.MotionAndAction;
+import display.GameDisplay;
+import entity.motionAndAbilities.MotionAndAbilities;
 import core.Position;
 import core.ScreenSize;
 import game.state.State;
@@ -16,21 +17,21 @@ public abstract class MovingEntity extends GameObject {
     protected AnimationManager animationManager;
     protected int lifes;
     protected int maxLifes;
-    private MotionAndAction motion;
+    private MotionAndAbilities mAndA;
     private Direction direction;
     private State state;
 
-    public MovingEntity(Controller controller, MotionAndAction motion, Position position, State state) {
+    public MovingEntity(Controller controller, MotionAndAbilities mAndA, Position position, State state) {
         super(64,64, position.intX(), position.intY());
         this.controller = controller;
-        this.motion = motion;
+        this.mAndA = mAndA;
         this.direction = Direction.R;
         this.state = state;
     }
     @Override
     public void update() {
-        motion.update(controller, position, state);
-        position.apply(motion);
+        mAndA.update(controller, position, state);
+        position.apply(mAndA);
         manageDirection();
         decideAnimation(position);
         animationManager.update(direction);
@@ -40,9 +41,9 @@ public abstract class MovingEntity extends GameObject {
 
         double x = position.getX();
 
-        if(motion.isHitting()){
+        if(mAndA.isHitting()){
             animationManager.playAnimation("hit");
-        } else if(motion.isMoving() || (controller.isRequestingRight() && x >= ScreenSize.getRightBorder())|| (controller.isRequestingLeft() && x <= ScreenSize.getLeftBorder())){
+        } else if(mAndA.isMoving() || (controller.isRequestingRight() && x >= ScreenSize.getRightBorder())|| (controller.isRequestingLeft() && x <= ScreenSize.getLeftBorder())){
             animationManager.playAnimation("walk");
         } else {
             animationManager.playAnimation("stand");
@@ -50,8 +51,16 @@ public abstract class MovingEntity extends GameObject {
     }
 
     protected void manageDirection(){
-        if(motion.isMoving()){
-            this.direction = Direction.fromMotion(motion);
+        if(mAndA.isMoving()){
+            this.direction = Direction.fromMotion(mAndA);
+        }
+    }
+
+    protected void testIfAlive(){
+        if(lifes == 0){
+            state.setUpdatable(false);
+            state.getGameObjects().remove(this);
+            state.setUpdatable(true);
         }
     }
 
@@ -61,43 +70,12 @@ public abstract class MovingEntity extends GameObject {
     }
 
     @Override
-    public void setLifes(int lifes){
-        this.lifes = lifes;
-    }
-
-    @Override
-    public void setMaxLifes(int maxLifes){
-        this.maxLifes = maxLifes;
-    }
-
-    @Override
-    public void addLifes(int lifes){
-        this.lifes += lifes;
-    }
-
-    @Override
-    public void addMaxLifes(int maxLifes){
-        this.maxLifes += maxLifes;
-    }
-
-    @Override
-    public void subtractLifes(int lifes){
-        this.lifes -= lifes;
-        System.out.println(this.lifes);
-    }
-
-    @Override
-    public void subtractMaxLifes(int maxLifes){
-        this.maxLifes -= maxLifes;
-    }
-
-    @Override
     public Image getSprite() {
         return animationManager.getSprite();
     }
 
     @Override
-    public MotionAndAction getMotion() {
-        return motion;
+    public MotionAndAbilities getMotionAndAbilities() {
+        return mAndA;
     }
 }

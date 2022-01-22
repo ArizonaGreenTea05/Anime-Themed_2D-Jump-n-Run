@@ -4,7 +4,7 @@ import core.Direction;
 import core.Position;
 import core.ScreenSize;
 import core.Size;
-import entity.motionAndAction.MotionAndAction;
+import entity.motionAndAbilities.MotionAndAbilities;
 import game.state.State;
 
 import java.awt.*;
@@ -27,7 +27,7 @@ public abstract class GameObject {
 
     public abstract Image getSprite();
 
-    public abstract MotionAndAction getMotion();
+    public abstract MotionAndAbilities getMotionAndAbilities();
 
     public void setPosition(Position position) {
         this.position = position;
