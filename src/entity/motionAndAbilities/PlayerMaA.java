@@ -63,6 +63,14 @@ public class PlayerMaA extends MotionAndAbilities {
             sitting = false;
         }
 
+        if(controller.isRequestingSprint()) {
+            sprint(true);
+        }
+
+        if(!controller.isRequestingSprint()) {
+            sprint(false);
+        }
+
         if(controller.isNotRequestingHit()) {
             canHit = true;
         }
@@ -103,13 +111,13 @@ public class PlayerMaA extends MotionAndAbilities {
 
 
         vector = new Vector2D(deltaX, deltaY);
-        vector.multiply(speed);
+        vector.multiply(speed, normalSpeed);
 
     }
 
     private void moveMap(Vector2D mapVector) {
 
-        mapVector.multiply(speed);
+        mapVector.multiply(speed, normalSpeed);
 
         for (GameObject mapObject : mapObjects) {
             int blockPosX = mapObject.getPosition().intX();

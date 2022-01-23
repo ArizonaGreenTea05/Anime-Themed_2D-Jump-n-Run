@@ -33,6 +33,11 @@ public class PlayerController implements Controller {
     }
 
     @Override
+    public boolean isRequestingSprint(){
+        return input.isPressed(KeyEvent.VK_CAPS_LOCK) || input.isPressed(KeyEvent.VK_CONTROL);
+    }
+
+    @Override
     public boolean isRequestingHit() {
         return input.isPressed(KeyEvent.VK_J);
     }
@@ -40,5 +45,10 @@ public class PlayerController implements Controller {
     @Override
     public boolean isNotRequestingHit() {
         return !isRequestingHit();
+    }
+
+    @Override
+    public boolean isRequestingESC(){
+        return input.isPressed(KeyEvent.VK_ESCAPE);
     }
 }

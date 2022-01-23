@@ -5,6 +5,8 @@ public interface Controller {
     boolean isRequestingDown();
     boolean isRequestingLeft();
     boolean isRequestingRight();
+    boolean isRequestingSprint();
     boolean isRequestingHit();
     boolean isNotRequestingHit();
+    boolean isRequestingESC();
 }

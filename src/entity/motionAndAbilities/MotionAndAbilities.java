@@ -13,7 +13,8 @@ import static core.Direction.*;
 public abstract class MotionAndAbilities {
 
     protected Vector2D vector;
-    protected final double speed;
+    protected double speed;
+    protected final double normalSpeed;
     protected Position position;
     protected double x;
     protected double y;
@@ -25,6 +26,7 @@ public abstract class MotionAndAbilities {
 
     public MotionAndAbilities(double speed) {
         this.speed = speed;
+        this.normalSpeed = speed;
         this.vector = new Vector2D(0, 0);
     }
 
@@ -144,6 +146,14 @@ public abstract class MotionAndAbilities {
         double d = -0.01 * x*x + 2.9;
         if(d < 5 && d >= 0 ) return d;
         return 4;
+    }
+
+    protected void sprint(boolean sprint) {
+        if(sprint && speed == normalSpeed) {
+            speed++;
+        } else if(!sprint){
+            speed = normalSpeed;
+        }
     }
 
 

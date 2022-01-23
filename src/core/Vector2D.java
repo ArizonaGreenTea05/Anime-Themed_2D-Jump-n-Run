@@ -14,15 +14,9 @@ public class Vector2D {
         return Math.sqrt(x * x + y * y);
     }
 
-    public void normalize() {
-        double length = length();
-        x = x == 0 ? 0 : x/length;
-        y = y == 0 ? 0 : y/length;
-    }
-
-    public void multiply(double speed) {
+    public void multiply(double speed, double normalSpeed) {
         x *= speed;
-        y *= speed;
+        y *= normalSpeed;
     }
 
     public double getX() {

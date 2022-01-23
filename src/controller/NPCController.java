@@ -27,6 +27,11 @@ public class NPCController implements Controller {
     }
 
     @Override
+    public boolean isRequestingSprint(){
+        return false;
+    }
+
+    @Override
     public boolean isRequestingHit(){
         return false;
     }
@@ -34,6 +39,11 @@ public class NPCController implements Controller {
     @Override
     public boolean isNotRequestingHit() {
         return !isRequestingHit();
+    }
+
+    @Override
+    public boolean isRequestingESC(){
+        return false;
     }
 
 }

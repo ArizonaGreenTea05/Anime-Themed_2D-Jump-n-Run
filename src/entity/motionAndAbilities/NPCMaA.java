@@ -56,6 +56,14 @@ public class NPCMaA extends MotionAndAbilities {
             sitting = false;
         }
 
+        if(controller.isRequestingSprint()) {
+            sprint(true);
+        }
+
+        if(!controller.isRequestingSprint()) {
+            sprint(false);
+        }
+
         if(controller.isNotRequestingHit()) {
             canHit = true;
         }
@@ -84,7 +92,7 @@ public class NPCMaA extends MotionAndAbilities {
 
 
         vector = new Vector2D(deltaX, deltaY);
-        vector.multiply(speed);
+        vector.multiply(speed, normalSpeed);
 
     }
 
