@@ -86,24 +86,30 @@ public class GameState extends State {
                 if(sMap[i][j].equalsIgnoreCase("G")){
                     mapObjects.add(
                             new Grass(
-                                    (j-1)*64,
-                                    ground-(i-1)*64,
+                                    new Position(
+                                            (j-1)*64,
+                                            ground-(i-1)*64
+                                    ),
                                     Block.GRASS_BLOCK
                             )
                     );
                 } else if(sMap[i][j].equalsIgnoreCase("A")){
                     mapObjects.add(
                             new ActionBlock(
-                                    (j-1)*64,
-                                    ground-(i-1)*64,
+                                    new Position(
+                                            (j-1)*64,
+                                            ground-(i-1)*64
+                                    ),
                                     Block.ACTION_BLOCK
                             )
                     );
                 } else if(sMap[i][j].equalsIgnoreCase("F")){
                     mapObjects.add(
                             new FinishBlock(
-                                    (j-1)*64,
-                                    ground-(i-1)*64,
+                                    new Position(
+                                            (j-1)*64,
+                                            ground-(i-1)*64
+                                    ),
                                     Block.ACTION_BLOCK
                             )
                     );

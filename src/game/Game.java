@@ -9,6 +9,8 @@ import utils.ElseUtils;
 
 public class Game {
 
+    private GameLoop gameLoop;
+
     public static int SPRITE_SIZE = 64;
 
     private final GameDisplay gameDisplay;
@@ -45,4 +47,11 @@ public class Game {
         return gameDisplay;
     }
 
+    public GameLoop getGameLoop(){
+        return gameLoop;
+    }
+
+    public void setGameLoop(GameLoop gameLoop) {
+        this.gameLoop = gameLoop;
+    }
 }

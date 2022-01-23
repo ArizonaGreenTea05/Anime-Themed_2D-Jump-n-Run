@@ -5,11 +5,11 @@ import game.state.State;
 
 import java.awt.*;
 
-public class FinishBlock extends Block{
+public class Coin extends StaticEntity{
 
-    public FinishBlock(Position position, int texture){
+    public Coin(Position position, int texture){
         super(position, texture);
-        solid = true;
+        solid = false;
     }
 
     @Override
@@ -36,11 +36,14 @@ public class FinishBlock extends Block{
 
     @Override
     public void doActionOnPositionX(State state){
-        state.getGame().hasFinished();
+
     }
 
     @Override
     public void doActionOnSamePosition(State state){
-
+        state.setUpdatable(false);
+        state.getGameObjects().remove(this);
+        state.setUpdatable(true);
+        state.getGame().getGameLoop().addScore(5);
     }
 }

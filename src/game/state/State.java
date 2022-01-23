@@ -1,5 +1,6 @@
 package game.state;
 
+import display.GameDisplay;
 import entity.GameObject;
 import entity.MovingEntity;
 import game.Game;
@@ -62,4 +63,5 @@ public abstract class State {
     }
 
     public abstract MovingEntity getPlayer();
+
 }

@@ -1,26 +1,22 @@
 package entity;
 
 import core.Direction;
-import core.Position;
 import entity.motionAndAbilities.MotionAndAbilities;
+import core.Position;
 import gfx.ImageUtils;
 
 import java.awt.*;
 
-public abstract class Block extends GameObject {
+public abstract class StaticEntity extends GameObject {
 
-    public static final int GRASS_BLOCK = 0;
-    public static final int ACTION_BLOCK = 1;
+    public static final int COIN = 0;
 
-    private String block;
-    protected boolean actionUsed = false;
+    private String texture;
 
-    public Block(Position position, int texture) {
-        super(64, 64, position.intX(), position.intY());
-        if(texture == GRASS_BLOCK) {
-            this.block = "grass";
-        } else if(texture == ACTION_BLOCK) {
-            this.block = "action";
+    public StaticEntity(Position position, int texture) {
+        super(64,64, position.intX(), position.intY());
+        if(texture == COIN) {
+            this.texture = "coin";
         }
     }
 
@@ -31,7 +27,7 @@ public abstract class Block extends GameObject {
 
     @Override
     public Image getSprite() {
-        return ImageUtils.loadImage("/game/themes/" + menu.Menu.getGameTheme() + "/blocks/" + block + ".png");
+        return ImageUtils.loadImage("/game/themes/" + menu.Menu.getGameTheme() + "/blocks/" + texture + ".png");
     }
 
     @Override
@@ -74,6 +70,4 @@ public abstract class Block extends GameObject {
     public void subtractMaxLifes(int i){
 
     }
-
-
 }

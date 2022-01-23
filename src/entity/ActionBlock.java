@@ -9,8 +9,8 @@ import java.awt.*;
 
 public class ActionBlock extends Block{
 
-    public ActionBlock(int posX, int posY, int texture){
-        super(posX, posY, texture);
+    public ActionBlock(Position position, int texture){
+        super(position, texture);
         solid = true;
     }
 
@@ -36,13 +36,9 @@ public class ActionBlock extends Block{
         if(!actionUsed) {
             state.setUpdatable(false);
             state.getGameObjects().add(
-                    new NPC(
-                            new NPCController(),
-                            new NPCMaA(2),
+                    new Coin(
                             new Position(position.intX(), position.intY() - 66),
-                            state.getSpriteLibrary(),
-                            3,
-                            state
+                            StaticEntity.COIN
                     )
             );
             state.setUpdatable(true);
@@ -51,7 +47,12 @@ public class ActionBlock extends Block{
     }
 
     @Override
-    public void doActionOnPosition(State state){
+    public void doActionOnPositionX(State state){
+
+    }
+
+    @Override
+    public void doActionOnSamePosition(State state){
 
     }
 }

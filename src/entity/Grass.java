@@ -1,13 +1,14 @@
 package entity;
 
+import core.Position;
 import game.state.State;
 
 import java.awt.*;
 
 public class Grass extends Block{
 
-    public Grass(int posX, int posY, int texture){
-        super(posX, posY, texture);
+    public Grass(Position position, int texture){
+        super(position, texture);
         solid = true;
     }
 
@@ -34,7 +35,12 @@ public class Grass extends Block{
     }
 
     @Override
-    public void doActionOnPosition(State state){
+    public void doActionOnPositionX(State state){
+
+    }
+
+    @Override
+    public void doActionOnSamePosition(State state){
 
     }
 }

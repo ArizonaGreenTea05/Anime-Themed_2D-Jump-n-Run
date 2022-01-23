@@ -47,7 +47,9 @@ public abstract class GameObject {
 
     public abstract void doActionOnContact(State state);
 
-    public abstract void doActionOnPosition(State state);
+    public abstract void doActionOnSamePosition(State state);
+
+    public abstract void doActionOnPositionX(State state);
 
 
     protected boolean shown(GameObject object) {

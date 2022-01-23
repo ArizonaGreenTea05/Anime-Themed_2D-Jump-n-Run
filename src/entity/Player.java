@@ -47,7 +47,7 @@ public class Player extends MovingEntity {
     }
 
     @Override
-    public void doActionOnPosition(State state){
+    public void doActionOnPositionX(State state){
 
     }
 
@@ -95,6 +95,11 @@ public class Player extends MovingEntity {
 
     private void setLifesLabelText(){
         GameDisplay.setLifes(this.lifes + "/" + this.maxLifes);
+    }
+
+    @Override
+    public void doActionOnSamePosition(State state){
+
     }
 
 }

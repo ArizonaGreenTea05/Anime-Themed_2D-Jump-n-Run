@@ -398,7 +398,8 @@ public class Menu {
 
     private ActionListener getActionListenerStart() {
         return e -> {
-            new Thread(new GameLoop(new Game())).start();
+            GameLoop gameLoop = new GameLoop(new Game());
+            new Thread(gameLoop).start();
             menu.dispose();
         };
     }

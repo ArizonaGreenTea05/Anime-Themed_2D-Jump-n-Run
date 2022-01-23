@@ -19,6 +19,7 @@ public class GameLoop implements Runnable {
     public GameLoop(Game game) {
         this.game = game;
         this.gameDisplay = game.getGameDisplay();
+        game.setGameLoop(this);
     }
 
     @Override
@@ -73,6 +74,10 @@ public class GameLoop implements Runnable {
     private void render() {
         game.render();
         fps++;
+    }
+
+    public void addScore(int score) {
+        this.score = Math.min(this.score + score, 100);
     }
 
     public static void setRunning(boolean b){

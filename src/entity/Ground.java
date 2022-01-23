@@ -34,7 +34,12 @@ public class Ground extends CustomSizeBlock{
     }
 
     @Override
-    public void doActionOnPosition(State state){
+    public void doActionOnPositionX(State state){
+
+    }
+
+    @Override
+    public void doActionOnSamePosition(State state){
 
     }
 }

@@ -42,7 +42,7 @@ public class NPC extends MovingEntity {
     }
 
     @Override
-    public void doActionOnPosition(State state){
+    public void doActionOnPositionX(State state){
 
     }
 
@@ -77,5 +77,10 @@ public class NPC extends MovingEntity {
     @Override
     public void subtractMaxLifes(int maxLifes){
         this.maxLifes -= maxLifes;
+    }
+
+    @Override
+    public void doActionOnSamePosition(State state){
+
     }
 }

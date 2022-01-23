@@ -3,7 +3,6 @@ import controller.Controller;
 import core.Position;
 import core.ScreenSize;
 import core.Vector2D;
-import display.GameDisplay;
 import entity.GameObject;
 import game.state.State;
 
@@ -107,6 +106,7 @@ public class PlayerMaA extends MotionAndAbilities {
             }
         }
 
+        doBlockPositionXAction();
         doBlockPositionAction();
 
 
@@ -133,6 +133,21 @@ public class PlayerMaA extends MotionAndAbilities {
         }
     }
 
+    private void doBlockPositionXAction() {
+        doBlockPositionXAction(mapObjects);
+        doBlockPositionXAction(gameObjects);
+    }
+
+    private void doBlockPositionXAction(List<GameObject> objects) {
+
+        for (GameObject object : objects) {
+            int blockPosX = object.getPosition().intX();
+            if(x >= blockPosX && x <= blockPosX + 64) {
+                object.doActionOnPositionX(state);
+            }
+        }
+    }
+
     private void doBlockPositionAction() {
         doBlockPositionAction(mapObjects);
         doBlockPositionAction(gameObjects);
@@ -140,10 +155,16 @@ public class PlayerMaA extends MotionAndAbilities {
 
     private void doBlockPositionAction(List<GameObject> objects) {
 
-        for (GameObject object : objects) {
+        boolean updatable = state.getUpdatable();
+        for (int i = 0; updatable && i < objects.size(); i++) {
+            updatable = state.getUpdatable();
+            GameObject object = objects.get(i);
             int blockPosX = object.getPosition().intX();
-            if(x >= blockPosX && x <= blockPosX + 64) {
-                object.doActionOnPosition(state);
+            int blockPosY = object.getPosition().intY();
+            if(x > blockPosX - 32 && x < blockPosX + 32) {
+                if(y > blockPosY - 64 && y < blockPosY + 64) {
+                    object.doActionOnSamePosition(state);
+                }
             }
         }
     }
