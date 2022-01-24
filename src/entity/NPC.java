@@ -70,7 +70,6 @@ public class NPC extends MovingEntity {
     @Override
     public void subtractLifes(int lifes){
         this.lifes -= lifes;
-        System.out.println(this.lifes);
         testIfAlive();
     }
 

@@ -83,26 +83,20 @@ public class PlayerMaA extends MotionAndAbilities {
                 deltaY -= 1E-100;
                 sitting = true;
             }
-            if (controller.isRequestingLeft() && leftSpace() && x > leftBorder) {
+            if (controller.isRequestingLeft() && leftSpace()) {
                 deltaX -= 1.6;
                 sitting = false;
+                if(x <= leftBorder){
+                    moveMap(new Vector2D(1.6,0));
+                }
             }
 
-            if (controller.isRequestingLeft() && leftSpace() && x <= leftBorder) {
-                deltaX -= 1.6;
-                moveMap(new Vector2D(1.5,0));
-                sitting = false;
-            }
-
-            if (controller.isRequestingRight() && rightSpace() && x < rightBorder) {
+            if (controller.isRequestingRight() && rightSpace()) {
                 deltaX += 1.6;
                 sitting = false;
-            }
-
-            if (controller.isRequestingRight() && rightSpace() && x >= rightBorder) {
-                deltaX += 1.6;
-                moveMap(new Vector2D(-1.5,0));
-                sitting = false;
+                if(x >= rightBorder) {
+                    moveMap(new Vector2D(-1.6,0));
+                }
             }
         }
 
