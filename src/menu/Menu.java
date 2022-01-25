@@ -84,10 +84,10 @@ public class Menu {
     private static final Color color4 = new Color(255, 111, 197);
     private static final Color clear = new Color(0,0,0,0);
 
-    public static final Color[] buttonColor =           { color1,         color1,         color3,        Color.BLACK};
+    private static final Color[] buttonColor =           { color1,         color1,         color3,        Color.BLACK};
     private static final Color[] backButtonColor =      { color2,         color2,         color3,        Color.BLACK};
-    public static final Color[] labelColor =            { color2,         color2,         color3,        Color.BLACK};
-    public static final Color[] textColor =             { Color.WHITE,    Color.BLACK,    Color.BLACK,   color4};
+    private static final Color[] labelColor =            { color2,         color2,         color3,        Color.BLACK};
+    private static final Color[] textColor =             { Color.WHITE,    Color.BLACK,    Color.BLACK,   color4};
     private final String[] bgImage =                    {"bg_light.png", "bg_light.png", "bg_dark.png", "bg_dark.png"};
 
     public static final String textFont = "Comic Sans MS";
@@ -538,6 +538,14 @@ public class Menu {
 
     public static Color getBGColor(){
         return bgColors[theme];
+    }
+
+    public static Color getButtonColor(){
+        return buttonColor[colorSetting];
+    }
+
+    public static Color getTextColor(){
+        return textColor[colorSetting];
     }
 
 

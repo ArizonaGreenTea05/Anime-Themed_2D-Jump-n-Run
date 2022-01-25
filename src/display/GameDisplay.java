@@ -1,6 +1,7 @@
 package display;
 
 import game.Game;
+import game.GameLoop;
 import utils.FileLoader;
 import core.ScreenSize;
 import game.state.State;
@@ -16,11 +17,21 @@ public class GameDisplay extends JFrame {
 
     private Canvas canvas;
     private final Renderer renderer;
-    private Game game;
-    private int width, height;
-    private JButton bBack;
+    private final Game game;
+    private final int width,height;
+    private JButton bPause;
+    private JButton bResume;
+    private final JButton[] bExit = new JButton[3];
+    private static final JLabel[] lHeadline = new JLabel[3];
+    private final int FAILED = 0;
+    private final int PAUSE = 1;
+    private final int WON = 2;
     private JButton bInfo;
-    private JLabel lFailedWindow = new JLabel();
+    private final JPanel pFailedWindow = new JPanel();
+    private final JPanel pPauseWindow = new JPanel();
+
+
+
     private static double score = 0;
     private static final JLabel lThemeText = new JLabel(" Theme:");
     private static final JLabel lTheme = Menu.getThemeLabel();
@@ -36,15 +47,15 @@ public class GameDisplay extends JFrame {
     private static JLabel lLifes = new JLabel(" 5/5");
     private static JLabel lFps = new JLabel();
 
-    private Color bgColor = Menu.getBGColor();
+    private final Color bgColor = Menu.getBGColor();
+    private final Color buttonColor = Menu.getButtonColor();
 
     private Rectangle scorePos = new Rectangle();
     private Rectangle scoreTextPos = new Rectangle();
     private Rectangle lifesPos = new Rectangle();
     private Rectangle lifesTextPos = new Rectangle();
 
-    private static final JLabel lFailedText = new JLabel("!you failed!");
-    private final Color[] textColor = Menu.textColor;
+    private final Color textColor = Menu.getTextColor();
 
     public GameDisplay(Input input, String title, Game game) {
         this.game = game;
@@ -59,6 +70,8 @@ public class GameDisplay extends JFrame {
         setIconImage(FileLoader.loadImage("sakura_icon.png","/"));
 
         this.renderer = new Renderer();
+
+        initializePanels();
 
         initializeButtons();
 
@@ -80,8 +93,13 @@ public class GameDisplay extends JFrame {
 
 
     private void addAll() {
-        lFailedWindow.add(lFailedText);
-        add(lFailedWindow);
+        pFailedWindow.add(lHeadline[FAILED]);
+        pFailedWindow.add(bExit[FAILED]);
+        add(pFailedWindow);
+        pPauseWindow.add(lHeadline[PAUSE]);
+        pPauseWindow.add(bResume);
+        pPauseWindow.add(bExit[PAUSE]);
+        add(pPauseWindow);
         add(lFps);
         add(lTheme);
         lTheme.setVisible(false);
@@ -103,7 +121,7 @@ public class GameDisplay extends JFrame {
         add(lScoreText);
         add(lLifes);
         add(lLifesText);
-        add(bBack);
+        add(bPause);
         add(bInfo);
         add(canvas);
     }
@@ -113,21 +131,53 @@ public class GameDisplay extends JFrame {
         canvas.setFocusable(false);
     }
 
+    private void initializePanels() {
+        pPauseWindow.setVisible(false);
+        pPauseWindow.setBounds(1, 1, width-2, height-2);
+        pPauseWindow.setLayout(null);
+        pPauseWindow.setBackground(bgColor);
+
+        pFailedWindow.setVisible(false);
+        pFailedWindow.setBounds(1, 1, width-2, height-2);
+        pFailedWindow.setLayout(null);
+        pFailedWindow.setBackground(bgColor);
+    }
+
     private void initializeButtons() {
-        bBack = new JButton("<<back");
-        bBack.setBounds(Menu.getBackBounds());
-        bBack.setFont(new Font(Menu.textFont, Font.PLAIN,bBack.getHeight()/2));
-        bBack.addActionListener(getActionListenerBack());
-        bBack.setBackground(bgColor);
-        bBack.setForeground(textColor[Menu.colorSetting]);
-        bBack.setFocusable(false);
+        bPause = new JButton("PAUSE");
+        bPause.setBounds(Menu.getBackBounds());
+        bPause.setFont(new Font(Menu.textFont, Font.PLAIN, bPause.getHeight()/2));
+        bPause.addActionListener(getActionListenerPause());
+        bPause.setBackground(bgColor);
+        bPause.setForeground(textColor);
+        bPause.setFocusable(false);
+
+
+        bResume = new JButton("RESUME");
+        bResume.setBounds(pPauseWindow.getWidth()/6, pPauseWindow.getHeight()/2, pPauseWindow.getWidth()/3*2, pPauseWindow.getHeight()/7);
+        bResume.setFont(new Font("Consolas", Font.PLAIN, bResume.getHeight()/3*2));
+        bResume.setBackground(buttonColor);
+        bResume.setForeground(textColor);
+        bResume.setFocusable(false);
+        bResume.addActionListener(getActionListenerResume());
+
+
+        for (int i = 0; i < bExit.length; i++) {
+            bExit[i] = new JButton("EXIT");
+            bExit[i].setBounds(pFailedWindow.getWidth()/6, pFailedWindow.getHeight()/4*3, pFailedWindow.getWidth()/3*2, pFailedWindow.getHeight()/7);
+            bExit[i].setFont(new Font("Consolas", Font.PLAIN, bExit[i].getHeight()/3*2));
+            bExit[i].setBackground(buttonColor);
+            bExit[i].setForeground(textColor);
+            bExit[i].setFocusable(false);
+            bExit[i].addActionListener(getActionListenerBack(i));
+        }
 
         bInfo = new JButton("show info");
-        bInfo.setBounds(ScreenSize.getWidth()-Menu.labelWidth1-Menu.labelWidth2-100-bBack.getWidth(), 5 , bBack.getWidth(), Menu.labelHeight);
+        bInfo.setBounds(ScreenSize.getWidth()-Menu.labelWidth1-Menu.labelWidth2-100- bPause.getWidth(), 5 , bPause.getWidth(), Menu.labelHeight);
         bInfo.setFont(new Font(Menu.textFont, Font.PLAIN,bInfo.getHeight()/3*2));
         bInfo.addActionListener(getActionListenerInfo());
         bInfo.setBackground(bgColor);
-        bInfo.setForeground(textColor[Menu.colorSetting]);
+        bInfo.setForeground(textColor);
         bInfo.setFocusable(false);
     }
 
@@ -142,7 +192,7 @@ public class GameDisplay extends JFrame {
         lThemeText.setBounds(ScreenSize.getWidth()-labelWidth1-labelWidth2-22, 5 , labelWidth1, labelHeight);
         lThemeText.setOpaque(true);
         lThemeText.setBackground(bgColor);
-        lThemeText.setForeground(textColor[Menu.colorSetting]);
+        lThemeText.setForeground(textColor);
         lThemeText.setFont(lTheme.getFont());
 
         lTheme.setBounds(ScreenSize.getWidth()-labelWidth2-20, 5 , labelWidth2, labelHeight);
@@ -151,7 +201,7 @@ public class GameDisplay extends JFrame {
         lPlayerText.setBounds(ScreenSize.getWidth()-labelWidth1-labelWidth2-22,5 + gap + labelHeight , labelWidth1, labelHeight);
         lPlayerText.setOpaque(true);
         lPlayerText.setBackground(bgColor);
-        lPlayerText.setForeground(textColor[Menu.colorSetting]);
+        lPlayerText.setForeground(textColor);
         lPlayerText.setFont(lTheme.getFont());
 
         lPlayer.setBounds(ScreenSize.getWidth()-labelWidth2-20, 5 + gap +labelHeight , labelWidth2, labelHeight);
@@ -160,7 +210,7 @@ public class GameDisplay extends JFrame {
         lMapText.setBounds(ScreenSize.getWidth()-labelWidth1-labelWidth2-22,5 + 2*gap + 2*labelHeight , labelWidth1, labelHeight);
         lMapText.setOpaque(true);
         lMapText.setBackground(bgColor);
-        lMapText.setForeground(textColor[Menu.colorSetting]);
+        lMapText.setForeground(textColor);
         lMapText.setFont(lTheme.getFont());
 
         lMap.setBounds(ScreenSize.getWidth()-labelWidth2-20, 5 + 2*gap +2*labelHeight , labelWidth2, labelHeight);
@@ -169,7 +219,7 @@ public class GameDisplay extends JFrame {
         lHighScoreText.setBounds(ScreenSize.getWidth()-labelWidth1-labelWidth2-22,5 + 3*gap + 3*labelHeight , labelWidth1, labelHeight);
         lHighScoreText.setOpaque(true);
         lHighScoreText.setBackground(bgColor);
-        lHighScoreText.setForeground(textColor[Menu.colorSetting]);
+        lHighScoreText.setForeground(textColor);
         lHighScoreText.setFont(lTheme.getFont());
 
         lHighScore.setBounds(ScreenSize.getWidth()-labelWidth2-20, 5 + 3*gap + 3*labelHeight , labelWidth2, labelHeight);
@@ -178,7 +228,7 @@ public class GameDisplay extends JFrame {
         lScoreText.setBounds(lThemeText.getBounds());
         lScoreText.setOpaque(true);
         lScoreText.setBackground(bgColor);
-        lScoreText.setForeground(textColor[Menu.colorSetting]);
+        lScoreText.setForeground(textColor);
         lScoreText.setFont(lTheme.getFont());
         scoreTextPos.setBounds(ScreenSize.getWidth()-labelWidth1-labelWidth2-22,5 + 4*gap + 4*labelHeight , labelWidth1, labelHeight);
 
@@ -189,7 +239,7 @@ public class GameDisplay extends JFrame {
         lLifesText.setBounds(lPlayerText.getBounds());
         lLifesText.setOpaque(true);
         lLifesText.setBackground(bgColor);
-        lLifesText.setForeground(textColor[Menu.colorSetting]);
+        lLifesText.setForeground(textColor);
         lLifesText.setFont(lTheme.getFont());
         lifesTextPos.setBounds(ScreenSize.getWidth()-labelWidth1-labelWidth2-22,5 + 5*gap + 5*labelHeight , labelWidth1, labelHeight);
 
@@ -199,27 +249,51 @@ public class GameDisplay extends JFrame {
         lLifes.setFont(lScore.getFont());
         lifesPos.setBounds(ScreenSize.getWidth()-labelWidth2-20, 5 + 5*gap + 5*labelHeight , labelWidth2, labelHeight);
 
-        lFailedWindow.setVisible(false);
-        lFailedWindow.setBounds(50, 50, width-100, height-100);
-        lFailedWindow.setOpaque(true);
-        lFailedWindow.setBackground(Color.WHITE);
+        for (int i = 0; i < lHeadline.length; i++) {
+            lHeadline[i] = new JLabel();
+            lHeadline[i].setBounds(0, 10, pFailedWindow.getWidth(), pFailedWindow.getHeight()/5);
+            lHeadline[i].setFont(new Font("Consolas", Font.PLAIN, lHeadline[i].getHeight()/2));
+            lHeadline[i].setForeground(textColor);
+            lHeadline[i].setHorizontalAlignment(SwingConstants.CENTER);
+        }
+        lHeadline[FAILED].setText("YOU FAILED");
+        lHeadline[PAUSE].setText("PAUSE");
+        lHeadline[WON].setText("YOU WON");
 
-        lFailedText.setBounds(0, lFailedWindow.getHeight()/4, lFailedWindow.getWidth(), lFailedWindow.getHeight()/2);
-        lFailedText.setFont(new Font("Consolas", Font.PLAIN, lFailedText.getHeight()/4));
-        lFailedText.setForeground(Color.RED);
-        lFailedText.setHorizontalAlignment(SwingConstants.CENTER);
-
-        lFps.setBounds(10, bBack.getHeight()+15, lPlayerText.getHeight()*4, lPlayerText.getHeight());
+        lFps.setBounds(10, bPause.getHeight()+15, lPlayerText.getHeight()*4, lPlayerText.getHeight());
         lFps.setFont(new Font(Menu.textFont, Font.PLAIN, lFps.getHeight()/3*2));
         lFps.setOpaque(true);
         lFps.setBackground(bgColor);
-        lFps.setForeground(textColor[Menu.colorSetting]);
+        lFps.setForeground(textColor);
     }
 
-    private ActionListener getActionListenerBack() {
-        return e-> {
-            score = 0;
+    private ActionListener getActionListenerBack(int i) {
+        if(i == FAILED || i == PAUSE) {
+            return e -> {
+                score = 0;
+                game.hasFinished();
+            };
+        }
+        return e -> {
             game.hasFinished();
+        };
+    }
+
+    private ActionListener getActionListenerResume() {
+        return e-> {
+            GameLoop.setRunning(true);
+            pPauseWindow.setVisible(false);
+            bPause.setEnabled(true);
+            bInfo.setEnabled(true);
+        };
+    }
+
+    private ActionListener getActionListenerPause() {
+        return e-> {
+            GameLoop.setRunning(false);
+            bPause.setEnabled(false);
+            bInfo.setEnabled(false);
+            pPauseWindow.setVisible(true);
         };
     }
 
@@ -279,7 +353,10 @@ public class GameDisplay extends JFrame {
     }
 
     public void showFailed(){
-        lFailedWindow.setVisible(true);
+        bPause.setEnabled(false);
+        bInfo.setEnabled(false);
+        GameLoop.stop(true);
+        pFailedWindow.setVisible(true);
     }
 
     public void setFPS(String frames){
