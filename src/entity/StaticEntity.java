@@ -12,12 +12,14 @@ public abstract class StaticEntity extends GameObject {
     public static final int COIN = 0;
 
     private String texture;
+    private Image sprite;
 
     public StaticEntity(Position position, int texture) {
         super(64,64, position.intX(), position.intY());
         if(texture == COIN) {
             this.texture = "coin";
         }
+        sprite = loadSprite(this.texture);
     }
 
     @Override
@@ -27,7 +29,7 @@ public abstract class StaticEntity extends GameObject {
 
     @Override
     public Image getSprite() {
-        return ImageUtils.loadImage("/game/themes/" + menu.Menu.getGameTheme() + "/blocks/" + texture + ".png");
+        return sprite;
     }
 
     @Override

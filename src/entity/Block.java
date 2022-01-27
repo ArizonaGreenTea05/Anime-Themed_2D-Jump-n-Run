@@ -3,7 +3,6 @@ package entity;
 import core.Direction;
 import core.Position;
 import entity.motionAndAbilities.MotionAndAbilities;
-import gfx.ImageUtils;
 
 import java.awt.*;
 
@@ -12,16 +11,18 @@ public abstract class Block extends GameObject {
     public static final int GRASS_BLOCK = 0;
     public static final int ACTION_BLOCK = 1;
 
-    private String block;
+    private Image sprite;
+    private String texture;
     protected boolean actionUsed = false;
 
     public Block(Position position, int texture) {
         super(64, 64, position.intX(), position.intY());
         if(texture == GRASS_BLOCK) {
-            this.block = "grass";
+            this.texture = "grass";
         } else if(texture == ACTION_BLOCK) {
-            this.block = "action";
+            this.texture = "action";
         }
+        sprite = loadSprite(this.texture);
     }
 
     @Override
@@ -31,7 +32,7 @@ public abstract class Block extends GameObject {
 
     @Override
     public Image getSprite() {
-        return ImageUtils.loadImage("/game/themes/" + menu.Menu.getGameTheme() + "/blocks/" + block + ".png");
+        return sprite;
     }
 
     @Override

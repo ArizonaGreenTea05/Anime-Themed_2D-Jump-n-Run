@@ -32,7 +32,7 @@ public class GameState extends State {
                 new PlayerController(input),
                 new PlayerMaA(2),
                 new Position(ScreenSize.getLeftBorder(),
-                ScreenSize.getGround()-64),
+                0),
                 spriteLibrary,
                 5,
                 this);
@@ -42,7 +42,7 @@ public class GameState extends State {
                 new NPCController(),
                 new NPCMaA(2),
                 new Position(ScreenSize.getLeftBorder()+64,
-                ScreenSize.getGround()-64),
+                0),
                 spriteLibrary,
                 5,
                 this);
@@ -54,34 +54,12 @@ public class GameState extends State {
     private void createMap() {
 
         int ground = ScreenSize.getGround();
-        int screenHeight = ScreenSize.getHeight();
 
         String[][] sMap = FileLoader.loadMap();
 
-        /*
-        //everything underneath the ground
-        for (int posY = screenHeight; posY >= ground+64; posY-=64) {
-            int posX = -64;
-            for (int j = 0; j < sMap[0].length-1; j++) {
 
-                if(sMap[0][j].equalsIgnoreCase("G")){
-                    Grass grass = new Grass(posX, posY, "grass");
-                    mapObjects.add(grass);
-                }
-
-                posX += 64;
-            }
-        }
-
-         */
-
-
-        Ground groundBlock = new Ground(sMap[0].length*64,screenHeight-ground, -64, ground+64, "ground");
-        mapObjects.add(groundBlock);
-
-
-        for (int i = 1; i < sMap.length; i++) {
-            for (int j = 0; j < sMap[i].length; j++) {
+        for (int i = 0; i < sMap.length; i++) {
+            for (int j = 0; j < sMap[i].length-1; j++) {
 
                 if(sMap[i][j].equalsIgnoreCase("G")){
                     mapObjects.add(

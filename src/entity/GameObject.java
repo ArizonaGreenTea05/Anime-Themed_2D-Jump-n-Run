@@ -6,6 +6,7 @@ import core.ScreenSize;
 import core.Size;
 import entity.motionAndAbilities.MotionAndAbilities;
 import game.state.State;
+import gfx.ImageUtils;
 
 import java.awt.*;
 
@@ -59,6 +60,10 @@ public abstract class GameObject {
         int height = ScreenSize.getHeight();
 
         return x >= -object.getSize().getWidth() && x < width && y >= -object.getSize().getHeight() && y <= height;
+    }
+
+    protected Image loadSprite(String texture){
+        return ImageUtils.loadImage("/game/themes/" + menu.Menu.getGameTheme() + "/blocks/" + texture + ".png");
     }
 
     public abstract Direction getDirection();

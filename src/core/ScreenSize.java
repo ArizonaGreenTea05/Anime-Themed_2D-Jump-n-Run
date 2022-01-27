@@ -8,7 +8,7 @@ public class ScreenSize {
     private static Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
     private static final int width = (int) screenSize.getWidth();
     private static final int height = (int) screenSize.getHeight();
-    private static final int ground = (height-512 > height/2) ? height-512 : height-128;
+    private static final int ground = height-128;
     private static final int leftBorder = 9*64;
     private static final int rightBorder = width-9*64;
     private static final int mapWidth = mapWidth();
