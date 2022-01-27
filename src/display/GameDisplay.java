@@ -281,7 +281,7 @@ public class GameDisplay extends JFrame {
 
     private ActionListener getActionListenerResume() {
         return e-> {
-            GameLoop.setRunning(true);
+            new Thread(new GameLoop(game)).start();
             pPauseWindow.setVisible(false);
             bPause.setEnabled(true);
             bInfo.setEnabled(true);
@@ -355,7 +355,8 @@ public class GameDisplay extends JFrame {
     public void showFailed(){
         bPause.setEnabled(false);
         bInfo.setEnabled(false);
-        GameLoop.stop(true);
+        GameLoop.setRunning(false);
+        //GameLoop.stop(true);
         pFailedWindow.setVisible(true);
     }
 

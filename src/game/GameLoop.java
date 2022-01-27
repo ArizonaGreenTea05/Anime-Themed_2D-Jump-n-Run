@@ -4,13 +4,12 @@ import display.GameDisplay;
 
 public class GameLoop implements Runnable {
 
-    private int score = 10;
+    private int score = 100;
 
     private Game game;
     private GameDisplay gameDisplay;
 
     private static boolean running;
-    private static boolean stop;
     private final double updateRate = 1.0/100.0;
 
     private long nextStatTime;
@@ -26,13 +25,11 @@ public class GameLoop implements Runnable {
     @Override
     public void run() {
         running = true;
-        stop = false;
         double accumulator = 0;
         long currentTime, lastUpdate = System.currentTimeMillis();
         nextStatTime = System.currentTimeMillis() + 1000;
 
-        while(!stop) {
-            if(running) {
+        while(running){
                 currentTime = System.currentTimeMillis();
                 double lastRenderTimeInSeconds = (currentTime - lastUpdate) / 1000d;
                 accumulator += lastRenderTimeInSeconds;
@@ -46,8 +43,7 @@ public class GameLoop implements Runnable {
                     render();
                 }
                 printStats();
-                if (score == 0) stop();
-            }
+                if (score == 0) {failed();}
         }
     }
 
@@ -64,7 +60,7 @@ public class GameLoop implements Runnable {
         }
     }
 
-    private void stop() {
+    private void failed() {
         running = false;
         gameDisplay.showFailed();
     }
@@ -87,9 +83,5 @@ public class GameLoop implements Runnable {
 
     public static void setRunning(boolean b){
         running = b;
-    }
-
-    public static void stop(boolean b){
-        stop = b;
     }
 }
