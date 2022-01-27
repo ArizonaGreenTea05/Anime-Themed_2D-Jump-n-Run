@@ -82,4 +82,13 @@ public class NPC extends MovingEntity {
     public void doActionOnSamePosition(State state){
 
     }
+
+    @Override
+    public void testIfAlive(){
+        if(lifes == 0){
+            state.setUpdatable(false);
+            state.getGameObjects().remove(this);
+            state.setUpdatable(true);
+        }
+    }
 }

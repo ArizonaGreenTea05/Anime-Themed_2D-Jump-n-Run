@@ -153,24 +153,29 @@ public class GameDisplay extends JFrame {
         bPause.setFocusable(false);
 
 
-        bResume = new JButton("RESUME");
-        bResume.setBounds(pPauseWindow.getWidth()/6, pPauseWindow.getHeight()/2, pPauseWindow.getWidth()/3*2, pPauseWindow.getHeight()/7);
-        bResume.setFont(new Font("Consolas", Font.PLAIN, bResume.getHeight()/3*2));
-        bResume.setBackground(buttonColor);
-        bResume.setForeground(textColor);
-        bResume.setFocusable(false);
-        bResume.addActionListener(getActionListenerResume());
-
+        Rectangle bounds = Menu.getButtonBounds();
 
         for (int i = 0; i < bExit.length; i++) {
             bExit[i] = new JButton("EXIT");
-            bExit[i].setBounds(pFailedWindow.getWidth()/6, pFailedWindow.getHeight()/4*3, pFailedWindow.getWidth()/3*2, pFailedWindow.getHeight()/7);
+            if (i == FAILED) {
+                bExit[i].setBounds((Menu.getStartBounds()));
+            } else {
+                bExit[i].setBounds((pFailedWindow.getWidth() - bounds.width) / 2, pFailedWindow.getHeight() / 2, bounds.width, bounds.height);
+            }
             bExit[i].setFont(new Font("Consolas", Font.PLAIN, bExit[i].getHeight()/3*2));
             bExit[i].setBackground(buttonColor);
             bExit[i].setForeground(textColor);
             bExit[i].setFocusable(false);
             bExit[i].addActionListener(getActionListenerBack(i));
         }
+
+        bResume = new JButton("RESUME");
+        bResume.setBounds((pPauseWindow.getWidth()-bounds.width)/2, (int) (bExit[PAUSE].getY() - bExit[PAUSE].getHeight()*1.5), bounds.width, bounds.height);
+        bResume.setFont(new Font("Consolas", Font.PLAIN, bResume.getHeight()/3*2));
+        bResume.setBackground(buttonColor);
+        bResume.setForeground(textColor);
+        bResume.setFocusable(false);
+        bResume.addActionListener(getActionListenerResume());
 
         bInfo = new JButton("show info");
         bInfo.setBounds(ScreenSize.getWidth()-Menu.labelWidth1-Menu.labelWidth2-100- bPause.getWidth(), 5 , bPause.getWidth(), Menu.labelHeight);
@@ -246,12 +251,13 @@ public class GameDisplay extends JFrame {
         lLifes.setBounds(lPlayer.getBounds());
         lLifes.setOpaque(true);
         lLifes.setBackground(bgColor);
+        lLifes.setForeground(textColor);
         lLifes.setFont(lScore.getFont());
         lifesPos.setBounds(ScreenSize.getWidth()-labelWidth2-20, 5 + 5*gap + 5*labelHeight , labelWidth2, labelHeight);
 
         for (int i = 0; i < lHeadline.length; i++) {
             lHeadline[i] = new JLabel();
-            lHeadline[i].setBounds(0, 10, pFailedWindow.getWidth(), pFailedWindow.getHeight()/5);
+            lHeadline[i].setBounds(0, 50, pFailedWindow.getWidth(), pFailedWindow.getHeight()/5);
             lHeadline[i].setFont(new Font("Consolas", Font.PLAIN, lHeadline[i].getHeight()/2));
             lHeadline[i].setForeground(textColor);
             lHeadline[i].setHorizontalAlignment(SwingConstants.CENTER);
@@ -290,11 +296,15 @@ public class GameDisplay extends JFrame {
 
     private ActionListener getActionListenerPause() {
         return e-> {
-            GameLoop.setRunning(false);
-            bPause.setEnabled(false);
-            bInfo.setEnabled(false);
-            pPauseWindow.setVisible(true);
+            doPauseAction();
         };
+    }
+
+    public void doPauseAction() {
+        GameLoop.setRunning(false);
+        bPause.setEnabled(false);
+        bInfo.setEnabled(false);
+        pPauseWindow.setVisible(true);
     }
 
     private ActionListener getActionListenerInfo() {
@@ -356,7 +366,6 @@ public class GameDisplay extends JFrame {
         bPause.setEnabled(false);
         bInfo.setEnabled(false);
         GameLoop.setRunning(false);
-        //GameLoop.stop(true);
         pFailedWindow.setVisible(true);
     }
 

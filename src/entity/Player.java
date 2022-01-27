@@ -22,6 +22,7 @@ public class Player extends MovingEntity {
         this.maxLifes = maxLifes;
         lifes = maxLifes;
         this.controller = controller;
+        setLifesLabelText();
     }
 
     @Override
@@ -82,7 +83,6 @@ public class Player extends MovingEntity {
     @Override
     public void subtractLifes(int lifes){
         this.lifes -= lifes;
-        System.out.println(this.lifes);
         setLifesLabelText();
         testIfAlive();
     }
@@ -100,6 +100,13 @@ public class Player extends MovingEntity {
     @Override
     public void doActionOnSamePosition(State state){
 
+    }
+
+    @Override
+    public void testIfAlive(){
+        if(lifes == 0){
+            state.getGame().getGameDisplay().showFailed();
+        }
     }
 
 }

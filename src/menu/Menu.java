@@ -32,9 +32,11 @@ public class Menu {
     private final JButton bExit = new JButton("EXIT");
     private final JButton bChangeColor = new JButton("change colors");
     private JButton bStartGame;
+    private static Rectangle startBounds;
     private JButton[] bPlayers;
     private JButton[] bMaps;
     private final JButton[] bThemes = new JButton[gameThemes.length];
+    private static Rectangle buttonBounds;
     private JButton bBackPlayers = new JButton();
     private JButton bBackThemes = new JButton();
     private static JButton bBackMaps = new JButton();
@@ -256,6 +258,7 @@ public class Menu {
         bStartGame.setForeground(textColor[colorSetting]);
         bStartGame.setFont(new Font(textFont, Font.PLAIN, bStartGame.getHeight()/4));
         bStartGame.addActionListener(getActionListenerStart());
+        startBounds = bStartGame.getBounds();
         // -start Button-
 
 
@@ -328,6 +331,7 @@ public class Menu {
             menu.getContentPane().setBackground(getBGColor());
             menu.repaint();
         }
+        buttonBounds = bPlayers[0].getBounds();
         lTheme.setText(" " + ElseUtils.makeNameNice(getGameTheme()));
         menu.add(bBackThemes);
         menu.repaint();
@@ -548,10 +552,16 @@ public class Menu {
         return textColor[colorSetting];
     }
 
-
-
     public static Rectangle getBackBounds() {
         return bBackMaps.getBounds();
+    }
+
+    public static Rectangle getButtonBounds(){
+        return buttonBounds;
+    }
+
+    public static Rectangle getStartBounds(){
+        return startBounds;
     }
 
 }

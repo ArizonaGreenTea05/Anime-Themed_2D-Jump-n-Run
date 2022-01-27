@@ -2,10 +2,9 @@ package entity;
 
 import controller.Controller;
 import core.Direction;
-import display.GameDisplay;
-import entity.motionAndAbilities.MotionAndAbilities;
 import core.Position;
 import core.ScreenSize;
+import entity.motionAndAbilities.MotionAndAbilities;
 import game.state.State;
 import gfx.AnimationManager;
 
@@ -19,7 +18,7 @@ public abstract class MovingEntity extends GameObject {
     protected int maxLifes;
     private MotionAndAbilities mAndA;
     private Direction direction;
-    private State state;
+    protected State state;
 
     public MovingEntity(Controller controller, MotionAndAbilities mAndA, Position position, State state) {
         super(64,64, position.intX(), position.intY());
@@ -56,13 +55,7 @@ public abstract class MovingEntity extends GameObject {
         }
     }
 
-    protected void testIfAlive(){
-        if(lifes == 0){
-            state.setUpdatable(false);
-            state.getGameObjects().remove(this);
-            state.setUpdatable(true);
-        }
-    }
+    public abstract void testIfAlive();
 
     @Override
     public Direction getDirection(){

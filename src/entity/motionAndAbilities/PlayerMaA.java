@@ -14,10 +14,12 @@ public class PlayerMaA extends MotionAndAbilities {
     private double gravity;
     private final int ground = ScreenSize.getGround();
     private int savePosYJump = ground;
+    private GameObject player;
 
     public PlayerMaA(double speed) {
         super(speed);
         canHit = true;
+        //this.player = getThisGameObject();
     }
 
     @Override
@@ -36,6 +38,7 @@ public class PlayerMaA extends MotionAndAbilities {
 
         int leftBorder = ScreenSize.getLeftBorder();
         int rightBorder = ScreenSize.getRightBorder();
+        int screenHeight = ScreenSize.getHeight();
 
         //wenn Position 64p (Character-Größe = 64, deswegen 128) über Boden wird fallling true
         //wenn Position größer als Boden und nicht Up requestet wird wird falling true
@@ -46,6 +49,14 @@ public class PlayerMaA extends MotionAndAbilities {
         if(hasGround()){
             falling = false;
             gravity = 0;
+        }
+
+        if(y > screenHeight + 64){
+            for (GameObject gameObject : gameObjects) {
+                if(gameObject.getMotionAndAbilities() == this) {
+                    gameObject.subtractLifes(1);
+                }
+            }
         }
 
         if(falling) {
@@ -98,6 +109,10 @@ public class PlayerMaA extends MotionAndAbilities {
                     moveMap(new Vector2D(-1.6,0));
                 }
             }
+        }
+
+        if(controller.isRequestingESC()) {
+            state.getGame().getGameDisplay().doPauseAction();
         }
 
         doBlockPositionXAction();
