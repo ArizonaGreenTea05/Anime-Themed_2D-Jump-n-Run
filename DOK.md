@@ -21,3 +21,4 @@ KEINE FALSCHEN VERSPRECHUNGEN
 
 Misserfolge benennen, aber herausheben, dass man daraus gelernt hat
 
+Projektplanung etc
