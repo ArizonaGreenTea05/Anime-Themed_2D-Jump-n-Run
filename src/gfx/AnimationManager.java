@@ -22,6 +22,8 @@ public class AnimationManager {
         playAnimation("stand");
     }
 
+    //TODO: DAS HIER MUSS GEBUFFERT WERDEN
+    //HASHMAP angucken
     public Image getSprite() {
         return currentAnimationSheet.getSubimage(
                 frameIndex * Game.SPRITE_SIZE,

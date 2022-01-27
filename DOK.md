@@ -25,3 +25,7 @@ Projektplanung etc
 
 was habe ich inhaltlich gelernt
 -> quellen wie z.B.: die videos
+
+
+
+#PROFILING ANGUCKEN
