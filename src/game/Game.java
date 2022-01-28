@@ -24,10 +24,8 @@ public class Game {
         state = new GameState(input, this);
     }
 
-    public void hasFinished() {
+    public void stopGameLoop() {
         GameLoop.setRunning(false);
-        new Menu();
-        gameDisplay.dispose();
     }
 
 

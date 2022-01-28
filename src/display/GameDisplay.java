@@ -22,6 +22,7 @@ public class GameDisplay extends JFrame {
     private JButton bPause;
     private JButton bResume;
     private final JButton[] bExit = new JButton[3];
+    private final JButton[] bRestart = new JButton[3];
     private static final JLabel[] lHeadline = new JLabel[3];
     private final int FAILED = 0;
     private final int PAUSE = 1;
@@ -94,9 +95,11 @@ public class GameDisplay extends JFrame {
 
     private void addAll() {
         pFailedWindow.add(lHeadline[FAILED]);
+        pFailedWindow.add(bRestart[FAILED]);
         pFailedWindow.add(bExit[FAILED]);
         add(pFailedWindow);
         pPauseWindow.add(lHeadline[PAUSE]);
+        pPauseWindow.add(bRestart[PAUSE]);
         pPauseWindow.add(bResume);
         pPauseWindow.add(bExit[PAUSE]);
         add(pPauseWindow);
@@ -157,11 +160,7 @@ public class GameDisplay extends JFrame {
 
         for (int i = 0; i < bExit.length; i++) {
             bExit[i] = new JButton("EXIT");
-            if (i == FAILED) {
-                bExit[i].setBounds((Menu.getStartBounds()));
-            } else {
-                bExit[i].setBounds((pFailedWindow.getWidth() - bounds.width) / 2, pFailedWindow.getHeight() / 2, bounds.width, bounds.height);
-            }
+            bExit[i].setBounds((pFailedWindow.getWidth() - bounds.width) / 2, pFailedWindow.getHeight() / 2, bounds.width, bounds.height);
             bExit[i].setFont(new Font("Consolas", Font.PLAIN, bExit[i].getHeight()/3*2));
             bExit[i].setBackground(buttonColor);
             bExit[i].setForeground(textColor);
@@ -169,8 +168,18 @@ public class GameDisplay extends JFrame {
             bExit[i].addActionListener(getActionListenerBack(i));
         }
 
+        for (int i = 0; i < bRestart.length; i++) {
+            bRestart[i] = new JButton("RESTART");
+            bRestart[i].setBounds((pPauseWindow.getWidth()-bounds.width)/2, (int) (bExit[PAUSE].getY() - bExit[PAUSE].getHeight()*1.25), bounds.width, bounds.height);
+            bRestart[i].setFont(new Font("Consolas", Font.PLAIN, bRestart[i].getHeight()/3*2));
+            bRestart[i].setBackground(buttonColor);
+            bRestart[i].setForeground(textColor);
+            bRestart[i].setFocusable(false);
+            bRestart[i].addActionListener(getActionListenerRestart());
+        }
+
         bResume = new JButton("RESUME");
-        bResume.setBounds((pPauseWindow.getWidth()-bounds.width)/2, (int) (bExit[PAUSE].getY() - bExit[PAUSE].getHeight()*1.5), bounds.width, bounds.height);
+        bResume.setBounds((pPauseWindow.getWidth()-bounds.width)/2, (int) (bExit[PAUSE].getY() - bExit[PAUSE].getHeight()*2.5), bounds.width, bounds.height);
         bResume.setFont(new Font("Consolas", Font.PLAIN, bResume.getHeight()/3*2));
         bResume.setBackground(buttonColor);
         bResume.setForeground(textColor);
@@ -277,16 +286,30 @@ public class GameDisplay extends JFrame {
         if(i == FAILED || i == PAUSE) {
             return e -> {
                 score = 0;
-                game.hasFinished();
+                game.stopGameLoop();
+                new Menu();
+                dispose();
             };
         }
         return e -> {
-            game.hasFinished();
+            game.stopGameLoop();
+            new Menu();
+            dispose();
+        };
+    }
+
+    private ActionListener getActionListenerRestart() {
+        return e-> {
+            new Thread(new GameLoop(new Game())).start();
+            game.stopGameLoop();
+            dispose();
         };
     }
 
     private ActionListener getActionListenerResume() {
         return e-> {
+            score = 0;
+            game.stopGameLoop();
             new Thread(new GameLoop(game)).start();
             pPauseWindow.setVisible(false);
             bPause.setEnabled(true);
