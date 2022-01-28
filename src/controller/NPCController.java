@@ -23,7 +23,7 @@ public class NPCController implements Controller {
     }
     @Override
     public boolean isRequestingRight(){
-        return true;
+        return false;
     }
 
     @Override
