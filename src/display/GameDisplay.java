@@ -30,6 +30,7 @@ public class GameDisplay extends JFrame {
     private JButton bInfo;
     private final JPanel pFailedWindow = new JPanel();
     private final JPanel pPauseWindow = new JPanel();
+    private final JPanel pWonWindow = new JPanel();
 
 
 
@@ -144,6 +145,11 @@ public class GameDisplay extends JFrame {
         pFailedWindow.setBounds(1, 1, width-2, height-2);
         pFailedWindow.setLayout(null);
         pFailedWindow.setBackground(bgColor);
+
+        pWonWindow.setVisible(false);
+        pWonWindow.setBounds(1, 1, width-2, height-2);
+        pWonWindow.setLayout(null);
+        pWonWindow.setBackground(bgColor);
     }
 
     private void initializeButtons() {
