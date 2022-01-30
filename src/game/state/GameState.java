@@ -11,8 +11,6 @@ import game.Game;
 import input.Input;
 import utils.FileLoader;
 
-import java.util.List;
-
 public class GameState extends State {
 
     private Player player;
@@ -98,10 +96,8 @@ public class GameState extends State {
                             )
                     );
                 }
-
             }
         }
-
     }
 
     public MovingEntity getPlayer() {
