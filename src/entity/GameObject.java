@@ -53,13 +53,13 @@ public abstract class GameObject {
     public abstract void doActionOnPositionX(State state);
 
 
-    protected boolean shown(GameObject object) {
-        int x =  object.getPosition().intX();
-        int y =  object.getPosition().intY();
+    public boolean isShown() {
+        int x =  this.getPosition().intX();
+        int y =  this.getPosition().intY();
         int width = ScreenSize.getWidth();
         int height = ScreenSize.getHeight();
 
-        return x >= -object.getSize().getWidth() && x < width && y >= -object.getSize().getHeight() && y <= height;
+        return x >= -this.getSize().getWidth() && x < width && y >= -this.getSize().getHeight() && y <= height;
     }
 
     protected Image loadSprite(String texture){

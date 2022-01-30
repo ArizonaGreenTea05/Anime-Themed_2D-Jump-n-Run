@@ -1,8 +1,6 @@
 package entity;
 
-import controller.NPCController;
 import core.Position;
-import entity.motionAndAbilities.NPCMaA;
 import game.state.State;
 
 import java.awt.*;
@@ -21,7 +19,7 @@ public class ActionBlock extends Block{
 
     @Override
     public void render(Graphics graphics) {
-        if (shown(this)) {
+        if (isShown()) {
             graphics.drawImage(
                     this.getSprite(),
                     this.getPosition().intX(),

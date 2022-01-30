@@ -18,7 +18,7 @@ public class Ground extends CustomSizeBlock{
 
     @Override
     public void render(Graphics graphics) {
-        if (shown(this)) {
+        if (isShown()) {
             graphics.drawImage(
                     this.getSprite(),
                     this.getPosition().intX(),

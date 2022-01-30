@@ -48,7 +48,7 @@ public class GameState extends State {
                     gameObjects.add(
                             new NPC(
                                     new NPCController(),
-                                    new NPCMaA(2),
+                                    new NPCMaA(1.5),
                                     relativePosition,
                                     spriteLibrary,
                                     5,

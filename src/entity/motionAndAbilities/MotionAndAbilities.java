@@ -23,6 +23,7 @@ public abstract class MotionAndAbilities {
     protected State state;
     protected boolean canHit;
     protected Controller controller;
+    static int playerPosInList;
 
     public MotionAndAbilities(double speed) {
         this.speed = speed;
@@ -170,21 +171,23 @@ public abstract class MotionAndAbilities {
 
     public abstract boolean canCauseBlockAction();
 
-    protected void damage(State state){
+    protected void damage(){
         if(canHit) {
             canHit = false;
 
-            List<GameObject> gameObjects = state.getGameObjects();
             boolean updatable = state.getUpdatable();
+
+            GameObject thisGameObject = gameObjects.get(findThisGameObjectInList());
+
             for (int i = 0; i < gameObjects.size() && updatable; i++) {
                 GameObject gameObject = gameObjects.get(i);
                 if(gameObject.getMotionAndAbilities() != this) {
                     int posX = gameObject.getPosition().intX();
                     int posY = gameObject.getPosition().intY();
                     if (posY < y + 32 && posY > y - 32) {
-                        if (gameObject.getDirection() == R && posX < x + 92 && posX > x) {
+                        if (thisGameObject.getDirection() == R && posX < x + 96 && posX > x) {
                             gameObject.subtractLifes(1);
-                        } else if (gameObject.getDirection() == L && posX < x && posX > x - 92) {
+                        } else if (thisGameObject.getDirection() == L && posX < x && posX > x - 96) {
                             gameObject.subtractLifes(1);
                         }
                     }
@@ -192,6 +195,15 @@ public abstract class MotionAndAbilities {
                 updatable = state.getUpdatable();
             }
         }
+    }
+
+    protected int findThisGameObjectInList(){
+        for (int i = 0; i < gameObjects.size(); i++) {
+            if(gameObjects.get(i).getMotionAndAbilities() == this){
+                return i;
+            }
+        }
+        return -1;
     }
 
 }

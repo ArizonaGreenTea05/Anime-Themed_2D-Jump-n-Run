@@ -3,6 +3,7 @@ import controller.Controller;
 import core.Position;
 import core.ScreenSize;
 import core.Vector2D;
+import entity.GameObject;
 import game.state.State;
 
 public class NPCMaA extends MotionAndAbilities {
@@ -11,6 +12,7 @@ public class NPCMaA extends MotionAndAbilities {
     private double gravity;
     private final int ground = ScreenSize.getGround();
     private int savePosYJump = ground;
+    private GameObject thisGameObject;
 
     public NPCMaA(double speed) {
         super(speed);
@@ -24,6 +26,7 @@ public class NPCMaA extends MotionAndAbilities {
         this.gameObjects = state.getGameObjects();
         this.position = position;
         this.state = state;
+        setThisGameObject();
 
         double deltaX = 0;
         double deltaY = 0;
@@ -48,6 +51,9 @@ public class NPCMaA extends MotionAndAbilities {
             sitting = false;
         }
 
+        controlMotion();
+
+
         if (controller.isRequestingUp() && !falling) {
             if(gravity == 0) {savePosYJump = (int) Math.round(y);}
 
@@ -70,7 +76,7 @@ public class NPCMaA extends MotionAndAbilities {
 
         if(isHitting()) {
             sitting = false;
-            damage(state);
+            damage();
         } else {
 
             if (controller.isRequestingDown()) {
@@ -94,6 +100,30 @@ public class NPCMaA extends MotionAndAbilities {
         vector = new Vector2D(deltaX, deltaY);
         vector.multiply(speed, normalSpeed);
 
+    }
+
+    private void controlMotion() {
+        GameObject player = gameObjects.get(playerPosInList);
+        int pPosX = player.getPosition().intX();
+        int pPosY = player.getPosition().intY();
+        if(thisGameObject.isShown()) {
+            if (x < pPosX) {
+                controller.setRequestingLeft(false);
+                controller.setRequestingRight(true);
+            }
+            if (x > pPosX) {
+                controller.setRequestingRight(false);
+                controller.setRequestingLeft(true);
+            }
+        }
+    }
+
+    private boolean thisGameObjectSetted = false;
+    private void setThisGameObject() {
+        if(!thisGameObjectSetted) {
+            thisGameObject = gameObjects.get(findThisGameObjectInList());
+            thisGameObjectSetted = true;
+        }
     }
 
     @Override

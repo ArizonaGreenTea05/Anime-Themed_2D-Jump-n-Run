@@ -13,6 +13,36 @@ public class PlayerController implements Controller {
     }
 
     @Override
+    public void setRequestingDown(boolean requestingDown) {
+
+    }
+
+    @Override
+    public void setRequestingLeft(boolean requestingLeft) {
+
+    }
+
+    @Override
+    public void setRequestingRight(boolean requestingRight) {
+
+    }
+
+    @Override
+    public void setRequestingSprint(boolean requestingSprint) {
+
+    }
+
+    @Override
+    public void setRequestingHit(boolean requestingHit) {
+
+    }
+
+    @Override
+    public void setNotRequestingHit(boolean notRequestingHit) {
+
+    }
+
+    @Override
     public boolean isRequestingUp() {
         return input.isPressed(KeyEvent.VK_UP) || input.isPressed(KeyEvent.VK_W) || input.isPressed(KeyEvent.VK_SPACE);
     }

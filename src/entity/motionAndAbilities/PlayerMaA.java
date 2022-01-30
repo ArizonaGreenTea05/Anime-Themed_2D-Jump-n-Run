@@ -27,6 +27,7 @@ public class PlayerMaA extends MotionAndAbilities {
         this.gameObjects = state.getGameObjects();
         this.position = position;
         this.state = state;
+        setPlayer();
 
         double deltaX = 0;
         double deltaY = 0;
@@ -85,7 +86,7 @@ public class PlayerMaA extends MotionAndAbilities {
 
         if(isHitting()) {
             sitting = false;
-            damage(state);
+            damage();
         } else {
 
             if (controller.isRequestingDown()) {
@@ -122,6 +123,14 @@ public class PlayerMaA extends MotionAndAbilities {
         vector = new Vector2D(deltaX, deltaY);
         vector.multiply(speed, normalSpeed);
 
+    }
+
+    private boolean playerSetted = false;
+    private void setPlayer() {
+        if(!playerSetted) {
+            playerPosInList = findThisGameObjectInList();
+            playerSetted = true;
+        }
     }
 
     private void moveMap(Vector2D mapVector) {

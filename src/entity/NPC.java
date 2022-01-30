@@ -26,7 +26,7 @@ public class NPC extends MovingEntity {
 
     @Override
     public void render(Graphics graphics) {
-        if (shown(this)) {
+        if (isShown()) {
             graphics.drawImage(
                     this.getSprite(),
                     this.getPosition().intX(),
