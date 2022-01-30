@@ -35,19 +35,11 @@ public class GameState extends State {
                 0),
                 spriteLibrary,
                 5,
-                this);
+                this
+        );
         this.player = player;
 
-        NPC npc = new NPC(
-                new NPCController(),
-                new NPCMaA(2),
-                new Position(ScreenSize.getLeftBorder()+64,
-                0),
-                spriteLibrary,
-                5,
-                this);
-
-        gameObjects.addAll(List.of(player, npc));
+        gameObjects.add(player);
     }
 
 
@@ -89,6 +81,20 @@ public class GameState extends State {
                                             ground-(i-1)*64
                                     ),
                                     Block.ACTION_BLOCK
+                            )
+                    );
+                } else if(sMap[i][j].equalsIgnoreCase("E")){
+                    gameObjects.add(
+                            new NPC(
+                                    new NPCController(),
+                                    new NPCMaA(2),
+                                    new Position(
+                                            ScreenSize.getLeftBorder()+64,
+                                            0
+                                    ),
+                                    spriteLibrary,
+                                    5,
+                                    this
                             )
                     );
                 }

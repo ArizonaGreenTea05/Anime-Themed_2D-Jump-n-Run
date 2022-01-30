@@ -6,13 +6,13 @@ GGGGGGGGGG......................................................................
 GGGGGGGGGG.....................................................................................GGGGGGGGGG
 GGGGGGGGGG.....................................................................................GGGGGGGGGG
 GGGGGGGGGG......................................A..............................................GGGGGGGGGG
-GGGGGGGGGG.................................................................................I...GGGGGGGGGG
-GGGGGGGGGG....GGGGGG.........................GGGGGG...GGG.........................GGG......I...GGGGGGGGGG
+GGGGGGGGGG.....................................E...........................................I...GGGGGGGGGG
+GGGGGGGGGG....GGGGGG...................E.....GGGGGG...GGG.........................GGG......I...GGGGGGGGGG
 GGGGGGGGGG............................GGGG............GGG........................GGGG......I...GGGGGGGGGG
 GGGGGGGGGG.............AG..GG.........................GGG.......................GGGGG......I...GGGGGGGGGG
 GGGGGGGGGG.......................GGG..................GGG......................GGGGGG......I...GGGGGGGGGG
 GGGGGGGGGG.........GAGG...............................GGG.....................GGGGGGG......I...GGGGGGGGGG
-GGGGGGGGGG............................................GG.....................GGGGGGGG......I...GGGGGGGGGG
+GGGGGGGGGG.....E....................E.................GG.............E.......GGGGGGGG......I...GGGGGGGGGG
 GGGGGGGGGGGGGGGGGGGGG...GGGGGGGGGGGGGGGGGGGG....GGGGGGG..GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGFGGGGGGGGGGGGG
 GGGGGGGGGGGGGGGGGGGGG....GGGGGGGGGGGGGGGGGG......GGGGG..GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG
 GGGGGGGGGGGGGGGGGGGGG..................................GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG

@@ -36,7 +36,7 @@ public class FinishBlock extends Block{
 
     @Override
     public void doActionOnPositionX(State state){
-        state.getGame().stopGameLoop();
+        state.getGame().getGameDisplay().showWon();
     }
 
     @Override

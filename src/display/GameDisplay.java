@@ -104,6 +104,10 @@ public class GameDisplay extends JFrame {
         pPauseWindow.add(bResume);
         pPauseWindow.add(bExit[PAUSE]);
         add(pPauseWindow);
+        pWonWindow.add(lHeadline[WON]);
+        pWonWindow.add(bRestart[WON]);
+        pWonWindow.add(bExit[WON]);
+        add(pWonWindow);
         add(lFps);
         add(lTheme);
         lTheme.setVisible(false);
@@ -396,6 +400,13 @@ public class GameDisplay extends JFrame {
         bInfo.setEnabled(false);
         GameLoop.setRunning(false);
         pFailedWindow.setVisible(true);
+    }
+
+    public void showWon(){
+        bPause.setEnabled(false);
+        bInfo.setEnabled(false);
+        GameLoop.setRunning(false);
+        pWonWindow.setVisible(true);
     }
 
     public void setFPS(String frames){
