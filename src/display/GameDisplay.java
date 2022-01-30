@@ -343,35 +343,43 @@ public class GameDisplay extends JFrame {
     private ActionListener getActionListenerInfo() {
         return e-> {
             if(lTheme.isVisible()) {
-                lTheme.setVisible(false);
-                lThemeText.setVisible(false);
-                lPlayer.setVisible(false);
-                lPlayerText.setVisible(false);
-                lMap.setVisible(false);
-                lMapText.setVisible(false);
-                lHighScore.setVisible(false);
-                lHighScoreText.setVisible(false);
-                lScore.setBounds(lTheme.getBounds());
-                lScoreText.setBounds(lThemeText.getBounds());
-                lLifes.setBounds(lPlayer.getBounds());
-                lLifesText.setBounds(lPlayerText.getBounds());
-                bInfo.setText("show info");
+                hideInfo();
             } else {
-                lTheme.setVisible(true);
-                lThemeText.setVisible(true);
-                lPlayer.setVisible(true);
-                lPlayerText.setVisible(true);
-                lMap.setVisible(true);
-                lMapText.setVisible(true);
-                lHighScore.setVisible(true);
-                lHighScoreText.setVisible(true);
-                lScore.setBounds(scorePos);
-                lScoreText.setBounds(scoreTextPos);
-                lLifes.setBounds(lifesPos);
-                lLifesText.setBounds(lifesTextPos);
-                bInfo.setText("hide info");
+                showInfo();
             }
         };
+    }
+
+    private void hideInfo() {
+        lTheme.setVisible(false);
+        lThemeText.setVisible(false);
+        lPlayer.setVisible(false);
+        lPlayerText.setVisible(false);
+        lMap.setVisible(false);
+        lMapText.setVisible(false);
+        lHighScore.setVisible(false);
+        lHighScoreText.setVisible(false);
+        lScore.setBounds(lTheme.getBounds());
+        lScoreText.setBounds(lThemeText.getBounds());
+        lLifes.setBounds(lPlayer.getBounds());
+        lLifesText.setBounds(lPlayerText.getBounds());
+        bInfo.setText("show info");
+    }
+
+    private void showInfo() {
+        lTheme.setVisible(true);
+        lThemeText.setVisible(true);
+        lPlayer.setVisible(true);
+        lPlayerText.setVisible(true);
+        lMap.setVisible(true);
+        lMapText.setVisible(true);
+        lHighScore.setVisible(true);
+        lHighScoreText.setVisible(true);
+        lScore.setBounds(scorePos);
+        lScoreText.setBounds(scoreTextPos);
+        lLifes.setBounds(lifesPos);
+        lLifesText.setBounds(lifesTextPos);
+        bInfo.setText("hide info");
     }
 
     public void render(State state){
@@ -406,6 +414,19 @@ public class GameDisplay extends JFrame {
         bPause.setEnabled(false);
         bInfo.setEnabled(false);
         GameLoop.setRunning(false);
+        if(!lTheme.isVisible()) {showInfo();}
+        pWonWindow.add(lTheme);
+        pWonWindow.add(lThemeText);
+        pWonWindow.add(lPlayer);
+        pWonWindow.add(lPlayerText);
+        pWonWindow.add(lMap);
+        pWonWindow.add(lMapText);
+        pWonWindow.add(lHighScore);
+        pWonWindow.add(lHighScoreText);
+        pWonWindow.add(lScore);
+        pWonWindow.add(lScoreText);
+        pWonWindow.add(lLifes);
+        pWonWindow.add(lLifesText);
         pWonWindow.setVisible(true);
     }
 

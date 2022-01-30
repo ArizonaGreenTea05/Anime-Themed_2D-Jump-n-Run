@@ -32,14 +32,12 @@ public class GameState extends State {
         for (int i = 0; i < sMap.length; i++) {
             for (int j = 0; j < sMap[i].length-1; j++) {
                 String letter = sMap[i][j];
+                Position relativePosition = new Position((j-1)*64, ground-(i-1)*64);
                 if(letter.equalsIgnoreCase("P")){
                     Player player = new Player(
                             new PlayerController(input),
-                            new PlayerMaA(2),
-                            new Position(
-                                    ScreenSize.getLeftBorder(),
-                                    0
-                            ),
+                            new PlayerMaA(2.1),
+                            relativePosition,
                             spriteLibrary,
                             5,
                             this
@@ -51,10 +49,7 @@ public class GameState extends State {
                             new NPC(
                                     new NPCController(),
                                     new NPCMaA(2),
-                                    new Position(
-                                            ScreenSize.getLeftBorder()+64,
-                                            0
-                                    ),
+                                    relativePosition,
                                     spriteLibrary,
                                     5,
                                     this
@@ -74,33 +69,25 @@ public class GameState extends State {
         for (int i = 0; i < sMap.length; i++) {
             for (int j = 0; j < sMap[i].length-1; j++) {
                 String letter = sMap[i][j];
+                Position relativePosition = new Position((j-1)*64, ground-(i-1)*64);
                 if(letter.equalsIgnoreCase("G")){
                     mapObjects.add(
                             new Grass(
-                                    new Position(
-                                            (j-1)*64,
-                                            ground-(i-1)*64
-                                    ),
+                                    relativePosition,
                                     Block.GRASS_BLOCK
                             )
                     );
                 } else if(letter.equalsIgnoreCase("A")){
                     mapObjects.add(
                             new ActionBlock(
-                                    new Position(
-                                            (j-1)*64,
-                                            ground-(i-1)*64
-                                    ),
+                                    relativePosition,
                                     Block.ACTION_BLOCK
                             )
                     );
                 } else if(letter.equalsIgnoreCase("F")){
                     mapObjects.add(
                             new FinishBlock(
-                                    new Position(
-                                            (j-1)*64,
-                                            ground-(i-1)*64
-                                    ),
+                                    relativePosition,
                                     Block.ACTION_BLOCK
                             )
                     );

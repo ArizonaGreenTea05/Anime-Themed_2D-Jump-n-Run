@@ -79,12 +79,12 @@ public class NPCMaA extends MotionAndAbilities {
             }
 
             if (controller.isRequestingLeft() && leftSpace()) {
-                deltaX -= 1.6;
+                deltaX -= 1;
                 sitting = false;
             }
 
             if (controller.isRequestingRight() && rightSpace()) {
-                deltaX += 1.6;
+                deltaX += 1;
                 sitting = false;
             }
 

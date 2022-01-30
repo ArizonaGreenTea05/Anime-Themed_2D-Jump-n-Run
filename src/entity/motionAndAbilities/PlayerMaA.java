@@ -14,12 +14,10 @@ public class PlayerMaA extends MotionAndAbilities {
     private double gravity;
     private final int ground = ScreenSize.getGround();
     private int savePosYJump = ground;
-    private GameObject player;
 
     public PlayerMaA(double speed) {
         super(speed);
         canHit = true;
-        //this.player = getThisGameObject();
     }
 
     @Override
@@ -61,7 +59,7 @@ public class PlayerMaA extends MotionAndAbilities {
 
         if(falling) {
             deltaY += getFallSpeed(gravity);
-            gravity -= 0.5;
+            gravity -= 0.01;
             sitting = false;
         }
 
@@ -69,7 +67,7 @@ public class PlayerMaA extends MotionAndAbilities {
             if(gravity == 0) {savePosYJump = (int) Math.round(y);}
 
             deltaY -= getFallSpeed(gravity);
-            gravity += 0.5;
+            gravity += 0.01;
             sitting = false;
         }
 
@@ -95,18 +93,20 @@ public class PlayerMaA extends MotionAndAbilities {
                 sitting = true;
             }
             if (controller.isRequestingLeft() && leftSpace()) {
-                deltaX -= 1.6;
                 sitting = false;
-                if(x <= leftBorder){
-                    moveMap(new Vector2D(1.6,0));
+                if(x <= leftBorder) {
+                    moveMap(new Vector2D(1,0));
+                } else {
+                    deltaX -= 1;
                 }
             }
 
             if (controller.isRequestingRight() && rightSpace()) {
-                deltaX += 1.6;
                 sitting = false;
                 if(x >= rightBorder) {
-                    moveMap(new Vector2D(-1.6,0));
+                    moveMap(new Vector2D(-1,0));
+                } else {
+                    deltaX += 1;
                 }
             }
         }
@@ -135,10 +135,12 @@ public class PlayerMaA extends MotionAndAbilities {
             mapObject.setPosition(new Position(blockPosX + (int) mapVector.getX(), blockPosY + (int) mapVector.getY()));
         }
         for (GameObject gameObject : gameObjects) {
-            int objPosX = gameObject.getPosition().intX();
-            int objPosY = gameObject.getPosition().intY();
+            if(gameObject.getMotionAndAbilities() != this) {
+                int objPosX = gameObject.getPosition().intX();
+                int objPosY = gameObject.getPosition().intY();
 
-            gameObject.setPosition(new Position(objPosX + (int) mapVector.getX(), objPosY + (int) mapVector.getY()));
+                gameObject.setPosition(new Position(objPosX + (int) mapVector.getX(), objPosY + (int) mapVector.getY()));
+            }
         }
     }
 

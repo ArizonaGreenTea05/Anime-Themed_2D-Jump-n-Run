@@ -143,9 +143,10 @@ public abstract class MotionAndAbilities {
     }
 
     protected double getFallSpeed(double x){
-        double d = -0.01 * x*x + 2.9;
-        if(d < 5 && d >= 0 ) return d;
-        return 4;
+        double d = -0.0005 * x*x + 1.5;
+        if(d > 2) {return 1.5;}
+        if(d < 0) {return 0;}
+        return d;
     }
 
     protected void sprint(boolean sprint) {
