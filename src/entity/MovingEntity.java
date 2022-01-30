@@ -21,7 +21,7 @@ public abstract class MovingEntity extends GameObject {
     protected State state;
 
     public MovingEntity(Controller controller, MotionAndAbilities mAndA, Position position, State state) {
-        super(64,64, position.intX(), position.intY());
+        super(32,56, position.intX(), position.intY());
         this.controller = controller;
         this.mAndA = mAndA;
         this.direction = Direction.R;

@@ -1,18 +1,11 @@
 package entity.motionAndAbilities;
 import controller.Controller;
 import core.Position;
-import core.ScreenSize;
 import core.Vector2D;
 import entity.GameObject;
 import game.state.State;
 
 public class NPCMaA extends MotionAndAbilities {
-    private boolean falling;
-    private boolean sitting;
-    private double gravity;
-    private final int ground = ScreenSize.getGround();
-    private int savePosYJump = ground;
-    private GameObject thisGameObject;
 
     public NPCMaA(double speed) {
         super(speed);
@@ -47,7 +40,7 @@ public class NPCMaA extends MotionAndAbilities {
 
         if(falling) {
             deltaY += getFallSpeed(gravity);
-            gravity -= 0.5;
+            gravity -= 0.01;
             sitting = false;
         }
 
@@ -58,7 +51,7 @@ public class NPCMaA extends MotionAndAbilities {
             if(gravity == 0) {savePosYJump = (int) Math.round(y);}
 
             deltaY -= getFallSpeed(gravity);
-            gravity += 0.5;
+            gravity += 0.01;
             sitting = false;
         }
 
@@ -118,13 +111,7 @@ public class NPCMaA extends MotionAndAbilities {
         }
     }
 
-    private boolean thisGameObjectSetted = false;
-    private void setThisGameObject() {
-        if(!thisGameObjectSetted) {
-            thisGameObject = gameObjects.get(findThisGameObjectInList());
-            thisGameObjectSetted = true;
-        }
-    }
+
 
     @Override
     public Vector2D getVector() {

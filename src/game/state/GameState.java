@@ -36,7 +36,7 @@ public class GameState extends State {
                 if(letter.equalsIgnoreCase("P")){
                     Player player = new Player(
                             new PlayerController(input),
-                            new PlayerMaA(2.1),
+                            new PlayerMaA(2),
                             relativePosition,
                             spriteLibrary,
                             5,

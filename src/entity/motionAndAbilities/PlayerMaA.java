@@ -9,11 +9,6 @@ import game.state.State;
 import java.util.List;
 
 public class PlayerMaA extends MotionAndAbilities {
-    private boolean falling;
-    private boolean sitting;
-    private double gravity;
-    private final int ground = ScreenSize.getGround();
-    private int savePosYJump = ground;
 
     public PlayerMaA(double speed) {
         super(speed);
@@ -127,6 +122,7 @@ public class PlayerMaA extends MotionAndAbilities {
 
     private boolean playerSetted = false;
     private void setPlayer() {
+        setThisGameObject();
         if(!playerSetted) {
             playerPosInList = findThisGameObjectInList();
             playerSetted = true;

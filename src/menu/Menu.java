@@ -14,6 +14,8 @@ import java.util.Objects;
 
 public class Menu {
 
+    private String GAME_VERSION;
+
     private static final int AOD = 0;
     private static final int AOT = 1;
 
@@ -105,10 +107,11 @@ public class Menu {
         if(i==AOT) maps = mapsAoT;
     }
 
-    public Menu(){
+    public Menu(String version){
         this.colorSetting = Integer.parseInt(Objects.requireNonNull(FileLoader.load("color.txt")));
         this.width = ScreenSize.getWidth();
         this.height = ScreenSize.getHeight();
+        this.GAME_VERSION = version;
 
         setHighscore();
 
@@ -391,7 +394,7 @@ public class Menu {
                 colorSetting = 0;
             }
             FileLoader.save("" + colorSetting, "color.txt");
-            new Menu();
+            new Menu(GAME_VERSION);
             menu.dispose();
         };
     }
@@ -402,7 +405,7 @@ public class Menu {
 
     private ActionListener getActionListenerStart() {
         return e -> {
-            GameLoop gameLoop = new GameLoop(new Game());
+            GameLoop gameLoop = new GameLoop(new Game(GAME_VERSION));
             new Thread(gameLoop).start();
             menu.dispose();
         };

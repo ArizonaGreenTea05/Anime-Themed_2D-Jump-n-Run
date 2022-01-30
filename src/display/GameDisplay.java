@@ -14,6 +14,7 @@ import java.awt.event.ActionListener;
 import java.awt.image.BufferStrategy;
 
 public class GameDisplay extends JFrame {
+    private String GAME_VERSION;
 
     private Canvas canvas;
     private final Renderer renderer;
@@ -59,12 +60,13 @@ public class GameDisplay extends JFrame {
 
     private final Color textColor = Menu.getTextColor();
 
-    public GameDisplay(Input input, String title, Game game) {
+    public GameDisplay(Input input, String title, String version, Game game) {
         this.game = game;
         this.width = ScreenSize.getWidth();
         this.height = ScreenSize.getHeight();
+        this.GAME_VERSION = version;
 
-        setTitle(title);
+        setTitle(title + GAME_VERSION);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setResizable(false);
         setExtendedState(JFrame.MAXIMIZED_BOTH);
@@ -297,20 +299,20 @@ public class GameDisplay extends JFrame {
             return e -> {
                 score = 0;
                 game.stopGameLoop();
-                new Menu();
+                new Menu(GAME_VERSION);
                 dispose();
             };
         }
         return e -> {
             game.stopGameLoop();
-            new Menu();
+            new Menu(GAME_VERSION);
             dispose();
         };
     }
 
     private ActionListener getActionListenerRestart() {
         return e-> {
-            new Thread(new GameLoop(new Game())).start();
+            new Thread(new GameLoop(new Game(GAME_VERSION))).start();
             game.stopGameLoop();
             dispose();
         };

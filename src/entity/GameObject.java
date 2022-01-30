@@ -14,10 +14,13 @@ public abstract class GameObject {
     protected Position position;
     protected Size size;
     protected boolean solid;
+    protected int width, height;
 
     public GameObject(int width, int height, int posX, int posY) {
-        position = new Position(posX, posY);
-        size = new Size(width, height);
+        this.position = new Position(posX, posY);
+        this.size = new Size(width, height);
+        this.width = width;
+        this.height = height;
     }
 
     public abstract void update();
