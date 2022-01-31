@@ -13,6 +13,11 @@ public class PlayerController implements Controller {
     }
 
     @Override
+    public void setRequestingUp(boolean requestingDown) {
+
+    }
+
+    @Override
     public void setRequestingDown(boolean requestingDown) {
 
     }

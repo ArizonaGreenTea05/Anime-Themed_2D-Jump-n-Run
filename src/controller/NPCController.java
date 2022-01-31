@@ -13,10 +13,10 @@ public class NPCController implements Controller {
     public NPCController() {
     }
 
+    @Override
     public void setRequestingUp(boolean requestingUp) {
         this.isRequestingUp = requestingUp;
     }
-
 
     @Override
     public void setRequestingDown(boolean requestingDown) {
@@ -79,7 +79,7 @@ public class NPCController implements Controller {
 
     @Override
     public boolean isNotRequestingHit() {
-        return isNotRequestingHit;
+        return !isRequestingHit;
     }
 
     @Override

@@ -2,7 +2,7 @@ package entity;
 
 import core.Direction;
 import core.Position;
-import entity.motionAndAbilities.MotionAndAbilities;
+import motionAndAbilities.MotionAndAbilities;
 
 import java.awt.*;
 

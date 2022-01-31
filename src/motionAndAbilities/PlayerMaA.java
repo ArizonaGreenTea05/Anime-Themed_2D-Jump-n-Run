@@ -1,4 +1,4 @@
-package entity.motionAndAbilities;
+package motionAndAbilities;
 import controller.Controller;
 import core.Position;
 import core.ScreenSize;
@@ -81,7 +81,7 @@ public class PlayerMaA extends MotionAndAbilities {
 
         if(isHitting()) {
             sitting = false;
-            damage();
+            damage(1);
         } else {
 
             if (controller.isRequestingDown()) {

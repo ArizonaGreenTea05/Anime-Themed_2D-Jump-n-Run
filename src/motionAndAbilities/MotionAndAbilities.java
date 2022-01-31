@@ -1,4 +1,4 @@
-package entity.motionAndAbilities;
+package motionAndAbilities;
 
 import controller.Controller;
 import core.Position;
@@ -40,17 +40,22 @@ public abstract class MotionAndAbilities {
         this.vector = new Vector2D(0, 0);
     }
 
-    public abstract void update(Controller controller, Position position, State state);
+    protected double getFallSpeed(double x){
+        double d = -0.00005 * x*x + 1.5;
+        if(d > 2) {return 1.5;}
+        if(d < 0) {return 0;}
+        return d;
+    }
 
     protected boolean hasGround() {
-        if(testHasGround(mapObjects)){
+        if(hasGround(mapObjects)){
             return true;
         } else {
-            return testHasGround(gameObjects);
+            return hasGround(gameObjects);
         }
     }
 
-    private boolean testHasGround(List<GameObject> objects){
+    private boolean hasGround(List<GameObject> objects){
         for (GameObject object : objects) {
 
             if (object.getMotionAndAbilities() != this && object.isSolid()) {
@@ -83,15 +88,15 @@ public abstract class MotionAndAbilities {
 
 
     protected boolean topSpace() {
-        if(!testTopSpace(mapObjects)){
+        if(!topSpace(mapObjects)){
             return false;
         } else {
-            return testTopSpace(gameObjects);
+            return topSpace(gameObjects);
         }
 
     }
 
-    private boolean testTopSpace(List<GameObject> objects){
+    private boolean topSpace(List<GameObject> objects){
         for (GameObject object : objects) {
 
             if (object.getMotionAndAbilities() != this && object.isSolid()) {
@@ -128,14 +133,14 @@ public abstract class MotionAndAbilities {
     }
 
     protected boolean rightSpace() {
-        if(!testRightSpace(mapObjects)){
+        if(!rightSpace(mapObjects)){
             return false;
         } else {
-            return testRightSpace(gameObjects);
+            return rightSpace(gameObjects);
         }
     }
 
-    private boolean testRightSpace(List<GameObject> objects){
+    private boolean rightSpace(List<GameObject> objects){
         for (GameObject object : objects) {
 
             if (object.getMotionAndAbilities() != this && object.isSolid()) {
@@ -164,14 +169,14 @@ public abstract class MotionAndAbilities {
     }
 
     protected boolean leftSpace() {
-        if(!testLeftSpace(mapObjects)){
+        if(!leftSpace(mapObjects)){
             return false;
         } else {
-            return testLeftSpace(gameObjects);
+            return leftSpace(gameObjects);
         }
     }
 
-    private boolean testLeftSpace(List<GameObject> objects){
+    private boolean leftSpace(List<GameObject> objects){
         for (GameObject object : objects) {
             if (object.getMotionAndAbilities() != this && object.isSolid()) {
                 int objectWidth = object.getSize().getWidth();
@@ -198,13 +203,6 @@ public abstract class MotionAndAbilities {
         return true;
     }
 
-    protected double getFallSpeed(double x){
-        double d = -0.0005 * x*x + 1.5;
-        if(d > 2) {return 1.5;}
-        if(d < 0) {return 0;}
-        return d;
-    }
-
     protected void sprint(boolean sprint) {
         if(sprint && speed == normalSpeed) {
             speed++;
@@ -213,20 +211,7 @@ public abstract class MotionAndAbilities {
         }
     }
 
-
-    public abstract Vector2D getVector();
-
-    public abstract boolean isMoving();
-
-    public abstract boolean isJumping();
-
-    public abstract boolean isHitting();
-
-    public abstract boolean isSitting();
-
-    public abstract boolean canCauseBlockAction();
-
-    protected void damage(){
+    protected void damage(int damage){
         if(canHit) {
             canHit = false;
 
@@ -251,11 +236,11 @@ public abstract class MotionAndAbilities {
                     int posX = (int) (x+thisGameObjectSideSpace);
                     int posY = (int) (y+thisGameObjectTopSpace);
 
-                    if (posY < y + 32 && posY > y - 32) {
+                    if (objectPosY < posY + 32 && objectPosY > posY - 32) {
                         if (thisGameObject.getDirection() == R && objectPosX < posX + thisGameObjectWidth + 32 && objectPosX > posX) {
-                            gameObject.subtractLifes(1);
+                            gameObject.subtractLifes(damage);
                         } else if (thisGameObject.getDirection() == L && objectPosX < posX && objectPosX > posX - objectWidth - 32) {
-                            gameObject.subtractLifes(1);
+                            gameObject.subtractLifes(damage);
                         }
                     }
                 }
@@ -282,4 +267,19 @@ public abstract class MotionAndAbilities {
             thisGameObjectSetted = true;
         }
     }
+
+
+    public abstract Vector2D getVector();
+
+    public abstract boolean isMoving();
+
+    public abstract boolean isJumping();
+
+    public abstract boolean isHitting();
+
+    public abstract boolean isSitting();
+
+    public abstract boolean canCauseBlockAction();
+
+    public abstract void update(Controller controller, Position position, State state);
 }

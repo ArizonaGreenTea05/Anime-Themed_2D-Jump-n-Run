@@ -4,7 +4,7 @@ import controller.Controller;
 import core.Direction;
 import core.Position;
 import core.ScreenSize;
-import entity.motionAndAbilities.MotionAndAbilities;
+import motionAndAbilities.MotionAndAbilities;
 import game.state.State;
 import gfx.AnimationManager;
 

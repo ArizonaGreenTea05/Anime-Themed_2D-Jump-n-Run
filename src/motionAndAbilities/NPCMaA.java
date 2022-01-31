@@ -1,4 +1,4 @@
-package entity.motionAndAbilities;
+package motionAndAbilities;
 import controller.Controller;
 import core.Position;
 import core.Vector2D;
@@ -6,6 +6,7 @@ import entity.GameObject;
 import game.state.State;
 
 public class NPCMaA extends MotionAndAbilities {
+    boolean cooldownRunning = false;
 
     public NPCMaA(double speed) {
         super(speed);
@@ -20,6 +21,7 @@ public class NPCMaA extends MotionAndAbilities {
         this.position = position;
         this.state = state;
         setThisGameObject();
+        controlMotionAndAbilities();
 
         double deltaX = 0;
         double deltaY = 0;
@@ -44,8 +46,6 @@ public class NPCMaA extends MotionAndAbilities {
             sitting = false;
         }
 
-        controlMotion();
-
 
         if (controller.isRequestingUp() && !falling) {
             if(gravity == 0) {savePosYJump = (int) Math.round(y);}
@@ -69,7 +69,7 @@ public class NPCMaA extends MotionAndAbilities {
 
         if(isHitting()) {
             sitting = false;
-            damage();
+            damage(1);
         } else {
 
             if (controller.isRequestingDown()) {
@@ -95,22 +95,52 @@ public class NPCMaA extends MotionAndAbilities {
 
     }
 
-    private void controlMotion() {
+    private void controlMotionAndAbilities() {
         GameObject player = gameObjects.get(playerPosInList);
-        int pPosX = player.getPosition().intX();
-        int pPosY = player.getPosition().intY();
+        int playerWidth = player.getSize().getWidth();
+        int playerHeight = player.getSize().getHeight();
+        int playerSideSpace = (64-playerWidth)/2;
+        int playerTopSpace = (64-playerHeight);
+        int pPosX = player.getPosition().intX() + playerSideSpace;
+        int pPosY = player.getPosition().intY() + playerTopSpace;
+
+        int thisGameObjectWidth = thisGameObjectSize.getWidth();
+        int thisGameObjectHeight = thisGameObjectSize.getHeight();
+        int thisGameObjectSideSpace = (64-thisGameObjectWidth)/2;
+        int thisGameObjectTopSpace = (64-thisGameObjectHeight);
+        int posX = (int) (x+thisGameObjectSideSpace);
+        int posY = (int) (y+thisGameObjectTopSpace);
+
         if(thisGameObject.isShown()) {
-            if (x < pPosX) {
+            if (posX < pPosX) {
                 controller.setRequestingLeft(false);
                 controller.setRequestingRight(true);
             }
-            if (x > pPosX) {
+            if (posX > pPosX) {
                 controller.setRequestingRight(false);
                 controller.setRequestingLeft(true);
             }
+
+
+            if(pPosY < posY + 32 && pPosY > posY - 32){
+                if (pPosX < posX + thisGameObjectWidth + 32 && pPosX > posX-thisGameObjectWidth-32) {
+                    if(!cooldownRunning) {
+                        new Thread(() -> {
+                            cooldownRunning = true;
+                            controller.setRequestingHit(true);
+                            try {
+                                Thread.sleep(500);
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
+                            }
+                            controller.setRequestingHit(false);
+                            cooldownRunning = false;
+                        }).start();
+                    }
+                }
+            }
         }
     }
-
 
 
     @Override

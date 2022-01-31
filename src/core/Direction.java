@@ -1,6 +1,6 @@
 package core;
 
-import entity.motionAndAbilities.MotionAndAbilities;
+import motionAndAbilities.MotionAndAbilities;
 
 public enum Direction {
 

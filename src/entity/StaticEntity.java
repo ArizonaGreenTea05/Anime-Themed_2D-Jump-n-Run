@@ -1,9 +1,8 @@
 package entity;
 
 import core.Direction;
-import entity.motionAndAbilities.MotionAndAbilities;
+import motionAndAbilities.MotionAndAbilities;
 import core.Position;
-import gfx.ImageUtils;
 
 import java.awt.*;
 

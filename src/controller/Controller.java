@@ -1,6 +1,8 @@
 package controller;
 
 public interface Controller {
+    void setRequestingUp(boolean requestingUp);
+
     void setRequestingDown(boolean requestingDown);
 
     void setRequestingLeft(boolean requestingLeft);

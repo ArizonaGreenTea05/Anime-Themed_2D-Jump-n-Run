@@ -4,7 +4,7 @@ import core.Direction;
 import core.Position;
 import core.ScreenSize;
 import core.Size;
-import entity.motionAndAbilities.MotionAndAbilities;
+import motionAndAbilities.MotionAndAbilities;
 import game.state.State;
 import gfx.ImageUtils;
 

@@ -3,7 +3,7 @@ package entity;
 import controller.Controller;
 import core.Position;
 import display.GameDisplay;
-import entity.motionAndAbilities.MotionAndAbilities;
+import motionAndAbilities.MotionAndAbilities;
 import game.state.State;
 import gfx.AnimationManager;
 import gfx.SpriteLibrary;
