@@ -13,14 +13,11 @@ public interface Controller {
 
     void setRequestingHit(boolean requestingHit);
 
-    void setNotRequestingHit(boolean notRequestingHit);
-
     boolean isRequestingUp();
     boolean isRequestingDown();
     boolean isRequestingLeft();
     boolean isRequestingRight();
     boolean isRequestingSprint();
     boolean isRequestingHit();
-    boolean isNotRequestingHit();
     boolean isRequestingESC();
 }

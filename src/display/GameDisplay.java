@@ -142,18 +142,20 @@ public class GameDisplay extends JFrame {
     }
 
     private void initializePanels() {
+        Rectangle panelBounds = new Rectangle(1, 1, width-2, height-2);
+
         pPauseWindow.setVisible(false);
-        pPauseWindow.setBounds(1, 1, width-2, height-2);
+        pPauseWindow.setBounds(panelBounds);
         pPauseWindow.setLayout(null);
         pPauseWindow.setBackground(bgColor);
 
         pFailedWindow.setVisible(false);
-        pFailedWindow.setBounds(1, 1, width-2, height-2);
+        pFailedWindow.setBounds(panelBounds);
         pFailedWindow.setLayout(null);
         pFailedWindow.setBackground(bgColor);
 
         pWonWindow.setVisible(false);
-        pWonWindow.setBounds(1, 1, width-2, height-2);
+        pWonWindow.setBounds(panelBounds);
         pWonWindow.setLayout(null);
         pWonWindow.setBackground(bgColor);
     }

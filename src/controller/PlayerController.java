@@ -43,11 +43,6 @@ public class PlayerController implements Controller {
     }
 
     @Override
-    public void setNotRequestingHit(boolean notRequestingHit) {
-
-    }
-
-    @Override
     public boolean isRequestingUp() {
         return input.isPressed(KeyEvent.VK_UP) || input.isPressed(KeyEvent.VK_W) || input.isPressed(KeyEvent.VK_SPACE);
     }
@@ -75,11 +70,6 @@ public class PlayerController implements Controller {
     @Override
     public boolean isRequestingHit() {
         return input.isPressed(KeyEvent.VK_J);
-    }
-
-    @Override
-    public boolean isNotRequestingHit() {
-        return !isRequestingHit();
     }
 
     @Override

@@ -16,6 +16,8 @@ public class Menu {
 
     private String GAME_VERSION;
 
+    private static Icon bgImage;
+
     private static final int AOD = 0;
     private static final int AOT = 1;
 
@@ -92,7 +94,7 @@ public class Menu {
     private static final Color[] backButtonColor =      { color2,         color2,         color3,        Color.BLACK};
     private static final Color[] labelColor =            { color2,         color2,         color3,        Color.BLACK};
     private static final Color[] textColor =             { Color.WHITE,    Color.BLACK,    Color.BLACK,   color4};
-    private final String[] bgImage =                    {"bg_light.png", "bg_light.png", "bg_dark.png", "bg_dark.png"};
+    private final String[] bgImages =                    {"bg_light.png", "bg_light.png", "bg_dark.png", "bg_dark.png"};
 
     public static final String textFont = "Comic Sans MS";
 
@@ -248,7 +250,8 @@ public class Menu {
 
     private void initializeBackground() {
         background.setBounds(0,0,menu.getWidth(), menu.getHeight());
-        background.setIcon(FileLoader.loadIcon(bgImage[colorSetting],"/menu/", menu.getWidth(), menu.getHeight()));
+        bgImage = FileLoader.loadIcon(bgImages[colorSetting],"/menu/", menu.getWidth(), menu.getHeight());
+        background.setIcon(bgImage);
         menu.setContentPane(background);
     }
 
@@ -545,6 +548,10 @@ public class Menu {
 
     public static Color getBGColor(){
         return bgColors[theme];
+    }
+
+    public static Icon getBGImage(){
+        return bgImage;
     }
 
     public static Color getButtonColor(){

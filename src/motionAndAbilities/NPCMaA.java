@@ -6,7 +6,8 @@ import entity.GameObject;
 import game.state.State;
 
 public class NPCMaA extends MotionAndAbilities {
-    boolean cooldownRunning = false;
+    private boolean cooldownRunning = false;
+    private boolean didDamage = false;
 
     public NPCMaA(double speed) {
         super(speed);
@@ -63,13 +64,14 @@ public class NPCMaA extends MotionAndAbilities {
             sprint(false);
         }
 
-        if(controller.isNotRequestingHit()) {
+        if(!controller.isRequestingHit()) {
             canHit = true;
         }
 
         if(isHitting()) {
             sitting = false;
             damage(1);
+
         } else {
 
             if (controller.isRequestingDown()) {
@@ -126,8 +128,8 @@ public class NPCMaA extends MotionAndAbilities {
                 if (pPosX < posX + thisGameObjectWidth + 32 && pPosX > posX-thisGameObjectWidth-32) {
                     if(!cooldownRunning) {
                         new Thread(() -> {
-                            cooldownRunning = true;
                             controller.setRequestingHit(true);
+                            cooldownRunning = true;
                             try {
                                 Thread.sleep(500);
                             } catch (InterruptedException e) {

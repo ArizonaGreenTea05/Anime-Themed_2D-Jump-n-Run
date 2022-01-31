@@ -8,7 +8,6 @@ public class NPCController implements Controller {
     private boolean isRequestingRight = false;
     private boolean isRequestingSprint = false;
     private boolean isRequestingHit = false;
-    private boolean isNotRequestingHit = !isRequestingHit;
 
     public NPCController() {
     }
@@ -42,12 +41,6 @@ public class NPCController implements Controller {
     public void setRequestingHit(boolean requestingHit) {
         this.isRequestingHit = requestingHit;
     }
-
-    @Override
-    public void setNotRequestingHit(boolean notRequestingHit) {
-        this.isNotRequestingHit = notRequestingHit;
-    }
-
     @Override
     public boolean isRequestingUp() {
         return isRequestingUp;
@@ -75,11 +68,6 @@ public class NPCController implements Controller {
     @Override
     public boolean isRequestingHit(){
         return isRequestingHit;
-    }
-
-    @Override
-    public boolean isNotRequestingHit() {
-        return !isRequestingHit;
     }
 
     @Override

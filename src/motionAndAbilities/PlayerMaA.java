@@ -75,7 +75,7 @@ public class PlayerMaA extends MotionAndAbilities {
             sprint(false);
         }
 
-        if(controller.isNotRequestingHit()) {
+        if(!controller.isRequestingHit()) {
             canHit = true;
         }
 
