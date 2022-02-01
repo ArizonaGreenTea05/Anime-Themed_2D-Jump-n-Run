@@ -85,7 +85,7 @@ public class NPC extends MovingEntity {
 
     @Override
     public void testIfAlive(){
-        if(lifes == 0){
+        if(lifes <= 0){
             state.setUpdatable(false);
             state.getGameObjects().remove(this);
             state.setUpdatable(true);

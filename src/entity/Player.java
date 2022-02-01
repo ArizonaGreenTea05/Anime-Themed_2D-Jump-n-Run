@@ -104,7 +104,7 @@ public class Player extends MovingEntity {
 
     @Override
     public void testIfAlive(){
-        if(lifes == 0){
+        if(lifes <= 0){
             state.getGame().getGameDisplay().showFailed();
         }
     }

@@ -126,8 +126,8 @@ public class NPCMaA extends MotionAndAbilities {
             if(pPosY < posY + 32 && pPosY > posY - 32){
                 if (pPosX < posX + thisGameObjectWidth + 32 && pPosX > posX-thisGameObjectWidth-32) {
                     if(!cooldownRunning) {
-                        cooldownRunning = true;
                         new Thread(() -> {
+                            cooldownRunning = true;
                             controller.setRequestingHit(true);
                             try {
                                 Thread.sleep(500);
