@@ -2,6 +2,7 @@ package menu;
 
 import core.ScreenSize;
 import display.GameDisplay;
+import entity.GameObject;
 import game.Game;
 import game.GameLoop;
 import utils.ElseUtils;
@@ -196,7 +197,7 @@ public class Menu {
         lHighscore.setForeground(textColor[colorSetting]);
         lHighscore.setBackground(labelColor[colorSetting]);
         lHighscore.setFont(new Font(textFont, Font.PLAIN, fontSize));
-        lHighscore.setText(" " + highScore);
+        lHighscore.setText(" " + ElseUtils.shorten(String.valueOf(highScore),4));
 
         lScoreText.setBounds(menu.getWidth()-labelWidth1-labelWidth2-22, 47+4*labelHeight, labelWidth1, labelHeight);
         lScoreText.setOpaque(true);
@@ -209,7 +210,7 @@ public class Menu {
         lScore.setForeground(textColor[colorSetting]);
         lScore.setBackground(labelColor[colorSetting]);
         lScore.setFont(new Font(textFont, Font.PLAIN, fontSize));
-        lScore.setText(" " + GameDisplay.getScore());
+        lScore.setText(" " + ElseUtils.shorten(String.valueOf(GameDisplay.getScore()),4));
         // -Status-Anzeige-
     }
 

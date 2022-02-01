@@ -446,9 +446,9 @@ public class GameDisplay extends JFrame {
         lLifes.setText(" " + lifes);
     }
 
-    public void setScoreLabel(int i) {
+    public void setScoreLabel(double i) {
         score = i;
-        lScore.setText(" " + score);
+        lScore.setText(" " + ElseUtils.shorten(String.valueOf(score),4));
     }
 
     public static double getScore(){

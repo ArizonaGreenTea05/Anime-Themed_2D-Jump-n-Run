@@ -4,7 +4,7 @@ import display.GameDisplay;
 
 public class GameLoop implements Runnable {
 
-    private int score = 100;
+    private double score = 100;
 
     private Game game;
     private GameDisplay gameDisplay;
@@ -28,6 +28,17 @@ public class GameLoop implements Runnable {
         double accumulator = 0;
         long currentTime, lastUpdate = System.currentTimeMillis();
         nextStatTime = System.currentTimeMillis() + 1000;
+        new Thread(() -> {
+            while(running) {
+                try {
+                    Thread.sleep(100);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                score -= 0.1;
+                gameDisplay.setScoreLabel(score);
+            }
+        }).start();
 
         while(running){
                 currentTime = System.currentTimeMillis();
@@ -54,8 +65,6 @@ public class GameLoop implements Runnable {
             gameDisplay.setFPS("FPS: " + fps);
             fps = 0;
             ups = 0;
-            score--;
-            gameDisplay.setScoreLabel(score);
             nextStatTime = System.currentTimeMillis() + 1000;
         }
     }

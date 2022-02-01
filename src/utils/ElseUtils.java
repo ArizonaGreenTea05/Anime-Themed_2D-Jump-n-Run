@@ -30,4 +30,17 @@ public class ElseUtils {
 
         return out.toString();
     }
+
+    public static String shorten(String s, int length) {
+        char[] c = s.toCharArray();
+
+        if(length > c.length) {return s;}
+
+        String out = "";
+        for (int i = 0; i < length; i++) {
+            out += c[i];
+        }
+
+        return out;
+    }
 }
