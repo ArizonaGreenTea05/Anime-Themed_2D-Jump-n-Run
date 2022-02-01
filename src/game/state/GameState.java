@@ -58,8 +58,6 @@ public class GameState extends State {
                 }
             }
         }
-
-        gameObjects.add(player);
     }
 
 

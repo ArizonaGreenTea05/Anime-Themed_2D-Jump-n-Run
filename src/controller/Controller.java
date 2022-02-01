@@ -18,6 +18,8 @@ public interface Controller {
     boolean isRequestingLeft();
     boolean isRequestingRight();
     boolean isRequestingSprint();
+
     boolean isRequestingHit();
+
     boolean isRequestingESC();
 }
