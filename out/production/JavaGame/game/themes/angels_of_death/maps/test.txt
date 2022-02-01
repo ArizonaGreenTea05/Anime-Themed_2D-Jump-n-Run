@@ -6,13 +6,13 @@ GGGGGGGGGG......................................................................
 GGGGGGGGGG.....................................................................................GGGGGGGGGG
 GGGGGGGGGG.....................................................................................GGGGGGGGGG
 GGGGGGGGGG......................................A..............................................GGGGGGGGGG
-GGGGGGGGGG.....................................E...........................................I...GGGGGGGGGG
-GGGGGGGGGG....GGGGGG...................E.....GGGGGG...GGG.........................GGG......I...GGGGGGGGGG
+GGGGGGGGGG.................................................................................I...GGGGGGGGGG
+GGGGGGGGGG....GGGGGG.........................GGGGGG...GGG.........................GGG......I...GGGGGGGGGG
 GGGGGGGGGG............................GGGG............GGG........................GGGG......I...GGGGGGGGGG
 GGGGGGGGGG.............AG..GG.........................GGG.......................GGGGG......I...GGGGGGGGGG
 GGGGGGGGGG.......................GGG..................GGG......................GGGGGG......I...GGGGGGGGGG
-GGGGGGGGGG.........GAGG...............................GGG.....................GGGGGGG......I...GGGGGGGGGG
-GGGGGGGGGGP....E....................E.................GG.............E.......GGGGGGGG......I...GGGGGGGGGG
+GGGGGGGGGG.P.......GAGG...............................GGG.....................GGGGGGG......I...GGGGGGGGGG
+GGGGGGGGGG........E...................................GG.....................GGGGGGGG......I...GGGGGGGGGG
 GGGGGGGGGGGGGGGGGGGGG...GGGGGGGGGGGGGGGGGGGG....GGGGGGG..GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGFGGGGGGGGGGGGG
 GGGGGGGGGGGGGGGGGGGGG....GGGGGGGGGGGGGGGGGG......GGGGG..GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG
 GGGGGGGGGGGGGGGGGGGGG..................................GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG
