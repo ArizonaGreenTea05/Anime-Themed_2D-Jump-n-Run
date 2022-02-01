@@ -7,7 +7,6 @@ import game.state.State;
 
 public class NPCMaA extends MotionAndAbilities {
     private boolean cooldownRunning = false;
-    private boolean didDamage = false;
 
     public NPCMaA(double speed) {
         super(speed);
