@@ -34,16 +34,14 @@ public class GameState extends State {
                 String letter = sMap[i][j];
                 Position relativePosition = new Position((j-1)*64, ground-(i-1)*64);
                 if(letter.equalsIgnoreCase("P")){
-                    Player player = new Player(
+                    this.player = new Player(
                             new PlayerController(input),
-                            new PlayerMaA(2),
+                            new PlayerMaA(3.5),
                             relativePosition,
                             spriteLibrary,
                             5,
                             this
                     );
-                    this.player = player;
-                    gameObjects.add(player);
                 } else if(letter.equalsIgnoreCase("E")){
                     gameObjects.add(
                             new NPC(
@@ -58,6 +56,7 @@ public class GameState extends State {
                 }
             }
         }
+        gameObjects.add(player);
     }
 
 

@@ -33,6 +33,7 @@ public abstract class MotionAndAbilities {
     protected int savePosYJump = ground;
     protected GameObject thisGameObject;
     protected Size thisGameObjectSize;
+    protected int jumpHeight;
 
     public MotionAndAbilities(double speed) {
         this.speed = speed;
@@ -41,10 +42,9 @@ public abstract class MotionAndAbilities {
     }
 
     protected double getFallSpeed(double x){
-        double d = -0.00005 * x*x + 1.5;
-        if(d > 2) {return 1.5;}
-        if(d < 0) {return 0;}
-        return d;
+        if(x<0) {x = 0;}
+        if(x>1.5) {x = 1.5;}
+        return -0.2*Math.pow(x,2) + 4.8;
     }
 
     protected boolean hasGround() {
@@ -75,7 +75,7 @@ public abstract class MotionAndAbilities {
                 int posY = (int) (y+thisGameObjectTopSpace);
 
                 if (blockPosX < posX + thisGameObjectWidth + 2 && blockPosX > posX - object.getSize().getWidth() - 2) {
-                    if (blockPosY < posY + thisGameObjectHeight + 2 && blockPosY > posY + thisGameObjectHeight - 2) {
+                    if (blockPosY < posY + thisGameObjectHeight + 2 && blockPosY > posY + thisGameObjectHeight - 5) {
                         position.setY(blockPosY - 64);
                         return true;
                     }
@@ -116,7 +116,7 @@ public abstract class MotionAndAbilities {
                 int posY = (int) (y+thisGameObjectTopSpace);
 
                 if (blockPosX < posX + thisGameObjectWidth && blockPosX > posX - object.getSize().getWidth()+3) {
-                    if (blockPosY < posY - objectHeight + 2 && blockPosY > posY - objectHeight - 2) {
+                    if (blockPosY < posY - objectHeight + 2 && blockPosY > posY - objectHeight - 5) {
                         if(actionCaused()) {
                             object.doActionOnContact(state);
                         }

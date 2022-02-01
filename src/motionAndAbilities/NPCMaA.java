@@ -11,6 +11,7 @@ public class NPCMaA extends MotionAndAbilities {
     public NPCMaA(double speed) {
         super(speed);
         canHit = true;
+        jumpHeight = 160;
     }
 
     @Override
@@ -31,7 +32,7 @@ public class NPCMaA extends MotionAndAbilities {
 
         //wenn Position 64p (Character-Größe = 64, deswegen 128) über Boden wird fallling true
         //wenn Position größer als Boden und nicht Up requestet wird wird falling true
-        if(y < savePosYJump-160 || (!controller.isRequestingUp() && !hasGround()) || !topSpace()){
+        if(y < savePosYJump-jumpHeight || (!controller.isRequestingUp() && !hasGround()) || !topSpace()){
             falling = true;
         }
 
@@ -42,7 +43,7 @@ public class NPCMaA extends MotionAndAbilities {
 
         if(falling) {
             deltaY += getFallSpeed(gravity);
-            gravity -= 0.01;
+            gravity -= 0.1;
             sitting = false;
         }
 
@@ -51,7 +52,7 @@ public class NPCMaA extends MotionAndAbilities {
             if(gravity == 0) {savePosYJump = (int) Math.round(y);}
 
             deltaY -= getFallSpeed(gravity);
-            gravity += 0.01;
+            gravity += 0.1;
             sitting = false;
         }
 
@@ -92,7 +93,7 @@ public class NPCMaA extends MotionAndAbilities {
 
 
         vector = new Vector2D(deltaX, deltaY);
-        vector.multiply(speed, normalSpeed);
+        vector.multiply(speed, 1);
 
     }
 

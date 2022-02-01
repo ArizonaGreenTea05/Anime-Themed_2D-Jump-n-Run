@@ -1,6 +1,6 @@
 import menu.Menu;
 public class Launcher {
     public static void main(String[] args) {
-        new Menu("V0.3 - problem solved");
+        new Menu("V0.3");
     }
 }

@@ -17,4 +17,17 @@ public class ElseUtils {
 
         return out.toString();
     }
+
+    public static String removeSpaces(String s){
+        char[] c = s.toCharArray();
+        StringBuilder out = new StringBuilder("" + (char) (c[0] - 32));
+
+        for (int i = 1; i < c.length; i++) {
+            if(c[i] != ' '){
+                out.append(c[i]);
+            }
+        }
+
+        return out.toString();
+    }
 }

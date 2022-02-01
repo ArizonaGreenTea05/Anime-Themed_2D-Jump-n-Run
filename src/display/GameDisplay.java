@@ -2,7 +2,7 @@ package display;
 
 import game.Game;
 import game.GameLoop;
-import utils.FileLoader;
+import utils.*;
 import core.ScreenSize;
 import game.state.State;
 import input.Input;
@@ -12,6 +12,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferStrategy;
+
 
 public class GameDisplay extends JFrame {
     private String GAME_VERSION;
@@ -431,6 +432,9 @@ public class GameDisplay extends JFrame {
         pWonWindow.add(lScoreText);
         pWonWindow.add(lLifes);
         pWonWindow.add(lLifesText);
+        if(score > Double.parseDouble(ElseUtils.removeSpaces(lHighScore.getText()))){
+            lHighScore.setText(" " + score);
+        }
         pWonWindow.setVisible(true);
     }
 

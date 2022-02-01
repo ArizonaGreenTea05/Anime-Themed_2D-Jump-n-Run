@@ -13,6 +13,7 @@ public class PlayerMaA extends MotionAndAbilities {
     public PlayerMaA(double speed) {
         super(speed);
         canHit = true;
+        jumpHeight = 176;
     }
 
     @Override
@@ -36,7 +37,7 @@ public class PlayerMaA extends MotionAndAbilities {
 
         //wenn Position 64p (Character-Größe = 64, deswegen 128) über Boden wird fallling true
         //wenn Position größer als Boden und nicht Up requestet wird wird falling true
-        if(y < savePosYJump-160 || (!controller.isRequestingUp() && !hasGround()) || !topSpace()){
+        if(y < savePosYJump-jumpHeight || (!controller.isRequestingUp() && !hasGround()) || !topSpace()){
             falling = true;
         }
 
@@ -54,17 +55,17 @@ public class PlayerMaA extends MotionAndAbilities {
         }
 
         if(falling) {
-            deltaY += getFallSpeed(gravity);
-            gravity -= 0.01;
+            gravity -= 0.1;
             sitting = false;
+            deltaY += getFallSpeed(gravity);
         }
 
         if (controller.isRequestingUp() && !falling) {
             if(gravity == 0) {savePosYJump = (int) Math.round(y);}
 
-            deltaY -= getFallSpeed(gravity);
-            gravity += 0.01;
+            gravity += 0.1;
             sitting = false;
+            deltaY -= getFallSpeed(gravity);
         }
 
         if(controller.isRequestingSprint()) {
@@ -116,7 +117,7 @@ public class PlayerMaA extends MotionAndAbilities {
 
 
         vector = new Vector2D(deltaX, deltaY);
-        vector.multiply(speed, normalSpeed);
+        vector.multiply(speed, 1);
 
     }
 
