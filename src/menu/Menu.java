@@ -133,7 +133,6 @@ public class Menu {
 
 
     private void initializeMenu() {
-        // 16/9-Format, halb so breit wie Bildschirm, Höhe dementsprechend angepasst
         menu.setSize(width,height);
         menu.setIconImage(FileLoader.loadImage("sakura_icon.png", "/"));
         menu.setUndecorated(true);

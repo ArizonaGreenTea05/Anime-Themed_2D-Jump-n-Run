@@ -30,13 +30,13 @@ public class GameLoop implements Runnable {
         nextStatTime = System.currentTimeMillis() + 1000;
         new Thread(() -> {
             while(running) {
+                gameDisplay.setScoreLabel(score);
                 try {
                     Thread.sleep(100);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
                 score -= 0.1;
-                gameDisplay.setScoreLabel(score);
             }
         }).start();
 

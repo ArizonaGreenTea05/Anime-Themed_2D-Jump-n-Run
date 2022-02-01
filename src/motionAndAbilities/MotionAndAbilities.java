@@ -44,7 +44,7 @@ public abstract class MotionAndAbilities {
     protected double getFallSpeed(double x){
         if(x<0) {x = 0;}
         if(x>1.5) {x = 1.5;}
-        return -0.2*Math.pow(x,2) + 4.8;
+        return -0.1*Math.pow(x,2) + 5;
     }
 
     protected boolean hasGround() {

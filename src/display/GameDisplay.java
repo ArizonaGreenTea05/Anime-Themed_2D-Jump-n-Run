@@ -433,7 +433,7 @@ public class GameDisplay extends JFrame {
         pWonWindow.add(lLifes);
         pWonWindow.add(lLifesText);
         if(score > Double.parseDouble(ElseUtils.removeSpaces(lHighScore.getText()))){
-            lHighScore.setText(" " + score);
+            lHighScore.setText(" " + ElseUtils.shorten(String.valueOf(score),4));
         }
         pWonWindow.setVisible(true);
     }
