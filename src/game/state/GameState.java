@@ -25,10 +25,16 @@ public class GameState extends State {
 
         createMap(sMap, ground);
 
-        initializeCharacters(sMap, ground);
+        /*
+        player muss zuerst initialisiert werden, damit er in GameObjects an Index 0 zu finden ist
+        und sich seine Index-Position somit nicht ändert, egal ob Objekte hinzugefügt oder entfernt werden.
+         */
+        initializePlayer(sMap, ground);
+
+        initializeNPCs(sMap, ground);
     }
 
-    private void initializeCharacters(String[][] sMap, int ground) {
+    private void initializePlayer(String[][] sMap, int ground) {
         for (int i = 0; i < sMap.length; i++) {
             for (int j = 0; j < sMap[i].length-1; j++) {
                 String letter = sMap[i][j];
@@ -42,7 +48,18 @@ public class GameState extends State {
                             5,
                             this
                     );
-                } else if(letter.equalsIgnoreCase("E")){
+                    gameObjects.add(player);
+                }
+            }
+        }
+    }
+
+    private void initializeNPCs(String[][] sMap, int ground) {
+        for (int i = 0; i < sMap.length; i++) {
+            for (int j = 0; j < sMap[i].length-1; j++) {
+                String letter = sMap[i][j];
+                Position relativePosition = new Position((j-1)*64, ground-(i-1)*64);
+                if(letter.equalsIgnoreCase("E")){
                     gameObjects.add(
                             new NPC(
                                     new NPCController(),
@@ -56,7 +73,6 @@ public class GameState extends State {
                 }
             }
         }
-        gameObjects.add(player);
     }
 
 

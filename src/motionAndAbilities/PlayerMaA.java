@@ -47,11 +47,7 @@ public class PlayerMaA extends MotionAndAbilities {
         }
 
         if(y > screenHeight + 64){
-            for (GameObject gameObject : gameObjects) {
-                if(gameObject.getMotionAndAbilities() == this) {
-                    gameObject.subtractLifes(1);
-                }
-            }
+            thisGameObject.subtractLifes(1);
         }
 
         if(falling) {

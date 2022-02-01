@@ -1,9 +1,12 @@
 package motionAndAbilities;
 import controller.Controller;
 import core.Position;
+import core.ScreenSize;
 import core.Vector2D;
 import entity.GameObject;
 import game.state.State;
+
+import static core.Direction.*;
 
 public class NPCMaA extends MotionAndAbilities {
     private boolean cooldownRunning = false;
@@ -30,6 +33,8 @@ public class NPCMaA extends MotionAndAbilities {
         x = position.getX();
         y = position.getY();
 
+        int screenHeight = ScreenSize.getHeight();
+
         //wenn Position 64p (Character-Größe = 64, deswegen 128) über Boden wird fallling true
         //wenn Position größer als Boden und nicht Up requestet wird wird falling true
         if(y < savePosYJump-jumpHeight || (!controller.isRequestingUp() && !hasGround()) || !topSpace()){
@@ -39,6 +44,10 @@ public class NPCMaA extends MotionAndAbilities {
         if(hasGround()){
             falling = false;
             gravity = 0;
+        }
+
+        if(y > screenHeight + 64){
+            thisGameObject.subtractLifes(1);
         }
 
         if(falling) {
@@ -141,6 +150,19 @@ public class NPCMaA extends MotionAndAbilities {
                     }
                 }
             }
+
+            if(hasGround()){
+                if(thisGameObject.getDirection() == L && !hasGround(-thisGameObjectWidth)){
+                    controller.setRequestingUp(true);
+                } else if(thisGameObject.getDirection() == R && !hasGround(thisGameObjectWidth)){
+                    controller.setRequestingUp(true);
+                }
+            }
+
+            if(falling) {
+                controller.setRequestingUp(false);
+            }
+
         }
     }
 

@@ -48,14 +48,42 @@ public abstract class MotionAndAbilities {
     }
 
     protected boolean hasGround() {
-        if(hasGround(mapObjects)){
+
+        int thisGameObjectWidth = thisGameObjectSize.getWidth();
+        int thisGameObjectHeight = thisGameObjectSize.getHeight();
+        int thisGameObjectSideSpace = (64-thisGameObjectWidth)/2;
+        int thisGameObjectTopSpace = (64-thisGameObjectHeight);
+        int posX = (int) (x+thisGameObjectSideSpace);
+        int posY = (int) (y+thisGameObjectTopSpace);
+
+        if(hasGround(mapObjects, posX, posY)){
             return true;
         } else {
-            return hasGround(gameObjects);
+            return hasGround(gameObjects, posX, posY);
         }
     }
 
-    private boolean hasGround(List<GameObject> objects){
+    protected boolean hasGround(int xOffset) {
+
+        int thisGameObjectWidth = thisGameObjectSize.getWidth();
+        int thisGameObjectHeight = thisGameObjectSize.getHeight();
+        int thisGameObjectSideSpace = (64-thisGameObjectWidth)/2;
+        int thisGameObjectTopSpace = (64-thisGameObjectHeight);
+        int posX = (int) (x+thisGameObjectSideSpace + xOffset);
+        int posY = (int) (y+thisGameObjectTopSpace);
+
+        if(hasGround(mapObjects, posX, posY)){
+            return true;
+        } else {
+            return hasGround(gameObjects, posX, posY);
+        }
+    }
+
+    private boolean hasGround(List<GameObject> objects, int posX, int posY){
+
+        int thisGameObjectWidth = thisGameObjectSize.getWidth();
+        int thisGameObjectHeight = thisGameObjectSize.getHeight();
+
         for (GameObject object : objects) {
 
             if (object.getMotionAndAbilities() != this && object.isSolid()) {
@@ -65,14 +93,6 @@ public abstract class MotionAndAbilities {
                 int objectTopSpace = (64-objectHeight);
                 int blockPosX = object.getPosition().intX() + objectSideSpace;
                 int blockPosY = object.getPosition().intY() + objectTopSpace;
-
-
-                int thisGameObjectWidth = thisGameObjectSize.getWidth();
-                int thisGameObjectHeight = thisGameObjectSize.getHeight();
-                int thisGameObjectSideSpace = (64-thisGameObjectWidth)/2;
-                int thisGameObjectTopSpace = (64-thisGameObjectHeight);
-                int posX = (int) (x+thisGameObjectSideSpace);
-                int posY = (int) (y+thisGameObjectTopSpace);
 
                 if (blockPosX < posX + thisGameObjectWidth + 2 && blockPosX > posX - object.getSize().getWidth() - 2) {
                     if (blockPosY < posY + thisGameObjectHeight + 2 && blockPosY > posY + thisGameObjectHeight - 5) {
@@ -97,6 +117,14 @@ public abstract class MotionAndAbilities {
     }
 
     private boolean topSpace(List<GameObject> objects){
+        int thisGameObjectWidth = thisGameObjectSize.getWidth();
+        int thisGameObjectHeight = thisGameObjectSize.getHeight();
+        int thisGameObjectSideSpace = (64-thisGameObjectWidth)/2;
+        int thisGameObjectTopSpace = (64-thisGameObjectHeight);
+        int posX = (int) (x+thisGameObjectSideSpace);
+        int posY = (int) (y+thisGameObjectTopSpace);
+
+
         for (GameObject object : objects) {
 
             if (object.getMotionAndAbilities() != this && object.isSolid()) {
@@ -106,14 +134,6 @@ public abstract class MotionAndAbilities {
                 int objectTopSpace = (64-objectHeight);
                 int blockPosX = object.getPosition().intX() + objectSideSpace;
                 int blockPosY = object.getPosition().intY() + objectTopSpace;
-
-
-                int thisGameObjectWidth = thisGameObjectSize.getWidth();
-                int thisGameObjectHeight = thisGameObjectSize.getHeight();
-                int thisGameObjectSideSpace = (64-thisGameObjectWidth)/2;
-                int thisGameObjectTopSpace = (64-thisGameObjectHeight);
-                int posX = (int) (x+thisGameObjectSideSpace);
-                int posY = (int) (y+thisGameObjectTopSpace);
 
                 if (blockPosX < posX + thisGameObjectWidth && blockPosX > posX - object.getSize().getWidth()+3) {
                     if (blockPosY < posY - objectHeight + 2 && blockPosY > posY - objectHeight - 5) {
@@ -141,6 +161,14 @@ public abstract class MotionAndAbilities {
     }
 
     private boolean rightSpace(List<GameObject> objects){
+        int thisGameObjectWidth = thisGameObjectSize.getWidth();
+        int thisGameObjectHeight = thisGameObjectSize.getHeight();
+        int thisGameObjectSideSpace = (64-thisGameObjectWidth)/2;
+        int thisGameObjectTopSpace = (64-thisGameObjectHeight);
+        int posX = (int) (x+thisGameObjectSideSpace);
+        int posY = (int) (y+thisGameObjectTopSpace);
+
+
         for (GameObject object : objects) {
 
             if (object.getMotionAndAbilities() != this && object.isSolid()) {
@@ -150,13 +178,6 @@ public abstract class MotionAndAbilities {
                 int objectTopSpace = (64-objectHeight);
                 int blockPosX = object.getPosition().intX() + objectSideSpace;
                 int blockPosY = object.getPosition().intY() + objectTopSpace;
-
-                int thisGameObjectWidth = thisGameObjectSize.getWidth();
-                int thisGameObjectHeight = thisGameObjectSize.getHeight();
-                int thisGameObjectSideSpace = (64-thisGameObjectWidth)/2;
-                int thisGameObjectTopSpace = (64-thisGameObjectHeight);
-                int posX = (int) (x+thisGameObjectSideSpace);
-                int posY = (int) (y+thisGameObjectTopSpace);
 
                 if (blockPosY < posY + thisGameObjectHeight && blockPosY > posY - objectHeight) {
                     if (blockPosX < posX + objectWidth && blockPosX > posX - objectWidth/2) {
@@ -177,6 +198,13 @@ public abstract class MotionAndAbilities {
     }
 
     private boolean leftSpace(List<GameObject> objects){
+        int thisGameObjectWidth = thisGameObjectSize.getWidth();
+        int thisGameObjectHeight = thisGameObjectSize.getHeight();
+        int thisGameObjectSideSpace = (64-thisGameObjectWidth)/2;
+        int thisGameObjectTopSpace = (64-thisGameObjectHeight);
+        int posX = (int) (x+thisGameObjectSideSpace);
+        int posY = (int) (y+thisGameObjectTopSpace);
+
         for (GameObject object : objects) {
             if (object.getMotionAndAbilities() != this && object.isSolid()) {
                 int objectWidth = object.getSize().getWidth();
@@ -186,12 +214,6 @@ public abstract class MotionAndAbilities {
                 int blockPosX = object.getPosition().intX() + objectSideSpace;
                 int blockPosY = object.getPosition().intY() + objectTopSpace;
 
-                int thisGameObjectWidth = thisGameObjectSize.getWidth();
-                int thisGameObjectHeight = thisGameObjectSize.getHeight();
-                int thisGameObjectSideSpace = (64-thisGameObjectWidth)/2;
-                int thisGameObjectTopSpace = (64-thisGameObjectHeight);
-                int posX = (int) (x+thisGameObjectSideSpace);
-                int posY = (int) (y+thisGameObjectTopSpace);
 
                 if (blockPosY < posY + thisGameObjectHeight && blockPosY > posY - objectHeight) {
                     if (blockPosX > posX - objectWidth && blockPosX < posX + objectWidth/2) {
@@ -219,6 +241,13 @@ public abstract class MotionAndAbilities {
 
             GameObject thisGameObject = gameObjects.get(findThisGameObjectInList());
 
+            int thisGameObjectWidth = thisGameObjectSize.getWidth();
+            int thisGameObjectHeight = thisGameObjectSize.getHeight();
+            int thisGameObjectSideSpace = (64-thisGameObjectWidth)/2;
+            int thisGameObjectTopSpace = (64-thisGameObjectHeight);
+            int posX = (int) (x+thisGameObjectSideSpace);
+            int posY = (int) (y+thisGameObjectTopSpace);
+
             for (int i = 0; i < gameObjects.size() && updatable; i++) {
                 GameObject gameObject = gameObjects.get(i);
                 if(gameObject.getMotionAndAbilities() != this) {
@@ -229,12 +258,7 @@ public abstract class MotionAndAbilities {
                     int objectPosX = gameObject.getPosition().intX() + objectSideSpace;
                     int objectPosY = gameObject.getPosition().intY() + objectTopSpace;
 
-                    int thisGameObjectWidth = thisGameObjectSize.getWidth();
-                    int thisGameObjectHeight = thisGameObjectSize.getHeight();
-                    int thisGameObjectSideSpace = (64-thisGameObjectWidth)/2;
-                    int thisGameObjectTopSpace = (64-thisGameObjectHeight);
-                    int posX = (int) (x+thisGameObjectSideSpace);
-                    int posY = (int) (y+thisGameObjectTopSpace);
+
 
                     if (objectPosY < posY + 32 && objectPosY > posY - 32) {
                         if (thisGameObject.getDirection() == R && objectPosX < posX + thisGameObjectWidth + 32 && objectPosX > posX) {
