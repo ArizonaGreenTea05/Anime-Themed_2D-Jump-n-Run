@@ -138,9 +138,14 @@ public class NPCMaA extends MotionAndAbilities {
                     if(!cooldownRunning) {
                         new Thread(() -> {
                             cooldownRunning = true;
+                            try {
+                                Thread.sleep(400);
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
+                            }
                             controller.setRequestingHit(true);
                             try {
-                                Thread.sleep(500);
+                                Thread.sleep(100);
                             } catch (InterruptedException e) {
                                 e.printStackTrace();
                             }
@@ -152,9 +157,9 @@ public class NPCMaA extends MotionAndAbilities {
             }
 
             if(hasGround()){
-                if(thisGameObject.getDirection() == L && !hasGround(-thisGameObjectWidth)){
+                if(thisGameObject.getDirection() == L && !hasGround(-thisGameObjectWidth/2)){
                     controller.setRequestingUp(true);
-                } else if(thisGameObject.getDirection() == R && !hasGround(thisGameObjectWidth)){
+                } else if(thisGameObject.getDirection() == R && !hasGround(thisGameObjectWidth/2)){
                     controller.setRequestingUp(true);
                 }
             }
