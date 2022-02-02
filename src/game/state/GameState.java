@@ -108,7 +108,7 @@ public class GameState extends State {
                     mapObjects.add(
                             new FinishBlock(
                                     relativePosition,
-                                    Block.ACTION_BLOCK
+                                    Block.GROUND_BLOCK
                             )
                     );
                 }
