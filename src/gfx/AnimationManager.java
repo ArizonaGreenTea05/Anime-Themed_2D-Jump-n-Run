@@ -16,7 +16,7 @@ public class AnimationManager {
 
     public AnimationManager(SpriteSet spriteSet) {
         this.spriteSet = spriteSet;
-        this.updatesPerFrame = 25;
+        this.updatesPerFrame = 30;
         this.frameIndex = 0;
         this.currentFrameTime = 0;
         playAnimation("stand");
