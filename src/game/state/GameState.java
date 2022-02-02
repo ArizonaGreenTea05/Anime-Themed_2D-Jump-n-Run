@@ -85,9 +85,16 @@ public class GameState extends State {
                 Position relativePosition = new Position((j-1)*64, ground-(i-1)*64);
                 if(letter.equalsIgnoreCase("G")){
                     mapObjects.add(
-                            new Grass(
+                            new NormalBlock(
                                     relativePosition,
-                                    Block.GRASS_BLOCK
+                                    Block.GROUND_BLOCK
+                            )
+                    );
+                } else if(letter.equalsIgnoreCase("W")){
+                    mapObjects.add(
+                            new NormalBlock(
+                                    relativePosition,
+                                    Block.WALL_BLOCK
                             )
                     );
                 } else if(letter.equalsIgnoreCase("A")){

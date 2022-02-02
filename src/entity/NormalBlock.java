@@ -1,13 +1,14 @@
 package entity;
 
+import core.Position;
 import game.state.State;
 
 import java.awt.*;
 
-public class Ground extends CustomSizeBlock{
+public class NormalBlock extends Block{
 
-    public Ground(int width, int height, int posX, int posY, String texture){
-        super(width, height, posX,  posY, texture);
+    public NormalBlock(Position position, int texture){
+        super(position, texture);
         solid = true;
     }
 
@@ -29,7 +30,7 @@ public class Ground extends CustomSizeBlock{
     }
 
     @Override
-    public void doActionOnContact(State state) {
+    public void doActionOnContact(State state){
 
     }
 

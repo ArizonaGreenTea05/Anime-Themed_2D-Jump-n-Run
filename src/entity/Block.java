@@ -8,8 +8,9 @@ import java.awt.*;
 
 public abstract class Block extends GameObject {
 
-    public static final int GRASS_BLOCK = 0;
+    public static final int GROUND_BLOCK = 0;
     public static final int ACTION_BLOCK = 1;
+    public static final int WALL_BLOCK = 2;
 
     private Image sprite;
     private String texture;
@@ -17,10 +18,12 @@ public abstract class Block extends GameObject {
 
     public Block(Position position, int texture) {
         super(64, 64, position.intX(), position.intY());
-        if(texture == GRASS_BLOCK) {
-            this.texture = "grass";
+        if(texture == GROUND_BLOCK) {
+            this.texture = "ground";
         } else if(texture == ACTION_BLOCK) {
             this.texture = "action";
+        } else if(texture == WALL_BLOCK) {
+            this.texture = "wall";
         }
         sprite = loadSprite(this.texture);
     }
