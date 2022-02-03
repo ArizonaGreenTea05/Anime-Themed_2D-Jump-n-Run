@@ -95,7 +95,7 @@ public abstract class MotionAndAbilities {
                 int blockPosY = object.getPosition().intY() + objectTopSpace;
 
                 if (blockPosX < posX + thisGameObjectWidth + 2 && blockPosX > posX - object.getSize().getWidth() - 2) {
-                    if (blockPosY < posY + thisGameObjectHeight + 2 && blockPosY > posY + thisGameObjectHeight - 5) {
+                    if (blockPosY < posY + thisGameObjectHeight + 5 && blockPosY > posY + thisGameObjectHeight - 2) {
                         position.setY(blockPosY - 64);
                         return true;
                     }
@@ -180,7 +180,7 @@ public abstract class MotionAndAbilities {
                 int blockPosY = object.getPosition().intY() + objectTopSpace;
 
                 if (blockPosY < posY + thisGameObjectHeight && blockPosY > posY - objectHeight) {
-                    if (blockPosX < posX + objectWidth && blockPosX > posX - objectWidth/2) {
+                    if (blockPosX < posX + thisGameObjectWidth+5 && blockPosX > posX - thisGameObjectWidth/2) {
                         return false;
                     }
                 }
@@ -216,7 +216,7 @@ public abstract class MotionAndAbilities {
 
 
                 if (blockPosY < posY + thisGameObjectHeight && blockPosY > posY - objectHeight) {
-                    if (blockPosX > posX - objectWidth - 4 && blockPosX < posX + objectWidth/2) {
+                    if (blockPosX > posX - objectWidth - 5 && blockPosX < posX + objectWidth/2) {
                         return false;
                     }
                 }
