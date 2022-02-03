@@ -1,4 +1,4 @@
-package entity;
+package gameObjects;
 
 import core.Direction;
 import core.Position;

@@ -1,22 +1,29 @@
-package entity;
+package gameObjects;
 
 import core.Direction;
-import motionAndAbilities.MotionAndAbilities;
 import core.Position;
+import motionAndAbilities.MotionAndAbilities;
 
 import java.awt.*;
 
-public abstract class StaticEntity extends GameObject {
+public abstract class Block extends GameObject {
 
-    public static final int COIN = 0;
+    public static final int GROUND_BLOCK = 0;
+    public static final int ACTION_BLOCK = 1;
+    public static final int WALL_BLOCK = 2;
 
-    private String texture;
     private Image sprite;
+    private String texture;
+    protected boolean actionUsed = false;
 
-    public StaticEntity(Position position, int texture) {
-        super(64,64, position.intX(), position.intY());
-        if(texture == COIN) {
-            this.texture = "coin";
+    public Block(Position position, int texture) {
+        super(64, 64, position.intX(), position.intY());
+        if(texture == GROUND_BLOCK) {
+            this.texture = "ground";
+        } else if(texture == ACTION_BLOCK) {
+            this.texture = "action";
+        } else if(texture == WALL_BLOCK) {
+            this.texture = "wall";
         }
         sprite = loadSprite(this.texture);
     }
@@ -71,4 +78,6 @@ public abstract class StaticEntity extends GameObject {
     public void subtractMaxLifes(int i){
 
     }
+
+
 }

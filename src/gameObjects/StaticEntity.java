@@ -1,21 +1,23 @@
-package entity;
+package gameObjects;
 
 import core.Direction;
 import motionAndAbilities.MotionAndAbilities;
+import core.Position;
 
 import java.awt.*;
 
-public abstract class CustomSizeBlock extends GameObject {
+public abstract class StaticEntity extends GameObject {
+
+    public static final int COIN = 0;
 
     private String texture;
-    private int width, height;
     private Image sprite;
 
-    public CustomSizeBlock(int width, int height, int posX, int posY, String texture) {
-        super(width, height, posX, posY);
-        this.texture = texture;
-        this.width = width;
-        this.height = height;
+    public StaticEntity(Position position, int texture) {
+        super(64,64, position.intX(), position.intY());
+        if(texture == COIN) {
+            this.texture = "coin";
+        }
         sprite = loadSprite(this.texture);
     }
 
@@ -23,7 +25,6 @@ public abstract class CustomSizeBlock extends GameObject {
     public void update() {
 
     }
-
 
     @Override
     public Image getSprite() {
@@ -34,6 +35,7 @@ public abstract class CustomSizeBlock extends GameObject {
     public MotionAndAbilities getMotionAndAbilities() {
         return null;
     }
+
 
     @Override
     public Direction getDirection(){

@@ -5,7 +5,7 @@ import core.Position;
 import core.ScreenSize;
 import core.Size;
 import core.Vector2D;
-import entity.GameObject;
+import gameObjects.GameObject;
 import game.state.State;
 
 import java.util.List;

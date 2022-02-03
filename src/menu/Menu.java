@@ -2,7 +2,6 @@ package menu;
 
 import core.ScreenSize;
 import display.GameDisplay;
-import entity.GameObject;
 import game.Game;
 import game.GameLoop;
 import utils.ElseUtils;

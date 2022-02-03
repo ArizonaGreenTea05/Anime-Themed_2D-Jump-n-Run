@@ -1,8 +1,7 @@
 package game.state;
 
-import display.GameDisplay;
-import entity.GameObject;
-import entity.MovingEntity;
+import gameObjects.GameObject;
+import gameObjects.MovingEntity;
 import game.Game;
 import gfx.SpriteLibrary;
 import input.Input;

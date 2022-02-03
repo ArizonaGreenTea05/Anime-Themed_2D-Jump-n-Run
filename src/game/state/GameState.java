@@ -4,7 +4,7 @@ import controller.NPCController;
 import controller.PlayerController;
 import core.Position;
 import core.ScreenSize;
-import entity.*;
+import gameObjects.*;
 import motionAndAbilities.NPCMaA;
 import motionAndAbilities.PlayerMaA;
 import game.Game;

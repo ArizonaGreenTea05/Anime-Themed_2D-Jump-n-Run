@@ -1,13 +1,13 @@
-package entity;
+package gameObjects;
 
 import core.Position;
 import game.state.State;
 
 import java.awt.*;
 
-public class FinishBlock extends Block{
+public class NormalBlock extends Block{
 
-    public FinishBlock(Position position, int texture){
+    public NormalBlock(Position position, int texture){
         super(position, texture);
         solid = true;
     }
@@ -36,7 +36,7 @@ public class FinishBlock extends Block{
 
     @Override
     public void doActionOnPositionX(State state){
-        state.getGame().getGameDisplay().showWon();
+
     }
 
     @Override

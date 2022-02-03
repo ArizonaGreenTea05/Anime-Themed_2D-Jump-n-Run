@@ -1,6 +1,6 @@
 package display;
 
-import entity.GameObject;
+import gameObjects.GameObject;
 import game.state.State;
 
 import java.awt.*;

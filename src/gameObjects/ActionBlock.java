@@ -1,4 +1,4 @@
-package entity;
+package gameObjects;
 
 import core.Position;
 import game.state.State;
