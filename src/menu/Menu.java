@@ -30,7 +30,7 @@ public class Menu {
     private static final int npccount = 1;
 
 
-    private final JFrame menu = new JFrame("GameMenu");
+    private final JFrame menu = new JFrame();
     private final int width, height;
     private final JLabel background = new JLabel();
 
@@ -134,6 +134,7 @@ public class Menu {
 
     private void initializeMenu() {
         menu.setSize(width,height);
+        menu.setTitle("GameMenu   | " + GAME_VERSION + " |");
         menu.setIconImage(FileLoader.loadImage("sakura_icon.png", "/"));
         menu.setUndecorated(true);
         menu.getContentPane().setBackground(new Color(23, 139, 221));
