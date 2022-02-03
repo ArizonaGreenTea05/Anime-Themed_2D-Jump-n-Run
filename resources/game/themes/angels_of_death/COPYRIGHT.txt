@@ -1,8 +1,9 @@
-Copyright (Images):
+Copyright (Characters):
 
 Copyright (c) Makoto Sanada, KRNKRN
 
 https://www.gamemaga.jp/satsuriku/
 
-https://satsuriku-no-tenshi.fandom.com/wiki/Isaac_%22Zack%22_Foster/Image_Gallery
-https://satsuriku-no-tenshi.fandom.com/wiki/Rachel_%22Ray%22_Gardner/Image_Gallery
+https://satsuriku-no-tenshi.fandom.com/wiki/Isaac_%22Zack%22_Foster/Image_Gallery?file=Isaac_Foster_sprites.png
+https://satsuriku-no-tenshi.fandom.com/wiki/Rachel_%22Ray%22_Gardner/Image_Gallery?file=Rachel_Gardner_sprites.png
+https://satsuriku-no-tenshi.fandom.com/wiki/Edward_%22Eddie%22_Mason/Image_Gallery?file=Edward_Mason_sprites.png
