@@ -216,7 +216,7 @@ public abstract class MotionAndAbilities {
 
 
                 if (blockPosY < posY + thisGameObjectHeight && blockPosY > posY - objectHeight) {
-                    if (blockPosX > posX - objectWidth && blockPosX < posX + objectWidth/2) {
+                    if (blockPosX > posX - objectWidth-4 && blockPosX < posX + objectWidth/2) {
                         return false;
                     }
                 }

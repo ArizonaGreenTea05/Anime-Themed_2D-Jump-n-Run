@@ -532,6 +532,10 @@ public class Menu {
         return playerName[name];
     }
 
+    public static String[] getPlayerNames(){
+        return playerName;
+    }
+
     public static String[] getNPCs(){
         String[] npcs = new String[npccount];
 

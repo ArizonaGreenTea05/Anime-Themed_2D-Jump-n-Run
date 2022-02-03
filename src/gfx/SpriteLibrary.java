@@ -18,7 +18,7 @@ public class SpriteLibrary {
     }
 
     private void loadUnits() {
-        String[] pn = Menu.playerName;
+        String[] pn = Menu.getPlayerNames();
         String[] npcn = Menu.getNPCs();
 
         int pnl = pn.length;
