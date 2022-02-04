@@ -10,8 +10,12 @@ public class ElseUtils {
             if(c[i] != '_'){
                 out.append(c[i]);
             } else {
-                out.append(" ").append((char) (c[i + 1] - 32));
-                i++;
+                if(c[i+1] >= 97 && c[i+1] <= 122) {
+                    out.append(" ").append((char) (c[i + 1] - 32));
+                    i++;
+                } else {
+                    out.append(" ");
+                }
             }
         }
 

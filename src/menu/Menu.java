@@ -67,13 +67,13 @@ public class Menu {
      * declaration of themes, player names and colors
      **/
 
-    public static final String[] playerNamesAoT = new String[] {"levi_ackerman", "mikasa_ackerman", "sasha_braus"};
-    public static final String[] mapsAoT = new String[] {"test"};
-    public static final Color bgColorAoT = new Color(70, 90, 120);
-
     public static final String[] playerNamesAoD = new String[] {"isaac_foster", "rachel_gardner"};
-    public static final String[] mapsAoD = new String[] {"test"};
+    public static final String[] mapsAoD = new String[] {"level_1"};
     public static final Color bgColorAoD = new Color(128, 186, 224);
+
+    public static final String[] playerNamesAoT = new String[] {"levi_ackerman", "mikasa_ackerman", "sasha_braus"};
+    public static final String[] mapsAoT = new String[] {"level_1"};
+    public static final Color bgColorAoT = new Color(70, 90, 120);
 
     public static final String[] gameThemes = new String[] {"angels_of_death", "attack_on_titan"};
     private static final Color[] bgColors = new Color[]{bgColorAoD, bgColorAoT};
