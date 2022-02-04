@@ -347,12 +347,16 @@ public class GameDisplay extends JFrame {
 
     private ActionListener getActionListenerInfo() {
         return e-> {
-            if(lTheme.isVisible()) {
-                hideInfo();
-            } else {
-                showInfo();
-            }
+            doInfo();
         };
+    }
+
+    public void doInfo() {
+        if(lTheme.isVisible()) {
+            hideInfo();
+        } else {
+            showInfo();
+        }
     }
 
     private void hideInfo() {

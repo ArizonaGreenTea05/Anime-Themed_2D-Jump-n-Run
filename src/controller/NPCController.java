@@ -1,5 +1,7 @@
 package controller;
 
+import java.awt.event.KeyEvent;
+
 public class NPCController implements Controller {
 
     private boolean isRequestingUp = false;
@@ -72,6 +74,11 @@ public class NPCController implements Controller {
 
     @Override
     public boolean isRequestingESC(){
+        return false;
+    }
+
+    @Override
+    public boolean isRequestingF3(){
         return false;
     }
 

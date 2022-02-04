@@ -9,6 +9,7 @@ import game.state.State;
 import java.util.List;
 
 public class PlayerMaA extends MotionAndAbilities {
+    private boolean f3Pressed = false;
 
     public PlayerMaA(double speed) {
         super(speed);
@@ -106,6 +107,15 @@ public class PlayerMaA extends MotionAndAbilities {
 
         if(controller.isRequestingESC()) {
             state.getGame().getGameDisplay().doPauseAction();
+        }
+
+        if(controller.isRequestingF3()) {
+            if(!f3Pressed) {
+                f3Pressed = true;
+                state.getGame().getGameDisplay().doInfo();
+            }
+        } else {
+            f3Pressed = false;
         }
 
         doBlockPositionXAction();

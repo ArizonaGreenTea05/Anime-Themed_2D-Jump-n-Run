@@ -22,4 +22,6 @@ public interface Controller {
     boolean isRequestingHit();
 
     boolean isRequestingESC();
+    boolean isRequestingF3();
+
 }

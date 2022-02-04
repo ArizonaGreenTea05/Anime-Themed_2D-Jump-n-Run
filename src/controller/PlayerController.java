@@ -76,4 +76,9 @@ public class PlayerController implements Controller {
     public boolean isRequestingESC(){
         return input.isPressed(KeyEvent.VK_ESCAPE);
     }
+
+    @Override
+    public boolean isRequestingF3(){
+        return input.isPressed(KeyEvent.VK_F3);
+    }
 }
