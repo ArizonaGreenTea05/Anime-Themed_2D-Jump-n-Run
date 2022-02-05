@@ -71,4 +71,9 @@ public abstract class MovingEntity extends GameObject {
     public MotionAndAbilities getMotionAndAbilities() {
         return mAndA;
     }
+
+    @Override
+    public Controller getController(){
+        return controller;
+    }
 }

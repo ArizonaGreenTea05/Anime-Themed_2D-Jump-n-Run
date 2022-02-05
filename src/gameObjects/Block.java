@@ -1,5 +1,6 @@
 package gameObjects;
 
+import controller.Controller;
 import core.Direction;
 import core.Position;
 import motionAndAbilities.MotionAndAbilities;
@@ -77,6 +78,11 @@ public abstract class Block extends GameObject {
     @Override
     public void subtractMaxLifes(int i){
 
+    }
+
+    @Override
+    public Controller getController(){
+        return null;
     }
 
 

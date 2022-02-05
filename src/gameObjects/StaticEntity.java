@@ -1,5 +1,6 @@
 package gameObjects;
 
+import controller.Controller;
 import core.Direction;
 import motionAndAbilities.MotionAndAbilities;
 import core.Position;
@@ -70,5 +71,10 @@ public abstract class StaticEntity extends GameObject {
     @Override
     public void subtractMaxLifes(int i){
 
+    }
+
+    @Override
+    public Controller getController(){
+        return null;
     }
 }

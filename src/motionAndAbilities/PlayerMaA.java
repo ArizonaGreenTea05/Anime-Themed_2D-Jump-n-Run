@@ -65,13 +65,7 @@ public class PlayerMaA extends MotionAndAbilities {
             deltaY -= getFallSpeed(gravity);
         }
 
-        if(controller.isRequestingSprint()) {
-            sprint(true);
-        }
-
-        if(!controller.isRequestingSprint()) {
-            sprint(false);
-        }
+        sprint(controller.isRequestingSprint(), 1.5);
 
         if(!controller.isRequestingHit()) {
             canHit = true;
@@ -138,7 +132,7 @@ public class PlayerMaA extends MotionAndAbilities {
 
     private void moveMap(Vector2D mapVector) {
 
-        mapVector.multiply(speed, normalSpeed);
+        mapVector.multiply(speed, 1);
 
         for (GameObject mapObject : mapObjects) {
             int blockPosX = mapObject.getPosition().intX();

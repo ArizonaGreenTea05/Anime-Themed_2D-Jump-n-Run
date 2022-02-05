@@ -1,5 +1,6 @@
 package gameObjects;
 
+import controller.Controller;
 import core.Direction;
 import motionAndAbilities.MotionAndAbilities;
 
@@ -68,5 +69,10 @@ public abstract class CustomSizeBlock extends GameObject {
     @Override
     public void subtractMaxLifes(int i){
 
+    }
+
+    @Override
+    public Controller getController(){
+        return null;
     }
 }

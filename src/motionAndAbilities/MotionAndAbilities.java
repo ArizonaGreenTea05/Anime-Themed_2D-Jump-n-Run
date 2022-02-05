@@ -225,9 +225,9 @@ public abstract class MotionAndAbilities {
         return true;
     }
 
-    protected void sprint(boolean sprint) {
+    protected void sprint(boolean sprint, double sprintSpeed) {
         if(sprint && speed == normalSpeed) {
-            speed++;
+            speed += sprintSpeed;
         } else if(!sprint){
             speed = normalSpeed;
         }

@@ -52,10 +52,6 @@ public class Player extends MovingEntity {
 
     }
 
-    public static Controller getController(){
-        return controller;
-    }
-
     @Override
     public void setLifes(int lifes){
         this.lifes = lifes;

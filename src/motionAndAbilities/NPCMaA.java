@@ -10,6 +10,7 @@ import static core.Direction.*;
 
 public class NPCMaA extends MotionAndAbilities {
     private boolean cooldownRunning = false;
+    private GameObject player;
 
     public NPCMaA(double speed) {
         super(speed);
@@ -24,6 +25,7 @@ public class NPCMaA extends MotionAndAbilities {
         this.gameObjects = state.getGameObjects();
         this.position = position;
         this.state = state;
+        this.player = gameObjects.get(playerPosInList);
         setThisGameObject();
         controlMotionAndAbilities();
 
@@ -65,13 +67,7 @@ public class NPCMaA extends MotionAndAbilities {
             sitting = false;
         }
 
-        if(controller.isRequestingSprint()) {
-            sprint(true);
-        }
-
-        if(!controller.isRequestingSprint()) {
-            sprint(false);
-        }
+        sprint(controller.isRequestingSprint() && thisGameObject.getDirection() == player.getDirection(), 1.3);
 
         if(!controller.isRequestingHit()) {
             canHit = true;
@@ -107,7 +103,6 @@ public class NPCMaA extends MotionAndAbilities {
     }
 
     private void controlMotionAndAbilities() {
-        GameObject player = gameObjects.get(playerPosInList);
         int playerWidth = player.getSize().getWidth();
         int playerHeight = player.getSize().getHeight();
         int playerSideSpace = (64-playerWidth)/2;
@@ -167,6 +162,9 @@ public class NPCMaA extends MotionAndAbilities {
             if(falling) {
                 controller.setRequestingUp(false);
             }
+
+            System.out.println(player.getController().isRequestingSprint());
+            controller.setRequestingSprint(player.getController().isRequestingSprint());
 
         }
     }

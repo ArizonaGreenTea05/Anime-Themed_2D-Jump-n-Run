@@ -1,5 +1,6 @@
 package gameObjects;
 
+import controller.Controller;
 import core.Direction;
 import core.Position;
 import core.ScreenSize;
@@ -80,4 +81,6 @@ public abstract class GameObject {
     public abstract void addMaxLifes(int maxLifes);
 
     public abstract void subtractLifes(int i);
+
+    public abstract Controller getController();
 }
