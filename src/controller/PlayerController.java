@@ -6,15 +6,15 @@ import java.awt.event.KeyEvent;
 
 public class PlayerController implements Controller {
 
-    private Input input;
-    private static int jump = KeyEvent.VK_W;
-    private static int down = KeyEvent.VK_S;
-    private static int left = KeyEvent.VK_A;
-    private static int right = KeyEvent.VK_D;
-    private static int sprint = KeyEvent.VK_SHIFT;
-    private static int hit = KeyEvent.VK_J;
-    private static int pause = KeyEvent.VK_ESCAPE;
-    private static int info = KeyEvent.VK_F3;
+    private final Input input;
+    private static final int jump = KeyEvent.VK_W;
+    private static final int down = KeyEvent.VK_S;
+    private static final int left = KeyEvent.VK_A;
+    private static final int right = KeyEvent.VK_D;
+    private static final int sprint = KeyEvent.VK_SHIFT;
+    private static final int hit = KeyEvent.VK_J;
+    private static final int pause = KeyEvent.VK_ESCAPE;
+    private static final int info = KeyEvent.VK_F3;
 
     public PlayerController(Input input) {
         this.input = input;
@@ -22,14 +22,14 @@ public class PlayerController implements Controller {
 
     public static Object[][] getData() {
         return new String[][]{
-                {"left", KeyEvent.getKeyText(left)},
-                {"right", KeyEvent.getKeyText(right)},
-                {"jump", KeyEvent.getKeyText(jump)},
-                {"Sit", KeyEvent.getKeyText(down)},
-                {"Sprint", KeyEvent.getKeyText(sprint)},
-                {"Hit", KeyEvent.getKeyText(hit)},
-                {"Pause", KeyEvent.getKeyText(pause)},
-                {"Info", KeyEvent.getKeyText(info)},
+                {" Left", " " + KeyEvent.getKeyText(left)},
+                {" Right", " " + KeyEvent.getKeyText(right)},
+                {" Jump", " " + KeyEvent.getKeyText(jump)},
+                {" Sit", " " + KeyEvent.getKeyText(down)},
+                {" Sprint", " " + KeyEvent.getKeyText(sprint)},
+                {" Hit", " " + KeyEvent.getKeyText(hit)},
+                {" Pause", " " + KeyEvent.getKeyText(pause)},
+                {" Info", " " + KeyEvent.getKeyText(info)},
         };
     }
 
