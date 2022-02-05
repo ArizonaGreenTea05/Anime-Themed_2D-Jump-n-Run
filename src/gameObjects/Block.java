@@ -10,8 +10,10 @@ import java.awt.*;
 public abstract class Block extends GameObject {
 
     public static final int GROUND_BLOCK = 0;
-    public static final int ACTION_BLOCK = 1;
+    public static final int TRANS_GROUND_BLOCK = 1;
     public static final int WALL_BLOCK = 2;
+    public static final int TRANS_WALL_BLOCK = 3;
+    public static final int ACTION_BLOCK = 4;
 
     private Image sprite;
     private String texture;
@@ -21,10 +23,14 @@ public abstract class Block extends GameObject {
         super(64, 64, position.intX(), position.intY());
         if(texture == GROUND_BLOCK) {
             this.texture = "ground";
-        } else if(texture == ACTION_BLOCK) {
-            this.texture = "action";
         } else if(texture == WALL_BLOCK) {
             this.texture = "wall";
+        } else if(texture == TRANS_GROUND_BLOCK) {
+            this.texture = "trans_ground";
+        } else if(texture == TRANS_WALL_BLOCK) {
+            this.texture = "trans_wall";
+        } else if(texture == ACTION_BLOCK) {
+            this.texture = "action";
         }
         sprite = loadSprite(this.texture);
     }

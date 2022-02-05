@@ -42,7 +42,7 @@ public class GameState extends State {
                 if(letter.equalsIgnoreCase("P")){
                     this.player = new Player(
                             new PlayerController(input),
-                            new PlayerMaA(3.9),
+                            new PlayerMaA(3.5),
                             relativePosition,
                             spriteLibrary,
                             5,
@@ -84,18 +84,36 @@ public class GameState extends State {
             for (int j = 0; j < sMap[i].length-1; j++) {
                 String letter = sMap[i][j];
                 Position relativePosition = new Position((j-1)*64, ground-(i-1)*64);
-                if(letter.equalsIgnoreCase("G")){
+                if(letter.equals("G")){
                     mapObjects.add(
                             new NormalBlock(
                                     relativePosition,
-                                    Block.GROUND_BLOCK
+                                    Block.GROUND_BLOCK,
+                                    true
                             )
                     );
-                } else if(letter.equalsIgnoreCase("W")){
+                } else if(letter.equals("W")){
                     mapObjects.add(
                             new NormalBlock(
                                     relativePosition,
-                                    Block.WALL_BLOCK
+                                    Block.WALL_BLOCK,
+                                    true
+                            )
+                    );
+                } else if(letter.equals("g")){
+                    mapObjects.add(
+                            new NormalBlock(
+                                    relativePosition,
+                                    Block.TRANS_GROUND_BLOCK,
+                                    false
+                            )
+                    );
+                } else if(letter.equals("w")){
+                    mapObjects.add(
+                            new NormalBlock(
+                                    relativePosition,
+                                    Block.TRANS_WALL_BLOCK,
+                                    false
                             )
                     );
                 } else if(letter.equalsIgnoreCase("A")){
