@@ -7,13 +7,34 @@ import java.awt.event.KeyEvent;
 public class PlayerController implements Controller {
 
     private Input input;
+    private static int jump = KeyEvent.VK_W;
+    private static int down = KeyEvent.VK_S;
+    private static int left = KeyEvent.VK_A;
+    private static int right = KeyEvent.VK_D;
+    private static int sprint = KeyEvent.VK_SHIFT;
+    private static int hit = KeyEvent.VK_J;
+    private static int pause = KeyEvent.VK_ESCAPE;
+    private static int info = KeyEvent.VK_F3;
 
     public PlayerController(Input input) {
         this.input = input;
     }
 
+    public static Object[][] getData() {
+        return new String[][]{
+                {"left", KeyEvent.getKeyText(left)},
+                {"right", KeyEvent.getKeyText(right)},
+                {"jump", KeyEvent.getKeyText(jump)},
+                {"Sit", KeyEvent.getKeyText(down)},
+                {"Sprint", KeyEvent.getKeyText(sprint)},
+                {"Hit", KeyEvent.getKeyText(hit)},
+                {"Pause", KeyEvent.getKeyText(pause)},
+                {"Info", KeyEvent.getKeyText(info)},
+        };
+    }
+
     @Override
-    public void setRequestingUp(boolean requestingDown) {
+    public void setRequestingJump(boolean requestingDown) {
 
     }
 
@@ -44,41 +65,41 @@ public class PlayerController implements Controller {
 
     @Override
     public boolean isRequestingUp() {
-        return input.isPressed(KeyEvent.VK_UP) || input.isPressed(KeyEvent.VK_W) || input.isPressed(KeyEvent.VK_SPACE);
+        return input.isPressed(jump);
     }
 
     @Override
     public boolean isRequestingDown() {
-        return input.isPressed(KeyEvent.VK_DOWN) || input.isPressed(KeyEvent.VK_S);
+        return input.isPressed(down);
     }
 
     @Override
     public boolean isRequestingLeft() {
-        return input.isPressed(KeyEvent.VK_LEFT) || input.isPressed(KeyEvent.VK_A);
+        return input.isPressed(left);
     }
 
     @Override
     public boolean isRequestingRight() {
-        return input.isPressed(KeyEvent.VK_RIGHT) || input.isPressed(KeyEvent.VK_D);
+        return input.isPressed(right);
     }
 
     @Override
     public boolean isRequestingSprint(){
-        return input.isPressed(KeyEvent.VK_CAPS_LOCK) || input.isPressed(KeyEvent.VK_CONTROL);
+        return input.isPressed(sprint);
     }
 
     @Override
     public boolean isRequestingHit() {
-        return input.isPressed(KeyEvent.VK_J);
+        return input.isPressed(hit);
     }
 
     @Override
-    public boolean isRequestingESC(){
-        return input.isPressed(KeyEvent.VK_ESCAPE);
+    public boolean isRequestingPause(){
+        return input.isPressed(pause);
     }
 
     @Override
-    public boolean isRequestingF3(){
-        return input.isPressed(KeyEvent.VK_F3);
+    public boolean isRequestingInfo(){
+        return input.isPressed(info);
     }
 }

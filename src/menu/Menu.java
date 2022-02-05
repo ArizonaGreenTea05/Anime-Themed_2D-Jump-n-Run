@@ -1,5 +1,6 @@
 package menu;
 
+import controller.PlayerController;
 import core.ScreenSize;
 import display.GameDisplay;
 import game.Game;
@@ -16,6 +17,8 @@ public class Menu {
 
     private String GAME_VERSION;
 
+    private static boolean controlsShown = false;
+
     private static Icon bgImage;
 
     private static final int AOD = 0;
@@ -30,17 +33,17 @@ public class Menu {
 
     private static final String[] playerSheetsInFolder = new String[] {"stand.png", "walk.png", "hit.png"};
 
-    private static final int npccount = 1;
-
 
     private final JFrame menu = new JFrame();
     private final int width, height;
     private final JLabel background = new JLabel();
 
+    private final JPanel pControls = new JPanel();
+
     private final JButton bExit = new JButton("EXIT");
     private final JButton bChangeColor = new JButton("change colors");
+    private final JButton bShowControls = new JButton("controls");
     private JButton bStartGame;
-    private static Rectangle startBounds;
     private JButton[] bPlayers;
     private JButton[] bMaps;
     private final JButton[] bThemes = new JButton[gameThemes.length];
@@ -56,15 +59,15 @@ public class Menu {
 
     private static double highScore;
 
-    private static JLabel lThemeText = new JLabel("Theme:");
+    private static final JLabel lThemeText = new JLabel("Theme:");
     private static JLabel lTheme = new JLabel("");
-    private static JLabel lPlayerText = new JLabel("Character:");
+    private static final JLabel lPlayerText = new JLabel("Character:");
     private static JLabel lPlayer = new JLabel("");
-    private static JLabel lMapText = new JLabel("Map:");
+    private static final JLabel lMapText = new JLabel("Map:");
     private static JLabel lMap = new JLabel("");
-    private static JLabel lHighscoreText = new JLabel("Highscore:");
+    private static final JLabel lHighscoreText = new JLabel("Highscore:");
     private static JLabel lHighscore = new JLabel("");
-    private static JLabel lScoreText = new JLabel("Score:");
+    private static final JLabel lScoreText = new JLabel("Score:");
     private static JLabel lScore = new JLabel("");
 
     /**
@@ -95,7 +98,7 @@ public class Menu {
     private static final Color clear = new Color(0,0,0,0);
 
     private static final Color[] buttonColor =           { color1,         color1,         color3,        Color.BLACK};
-    private static final Color[] backButtonColor =      { color2,         color2,         color3,        Color.BLACK};
+    private static final Color[] backButtonColor =       { color2,         color2,         color3,        Color.BLACK};
     private static final Color[] labelColor =            { color2,         color2,         color3,        Color.BLACK};
     private static final Color[] textColor =             { Color.WHITE,    Color.BLACK,    Color.BLACK,   color4};
     private final String[] bgImages =                    {"bg_light.png", "bg_light.png", "bg_dark.png", "bg_dark.png"};
@@ -127,11 +130,55 @@ public class Menu {
 
         initializeLabels();
 
+        initializePanels();
+
+        initializeTable();
+
         initializeBackground();
 
         addAll();
 
         menu.setVisible(true);
+    }
+
+    private void initializePanels() {
+        int themeTextX = lThemeText.getX();
+        int themeTextY = lThemeText.getY();
+        Rectangle bounds = new Rectangle(themeTextX, themeTextY, width-themeTextX - 20, bShowControls.getY() - 2*themeTextY);
+
+        pControls.setVisible(controlsShown);
+        pControls.setBounds(bounds);
+        pControls.setLayout(null);
+        pControls.setBackground(buttonColor[colorSetting]);
+    }
+
+    private void initializeTable() {
+        String[] columnNames = {"Action",
+                "Key"};
+
+        Object[][] data = PlayerController.getData();
+
+        JTable table = new JTable(data, columnNames);
+
+        table.setEnabled(false);
+        table.setBackground(buttonColor[colorSetting]);
+        table.setForeground(textColor[colorSetting]);
+        table.setFont(new Font(textFont, Font.PLAIN, fontSize));
+        table.getTableHeader().setBackground(buttonColor[colorSetting]);
+        table.getTableHeader().setForeground(textColor[colorSetting]);
+        table.getTableHeader().setFont(new Font(textFont, Font.PLAIN, fontSize));
+        int tableHeaderHeight = table.getTableHeader().getHeight();
+        int rowCount = table.getRowCount();
+        int rowheight = (
+                    pControls.getHeight()           //  Panel-Höhe
+                    -tableHeaderHeight              //- Header-Höhe
+                )                                   //= Resthöhe, die die Zeilen ausfüllen müssen
+                /rowCount                           //Resthöhe / Zeilenzahl = theoretische höhe der Zeile
+                -rowCount/2;                        //ein paar Pixel Abzug, damit die Trennlinie zwischen den Zeilen mit einberechnet wird
+        table.setRowHeight(rowheight);
+        pControls.setLayout(new BorderLayout());
+        pControls.add(table.getTableHeader(), BorderLayout.PAGE_START);
+        pControls.add(table, BorderLayout.CENTER);
     }
 
 
@@ -140,7 +187,6 @@ public class Menu {
         menu.setTitle("GameMenu   | " + GAME_VERSION + " |");
         menu.setIconImage(FileLoader.loadImage("sakura_icon.png", "/"));
         menu.setUndecorated(true);
-        menu.getContentPane().setBackground(new Color(23, 139, 221));
         menu.setResizable(false);
         menu.setLayout(null);
         menu.setLocationRelativeTo(null);
@@ -234,6 +280,9 @@ public class Menu {
         }
 
 
+
+        menu.add(pControls);
+        menu.add(bShowControls);
         menu.add(lTheme);
         lTheme.setVisible(true);
         menu.add(lThemeText);
@@ -268,7 +317,6 @@ public class Menu {
         bStartGame.setForeground(textColor[colorSetting]);
         bStartGame.setFont(new Font(textFont, Font.PLAIN, bStartGame.getHeight()/4));
         bStartGame.addActionListener(getActionListenerStart());
-        startBounds = bStartGame.getBounds();
         // -start Button-
 
 
@@ -279,7 +327,7 @@ public class Menu {
         Font font = new Font(textFont, Font.PLAIN, backHeight/5*3);
 
         bBackThemes = new JButton("<<back");
-        bBackThemes.setBounds(10, 10, backWidth, backHeight);
+        bBackThemes.setBounds(20, 20, backWidth, backHeight);
         bBackThemes.setFont(font);
         bBackThemes.setBackground(backButtonColor[colorSetting]);
         bBackThemes.setForeground(textColor[colorSetting]);
@@ -303,7 +351,7 @@ public class Menu {
 
 
         // color change Button
-        bChangeColor.setBounds(menu.getWidth()-25-backWidth, menu.getHeight()-backHeight-10, backWidth, backHeight);
+        bChangeColor.setBounds(menu.getWidth()-20-backWidth, menu.getHeight()-backHeight-10, backWidth, backHeight);
         bChangeColor.setFont(new Font(textFont, Font.PLAIN, backHeight/2));
         bChangeColor.setBackground(buttonColor[colorSetting]);
         bChangeColor.setForeground(textColor[colorSetting]);
@@ -311,16 +359,21 @@ public class Menu {
         // - color change Button-
 
 
+        bShowControls.setBounds(menu.getWidth()-20-backWidth, menu.getHeight()-2*backHeight-20, backWidth, backHeight);
+        bShowControls.setFont(new Font(textFont, Font.PLAIN, backHeight/2));
+        bShowControls.setBackground(buttonColor[colorSetting]);
+        bShowControls.setForeground(textColor[colorSetting]);
+        bShowControls.addActionListener(getActionListenerShowControls());
+
+
         // exit Button
-        bExit.setBounds(10, menu.getHeight()-backHeight-10, backWidth, backHeight);
+        bExit.setBounds(20, menu.getHeight()-backHeight-10, backWidth, backHeight);
         bExit.setFont(font);
         bExit.setBackground(buttonColor[colorSetting]);
         bExit.setForeground(textColor[colorSetting]);
         bExit.addActionListener(getActionListenerExit());
         // - exit Button-
     }
-
-
 
 
     private void addPlayers(){
@@ -391,6 +444,13 @@ public class Menu {
 
     public static String[] getPlayerSheetsInFolder() {
         return playerSheetsInFolder;
+    }
+
+    private ActionListener getActionListenerShowControls() {
+        return e -> {
+            controlsShown = !pControls.isVisible();
+            pControls.setVisible(controlsShown);
+        };
     }
 
     private ActionListener getActionListenerColor() {
@@ -536,30 +596,12 @@ public class Menu {
         return playerName[name];
     }
 
-    public static String[] getPlayerNames(){
-        return playerName;
-    }
-
-    public static String[] getNPCs(){
-        String[] npcs = new String[npccount];
-
-        for (int i = 0; i < npccount; i++) {
-            npcs[i] = "npc_" + (i+1);
-        }
-
-        return npcs;
-    }
-
     public static String getMapName(){
         return maps[map];
     }
 
     public static Color getBGColor(){
         return bgColors[theme];
-    }
-
-    public static Icon getBGImage(){
-        return bgImage;
     }
 
     public static Color getButtonColor(){
@@ -576,10 +618,6 @@ public class Menu {
 
     public static Rectangle getButtonBounds(){
         return buttonBounds;
-    }
-
-    public static Rectangle getStartBounds(){
-        return startBounds;
     }
 
 }

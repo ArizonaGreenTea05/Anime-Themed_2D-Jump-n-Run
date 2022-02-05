@@ -15,7 +15,7 @@ public class NPCController implements Controller {
     }
 
     @Override
-    public void setRequestingUp(boolean requestingUp) {
+    public void setRequestingJump(boolean requestingUp) {
         this.isRequestingUp = requestingUp;
     }
 
@@ -73,12 +73,12 @@ public class NPCController implements Controller {
     }
 
     @Override
-    public boolean isRequestingESC(){
+    public boolean isRequestingPause(){
         return false;
     }
 
     @Override
-    public boolean isRequestingF3(){
+    public boolean isRequestingInfo(){
         return false;
     }
 

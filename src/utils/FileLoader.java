@@ -103,7 +103,7 @@ public class FileLoader {
         return loadFileNames(path, "", SPECIFIC);
     }
 
-    public static String[] loadFileNames(String path, String ignore, int specify){
+    public static String[] loadFileNames(String path, String ignore, int specifyIgnore){
 
         File directoryPath = new File("resources/" + path);
 
@@ -112,7 +112,7 @@ public class FileLoader {
             List<String> contentsList = new LinkedList<>();
 
             for (int i = 0; i < contents.length; i++) {
-                if (specify == SPECIFIC) {
+                if (specifyIgnore == SPECIFIC) {
                     if (!contents[i].equals(ignore)) {
                         contentsList.add(contents[i]);
                     }

@@ -1,7 +1,7 @@
 package controller;
 
 public interface Controller {
-    void setRequestingUp(boolean requestingUp);
+    void setRequestingJump(boolean requestingUp);
 
     void setRequestingDown(boolean requestingDown);
 
@@ -21,7 +21,7 @@ public interface Controller {
 
     boolean isRequestingHit();
 
-    boolean isRequestingESC();
-    boolean isRequestingF3();
+    boolean isRequestingPause();
+    boolean isRequestingInfo();
 
 }

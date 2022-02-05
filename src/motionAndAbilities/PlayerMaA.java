@@ -99,11 +99,11 @@ public class PlayerMaA extends MotionAndAbilities {
             }
         }
 
-        if(controller.isRequestingESC()) {
+        if(controller.isRequestingPause()) {
             state.getGame().getGameDisplay().doPauseAction();
         }
 
-        if(controller.isRequestingF3()) {
+        if(controller.isRequestingInfo()) {
             if(!f3Pressed) {
                 f3Pressed = true;
                 state.getGame().getGameDisplay().doInfo();

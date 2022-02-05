@@ -153,17 +153,16 @@ public class NPCMaA extends MotionAndAbilities {
 
             if(hasGround()){
                 if(thisGameObject.getDirection() == L && !hasGround(-thisGameObjectWidth/2)){
-                    controller.setRequestingUp(true);
+                    controller.setRequestingJump(true);
                 } else if(thisGameObject.getDirection() == R && !hasGround(thisGameObjectWidth/2)){
-                    controller.setRequestingUp(true);
+                    controller.setRequestingJump(true);
                 }
             }
 
             if(falling) {
-                controller.setRequestingUp(false);
+                controller.setRequestingJump(false);
             }
 
-            System.out.println(player.getController().isRequestingSprint());
             controller.setRequestingSprint(player.getController().isRequestingSprint());
 
         }

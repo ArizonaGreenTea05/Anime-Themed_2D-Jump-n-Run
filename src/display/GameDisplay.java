@@ -290,7 +290,7 @@ public class GameDisplay extends JFrame {
         lHeadline[PAUSE].setText("PAUSE");
         lHeadline[WON].setText("YOU WON");
 
-        lFps.setBounds(10, bPause.getHeight()+15, lPlayerText.getHeight()*4, lPlayerText.getHeight());
+        lFps.setBounds(bPause.getX(), bPause.getHeight()+15, lPlayerText.getHeight()*4, lPlayerText.getHeight());
         lFps.setFont(new Font(Menu.textFont, Font.PLAIN, lFps.getHeight()/3*2));
         lFps.setOpaque(true);
         lFps.setBackground(bgColor);

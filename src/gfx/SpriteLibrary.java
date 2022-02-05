@@ -1,6 +1,8 @@
 package gfx;
 
 import menu.Menu;
+import utils.FileLoader;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -18,22 +20,13 @@ public class SpriteLibrary {
     }
 
     private void loadUnits() {
-        String[] pn = Menu.getPlayerNames();
-        String[] npcn = Menu.getNPCs();
+        String gameTheme = Menu.getGameTheme();
 
-        int pnl = pn.length;
-        int npcnl = npcn.length;
-
-        int l = pnl + npcnl;
-
-        String[] folderNames = new String[l];
-
-        System.arraycopy(pn, 0, folderNames, 0, pnl);
-        System.arraycopy(npcn, 0, folderNames, pnl, npcnl);
+        String[] folderNames = FileLoader.loadFileNames("/game/themes/" + gameTheme + "/characters/");
 
         for(String folderName: folderNames) {
             SpriteSet spriteSet = new SpriteSet();
-            String pathToFolder = "/game/themes/" + Menu.getGameTheme() + "/characters/" + folderName;
+            String pathToFolder = "/game/themes/" + gameTheme + "/characters/" + folderName;
             String[] sheetsInFolder = Menu.getPlayerSheetsInFolder();
 
             for(String sheetName: sheetsInFolder) {
