@@ -17,11 +17,9 @@ import java.util.Objects;
 
 public class Menu {
 
-    private String GAME_VERSION;
+    private final String GAME_VERSION;
 
     private static boolean controlsShown = false;
-
-    private static Icon bgImage;
 
     private static final int AOD = 0;
     private static final String AOD_PATH = "game/themes/angels_of_death/";
@@ -62,15 +60,15 @@ public class Menu {
     private static double highScore;
 
     private static final JLabel lThemeText = new JLabel(" Theme:");
-    private static JLabel lTheme = new JLabel("");
+    private static final JLabel lTheme = new JLabel("");
     private static final JLabel lPlayerText = new JLabel(" Character:");
-    private static JLabel lPlayer = new JLabel("");
+    private static final JLabel lPlayer = new JLabel("");
     private static final JLabel lMapText = new JLabel(" Map:");
-    private static JLabel lMap = new JLabel("");
+    private static final JLabel lMap = new JLabel("");
     private static final JLabel lHighscoreText = new JLabel(" Highscore:");
-    private static JLabel lHighscore = new JLabel("");
+    private static final JLabel lHighscore = new JLabel("");
     private static final JLabel lScoreText = new JLabel(" Score:");
-    private static JLabel lScore = new JLabel("");
+    private static final JLabel lScore = new JLabel("");
 
     /**
      * declaration of themes, player names and colors
@@ -97,14 +95,13 @@ public class Menu {
     private static final Color color2 = new Color(4, 162, 236);
     private static final Color color3 = new Color(187, 120, 160);
     private static final Color color4 = new Color(255, 111, 197);
-    private static final Color clear = new Color(0,0,0,0);
 
     private static final Color[] buttonColor =           { color1,         color1,         color3,        Color.BLACK};
     private static final Color[] backButtonColor =       { color2,         color2,         color3,        Color.BLACK};
     private static final Color[] labelColor =            { color2,         color2,         color3,        Color.BLACK};
     private static final Color[] textColor =             { Color.WHITE,    Color.BLACK,    Color.BLACK,   color4};
     private final String[] bgImages =                    {"bg_light.png", "bg_light.png", "bg_dark.png", "bg_dark.png"};
-    Border border;
+    private static Border border;
 
     public static final String textFont = "Comic Sans MS";
 
@@ -324,7 +321,7 @@ public class Menu {
 
     private void initializeBackground() {
         background.setBounds(0,0,menu.getWidth(), menu.getHeight());
-        bgImage = FileLoader.loadIcon(bgImages[colorSetting],"/menu/", menu.getWidth(), menu.getHeight());
+        Icon bgImage = FileLoader.loadIcon(bgImages[colorSetting], "/menu/", menu.getWidth(), menu.getHeight());
         background.setIcon(bgImage);
         menu.setContentPane(background);
     }
@@ -586,7 +583,7 @@ public class Menu {
     }
 
     private void setHighscore(){
-        double highscore = Double.parseDouble(FileLoader.load("HighScore"));
+        double highscore = Double.parseDouble(Objects.requireNonNull(FileLoader.load("HighScore")));
         double score = GameDisplay.getScore();
 
         if (highscore >= score) {
@@ -647,6 +644,10 @@ public class Menu {
 
     public static Rectangle getButtonBounds(){
         return buttonBounds;
+    }
+
+    public static Border getBorder(){
+        return border;
     }
 
 }

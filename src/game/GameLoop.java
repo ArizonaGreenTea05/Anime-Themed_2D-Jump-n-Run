@@ -4,10 +4,11 @@ import display.GameDisplay;
 
 public class GameLoop implements Runnable {
 
-    private double score = 100;
+    private static final double scoreBackup = 100;
+    private static double score = scoreBackup;
 
-    private Game game;
-    private GameDisplay gameDisplay;
+    private final Game game;
+    private final GameDisplay gameDisplay;
 
     private static boolean running;
     private final double updateRate = 1.0/120.0;
@@ -92,5 +93,9 @@ public class GameLoop implements Runnable {
 
     public static void setRunning(boolean b){
         running = b;
+    }
+
+    public void resetScore() {
+        score = scoreBackup;
     }
 }
