@@ -65,6 +65,7 @@ public class GameState extends State {
                                     new NPCController(),
                                     new NPCMaA(1.5),
                                     relativePosition,
+                                    1,
                                     spriteLibrary,
                                     5,
                                     this

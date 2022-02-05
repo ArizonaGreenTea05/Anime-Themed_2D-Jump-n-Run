@@ -11,9 +11,9 @@ import java.awt.*;
 
 public class NPC extends MovingEntity {
 
-    public NPC(Controller controller, MotionAndAbilities mAndA, Position position, SpriteLibrary spriteLibrary, int maxLifes, State state) {
+    public NPC(Controller controller, MotionAndAbilities mAndA, Position position, int texture, SpriteLibrary spriteLibrary, int maxLifes, State state) {
         super(controller, mAndA, position, state);
-        animationManager = new AnimationManager(spriteLibrary.getUnit("npc_1"));
+        animationManager = new AnimationManager(spriteLibrary.getUnit("npc_" + texture));
         solid = true;
         this.maxLifes = maxLifes;
         lifes = maxLifes;

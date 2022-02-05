@@ -11,7 +11,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Objects;
 
 public class FileLoader {
@@ -48,7 +49,7 @@ public class FileLoader {
     public static String[][] loadMap(){
         String theme = Menu.getGameTheme();
         String map = Menu.getMapName();
-        String path = "game/themes/" + theme + "/maps/" + map + ".txt";
+        String path = "game/themes/" + theme + "/maps/" + map;
         String mapDoc = load(path);
 
         String[] temp1 = Objects.requireNonNull(mapDoc).split("\n",Integer.MAX_VALUE);
@@ -78,19 +79,53 @@ public class FileLoader {
 
 
     public static Icon loadIcon(String image, String path, int width, int height) {
-        Image img = null;
-        img = Objects.requireNonNull(loadImage(image, path)).getScaledInstance(width, height, Image.SCALE_DEFAULT);
+        Image img = Objects.requireNonNull(loadImage(image, path)).getScaledInstance(width, height, Image.SCALE_DEFAULT);
         return new ImageIcon(img);
     }
 
     public static Image loadImage(String image, String path) {
+
         Image img = null;
         try {
             img = ImageIO.read(Objects.requireNonNull(FileLoader.class.getResource(path + image)));
         } catch (IOException e) {
-            e.printStackTrace();
+            System.err.println("ERROR! failed to load file '" + image + "'");
         }
 
         return img;
+    }
+
+
+    public static final int ALL = 0;
+    public static final int SPECIFIC = 1;
+
+    public static String[] loadFileNames(String path){
+        return loadFileNames(path, "", SPECIFIC);
+    }
+
+    public static String[] loadFileNames(String path, String ignore, int specify){
+
+        File directoryPath = new File("resources/" + path);
+
+        try {
+            String[] contents = directoryPath.list();
+            List<String> contentsList = new LinkedList<>();
+
+            for (int i = 0; i < contents.length; i++) {
+                if (specify == SPECIFIC) {
+                    if (!contents[i].equals(ignore)) {
+                        contentsList.add(contents[i]);
+                    }
+                } else {
+                    if (!contents[i].contains(ignore)) {
+                        contentsList.add(contents[i]);
+                    }
+                }
+            }
+            return contentsList.toArray(new String[0]);
+        } catch (NullPointerException npe){
+            System.err.println("ERROR! failed to load files from '" + path + "'");
+        }
+        return null;
     }
 }
