@@ -51,9 +51,6 @@ public class PlayerMaA extends MotionAndAbilities {
         if(hasGround()){
             falling = false;
             gravity = 0;
-            if(!controller.isRequestingSprint()) {
-                speed = normalSpeed;
-            }
         }
 
         if(y > screenHeight + 64){
@@ -72,14 +69,13 @@ public class PlayerMaA extends MotionAndAbilities {
             }
         }
 
-        if (controller.isRequestingUp() && !falling) {
+        if(controller.isRequestingUp() && !falling) {
             if(gravity == 0) {
                 savePosYJump = (int) Math.round(y);
                 maxJumpPos = savePosYJump-jumpHeight;
             }
 
             gravity += 0.1;
-            speed += 1;
             sitting = false;
 
             double jumpSpeed = getFallSpeed(gravity);
