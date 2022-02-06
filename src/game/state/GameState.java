@@ -84,52 +84,47 @@ public class GameState extends State {
             for (int j = 0; j < sMap[i].length-1; j++) {
                 String letter = sMap[i][j];
                 Position relativePosition = new Position((j-1)*64, ground-(i-1)*64);
+                GameObject object = null;
                 if(letter.equals("G")){
-                    mapObjects.add(
-                            new NormalBlock(
+                    object = new NormalBlock(
                                     relativePosition,
                                     Block.GROUND_BLOCK,
                                     true
-                            )
-                    );
+                            );
                 } else if(letter.equals("W")){
-                    mapObjects.add(
-                            new NormalBlock(
+                    object = new NormalBlock(
                                     relativePosition,
                                     Block.WALL_BLOCK,
                                     true
-                            )
-                    );
+                            );
                 } else if(letter.equals("g")){
-                    mapObjects.add(
-                            new NormalBlock(
+                    object = new NormalBlock(
                                     relativePosition,
                                     Block.TRANS_GROUND_BLOCK,
                                     false
-                            )
-                    );
+                            );
                 } else if(letter.equals("w")){
-                    mapObjects.add(
-                            new NormalBlock(
+                    object = new NormalBlock(
                                     relativePosition,
                                     Block.TRANS_WALL_BLOCK,
                                     false
-                            )
-                    );
+                            );
                 } else if(letter.equalsIgnoreCase("A")){
-                    mapObjects.add(
-                            new ActionBlock(
+                    object = new ActionBlock(
                                     relativePosition,
                                     Block.ACTION_BLOCK
-                            )
-                    );
+                            );
                 } else if(letter.equalsIgnoreCase("F")){
-                    mapObjects.add(
-                            new FinishBlock(
+                    object = new FinishBlock(
                                     relativePosition,
                                     Block.GROUND_BLOCK
-                            )
-                    );
+                            );
+                }
+                if(object!=null) {
+                    mapObjects.add(object);
+                }
+                if(i == 0 && j == 0){
+                    lowestBlock = object;
                 }
             }
         }

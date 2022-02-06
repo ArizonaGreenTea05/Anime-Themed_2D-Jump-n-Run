@@ -11,6 +11,8 @@ public class ScreenSize {
     private static final int ground = height-128;
     private static final int leftBorder = 9*64;
     private static final int rightBorder = width-9*64;
+    private static final int topBorder = 128;
+    private static final int bottomBorder = height-256;
     private static final int mapWidth = mapWidth();
     private static final int mapHeight = mapHeight();
 
@@ -64,5 +66,13 @@ public class ScreenSize {
 
     public static int getRightBorder() {
         return rightBorder;
+    }
+
+    public static int getTopBorder() {
+        return topBorder;
+    }
+
+    public static int getBottomBorder() {
+        return bottomBorder;
     }
 }

@@ -10,6 +10,7 @@ import java.util.List;
 
 public class PlayerMaA extends MotionAndAbilities {
     private boolean f3Pressed = false;
+    private int maxJumpPos = 0;
 
     public PlayerMaA(double speed) {
         super(speed);
@@ -34,13 +35,16 @@ public class PlayerMaA extends MotionAndAbilities {
 
         int leftBorder = ScreenSize.getLeftBorder();
         int rightBorder = ScreenSize.getRightBorder();
+        int topBorder = ScreenSize.getTopBorder();
+        int bottomBorder = ScreenSize.getBottomBorder();
         int screenHeight = ScreenSize.getHeight();
+        int lowestBlockPos = (int) state.getLowestBlock().getPosition().getY();
 
 
 
         //wenn Position 64p (Character-Größe = 64, deswegen 128) über Boden wird fallling true
         //wenn Position größer als Boden und nicht Up requestet wird wird falling true
-        if(y < savePosYJump-jumpHeight || (!controller.isRequestingUp() && !hasGround()) || !topSpace()){
+        if(y < maxJumpPos || (!controller.isRequestingUp() && !hasGround()) || !topSpace()){
             falling = true;
         }
 
@@ -56,15 +60,31 @@ public class PlayerMaA extends MotionAndAbilities {
         if(falling) {
             gravity -= 0.1;
             sitting = false;
-            deltaY += getFallSpeed(gravity);
+
+            double jumpSpeed = getFallSpeed(gravity);
+            if(y >= bottomBorder && lowestBlockPos > screenHeight) {
+                moveMap(new Vector2D(0,-jumpSpeed));
+            } else {
+                deltaY += jumpSpeed;
+            }
         }
 
         if (controller.isRequestingUp() && !falling) {
-            if(gravity == 0) {savePosYJump = (int) Math.round(y);}
+            if(gravity == 0) {
+                savePosYJump = (int) Math.round(y);
+                maxJumpPos = savePosYJump-jumpHeight;
+            }
 
             gravity += 0.1;
             sitting = false;
-            deltaY -= getFallSpeed(gravity);
+
+            double jumpSpeed = getFallSpeed(gravity);
+            if(y <= topBorder) {
+                moveMap(new Vector2D(0,jumpSpeed));
+                maxJumpPos += jumpSpeed;
+            } else {
+                deltaY -= jumpSpeed;
+            }
         }
 
         sprint(controller.isRequestingSprint(), 1.5);

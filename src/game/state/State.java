@@ -1,5 +1,6 @@
 package game.state;
 
+import core.ScreenSize;
 import gameObjects.GameObject;
 import gameObjects.MovingEntity;
 import game.Game;
@@ -11,6 +12,7 @@ import java.util.List;
 
 public abstract class State {
 
+    protected GameObject lowestBlock;
     protected List<GameObject> gameObjects;
     protected List<GameObject> mapObjects;
     protected SpriteLibrary spriteLibrary;
@@ -62,5 +64,9 @@ public abstract class State {
     }
 
     public abstract MovingEntity getPlayer();
+
+    public GameObject getLowestBlock(){
+        return lowestBlock;
+    }
 
 }
