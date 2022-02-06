@@ -181,7 +181,7 @@ public abstract class MotionAndAbilities {
                 int blockPosY = object.getPosition().intY() + objectTopSpace;
 
                 if (blockPosY < posY + thisGameObjectHeight && blockPosY > posY - objectHeight) {
-                    if (blockPosX < posX + thisGameObjectWidth+5 && blockPosX > posX - thisGameObjectWidth/2) {
+                    if (blockPosX < posX + thisGameObjectWidth+7 && blockPosX > posX - thisGameObjectWidth/2) {
                         return false;
                     }
                 }
