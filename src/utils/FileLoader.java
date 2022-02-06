@@ -87,9 +87,9 @@ public class FileLoader {
 
         Image img = null;
         try {
-            img = ImageIO.read(Objects.requireNonNull(FileLoader.class.getResource(path + image)));
+            img = ImageIO.read(Objects.requireNonNull(FileLoader.class.getResource(path + image + ".png")));
         } catch (IOException e) {
-            System.err.println("ERROR! failed to load file '" + image + "'");
+            System.err.println("ERROR! failed to load file '" + image + ".png'");
         }
 
         return img;

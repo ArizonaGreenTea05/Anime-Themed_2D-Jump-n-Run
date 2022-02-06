@@ -73,7 +73,7 @@ public class GameDisplay extends JFrame {
         setResizable(false);
         setExtendedState(JFrame.MAXIMIZED_BOTH);
         setUndecorated(true);
-        setIconImage(FileLoader.loadImage("sakura_icon.png","/"));
+        setIconImage(FileLoader.loadImage("sakura_icon","/"));
 
         this.renderer = new Renderer();
 

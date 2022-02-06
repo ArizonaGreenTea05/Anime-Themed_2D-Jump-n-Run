@@ -96,11 +96,19 @@ public class Menu {
     private static final Color color3 = new Color(187, 120, 160);
     private static final Color color4 = new Color(255, 111, 197);
 
-    private static final Color[] buttonColor =           { color1,         color1,         color3,        Color.BLACK};
-    private static final Color[] backButtonColor =       { color2,         color2,         color3,        Color.BLACK};
-    private static final Color[] labelColor =            { color2,         color2,         color3,        Color.BLACK};
-    private static final Color[] textColor =             { Color.WHITE,    Color.BLACK,    Color.BLACK,   color4};
-    private final String[] bgImages =                    {"bg_light.png", "bg_light.png", "bg_dark.png", "bg_dark.png"};
+    private static final Color red =    new Color(255, 30, 0);
+    private static final Color orange = new Color(255, 160, 0);
+    private static final Color yellow = new Color(255, 240, 0);
+    private static final Color green =  new Color(30, 220, 0);
+    private static final Color blue =   new Color(0, 140, 255);
+    private static final Color purple = new Color(110, 64, 255);
+
+    private static final Color[] buttonColor =           { color1,      color1,      color3,      Color.BLACK, blue};
+    private static final Color[] backButtonColor =       { color2,      color2,      color3,      Color.BLACK, orange};
+    private static final Color[] bottomButtonColor =     { color1,      color1,      color3,      Color.BLACK, green};
+    private static final Color[] labelColor =            { color2,      color2,      color3,      Color.BLACK, red};
+    private static final Color[] textColor =             { Color.WHITE, Color.BLACK, Color.BLACK, color4,      Color.WHITE};
+    private final String[] bgImages =                    {"bg_light",  "bg_light",  "bg_dark",   "bg_dark",   "bg_nyan"};
     private static Border border;
 
     public static final String textFont = "Comic Sans MS";
@@ -150,7 +158,7 @@ public class Menu {
         pControls.setVisible(controlsShown);
         pControls.setBounds(bounds);
         pControls.setLayout(null);
-        pControls.setBackground(buttonColor[colorSetting]);
+        pControls.setBackground(bottomButtonColor[colorSetting]);
         pControls.setBorder(border);
     }
 
@@ -175,10 +183,10 @@ public class Menu {
 
         table.setEnabled(false);
         table.setShowGrid(true);
-        table.setBackground(buttonColor[colorSetting]);
+        table.setBackground(bottomButtonColor[colorSetting]);
         table.setForeground(textColor[colorSetting]);
         table.setFont(new Font(textFont, Font.PLAIN, rowheight/4));
-        table.getTableHeader().setBackground(buttonColor[colorSetting]);
+        table.getTableHeader().setBackground(bottomButtonColor[colorSetting]);
         table.getTableHeader().setForeground(textColor[colorSetting]);
         table.getTableHeader().setFont(new Font(textFont, Font.PLAIN, tableHeaderHeight/2));
 
@@ -193,7 +201,7 @@ public class Menu {
     private void initializeMenu() {
         menu.setSize(width,height);
         menu.setTitle("GameMenu   | " + GAME_VERSION + " |");
-        menu.setIconImage(FileLoader.loadImage("sakura_icon.png", "/"));
+        menu.setIconImage(FileLoader.loadImage("sakura_icon", "/"));
         menu.setUndecorated(true);
         menu.setResizable(false);
         menu.setLayout(null);
@@ -375,7 +383,7 @@ public class Menu {
         // color change Button
         bChangeColor.setBounds(menu.getWidth()-20-backWidth, menu.getHeight()-backHeight-10, backWidth, backHeight);
         bChangeColor.setFont(new Font(textFont, Font.PLAIN, backHeight/2));
-        bChangeColor.setBackground(buttonColor[colorSetting]);
+        bChangeColor.setBackground(bottomButtonColor[colorSetting]);
         bChangeColor.setForeground(textColor[colorSetting]);
         bChangeColor.setBorder(border);
         bChangeColor.addActionListener(getActionListenerColor());
@@ -384,7 +392,7 @@ public class Menu {
 
         bShowControls.setBounds(menu.getWidth()-20-backWidth, menu.getHeight()-2*backHeight-20, backWidth, backHeight);
         bShowControls.setFont(new Font(textFont, Font.PLAIN, backHeight/2));
-        bShowControls.setBackground(buttonColor[colorSetting]);
+        bShowControls.setBackground(bottomButtonColor[colorSetting]);
         bShowControls.setForeground(textColor[colorSetting]);
         bShowControls.setBorder(border);
         bShowControls.addActionListener(getActionListenerShowControls());
@@ -393,7 +401,7 @@ public class Menu {
         // exit Button
         bExit.setBounds(20, menu.getHeight()-backHeight-10, backWidth, backHeight);
         bExit.setFont(font);
-        bExit.setBackground(buttonColor[colorSetting]);
+        bExit.setBackground(bottomButtonColor[colorSetting]);
         bExit.setForeground(textColor[colorSetting]);
         bExit.setBorder(border);
         bExit.addActionListener(getActionListenerExit());
