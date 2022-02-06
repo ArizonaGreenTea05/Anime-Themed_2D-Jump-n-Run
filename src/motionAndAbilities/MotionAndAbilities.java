@@ -292,7 +292,6 @@ public abstract class MotionAndAbilities {
         }
     }
 
-
     public abstract Vector2D getVector();
 
     public abstract boolean isMoving();

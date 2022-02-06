@@ -1,5 +1,6 @@
 package core;
 
+import controller.Controller;
 import motionAndAbilities.MotionAndAbilities;
 
 public enum Direction {
@@ -17,16 +18,18 @@ public enum Direction {
         this.animationRow = animationRow;
     }
 
-    public static Direction fromMotion(MotionAndAbilities motion){
-        double x = motion.getVector().getX();
-        double y = motion.getVector().getY();
+    public static Direction fromMotion(Controller controller){
+        boolean right = controller.isRequestingRight();
+        boolean left = controller.isRequestingLeft();
+        boolean up = controller.isRequestingUp();
+        boolean down = controller.isRequestingDown();
 
-        if(motion.isSitting()) return D;
-        if(x < 0 && y >= 0) return L;
-        if(x == 0 && y < 0) return O;
-        if(x > 0 && y >= 0) return R;
-        if(x < 0 && y < 0) return OL;
-        if(x > 0 && y < 0) return OR;
+        if(down) return D;
+        if(left && !up) return L;
+        if(up && !left && !right) return O;
+        if(right && !up) return R;
+        if(left && up) return OL;
+        if(right && up) return OR;
 
         return R;
     }

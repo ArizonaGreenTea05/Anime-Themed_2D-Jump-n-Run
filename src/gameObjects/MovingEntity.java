@@ -51,7 +51,7 @@ public abstract class MovingEntity extends GameObject {
 
     protected void manageDirection(){
         if(mAndA.isMoving()){
-            this.direction = Direction.fromMotion(mAndA);
+            this.direction = Direction.fromMotion(controller);
         }
     }
 

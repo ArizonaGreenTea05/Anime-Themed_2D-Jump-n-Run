@@ -36,6 +36,8 @@ public class PlayerMaA extends MotionAndAbilities {
         int rightBorder = ScreenSize.getRightBorder();
         int screenHeight = ScreenSize.getHeight();
 
+
+
         //wenn Position 64p (Character-Größe = 64, deswegen 128) über Boden wird fallling true
         //wenn Position größer als Boden und nicht Up requestet wird wird falling true
         if(y < savePosYJump-jumpHeight || (!controller.isRequestingUp() && !hasGround()) || !topSpace()){
