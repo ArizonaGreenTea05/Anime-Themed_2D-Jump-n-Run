@@ -26,6 +26,7 @@ public abstract class MotionAndAbilities {
     protected boolean canHit;
     protected Controller controller;
     static int playerPosInList;
+    protected static GameObject player;
     protected boolean falling;
     protected boolean sitting;
     protected double gravity;
@@ -293,6 +294,10 @@ public abstract class MotionAndAbilities {
     }
 
     public abstract Vector2D getVector();
+
+    public static GameObject getPlayer(){
+        return player;
+    }
 
     public abstract boolean isMoving();
 

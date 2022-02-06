@@ -13,15 +13,12 @@ import java.awt.*;
 
 public class Player extends MovingEntity {
 
-    private static Controller controller;
-
     public Player(Controller controller, MotionAndAbilities mAndA, Position position, SpriteLibrary spriteLibrary, int maxLifes, State state) {
         super(controller, mAndA, position, state);
         animationManager = new AnimationManager(spriteLibrary.getUnit(Menu.getPlayerName()));
         solid = true;
         this.maxLifes = maxLifes;
         lifes = maxLifes;
-        this.controller = controller;
         setLifesLabelText();
     }
 
@@ -66,7 +63,9 @@ public class Player extends MovingEntity {
 
     @Override
     public void addLifes(int lifes){
-        this.lifes += lifes;
+        if(this.lifes < maxLifes) {
+            this.lifes += lifes;
+        }
         setLifesLabelText();
     }
 

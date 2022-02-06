@@ -2,6 +2,7 @@ package gameObjects;
 
 import core.Position;
 import game.state.State;
+import motionAndAbilities.MotionAndAbilities;
 
 import java.awt.*;
 
@@ -45,5 +46,6 @@ public class Coin extends StaticEntity{
         state.getGameObjects().remove(this);
         state.setUpdatable(true);
         state.getGame().getGameLoop().addScore(5);
+        MotionAndAbilities.getPlayer().addLifes(1);
     }
 }

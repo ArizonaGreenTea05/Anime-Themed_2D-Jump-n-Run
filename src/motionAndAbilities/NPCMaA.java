@@ -10,7 +10,6 @@ import static core.Direction.*;
 
 public class NPCMaA extends MotionAndAbilities {
     private boolean cooldownRunning = false;
-    private GameObject player;
 
     public NPCMaA(double speed) {
         super(speed);
@@ -118,13 +117,15 @@ public class NPCMaA extends MotionAndAbilities {
         int posY = (int) (y+thisGameObjectTopSpace);
 
         if(thisGameObject.isShown()) {
-            if (posX < pPosX) {
-                controller.setRequestingLeft(false);
-                controller.setRequestingRight(true);
-            }
-            if (posX > pPosX) {
-                controller.setRequestingRight(false);
-                controller.setRequestingLeft(true);
+            if(posY < pPosY + 128 && posY > pPosY - 128) {
+                if (posX < pPosX) {
+                    controller.setRequestingLeft(false);
+                    controller.setRequestingRight(true);
+                }
+                if (posX > pPosX) {
+                    controller.setRequestingRight(false);
+                    controller.setRequestingLeft(true);
+                }
             }
 
 

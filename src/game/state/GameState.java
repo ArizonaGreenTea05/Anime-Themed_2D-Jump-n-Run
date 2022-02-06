@@ -71,6 +71,13 @@ public class GameState extends State {
                                     this
                             )
                     );
+                }else if(letter.equalsIgnoreCase("C")){
+                    gameObjects.add(
+                            new Coin(
+                                    relativePosition,
+                                    StaticEntity.COIN
+                            )
+                    );
                 }
             }
         }
