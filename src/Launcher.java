@@ -4,3 +4,6 @@ public class Launcher {
         new Menu("V 0.7");
     }
 }
+/*
+TODO: Loading Screen
+ */
