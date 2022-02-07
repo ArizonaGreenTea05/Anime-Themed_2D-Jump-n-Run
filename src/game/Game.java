@@ -1,6 +1,7 @@
 package game;
 
 import display.GameDisplay;
+import display.LoadingScreen;
 import game.state.GameState;
 import game.state.State;
 import input.Input;
@@ -21,7 +22,15 @@ public class Game {
     public Game(String version) {
         input = new Input();
         gameDisplay = new GameDisplay(input, "Jump'n'Run - "+ ElseUtils.makeNameNice(Menu.getGameTheme()) +" styled ", " | " + version + " |", this);
+
+        LoadingScreen loadingScreen = new LoadingScreen();
+        Thread tLoadingScreen = new Thread(loadingScreen);
+        tLoadingScreen.start();
+
         state = new GameState(input, this);
+
+        tLoadingScreen.stop();
+        loadingScreen.dispose();
     }
 
     public void stopGameLoop() {

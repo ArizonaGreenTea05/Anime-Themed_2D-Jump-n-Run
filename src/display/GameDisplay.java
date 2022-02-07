@@ -69,7 +69,7 @@ public class GameDisplay extends JFrame {
         this.GAME_VERSION = version;
 
         setTitle(title + GAME_VERSION);
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
         setResizable(false);
         setExtendedState(JFrame.MAXIMIZED_BOTH);
         setUndecorated(true);

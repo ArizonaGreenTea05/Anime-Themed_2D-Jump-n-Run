@@ -3,6 +3,7 @@ package menu;
 import controller.PlayerController;
 import core.ScreenSize;
 import display.GameDisplay;
+import display.LoadingScreen;
 import game.Game;
 import game.GameLoop;
 import utils.ElseUtils;
@@ -108,7 +109,7 @@ public class Menu {
     private static final Color[] bottomButtonColor =     { color1,      color1,      color3,      Color.BLACK, green};
     private static final Color[] labelColor =            { color2,      color2,      color3,      Color.BLACK, red};
     private static final Color[] textColor =             { Color.WHITE, Color.BLACK, Color.BLACK, color4,      Color.WHITE};
-    private final String[] bgImages =                    {"bg_light",  "bg_light",  "bg_dark",   "bg_dark",   "bg_nyan"};
+    private static final String[] bgImages =                    {"bg_light",  "bg_light",  "bg_dark",   "bg_dark",   "bg_nyan"};
     private static Border border;
 
     public static final String textFont = "Comic Sans MS";
@@ -202,6 +203,7 @@ public class Menu {
         menu.setSize(width,height);
         menu.setTitle("GameMenu   | " + GAME_VERSION + " |");
         menu.setIconImage(FileLoader.loadImage("sakura_icon", "/"));
+        menu.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
         menu.setUndecorated(true);
         menu.setResizable(false);
         menu.setLayout(null);
@@ -506,9 +508,13 @@ public class Menu {
 
     private ActionListener getActionListenerStart() {
         return e -> {
-            GameLoop gameLoop = new GameLoop(new Game(GAME_VERSION));
-            new Thread(gameLoop).start();
-            menu.dispose();
+            new Thread(() ->{
+                menu.dispose();
+
+                GameLoop gameLoop = new GameLoop(new Game(GAME_VERSION));
+
+                new Thread(gameLoop).start();
+            }).start();
         };
     }
 
@@ -656,6 +662,14 @@ public class Menu {
 
     public static Border getBorder(){
         return border;
+    }
+
+    public static Icon getBGImage(){
+        return FileLoader.loadIcon(bgImages[colorSetting], "/menu/", ScreenSize.getWidth(), ScreenSize.getHeight());
+    }
+
+    public static String getFont(){
+        return textFont;
     }
 
 }
