@@ -11,6 +11,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Objects;
@@ -122,7 +123,9 @@ public class FileLoader {
                     }
                 }
             }
-            return contentsList.toArray(new String[0]);
+            String[] out = contentsList.toArray(new String[0]);
+            Arrays.sort(out);
+            return out;
         } catch (NullPointerException npe){
             System.err.println("ERROR! failed to load files from '" + path + "'");
         }

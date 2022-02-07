@@ -82,7 +82,7 @@ public class Menu {
     public static final String[] mapsAoT = FileLoader.loadFileNames(AOT_PATH + "maps");
     public static final Color bgColorAoT = new Color(70, 90, 120);
 
-    public static final String[] gameThemes = {"angels_of_death", "attack_on_titan"};
+    public static final String[] gameThemes = FileLoader.loadFileNames(THEME_PATH);
     private static final Color[] bgColors = new Color[]{bgColorAoD, bgColorAoT};
 
     private static int name;
