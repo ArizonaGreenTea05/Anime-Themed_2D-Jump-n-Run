@@ -253,10 +253,10 @@ public class Menu {
         // bei Farbwechsel wird vorheriger Punkt beibehalten
         if(!lMap.getText().equals("")) {
             menu.add(bStartGame);
-            menu.add(bBack[PLAYERS]);
+            menu.add(bBack[MAPS]);
         } else if(!lPlayer.getText().equals("")) {
             addMaps();
-            menu.add(bBack[MAPS]);
+            menu.add(bBack[PLAYERS]);
         } else if(!lTheme.getText().equals("")) {
             addPlayers();
             menu.add(bBack[THEMES]);
@@ -746,8 +746,8 @@ public class Menu {
 
 // else methods
 
-    private void remove(Component[] buttons) {
-        for (Component component : buttons) {
+    private void remove(Component[] components) {
+        for (Component component : components) {
             menu.remove(component);
         }
     }
