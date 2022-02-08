@@ -19,19 +19,25 @@ public class Game {
     private final State state;
 
 
+
     public Game(String version) {
         input = new Input();
         gameDisplay = new GameDisplay(input, "Jump'n'Run - "+ ElseUtils.makeNameNice(Menu.getGameTheme()) +" styled ", " | " + version + " |", this);
 
+        // loading screen initialized
         LoadingScreen loadingScreen = new LoadingScreen();
         Thread tLoadingScreen = new Thread(loadingScreen);
         tLoadingScreen.start();
 
+        // initialization of GameState takes a long time because every GameObject needs to be initialized
         state = new GameState(input, this);
 
+        // loading screen stopped
         tLoadingScreen.stop();
         loadingScreen.dispose();
     }
+
+
 
     public void stopGameLoop() {
         GameLoop.setRunning(false);

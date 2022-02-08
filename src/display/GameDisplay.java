@@ -22,21 +22,35 @@ public class GameDisplay extends JFrame {
     private final Renderer renderer;
     private final Game game;
     private final int width,height;
+    private final Border border = Menu.getBorder();
+
+
+
+// buttons
+
+    private JButton bInfo;
     private JButton bPause;
     private JButton bResume;
     private final JButton[] bExit = new JButton[3];
     private final JButton[] bRestart = new JButton[3];
-    private static final JLabel[] lHeadline = new JLabel[3];
-    private final int FAILED = 0;
-    private final int PAUSE = 1;
-    private final int WON = 2;
-    private JButton bInfo;
+
+
+
+// panels
+
     private final JPanel pFailedWindow = new JPanel();
     private final JPanel pPauseWindow = new JPanel();
     private final JPanel pWonWindow = new JPanel();
-    private final Border border = Menu.getBorder();
+    private final int FAILED = 0;
+    private final int PAUSE = 1;
+    private final int WON = 2;
 
 
+
+// labels
+
+
+    private static final JLabel[] lHeadline = new JLabel[3];
     private static double score = 0;
     private static final JLabel lThemeText = new JLabel(" Theme:");
     private static final JLabel lTheme = Menu.getThemeLabel();
@@ -52,15 +66,23 @@ public class GameDisplay extends JFrame {
     private static final JLabel lLifes = new JLabel(" 5/5");
     private static final JLabel lFps = new JLabel();
 
+
+
+// colors
+
     private final Color bgColor = Menu.getBGColor();
     private final Color buttonColor = Menu.getButtonColor();
+    private final Color textColor = Menu.getTextColor();
 
+
+
+// bounds of info-labels so their position can be swapped depending on whether info shall be shown or not
     private final Rectangle scorePos = new Rectangle();
     private final Rectangle scoreTextPos = new Rectangle();
     private final Rectangle lifesPos = new Rectangle();
     private final Rectangle lifesTextPos = new Rectangle();
 
-    private final Color textColor = Menu.getTextColor();
+
 
     public GameDisplay(Input input, String title, String version, Game game) {
         this.game = game;
@@ -68,12 +90,7 @@ public class GameDisplay extends JFrame {
         this.height = ScreenSize.getHeight();
         this.GAME_VERSION = version;
 
-        setTitle(title + GAME_VERSION);
-        setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
-        setResizable(false);
-        setExtendedState(JFrame.MAXIMIZED_BOTH);
-        setUndecorated(true);
-        setIconImage(FileLoader.loadImage("sakura_icon","/"));
+        initializeMenu(title);
 
         this.renderer = new Renderer();
 
@@ -91,57 +108,55 @@ public class GameDisplay extends JFrame {
 
         pack();
 
-        canvas.createBufferStrategy(2);
+        canvas.createBufferStrategy(3);
 
         setLocationRelativeTo(null);
         setVisible(true);
     }
 
 
-    private void addAll() {
-        pFailedWindow.add(lHeadline[FAILED]);
-        pFailedWindow.add(bRestart[FAILED]);
-        pFailedWindow.add(bExit[FAILED]);
-        add(pFailedWindow);
-        pPauseWindow.add(lHeadline[PAUSE]);
-        pPauseWindow.add(bRestart[PAUSE]);
-        pPauseWindow.add(bResume);
-        pPauseWindow.add(bExit[PAUSE]);
-        add(pPauseWindow);
-        pWonWindow.add(lHeadline[WON]);
-        pWonWindow.add(bRestart[WON]);
-        pWonWindow.add(bExit[WON]);
-        add(pWonWindow);
-        add(lFps);
-        add(lTheme);
-        lTheme.setVisible(false);
-        add(lThemeText);
-        lThemeText.setVisible(false);
-        add(lPlayer);
-        lPlayer.setVisible(false);
-        add(lPlayerText);
-        lPlayerText.setVisible(false);
-        add(lMap);
-        lMap.setVisible(false);
-        add(lMapText);
-        lMapText.setVisible(false);
-        add(lHighScore);
-        lHighScore.setVisible(false);
-        add(lHighScoreText);
-        lHighScoreText.setVisible(false);
-        add(lScore);
-        add(lScoreText);
-        add(lLifes);
-        add(lLifesText);
-        add(bPause);
-        add(bInfo);
-        add(canvas);
+    public void render(State state){
+        BufferStrategy bufferStrategy = canvas.getBufferStrategy();
+        // Exception handling: wenn der button "back" gedrückt und das Fenster geschlossen wird, gibt "bufferStrategy.getDrawGraphics()" eine IllegalStateException aus, das Programm macht jedoch was es soll.
+        // -> an dieser Stelle nicht notwendig, dass diese Sequenz ausgeführt wird
+        // -> try-catch, damit an der Stelle kein error ausgegeben wird
+        try {
+
+            // getting graphics
+            Graphics graphics = bufferStrategy.getDrawGraphics();
+            // setting background color
+            graphics.setColor(Menu.getBGColor());
+            graphics.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
+            // rendering
+            renderer.render(state, graphics);
+            // showing rendered canvas
+            bufferStrategy.show();
+
+        } catch(IllegalStateException ignored) {}
     }
+
+
+
+// initializer methods
+
+    private void initializeMenu(String title) {
+        setTitle(title + GAME_VERSION);
+        setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+        setResizable(false);
+        setExtendedState(JFrame.MAXIMIZED_BOTH);
+        setUndecorated(true);
+        setIconImage(FileLoader.loadImage("sakura_icon","/"));
+    }
+
+
+
     private void initializeCanvas() {
         canvas = new Canvas();
         canvas.setPreferredSize(new Dimension(width, height));
         canvas.setFocusable(false);
     }
+
+
 
     private void initializePanels() {
         Rectangle panelBounds = new Rectangle(1, 1, width-2, height-2);
@@ -162,10 +177,17 @@ public class GameDisplay extends JFrame {
         pWonWindow.setBackground(bgColor);
     }
 
+
+
     private void initializeButtons() {
+
+        // button has same bounds as back buttons in menu
+
+        String font = Menu.textFont;
+
         bPause = new JButton("PAUSE");
         bPause.setBounds(Menu.getBackBounds());
-        bPause.setFont(new Font(Menu.textFont, Font.PLAIN, bPause.getHeight()/2));
+        bPause.setFont(new Font(font, Font.PLAIN, bPause.getHeight()/2));
         bPause.addActionListener(getActionListenerPause());
         bPause.setBackground(bgColor);
         bPause.setForeground(textColor);
@@ -173,12 +195,27 @@ public class GameDisplay extends JFrame {
         bPause.setFocusable(false);
 
 
+        // button has width of back buttons and height of labels
+
+        bInfo = new JButton("show info");
+        bInfo.setBounds(ScreenSize.getWidth()-Menu.labelWidth1-Menu.labelWidth2-100- bPause.getWidth(), 5 , bPause.getWidth(), Menu.labelHeight);
+        bInfo.setFont(new Font(font, Font.PLAIN,bInfo.getHeight()/3*2));
+        bInfo.addActionListener(getActionListenerInfo());
+        bInfo.setBackground(bgColor);
+        bInfo.setForeground(textColor);
+        bInfo.setBorder(border);
+        bInfo.setFocusable(false);
+
+
+
+        // buttons have same bounds as theme, player and map buttons in Menu
+
         Rectangle bounds = Menu.getButtonBounds();
 
         for (int i = 0; i < bExit.length; i++) {
             bExit[i] = new JButton("EXIT");
             bExit[i].setBounds((pFailedWindow.getWidth() - bounds.width) / 2, pFailedWindow.getHeight() / 2, bounds.width, bounds.height);
-            bExit[i].setFont(new Font("Consolas", Font.PLAIN, bExit[i].getHeight()/3*2));
+            bExit[i].setFont(new Font(font, Font.PLAIN, bExit[i].getHeight()/3*2));
             bExit[i].setBackground(buttonColor);
             bExit[i].setForeground(textColor);
             bExit[i].setBorder(border);
@@ -189,7 +226,7 @@ public class GameDisplay extends JFrame {
         for (int i = 0; i < bRestart.length; i++) {
             bRestart[i] = new JButton("RESTART");
             bRestart[i].setBounds((pPauseWindow.getWidth()-bounds.width)/2, (int) (bExit[PAUSE].getY() - bExit[PAUSE].getHeight()*1.25), bounds.width, bounds.height);
-            bRestart[i].setFont(new Font("Consolas", Font.PLAIN, bRestart[i].getHeight()/3*2));
+            bRestart[i].setFont(new Font(font, Font.PLAIN, bRestart[i].getHeight()/3*2));
             bRestart[i].setBackground(buttonColor);
             bRestart[i].setForeground(textColor);
             bRestart[i].setBorder(border);
@@ -199,22 +236,15 @@ public class GameDisplay extends JFrame {
 
         bResume = new JButton("RESUME");
         bResume.setBounds((pPauseWindow.getWidth()-bounds.width)/2, (int) (bExit[PAUSE].getY() - bExit[PAUSE].getHeight()*2.5), bounds.width, bounds.height);
-        bResume.setFont(new Font("Consolas", Font.PLAIN, bResume.getHeight()/3*2));
+        bResume.setFont(new Font(font, Font.PLAIN, bResume.getHeight()/3*2));
         bResume.setBackground(buttonColor);
         bResume.setForeground(textColor);
         bResume.setBorder(border);
         bResume.setFocusable(false);
         bResume.addActionListener(getActionListenerResume());
-
-        bInfo = new JButton("show info");
-        bInfo.setBounds(ScreenSize.getWidth()-Menu.labelWidth1-Menu.labelWidth2-100- bPause.getWidth(), 5 , bPause.getWidth(), Menu.labelHeight);
-        bInfo.setFont(new Font(Menu.textFont, Font.PLAIN,bInfo.getHeight()/3*2));
-        bInfo.addActionListener(getActionListenerInfo());
-        bInfo.setBackground(bgColor);
-        bInfo.setForeground(textColor);
-        bInfo.setBorder(border);
-        bInfo.setFocusable(false);
     }
+
+
 
     private void initializeLabels() {
 
@@ -316,6 +346,52 @@ public class GameDisplay extends JFrame {
         lFps.setBorder(border);
     }
 
+
+
+    private void addAll() {
+        pFailedWindow.add(lHeadline[FAILED]);
+        pFailedWindow.add(bRestart[FAILED]);
+        pFailedWindow.add(bExit[FAILED]);
+        add(pFailedWindow);
+        pPauseWindow.add(lHeadline[PAUSE]);
+        pPauseWindow.add(bRestart[PAUSE]);
+        pPauseWindow.add(bResume);
+        pPauseWindow.add(bExit[PAUSE]);
+        add(pPauseWindow);
+        pWonWindow.add(lHeadline[WON]);
+        pWonWindow.add(bRestart[WON]);
+        pWonWindow.add(bExit[WON]);
+        add(pWonWindow);
+        add(lFps);
+        add(lTheme);
+        lTheme.setVisible(false);
+        add(lThemeText);
+        lThemeText.setVisible(false);
+        add(lPlayer);
+        lPlayer.setVisible(false);
+        add(lPlayerText);
+        lPlayerText.setVisible(false);
+        add(lMap);
+        lMap.setVisible(false);
+        add(lMapText);
+        lMapText.setVisible(false);
+        add(lHighScore);
+        lHighScore.setVisible(false);
+        add(lHighScoreText);
+        lHighScoreText.setVisible(false);
+        add(lScore);
+        add(lScoreText);
+        add(lLifes);
+        add(lLifesText);
+        add(bPause);
+        add(bInfo);
+        add(canvas);
+    }
+
+
+
+// action listeners
+
     private ActionListener getActionListenerBack(int i) {
         if(i == FAILED || i == PAUSE) {
             return e -> {
@@ -408,26 +484,6 @@ public class GameDisplay extends JFrame {
         bInfo.setText("hide info");
     }
 
-    public void render(State state){
-        BufferStrategy bufferStrategy = canvas.getBufferStrategy();
-        // Exception handling: wenn der button "back" gedrückt und das Fenster geschlossen wird, gibt "bufferStrategy.getDrawGraphics()" eine IllegalStateException aus, das Programm macht jedoch was es soll.
-        // -> an dieser Stelle nicht notwendig, dass diese Sequenz ausgeführt wird
-        // -> try-catch, damit an der Stelle kein error ausgegeben wird
-        try {
-
-            Graphics graphics = bufferStrategy.getDrawGraphics();
-
-            graphics.setColor(Menu.getBGColor());
-
-            graphics.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
-
-            renderer.render(state, graphics);
-
-            graphics.dispose();
-            bufferStrategy.show();
-
-        } catch(IllegalStateException ignored) {}
-    }
 
     public void showFailed(){
         bPause.setEnabled(false);
