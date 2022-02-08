@@ -509,10 +509,9 @@ public class Menu {
     private ActionListener getActionListenerStart() {
         return e -> {
             new Thread(() ->{
-                menu.dispose();
 
                 GameLoop gameLoop = new GameLoop(new Game(GAME_VERSION));
-
+                menu.dispose();
                 new Thread(gameLoop).start();
             }).start();
         };

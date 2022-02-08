@@ -15,7 +15,7 @@ public class LoadingScreen extends JFrame implements Runnable{
     public LoadingScreen(){
         setSize(ScreenSize.getWidth(),ScreenSize.getHeight());
         setTitle("...loading...");
-        setIconImage(FileLoader.loadImage("sakura_icon", "/"));
+        setIconImage(FileLoader.loadImage("loading_0", "/loading/"));
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
         setUndecorated(true);
         setResizable(false);
@@ -37,7 +37,7 @@ public class LoadingScreen extends JFrame implements Runnable{
         int height = getHeight()/12;
 
         for (int i = 0; i < loadingIMGs.length; i++) {
-            loadingIMGs[i] = FileLoader.loadIcon("loading " + i, "/loading/", height, height);
+            loadingIMGs[i] = FileLoader.loadIcon("loading_" + i, "/loading/", height, height);
         }
 
         loading.setOpaque(true);
