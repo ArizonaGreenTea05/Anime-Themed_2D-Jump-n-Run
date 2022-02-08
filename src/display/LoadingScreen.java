@@ -29,7 +29,6 @@ public class LoadingScreen extends JFrame implements Runnable{
 
 
         setVisible(true);
-        System.out.println("loading screen created");
     }
 
     private void initializeLoading() {

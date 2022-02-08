@@ -15,8 +15,8 @@ public class Game {
     public static int SPRITE_SIZE = 64;
 
     private final GameDisplay gameDisplay;
-    private Input input;
-    private State state;
+    private final Input input;
+    private final State state;
 
 
     public Game(String version) {

@@ -21,12 +21,8 @@ public class Menu {
 
     private static boolean controlsShown = false;
 
-    private static final int AOD = 0;
-    private static final String AOD_PATH = "game/themes/angels_of_death/";
-    private static final int AOT = 1;
-    private static final String AOT_PATH = "game/themes/attack_on_titan/";
     private static final String THEME_PATH = "game/themes";
-
+    public static final String[] gameThemes = FileLoader.loadFileNames(THEME_PATH);
 
     public static String[] playerName;
     public static String[] maps;
@@ -70,20 +66,6 @@ public class Menu {
     private static final JLabel lScoreText = new JLabel(" Score:");
     private static final JLabel lScore = new JLabel("");
 
-    /**
-     * declaration of themes, player names and colors
-     **/
-
-    public static final String[] playerNamesAoD = FileLoader.loadFileNames(AOD_PATH + "characters", "npc", FileLoader.ALL);
-    public static final String[] mapsAoD = FileLoader.loadFileNames(AOD_PATH + "maps", ".highscore" , FileLoader.ALL);
-    public static final Color bgColorAoD = new Color(128, 186, 224);
-
-    public static final String[] playerNamesAoT = FileLoader.loadFileNames(AOT_PATH + "characters", "npc", FileLoader.ALL);
-    public static final String[] mapsAoT = FileLoader.loadFileNames(AOT_PATH + "maps", ".highscore" , FileLoader.ALL);
-    public static final Color bgColorAoT = new Color(70, 90, 120);
-
-    public static final String[] gameThemes = FileLoader.loadFileNames(THEME_PATH);
-    private static final Color[] bgColors = new Color[]{bgColorAoD, bgColorAoT};
 
     private static int name;
     private static int theme;
@@ -112,17 +94,6 @@ public class Menu {
     private static Border border;
 
     public static final String textFont = "Comic Sans MS";
-
-
-    private static void setPlayerNames(int i){
-        if(i==AOD) playerName = playerNamesAoD;
-        if(i==AOT) playerName = playerNamesAoT;
-    }
-
-    private static void setMaps(int i){
-        if(i==AOD) maps = mapsAoD;
-        if(i==AOT) maps = mapsAoT;
-    }
 
     public Menu(String version){
         this.colorSetting = Integer.parseInt(Objects.requireNonNull(FileLoader.load("color")));
@@ -554,8 +525,8 @@ public class Menu {
     private ActionListener getActionListenerThemes(int in){
         return e -> {
             theme = in;
-            setPlayerNames(theme);
-            setMaps(theme);
+            setPlayerNames();
+            setMaps();
             for (JButton button : bThemes) {
                 menu.remove(button);
             }
@@ -600,7 +571,7 @@ public class Menu {
         double highscore = 0;
         try {
             highscore = Double.parseDouble(Objects.requireNonNull(FileLoader.load(getMapName() + ".highscore", THEME_PATH + "/" + getGameTheme() + "/maps/")));
-        } catch(Exception igore){}
+        } catch(Exception ignored){}
         double score = GameDisplay.getScore();
 
         if (highscore >= score) {
@@ -610,6 +581,14 @@ public class Menu {
             this.highscore = score;
         }
         lHighscore.setText(" " + ElseUtils.shorten(String.valueOf(highscore),4));
+    }
+
+    private static void setPlayerNames(){
+        playerName = FileLoader.loadFileNames(THEME_PATH + "/" + getGameTheme() + "/" + "characters", "npc", FileLoader.ALL);
+    }
+
+    private static void setMaps(){
+        maps = FileLoader.loadFileNames(THEME_PATH + "/" + getGameTheme() + "/" + "maps", ".highscore" , FileLoader.ALL);
     }
 
     public static JLabel getHighscore(){
@@ -645,7 +624,8 @@ public class Menu {
     }
 
     public static Color getBGColor(){
-        return bgColors[theme];
+        String gameTheme = getGameTheme();
+        return ElseUtils.stringToColor(FileLoader.load(gameTheme + ".color", THEME_PATH + "/" + gameTheme + "/"));
     }
 
     public static Color getButtonColor(){
