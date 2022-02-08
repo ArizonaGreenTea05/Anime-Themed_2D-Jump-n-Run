@@ -40,11 +40,26 @@ public class ElseUtils {
 
         if(length > c.length) {return s;}
 
-        String out = "";
+        StringBuilder out = new StringBuilder();
         for (int i = 0; i < length; i++) {
-            out += c[i];
+            out.append(c[i]);
         }
 
-        return out;
+        return out.toString();
+    }
+
+    public static String removeFileEnding(String s) {
+        char[] c = s.toCharArray();
+
+        StringBuilder out = new StringBuilder();
+        for (int i = 0; i < c.length; i++) {
+            if(c[i] == '.'){
+                break;
+            }
+            out.append(c[i]);
+        }
+
+        return out.toString();
+
     }
 }

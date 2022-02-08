@@ -57,7 +57,7 @@ public class FileLoader {
     public static String[][] loadMap(){
         String theme = Menu.getGameTheme();
         String map = Menu.getMapName();
-        String path = "game/themes/" + theme + "/maps/" + map;
+        String path = "game/themes/" + theme + "/maps/" + map + ".map";
         String mapDoc = load(path);
 
         String[] temp1 = Objects.requireNonNull(mapDoc).split("\n",Integer.MAX_VALUE);
@@ -131,6 +131,11 @@ public class FileLoader {
                 }
             }
             String[] out = contentsList.toArray(new String[0]);
+
+            for (int i = 0; i < out.length; i++) {
+                out[i] = ElseUtils.removeFileEnding(out[i]);
+            }
+
             Arrays.sort(out);
             return out;
         } catch (NullPointerException npe){

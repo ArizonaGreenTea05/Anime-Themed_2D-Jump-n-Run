@@ -75,11 +75,11 @@ public class Menu {
      **/
 
     public static final String[] playerNamesAoD = FileLoader.loadFileNames(AOD_PATH + "characters", "npc", FileLoader.ALL);
-    public static final String[] mapsAoD = FileLoader.loadFileNames(AOD_PATH + "maps");
+    public static final String[] mapsAoD = FileLoader.loadFileNames(AOD_PATH + "maps", ".highscore" , FileLoader.ALL);
     public static final Color bgColorAoD = new Color(128, 186, 224);
 
     public static final String[] playerNamesAoT = FileLoader.loadFileNames(AOT_PATH + "characters", "npc", FileLoader.ALL);
-    public static final String[] mapsAoT = FileLoader.loadFileNames(AOT_PATH + "maps");
+    public static final String[] mapsAoT = FileLoader.loadFileNames(AOT_PATH + "maps", ".highscore" , FileLoader.ALL);
     public static final Color bgColorAoT = new Color(70, 90, 120);
 
     public static final String[] gameThemes = FileLoader.loadFileNames(THEME_PATH);
@@ -599,14 +599,14 @@ public class Menu {
     private void setHighscore(){
         double highscore = 0;
         try {
-            highscore = Double.parseDouble(Objects.requireNonNull(FileLoader.load(getMapName() + "_highscore", THEME_PATH + "/" + getGameTheme() + "/")));
+            highscore = Double.parseDouble(Objects.requireNonNull(FileLoader.load(getMapName() + ".highscore", THEME_PATH + "/" + getGameTheme() + "/maps/")));
         } catch(Exception igore){}
         double score = GameDisplay.getScore();
 
         if (highscore >= score) {
             this.highscore = highscore;
         } else {
-            FileLoader.save(String.valueOf(score),getMapName() + "_highscore", THEME_PATH + "/" + getGameTheme() + "/");
+            FileLoader.save(String.valueOf(score),getMapName() + ".highscore", THEME_PATH + "/" + getGameTheme() + "/maps/");
             this.highscore = score;
         }
         lHighscore.setText(" " + ElseUtils.shorten(String.valueOf(highscore),4));
