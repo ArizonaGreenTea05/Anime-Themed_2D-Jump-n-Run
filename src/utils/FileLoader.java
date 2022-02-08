@@ -19,26 +19,33 @@ import java.util.Objects;
 public class FileLoader {
 
     public static void save(String data, String filename){
+        save(data, filename,"");
+    }
+
+    public static void save(String data, String filename, String path){
         try {
-            BufferedWriter writer = new BufferedWriter(new FileWriter("resources/" + filename));
+            BufferedWriter writer = new BufferedWriter(new FileWriter("resources/" + path + filename));
             writer.write(data);
             writer.close();
         } catch (IOException e) {
             System.err.println("ERROR! failed to save file '" + filename + "'");
         }
     }
+    public static String load(String filename) {
+        return load(filename,"");
+    }
 
-    public static String load(String filename){
+    public static String load(String filename, String path){
         String input = null;
         
-        File file = new File("resources/" + filename);
+        File file = new File("resources/" + path + filename);
         if(!file.exists()){
             System.err.println("ERROR! file '" + filename + "' not found");
             return null;
         }
         
         try {
-            input = new String(Files.readAllBytes(Path.of("resources/" + filename)));
+            input = new String(Files.readAllBytes(Path.of("resources/" + path + filename)));
         } catch (IOException e) {
             System.err.println("ERROR! failed to load file '" + filename + "'");
             return null;

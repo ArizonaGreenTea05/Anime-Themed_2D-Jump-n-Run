@@ -3,7 +3,6 @@ package menu;
 import controller.PlayerController;
 import core.ScreenSize;
 import display.GameDisplay;
-import display.LoadingScreen;
 import game.Game;
 import game.GameLoop;
 import utils.ElseUtils;
@@ -58,7 +57,7 @@ public class Menu {
     public static int labelWidth2;
     public static int fontSize;
 
-    private static double highScore;
+    private static double highscore;
 
     private static final JLabel lThemeText = new JLabel(" Theme:");
     private static final JLabel lTheme = new JLabel("");
@@ -272,7 +271,7 @@ public class Menu {
         lHighscore.setBackground(labelColor[colorSetting]);
         lHighscore.setBorder(border);
         lHighscore.setFont(new Font(textFont, Font.PLAIN, fontSize));
-        lHighscore.setText(" " + ElseUtils.shorten(String.valueOf(highScore),4));
+        lHighscore.setText(" " + ElseUtils.shorten(String.valueOf(highscore),4));
 
         lScoreText.setBounds(menu.getWidth()-labelWidth1-labelWidth2-22, 27+4*labelHeight, labelWidth1, labelHeight);
         lScoreText.setOpaque(true);
@@ -535,6 +534,7 @@ public class Menu {
                 menu.remove(button);
             }
             lPlayer.setText("");
+            setHighscore();
             menu.remove(bBackPlayers);
             menu.repaint();
             addPlayers();
@@ -589,6 +589,7 @@ public class Menu {
             }
             menu.remove(bBackPlayers);
             lMap.setText(" " + ElseUtils.makeNameNice(getMapName()));
+            setHighscore();
             menu.add(bBackMaps);
             menu.add(bStartGame);
             menu.repaint();
@@ -596,15 +597,19 @@ public class Menu {
     }
 
     private void setHighscore(){
-        double highscore = Double.parseDouble(Objects.requireNonNull(FileLoader.load("HighScore")));
+        double highscore = 0;
+        try {
+            highscore = Double.parseDouble(Objects.requireNonNull(FileLoader.load(getMapName() + "_highscore", THEME_PATH + "/" + getGameTheme() + "/")));
+        } catch(Exception igore){}
         double score = GameDisplay.getScore();
 
         if (highscore >= score) {
-            highScore = highscore;
+            this.highscore = highscore;
         } else {
-            FileLoader.save(String.valueOf(score), "HighScore");
-            highScore = score;
+            FileLoader.save(String.valueOf(score),getMapName() + "_highscore", THEME_PATH + "/" + getGameTheme() + "/");
+            this.highscore = score;
         }
+        lHighscore.setText(" " + ElseUtils.shorten(String.valueOf(highscore),4));
     }
 
     public static JLabel getHighscore(){
