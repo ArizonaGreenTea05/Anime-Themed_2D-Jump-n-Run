@@ -77,6 +77,7 @@ public class Menu {
     private final JButton bExit = new JButton("EXIT");
     private final JButton bChangeColor = new JButton("change colors");
     private final JButton bShowControls = new JButton("controls");
+    private final JButton bResetHighscore = new JButton("reset highscores");
     private static Rectangle buttonBounds;
 
 
@@ -268,6 +269,7 @@ public class Menu {
 
         menu.add(pControls);
         menu.add(bShowControls);
+        menu.add(bResetHighscore);
         menu.add(lTheme);
         lTheme.setVisible(true);
         menu.add(lThemeText);
@@ -338,12 +340,24 @@ public class Menu {
         // - color change Button-
 
 
+        // control showing Button
         bShowControls.setBounds(menu.getWidth()-20-backWidth, menu.getHeight()-2*backHeight-20, backWidth, backHeight);
         bShowControls.setFont(new Font(textFont, Font.PLAIN, backHeight/2));
         bShowControls.setBackground(bottomButtonColor[colorSetting]);
         bShowControls.setForeground(textColor[colorSetting]);
         bShowControls.setBorder(border);
         bShowControls.addActionListener(getActionListenerShowControls());
+        // - control showing Button-
+
+
+        // highscore reset Button
+        bResetHighscore.setBounds(menu.getWidth()-30-2*backWidth, menu.getHeight()-backHeight-10, backWidth, backHeight);
+        bResetHighscore.setFont(new Font(textFont, Font.PLAIN, backHeight/2));
+        bResetHighscore.setBackground(bottomButtonColor[colorSetting]);
+        bResetHighscore.setForeground(textColor[colorSetting]);
+        bResetHighscore.setBorder(border);
+        bResetHighscore.addActionListener(getActionListenerResetHighscores());
+        // - highscore reset Button-
 
 
         // exit Button
@@ -488,6 +502,12 @@ public class Menu {
 
 
 // action listeners
+
+    private ActionListener getActionListenerResetHighscores() {
+        return e -> {
+            resetHighscores();
+        };
+    }
 
     private ActionListener getActionListenerShowControls() {
         return e -> {
@@ -644,6 +664,20 @@ public class Menu {
 
 
 // setter methods
+
+    private void resetHighscores(){
+        double score = 0;
+        this.highscore = score;
+
+        for (String gameTheme : gameThemes) {
+            String[] mapNames = FileLoader.loadFileNames(GAME_THEME_PATH + "/" + gameTheme + "/" + "maps", ".highscore" , FileLoader.ALL);
+            for (String map : mapNames) {
+                FileLoader.save(String.valueOf(score), map + ".highscore", GAME_THEME_PATH + "/" + gameTheme + "/maps/");
+            }
+        }
+
+        lHighscore.setText(" " + ElseUtils.shorten(String.valueOf(highscore),4));
+    }
 
     private void setHighscore(){
         double highscore = 0;
