@@ -5,6 +5,8 @@ public class Size {
     private int width;
     private int height;
 
+    // size of game objects
+
     public Size(int width, int height) {
         this.width = width;
         this.height = height;

@@ -7,6 +7,9 @@ import java.awt.event.KeyEvent;
 public class PlayerController implements Controller {
 
     private final Input input;
+
+    // key events defined
+
     private static final int jump = KeyEvent.VK_W;
     private static final int down = KeyEvent.VK_S;
     private static final int left = KeyEvent.VK_A;
@@ -19,6 +22,9 @@ public class PlayerController implements Controller {
     public PlayerController(Input input) {
         this.input = input;
     }
+
+
+    // sends key event data to menu for show-controls-table
 
     public static Object[][] getData() {
         return new String[][]{

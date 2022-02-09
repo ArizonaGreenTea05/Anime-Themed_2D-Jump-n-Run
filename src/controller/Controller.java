@@ -1,6 +1,9 @@
 package controller;
 
 public interface Controller {
+
+    // controller with getter and setter methods
+
     void setRequestingJump(boolean requestingUp);
 
     void setRequestingDown(boolean requestingDown);

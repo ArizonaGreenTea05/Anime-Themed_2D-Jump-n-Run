@@ -1,78 +1,45 @@
 package core;
 
-import game.Game;
-
 import java.awt.*;
 
 public class ScreenSize {
-    private static Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-    private static final int width = (int) screenSize.getWidth();
-    private static final int height = (int) screenSize.getHeight();
-    private static final int ground = height-128;
-    private static final int leftBorder = 9*64;
-    private static final int rightBorder = width-9*64;
-    private static final int topBorder = 128;
-    private static final int bottomBorder = height-256;
-    private static final int mapWidth = mapWidth();
-    private static final int mapHeight = mapHeight();
 
-    private static int mapWidth(){
+    // defines constants regarding size of display
 
-        int mapWidth = width / Game.SPRITE_SIZE;
-
-        while (mapWidth * Game.SPRITE_SIZE <= width){
-            mapWidth++;
-        }
-
-        return mapWidth;
-    }
-
-    private static int mapHeight(){
-
-        int mapHeight = width / Game.SPRITE_SIZE;
-
-        while (mapHeight * Game.SPRITE_SIZE <= height){
-            mapHeight++;
-        }
-
-        return mapHeight;
-    }
-
-
+    private static final Dimension SCREEN_SIZE = Toolkit.getDefaultToolkit().getScreenSize();
+    private static final int WIDTH = (int) SCREEN_SIZE.getWidth();
+    private static final int HEIGHT = (int) SCREEN_SIZE.getHeight();
+    private static final int GROUND = HEIGHT -128;
+    private static final int LEFT_BORDER = 9*64;
+    private static final int RIGHT_BORDER = WIDTH - LEFT_BORDER;
+    private static final int TOP_BORDER = 128;
+    private static final int BOTTOM_BORDER = HEIGHT -256;
 
     public static int getWidth(){
-        return width;
+        return WIDTH;
     }
 
     public static int getHeight(){
-        return height;
-    }
-
-    public static int getMapWidth(){
-        return mapWidth;
-    }
-
-    public static int getMapHeight(){
-        return mapHeight;
+        return HEIGHT;
     }
 
     public static int getGround(){
-        return ground;
+        return GROUND;
     }
 
     public static int getLeftBorder() {
-        return leftBorder;
+        return LEFT_BORDER;
     }
 
     public static int getRightBorder() {
-        return rightBorder;
+        return RIGHT_BORDER;
     }
 
     public static int getTopBorder() {
-        return topBorder;
+        return TOP_BORDER;
     }
 
     public static int getBottomBorder() {
-        return bottomBorder;
+        return BOTTOM_BORDER;
     }
 }

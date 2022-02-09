@@ -18,6 +18,7 @@ public enum Direction {
     }
 
     public static Direction fromMotion(Controller controller){
+        // defines direction regarding action requested by controller
         boolean right = controller.isRequestingRight();
         boolean left = controller.isRequestingLeft();
         boolean up = controller.isRequestingUp();

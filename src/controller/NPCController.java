@@ -1,7 +1,5 @@
 package controller;
 
-import java.awt.event.KeyEvent;
-
 public class NPCController implements Controller {
 
     private boolean isRequestingUp = false;
@@ -10,6 +8,8 @@ public class NPCController implements Controller {
     private boolean isRequestingRight = false;
     private boolean isRequestingSprint = false;
     private boolean isRequestingHit = false;
+
+    // setter methods used for controlling npc out of NPCMaA
 
     public NPCController() {
     }
