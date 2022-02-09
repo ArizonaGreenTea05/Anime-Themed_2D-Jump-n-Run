@@ -38,11 +38,7 @@ public class Game {
     }
 
 
-
-    public void stopGameLoop() {
-        GameLoop.setRunning(false);
-    }
-
+// updater and renderer
 
     public void update(){
         state.updateObjects();
@@ -52,6 +48,16 @@ public class Game {
     public void render() {
         gameDisplay.render(state);
     }
+
+
+// stopping game loop when game stopped or paused
+
+    public void stopGameLoop() {
+        GameLoop.setRunning(false);
+    }
+
+
+// getter methods
 
     public State getState(){
         return state;
@@ -65,7 +71,11 @@ public class Game {
         return gameLoop;
     }
 
+
+// setter methods
+
     public void setGameLoop(GameLoop gameLoop) {
         this.gameLoop = gameLoop;
     }
+
 }

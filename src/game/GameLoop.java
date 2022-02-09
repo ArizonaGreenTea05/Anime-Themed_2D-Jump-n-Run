@@ -25,10 +25,13 @@ public class GameLoop implements Runnable {
 
     @Override
     public void run() {
+
         running = true;
         double accumulator = 0;
         long currentTime, lastUpdate = System.currentTimeMillis();
         nextStatTime = System.currentTimeMillis() + 1000;
+
+        // score counter counts in 0.1 second steps
         new Thread(() -> {
             while(running) {
                 gameDisplay.setScoreLabel(score);
@@ -41,38 +44,29 @@ public class GameLoop implements Runnable {
             }
         }).start();
 
+
         while(running){
                 currentTime = System.currentTimeMillis();
                 double lastRenderTimeInSeconds = (currentTime - lastUpdate) / 1000d;
                 accumulator += lastRenderTimeInSeconds;
                 lastUpdate = currentTime;
 
+                // updates ca. 120 times per second
                 if (accumulator >= updateRate) {
                     while (accumulator >= updateRate) {
                         update();
                         accumulator -= updateRate;
                     }
+                    // renders when updated
                     render();
                 }
+
                 printStats();
-                if (score == 0) {failed();}
+
+                if (score == 0) {
+                    failed();
+                }
         }
-    }
-
-
-    private void printStats() {
-        if(System.currentTimeMillis() > nextStatTime) {
-            System.out.printf("FPS: %d, UPS: %d%n", fps, ups);
-            gameDisplay.setFPS("FPS: " + fps);
-            fps = 0;
-            ups = 0;
-            nextStatTime = System.currentTimeMillis() + 1000;
-        }
-    }
-
-    private void failed() {
-        running = false;
-        gameDisplay.showFailed();
     }
 
 
@@ -84,6 +78,26 @@ public class GameLoop implements Runnable {
     private void render() {
         game.render();
         fps++;
+    }
+
+
+    private void printStats() {
+        // prints stats every second
+        if(System.currentTimeMillis() > nextStatTime) {
+            // prints fps & ups in terminal
+            System.out.printf("FPS: %d, UPS: %d%n", fps, ups);
+            // prints fps in fps-label
+            gameDisplay.setFPS(fps);
+            fps = 0;
+            ups = 0;
+            nextStatTime = System.currentTimeMillis() + 1000;
+        }
+    }
+
+    private void failed() {
+        // when failed game loop stopped and failed-panel shown
+        running = false;
+        gameDisplay.showFailed();
     }
 
     public void addScore(int score) {

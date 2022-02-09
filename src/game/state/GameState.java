@@ -11,6 +11,9 @@ import game.Game;
 import input.Input;
 import utils.FileLoader;
 
+
+// child class of State
+
 public class GameState extends State {
 
     private Player player;
@@ -25,16 +28,15 @@ public class GameState extends State {
 
         createMap(sMap, ground);
 
-        /*
-        player muss zuerst initialisiert werden, damit er in GameObjects an Index 0 zu finden ist
-        und sich seine Index-Position somit nicht ändert, egal ob Objekte hinzugefügt oder entfernt werden.
-         */
+        // player needs to be initialized as first, so it is at index 0 in gameObjects and it's position will not change, even if other gameObjects are added ore removed
         initializePlayer(sMap, ground);
 
         initializeNPCs(sMap, ground);
     }
 
     private void initializePlayer(String[][] sMap, int ground) {
+
+        // searching through map and adding player at defined position
         for (int i = 0; i < sMap.length; i++) {
             for (int j = 0; j < sMap[i].length-1; j++) {
                 String letter = sMap[i][j];
@@ -53,8 +55,9 @@ public class GameState extends State {
             }
         }
     }
-
     private void initializeNPCs(String[][] sMap, int ground) {
+
+        // searching through map and adding nps at defined position
         for (int i = 0; i < sMap.length; i++) {
             for (int j = 0; j < sMap[i].length-1; j++) {
                 String letter = sMap[i][j];
@@ -86,7 +89,7 @@ public class GameState extends State {
 
     private void createMap(String[][] sMap, int ground) {
 
-
+        // searching through map and adding blocks at defined positions
         for (int i = 0; i < sMap.length; i++) {
             for (int j = 0; j < sMap[i].length-1; j++) {
                 String letter = sMap[i][j];
@@ -127,9 +130,12 @@ public class GameState extends State {
                                     Block.GROUND_BLOCK
                             );
                 }
+
                 if(object!=null) {
                     mapObjects.add(object);
                 }
+
+                // saving lowest block for playerMaA
                 if(i == 0 && j == 0){
                     lowestBlock = object;
                 }

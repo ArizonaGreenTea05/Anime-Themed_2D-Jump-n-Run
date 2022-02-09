@@ -1,6 +1,5 @@
 package game.state;
 
-import core.ScreenSize;
 import gameObjects.GameObject;
 import gameObjects.MovingEntity;
 import game.Game;
@@ -9,6 +8,9 @@ import input.Input;
 
 import java.util.ArrayList;
 import java.util.List;
+
+
+// parent class of GameState
 
 public abstract class State {
 
@@ -28,6 +30,9 @@ public abstract class State {
         spriteLibrary = new SpriteLibrary();
     }
 
+
+// update methods
+
     public void updateObjects() {
         gameObjects.forEach(GameObject::update);
     }
@@ -35,6 +40,16 @@ public abstract class State {
     public void updateMap() {
         mapObjects.forEach(GameObject::update);
     }
+
+
+// setter methods
+
+    public void setUpdatable(boolean updatable){
+        this.updatable = updatable;
+    }
+
+
+// getter methods
 
     public List<GameObject> getGameObjects() {
         return gameObjects;
@@ -50,10 +65,6 @@ public abstract class State {
 
     public Game getGame(){
         return game;
-    }
-
-    public void setUpdatable(boolean updatable){
-        this.updatable = updatable;
     }
 
     public boolean getUpdatable(){

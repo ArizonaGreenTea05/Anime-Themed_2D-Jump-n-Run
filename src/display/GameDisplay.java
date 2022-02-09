@@ -117,9 +117,7 @@ public class GameDisplay extends JFrame {
 
     public void render(State state){
         BufferStrategy bufferStrategy = canvas.getBufferStrategy();
-        // Exception handling: wenn der button "back" gedrückt und das Fenster geschlossen wird, gibt "bufferStrategy.getDrawGraphics()" eine IllegalStateException aus, das Programm macht jedoch was es soll.
-        // -> an dieser Stelle nicht notwendig, dass diese Sequenz ausgeführt wird
-        // -> try-catch, damit an der Stelle kein error ausgegeben wird
+
         try {
 
             // getting graphics
@@ -515,8 +513,8 @@ public class GameDisplay extends JFrame {
         pWonWindow.setVisible(true);
     }
 
-    public void setFPS(String frames){
-        lFps.setText(frames);
+    public void setFPS(int frames){
+        lFps.setText("FPS: " + frames);
     }
 
     public static void setLifes(String lifes){
