@@ -7,7 +7,7 @@ import java.awt.*;
 
 public class NormalBlock extends Block{
 
-    public NormalBlock(Position position, int texture, boolean solid){
+    public NormalBlock(Position position, String texture, boolean solid){
         super(position, texture);
         this.solid = solid;
     }
@@ -19,6 +19,7 @@ public class NormalBlock extends Block{
 
     @Override
     public void render(Graphics graphics) {
+        // block draws itself
         if (isShown()) {
             graphics.drawImage(
                     this.getSprite(),
@@ -30,17 +31,17 @@ public class NormalBlock extends Block{
     }
 
     @Override
-    public void doActionOnContact(State state){
-
+    public void doActionOnContact(State state) {
+        // has no contact action
     }
 
     @Override
     public void doActionOnPositionX(State state){
-
+        // has no x position action
     }
 
     @Override
     public void doActionOnSamePosition(State state){
-
+        // has no same position action
     }
 }

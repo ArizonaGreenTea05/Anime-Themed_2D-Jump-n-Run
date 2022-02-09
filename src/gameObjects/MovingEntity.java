@@ -10,6 +10,11 @@ import gfx.AnimationManager;
 
 import java.awt.*;
 
+
+
+// child class of MovingEntity;
+// parent class of Player & NPC
+
 public abstract class MovingEntity extends GameObject {
 
     protected Controller controller;
@@ -21,28 +26,33 @@ public abstract class MovingEntity extends GameObject {
     protected State state;
 
     public MovingEntity(Controller controller, MotionAndAbilities mAndA, Position position, State state) {
+        // every moving entity has bounds 32p x 56p
         super(32,56, position.intX(), position.intY());
         this.controller = controller;
         this.mAndA = mAndA;
         this.direction = Direction.R;
         this.state = state;
     }
+
     @Override
     public void update() {
+        // updates Motion and Abilities
         mAndA.update(controller, position, state);
+        // updates position regarding Motion and Abilities
         position.apply(mAndA);
         manageDirection();
-        decideAnimation(position);
+        // updates animation
+        decideAnimation();
         animationManager.update(direction);
     }
 
-    private void decideAnimation(Position position) {
+    private void decideAnimation() {
 
-        double x = position.getX();
+        // decides which animation sheet should be used
 
         if(mAndA.isHitting()){
             animationManager.playAnimation("hit");
-        } else if(mAndA.isMoving() || (controller.isRequestingRight() && x >= ScreenSize.getRightBorder())|| (controller.isRequestingLeft() && x <= ScreenSize.getLeftBorder())){
+        } else if(mAndA.isMoving() || controller.isRequestingRight() || controller.isRequestingLeft()){
             animationManager.playAnimation("walk");
         } else {
             animationManager.playAnimation("stand");
@@ -56,6 +66,9 @@ public abstract class MovingEntity extends GameObject {
     }
 
     public abstract void testIfAlive();
+
+
+// getter methods
 
     @Override
     public Direction getDirection(){

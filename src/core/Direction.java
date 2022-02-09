@@ -1,7 +1,6 @@
 package core;
 
 import controller.Controller;
-import motionAndAbilities.MotionAndAbilities;
 
 public enum Direction {
 
@@ -24,12 +23,24 @@ public enum Direction {
         boolean up = controller.isRequestingUp();
         boolean down = controller.isRequestingDown();
 
-        if(down) return D;
-        if(left && !up) return L;
-        if(up && !left && !right) return O;
-        if(right && !up) return R;
-        if(left && up) return OL;
-        if(right && up) return OR;
+        if(down) {
+            return D;
+        }
+        if(left && !up) {
+            return L;
+        }
+        if(up && !left && !right) {
+            return O;
+        }
+        if(right && !up) {
+            return R;
+        }
+        if(left && up) {
+            return OL;
+        }
+        if(right && up) {
+            return OR;
+        }
 
         return R;
     }

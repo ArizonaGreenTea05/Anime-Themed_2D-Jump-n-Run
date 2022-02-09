@@ -13,6 +13,7 @@ public class NPC extends MovingEntity {
 
     public NPC(Controller controller, MotionAndAbilities mAndA, Position position, int texture, SpriteLibrary spriteLibrary, int maxLifes, State state) {
         super(controller, mAndA, position, state);
+        // loads animation of npc
         animationManager = new AnimationManager(spriteLibrary.getUnit("npc_" + texture));
         solid = true;
         this.maxLifes = maxLifes;
@@ -26,6 +27,7 @@ public class NPC extends MovingEntity {
 
     @Override
     public void render(Graphics graphics) {
+        // entity draws itself
         if (isShown()) {
             graphics.drawImage(
                     this.getSprite(),
@@ -38,14 +40,30 @@ public class NPC extends MovingEntity {
 
     @Override
     public void doActionOnContact(State state) {
-
+        // has no contact action
     }
 
     @Override
     public void doActionOnPositionX(State state){
-
+        // has no x position action
     }
 
+    @Override
+    public void doActionOnSamePosition(State state){
+        // has no same position action
+    }
+
+    @Override
+    public void testIfAlive(){
+        if(lifes <= 0){
+            state.setUpdatable(false);
+            state.getGameObjects().remove(this);
+            state.setUpdatable(true);
+        }
+    }
+
+
+// life setter methods
 
     @Override
     public void setLifes(int lifes){
@@ -76,19 +94,5 @@ public class NPC extends MovingEntity {
     @Override
     public void subtractMaxLifes(int maxLifes){
         this.maxLifes -= maxLifes;
-    }
-
-    @Override
-    public void doActionOnSamePosition(State state){
-
-    }
-
-    @Override
-    public void testIfAlive(){
-        if(lifes <= 0){
-            state.setUpdatable(false);
-            state.getGameObjects().remove(this);
-            state.setUpdatable(true);
-        }
     }
 }

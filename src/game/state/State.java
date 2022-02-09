@@ -29,10 +29,7 @@ public abstract class State {
     }
 
     public void updateObjects() {
-        for (int i = 0; i < gameObjects.size() && updatable; i++) {
-            gameObjects.get(i).update();
-        }
-
+        gameObjects.forEach(GameObject::update);
     }
 
     public void updateMap() {

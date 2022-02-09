@@ -46,6 +46,7 @@ public class Game {
 
     public void update(){
         state.updateObjects();
+        state.updateMap();
     }
 
     public void render() {

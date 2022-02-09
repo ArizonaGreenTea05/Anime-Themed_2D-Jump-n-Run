@@ -32,8 +32,8 @@ public class SpriteLibrary {
 
             for(String sheetName: sheetsInFolder) {
                 spriteSet.addSheet(
-                        sheetName.substring(0, sheetName.length() - 4),
-                        FileLoader.loadImage(sheetName,pathToFolder));
+                        sheetName,
+                        FileLoader.loadImage(sheetName, pathToFolder));
             }
 
             units.put(folderName, spriteSet);

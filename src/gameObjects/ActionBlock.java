@@ -7,7 +7,7 @@ import java.awt.*;
 
 public class ActionBlock extends Block{
 
-    public ActionBlock(Position position, int texture){
+    public ActionBlock(Position position, String texture){
         super(position, texture);
         solid = true;
     }
@@ -19,6 +19,7 @@ public class ActionBlock extends Block{
 
     @Override
     public void render(Graphics graphics) {
+        // block draws itself
         if (isShown()) {
             graphics.drawImage(
                     this.getSprite(),
@@ -31,6 +32,8 @@ public class ActionBlock extends Block{
 
     @Override
     public void doActionOnContact(State state){
+        // block summons coin
+        // can be used once
         if(!actionUsed) {
             state.setUpdatable(false);
             state.getGameObjects().add(
@@ -46,11 +49,11 @@ public class ActionBlock extends Block{
 
     @Override
     public void doActionOnPositionX(State state){
-
+        // has no x position action
     }
 
     @Override
     public void doActionOnSamePosition(State state){
-
+        // has no same position action
     }
 }

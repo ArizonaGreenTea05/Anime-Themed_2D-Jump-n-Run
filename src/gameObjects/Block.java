@@ -7,38 +7,34 @@ import motionAndAbilities.MotionAndAbilities;
 
 import java.awt.*;
 
+
+// child class of MovingEntity;
+// parent class of NormalBlock, FinishBlock & ActionBlock
+
 public abstract class Block extends GameObject {
 
-    public static final int GROUND_BLOCK = 0;
-    public static final int TRANS_GROUND_BLOCK = 1;
-    public static final int WALL_BLOCK = 2;
-    public static final int TRANS_WALL_BLOCK = 3;
-    public static final int ACTION_BLOCK = 4;
+    public static final String GROUND_BLOCK = "ground";
+    public static final String TRANS_GROUND_BLOCK = "trans_ground";
+    public static final String WALL_BLOCK = "wall";
+    public static final String TRANS_WALL_BLOCK = "trans_wall";
+    public static final String ACTION_BLOCK = "action";
 
     private Image sprite;
-    private String texture;
     protected boolean actionUsed = false;
 
-    public Block(Position position, int texture) {
+    public Block(Position position, String texture) {
         super(64, 64, position.intX(), position.intY());
-        if(texture == GROUND_BLOCK) {
-            this.texture = "ground";
-        } else if(texture == WALL_BLOCK) {
-            this.texture = "wall";
-        } else if(texture == TRANS_GROUND_BLOCK) {
-            this.texture = "trans_ground";
-        } else if(texture == TRANS_WALL_BLOCK) {
-            this.texture = "trans_wall";
-        } else if(texture == ACTION_BLOCK) {
-            this.texture = "action";
-        }
-        sprite = loadSprite(this.texture);
+        // loads sprite of given texture
+        sprite = loadSprite(texture);
     }
 
     @Override
     public void update() {
-
+        // no update
     }
+
+
+// getter methods
 
     @Override
     public Image getSprite() {
@@ -56,34 +52,37 @@ public abstract class Block extends GameObject {
         return null;
     }
 
+
+// life setter methods
+
     @Override
     public void setLifes(int lifes){
-
+        // is not alive
     }
 
     @Override
     public void setMaxLifes(int maxLifes){
-
+        // is not alive
     }
 
     @Override
     public void addLifes(int lifes){
-
+        // is not alive
     }
 
     @Override
     public void addMaxLifes(int maxLifes){
-
+        // is not alive
     }
 
     @Override
     public void subtractLifes(int i){
-
+        // is not alive
     }
 
     @Override
     public void subtractMaxLifes(int i){
-
+        // is not alive
     }
 
     @Override

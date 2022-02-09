@@ -11,6 +11,9 @@ import utils.FileLoader;
 
 import java.awt.*;
 
+
+// parent class of every game object
+
 public abstract class GameObject {
     protected Position position;
     protected Size size;

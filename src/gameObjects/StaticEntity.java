@@ -7,25 +7,28 @@ import core.Position;
 
 import java.awt.*;
 
+
+// child class of MovingEntity;
+// parent class of Coin
+
 public abstract class StaticEntity extends GameObject {
 
-    public static final int COIN = 0;
+    public static final String COIN = "coin";
 
-    private String texture;
     private Image sprite;
 
-    public StaticEntity(Position position, int texture) {
+    public StaticEntity(Position position, String texture) {
         super(64,64, position.intX(), position.intY());
-        if(texture == COIN) {
-            this.texture = "coin";
-        }
-        sprite = loadSprite(this.texture);
+        sprite = loadSprite(texture);
     }
 
     @Override
     public void update() {
-
+        // no update
     }
+
+
+// getter methods
 
     @Override
     public Image getSprite() {
@@ -43,38 +46,42 @@ public abstract class StaticEntity extends GameObject {
         return null;
     }
 
+
+// life setter methods
+
     @Override
     public void setLifes(int lifes){
-
+        // is not alive
     }
 
     @Override
     public void setMaxLifes(int maxLifes){
-
+        // is not alive
     }
 
     @Override
     public void addLifes(int lifes){
-
+        // is not alive
     }
 
     @Override
     public void addMaxLifes(int maxLifes){
-
+        // is not alive
     }
 
     @Override
     public void subtractLifes(int i){
-
+        // is not alive
     }
 
     @Override
     public void subtractMaxLifes(int i){
-
+        // is not alive
     }
 
     @Override
     public Controller getController(){
         return null;
     }
+
 }
