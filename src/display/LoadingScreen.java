@@ -31,7 +31,16 @@ public class LoadingScreen extends JFrame implements Runnable{
         setVisible(true);
     }
 
+    private void initializeBackground() {
+        // same background image as menu
+        background.setBounds(0,0,getWidth(), getHeight());
+        background.setIcon(Menu.getBGImage());
+        setContentPane(background);
+    }
+
     private void initializeLoading() {
+        // loading label with progress circle
+
         int width = getWidth()/4;
         int height = getHeight()/12;
 
@@ -49,22 +58,17 @@ public class LoadingScreen extends JFrame implements Runnable{
         add(loading);
     }
 
-    private void initializeBackground() {
-        background.setBounds(0,0,getWidth(), getHeight());
-        background.setIcon(Menu.getBGImage());
-        setContentPane(background);
-    }
-
     @Override
     public void run() {
+        // animates loading circle
         while(true) {
-            for (int i = 0; i < loadingIMGs.length; i++) {
+            for (Icon image : loadingIMGs) {
                 try {
                     Thread.sleep(200);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-                loading.setIcon(loadingIMGs[i]);
+                loading.setIcon(image);
             }
         }}
 }

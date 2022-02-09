@@ -10,6 +10,8 @@ public class Renderer {
 
     public void render(State state, Graphics graphics) {
 
+        // renders every game- and map-object
+
         List<GameObject> gameObjects = state.getGameObjects();
         List<GameObject> mapObjects = state.getMapObjects();
 
