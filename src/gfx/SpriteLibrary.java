@@ -2,7 +2,6 @@ package gfx;
 
 import menu.Menu;
 import utils.FileLoader;
-
 import java.util.HashMap;
 import java.util.Map;
 
@@ -15,31 +14,33 @@ public class SpriteLibrary {
         loadSpritesFromDisk();
     }
 
+// loads sprite sheets
     private void loadSpritesFromDisk() {
         loadUnits();
     }
 
     private void loadUnits() {
         String gameTheme = Menu.getGameTheme();
+        String THEME_PATH = "/game/themes/";
 
-        String[] folderNames = FileLoader.loadFileNames("/game/themes/" + gameTheme + "/characters/");
+        String[] folderNames = FileLoader.loadFileNames( THEME_PATH + gameTheme + "/characters/");
 
         for(String folderName: folderNames) {
             SpriteSet spriteSet = new SpriteSet();
-            String pathToFolder = "/game/themes/" + gameTheme + "/characters/" + folderName;
+            String pathToFolder = THEME_PATH + gameTheme + "/characters/" + folderName + "/";
             String[] sheetsInFolder = Menu.getPlayerSheetsInFolder();
 
             for(String sheetName: sheetsInFolder) {
                 spriteSet.addSheet(
                         sheetName.substring(0, sheetName.length() - 4),
-                        ImageUtils.loadImage(pathToFolder + "/" + sheetName));
+                        FileLoader.loadImage(sheetName,pathToFolder));
             }
 
             units.put(folderName, spriteSet);
         }
     }
 
-
+// getter for sprites of specific entity
     public SpriteSet getUnit(String name) {
         return units.get(name);
     }

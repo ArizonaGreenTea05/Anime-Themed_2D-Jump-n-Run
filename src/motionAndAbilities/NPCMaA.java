@@ -3,13 +3,18 @@ import controller.Controller;
 import core.Position;
 import core.ScreenSize;
 import core.Vector2D;
-import gameObjects.GameObject;
 import game.state.State;
 
 import static core.Direction.*;
 
 public class NPCMaA extends MotionAndAbilities {
     private boolean cooldownRunning = false;
+
+// same as PlayerMaA, just
+    // lower jump height,
+    // without moving of map,
+    // controls own controller
+
 
     public NPCMaA(double speed) {
         super(speed);
@@ -36,8 +41,6 @@ public class NPCMaA extends MotionAndAbilities {
 
         int screenHeight = ScreenSize.getHeight();
 
-        //wenn Position 64p (Character-Größe = 64, deswegen 128) über Boden wird fallling true
-        //wenn Position größer als Boden und nicht Up requestet wird wird falling true
         if(y < savePosYJump-jumpHeight || (!controller.isRequestingUp() && !hasGround()) || !topSpace()){
             falling = true;
         }
@@ -53,13 +56,15 @@ public class NPCMaA extends MotionAndAbilities {
 
         if(falling) {
             deltaY += getFallSpeed(gravity);
-            gravity -= 0.1;
+            gravity += 0.1;
             sitting = false;
         }
 
 
         if (controller.isRequestingUp() && !falling) {
-            if(gravity == 0) {savePosYJump = (int) Math.round(y);}
+            if(hasGround()) {
+                savePosYJump = (int) Math.round(y);
+            }
 
             deltaY -= getFallSpeed(gravity);
             gravity += 0.1;
@@ -101,6 +106,9 @@ public class NPCMaA extends MotionAndAbilities {
 
     }
 
+
+    // defines, what controller is requesting
+
     private void controlMotionAndAbilities() {
         int playerWidth = player.getSize().getWidth();
         int playerHeight = player.getSize().getHeight();
@@ -116,8 +124,11 @@ public class NPCMaA extends MotionAndAbilities {
         int posX = (int) (x+thisGameObjectSideSpace);
         int posY = (int) (y+thisGameObjectTopSpace);
 
+        // only works if entity is shown and within a y radius of 128p
         if(thisGameObject.isShown()) {
             if(posY < pPosY + 128 && posY > pPosY - 128) {
+
+                // always runs after player
                 if (posX < pPosX) {
                     controller.setRequestingLeft(false);
                     controller.setRequestingRight(true);
@@ -128,10 +139,12 @@ public class NPCMaA extends MotionAndAbilities {
                 }
             }
 
-
+            // if player can be hit, it will be hit
             if(pPosY < posY + 32 && pPosY > posY - 32){
                 if (pPosX < posX + thisGameObjectWidth + 32 && pPosX > posX-thisGameObjectWidth-32) {
+                    // entity can maximally hit two times per second
                     if(!cooldownRunning) {
+                        // as thread, so update loop can run along
                         new Thread(() -> {
                             cooldownRunning = true;
                             try {
@@ -139,19 +152,23 @@ public class NPCMaA extends MotionAndAbilities {
                             } catch (InterruptedException e) {
                                 e.printStackTrace();
                             }
+
                             controller.setRequestingHit(true);
+
                             try {
                                 Thread.sleep(100);
                             } catch (InterruptedException e) {
                                 e.printStackTrace();
                             }
+
                             controller.setRequestingHit(false);
                             cooldownRunning = false;
                         }).start();
+
                     }
                 }
             }
-
+            // if next block in direction of looking is not existent it jumps over the gap
             if(hasGround()){
                 if(thisGameObject.getDirection() == L && !hasGround(-thisGameObjectWidth/2)){
                     controller.setRequestingJump(true);
@@ -164,6 +181,7 @@ public class NPCMaA extends MotionAndAbilities {
                 controller.setRequestingJump(false);
             }
 
+            // if player sprints entity also sprints
             controller.setRequestingSprint(player.getController().isRequestingSprint());
 
         }

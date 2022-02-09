@@ -14,6 +14,7 @@ public class PlayerMaA extends MotionAndAbilities {
 
     public PlayerMaA(double speed) {
         super(speed);
+        // a player is an entity that can hit and has a maximal jump height of 176p
         canHit = true;
         jumpHeight = 176;
     }
@@ -42,42 +43,56 @@ public class PlayerMaA extends MotionAndAbilities {
 
 
 
-        //wenn Position 64p (Character-Größe = 64, deswegen 128) über Boden wird fallling true
-        //wenn Position größer als Boden und nicht Up requestet wird wird falling true
+        // if position is 64p above the ground falling is set true
+        // if position is above the ground and up is not requested falling is set true
         if(y < maxJumpPos || (!controller.isRequestingUp() && !hasGround()) || !topSpace()){
             falling = true;
         }
 
+        // if player has ground falling and gravity are reset
         if(hasGround()){
             falling = false;
             gravity = 0;
         }
 
+        // if player is below screen it dies
         if(y > screenHeight + 64){
             thisGameObject.subtractLifes(1);
         }
 
         if(falling) {
-            gravity -= 0.1;
+            // if player is falling gravity gets stronger, player can not sit
+            gravity += 0.1;
             sitting = false;
 
-            double jumpSpeed = getFallSpeed(gravity);
+            // fall speed is defined
+            double fallSpeed = getFallSpeed(gravity);
+            // either map or player is moved, depending on position if player
+            // if lowest block is reached, map is not moved anymore
             if(y >= bottomBorder && lowestBlockPos > screenHeight) {
-                moveMap(new Vector2D(0,-jumpSpeed));
+                moveMap(new Vector2D(0,-fallSpeed));
             } else {
-                deltaY += jumpSpeed;
+                deltaY += fallSpeed;
             }
         }
 
+
+        // if player wants to jump and is not falling
         if(controller.isRequestingUp() && !falling) {
-            if(gravity == 0) {
+
+            // player can not sit
+            sitting = false;
+
+            // if player has ground x position is saved (for knowing how high to jump)
+            if(hasGround()) {
                 savePosYJump = (int) Math.round(y);
                 maxJumpPos = savePosYJump-jumpHeight;
             }
 
+            // gravity (in this case used as inverted gravity for jump speed) gets stronger
             gravity += 0.1;
-            sitting = false;
 
+            // either map or player is moved, depending on position if player
             double jumpSpeed = getFallSpeed(gravity);
             if(y <= topBorder) {
                 moveMap(new Vector2D(0,jumpSpeed));
@@ -87,21 +102,30 @@ public class PlayerMaA extends MotionAndAbilities {
             }
         }
 
+        // if player wants to sprint it sprints
+        // if it does not it does not
         sprint(controller.isRequestingSprint(), 1.5);
 
+        // if player is not requesting to hit the ability of hitting is set to true
         if(!controller.isRequestingHit()) {
             canHit = true;
         }
 
+        // if player is hitting it can not sit and damages entity in range
         if(isHitting()) {
             sitting = false;
             damage(1);
         } else {
+        // if it is not hitting
 
+            // if it requests sitting it sits
+            // deltaY is changed to update player sprites
             if (controller.isRequestingDown()) {
                 deltaY -= 1E-100;
                 sitting = true;
             }
+
+            // if player requests left and left side is free either player or map is moved depending on position of player
             if (controller.isRequestingLeft() && leftSpace()) {
                 sitting = false;
                 if(x <= leftBorder) {
@@ -111,6 +135,7 @@ public class PlayerMaA extends MotionAndAbilities {
                 }
             }
 
+            // same as requesting left just mirrored
             if (controller.isRequestingRight() && rightSpace()) {
                 sitting = false;
                 if(x >= rightBorder) {
@@ -121,10 +146,13 @@ public class PlayerMaA extends MotionAndAbilities {
             }
         }
 
+
+        // if escape is pressed game is paused
         if(controller.isRequestingPause()) {
             state.getGame().getGameDisplay().doPauseAction();
         }
 
+        // if F3 is pressed info is either shown or hidden
         if(controller.isRequestingInfo()) {
             if(!f3Pressed) {
                 f3Pressed = true;
@@ -134,24 +162,28 @@ public class PlayerMaA extends MotionAndAbilities {
             f3Pressed = false;
         }
 
+        // every block at same x position as player does its 'positionXAction' (e.g. finish block)
         doBlockPositionXAction();
+        // every block at same position as player does its 'positionAction' (e.g. coin)
         doBlockPositionAction();
 
-
+        // vector of moving is defined
         vector = new Vector2D(deltaX, deltaY);
         vector.multiply(speed, 1);
 
     }
 
-    private boolean playerSetted = false;
+    // this game object is set and position of player (this game object9 saved
+    private boolean playerSet = false;
     private void setPlayer() {
         setThisGameObject();
-        if(!playerSetted) {
+        if(!playerSet) {
             playerPosInList = findThisGameObjectInList();
-            playerSetted = true;
+            playerSet = true;
         }
     }
 
+    // moving every game and map object regarding the given vector
     private void moveMap(Vector2D mapVector) {
 
         mapVector.multiply(speed, 1);
@@ -172,11 +204,13 @@ public class PlayerMaA extends MotionAndAbilities {
         }
     }
 
+    // do block position x action of every game and map object
     private void doBlockPositionXAction() {
         doBlockPositionXAction(mapObjects);
         doBlockPositionXAction(gameObjects);
     }
 
+    // do block position x action of every game map object of given list
     private void doBlockPositionXAction(List<GameObject> objects) {
 
         for (GameObject object : objects) {
@@ -187,11 +221,13 @@ public class PlayerMaA extends MotionAndAbilities {
         }
     }
 
+    // do block position action of every game and map object
     private void doBlockPositionAction() {
         doBlockPositionAction(mapObjects);
         doBlockPositionAction(gameObjects);
     }
 
+    // do block position action of every game map object of given list
     private void doBlockPositionAction(List<GameObject> objects) {
 
         boolean updatable = state.getUpdatable();
@@ -209,10 +245,15 @@ public class PlayerMaA extends MotionAndAbilities {
     }
 
 
+// getter method
+
     @Override
     public Vector2D getVector() {
         return vector;
     }
+
+
+// motion booleans
 
     @Override
     public boolean isMoving() {

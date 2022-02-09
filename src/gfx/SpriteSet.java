@@ -7,6 +7,8 @@ import java.util.Map;
 public class SpriteSet {
     private Map<String, Image> animationSheets;
 
+// sets animation sheet as hash map
+
     public SpriteSet() {
         this.animationSheets = new HashMap<>();
     }

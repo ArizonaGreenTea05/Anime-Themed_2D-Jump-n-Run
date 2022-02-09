@@ -18,6 +18,7 @@ import java.util.Objects;
 
 public class FileLoader {
 
+// save file
     public static void save(String data, String filename){
         save(data, filename,"");
     }
@@ -31,6 +32,8 @@ public class FileLoader {
             System.err.println("ERROR! failed to save file '" + filename + "'");
         }
     }
+
+// load file
     public static String load(String filename) {
         return load(filename,"");
     }
@@ -54,6 +57,7 @@ public class FileLoader {
     }
 
 
+// load a map in a 2D string array
     public static String[][] loadMap(){
         String theme = Menu.getGameTheme();
         String map = Menu.getMapName();
@@ -84,15 +88,15 @@ public class FileLoader {
     }
 
 
-
-
+// load icon with specific height/width parameters
     public static Icon loadIcon(String image, String path, int width, int height) {
         Image img = Objects.requireNonNull(loadImage(image, path)).getScaledInstance(width, height, Image.SCALE_DEFAULT);
         return new ImageIcon(img);
     }
 
-    public static Image loadImage(String image, String path) {
 
+// load image
+    public static Image loadImage(String image, String path) {
         Image img = null;
         try {
             img = ImageIO.read(Objects.requireNonNull(FileLoader.class.getResource(path + image + ".png")));
@@ -104,13 +108,22 @@ public class FileLoader {
     }
 
 
+// load file names
+
     public static final int ALL = 0;
     public static final int SPECIFIC = 1;
 
+    // load all files-/folder-names in this folder
     public static String[] loadFileNames(String path){
         return loadFileNames(path, "", SPECIFIC);
     }
 
+    /*
+    if specifiyIgnore == ALL
+        every file name that contains 'ignore' is not loaded
+    if specifiyIgnore == SPECIFIC
+        every name that equals 'ignore' is not loaded
+     */
     public static String[] loadFileNames(String path, String ignore, int specifyIgnore){
 
         File directoryPath = new File("resources/" + path);

@@ -7,7 +7,7 @@ import core.ScreenSize;
 import core.Size;
 import motionAndAbilities.MotionAndAbilities;
 import game.state.State;
-import gfx.ImageUtils;
+import utils.FileLoader;
 
 import java.awt.*;
 
@@ -67,7 +67,7 @@ public abstract class GameObject {
     }
 
     protected Image loadSprite(String texture){
-        return ImageUtils.loadImage("/game/themes/" + menu.Menu.getGameTheme() + "/blocks/" + texture + ".png");
+        return FileLoader.loadImage(texture,"/game/themes/" + menu.Menu.getGameTheme() + "/blocks/");
     }
 
     public abstract Direction getDirection();

@@ -6,6 +6,9 @@ import java.util.regex.Pattern;
 
 public class ElseUtils {
 
+// editing Strings
+
+    // removes underscores (replaces with space), makes every first letter to capital
     public static String makeNameNice(String s) {
         char[] c = s.toCharArray();
         StringBuilder out = new StringBuilder("" + (char) (c[0] - 32));
@@ -26,6 +29,7 @@ public class ElseUtils {
         return out.toString();
     }
 
+    // removes spaces
     public static String removeSpaces(String s) {
         char[] c = s.toCharArray();
         StringBuilder out = new StringBuilder("" + (char) (c[0] - 32));
@@ -39,6 +43,7 @@ public class ElseUtils {
         return out.toString();
     }
 
+    // shortens string to a specific length
     public static String shorten(String s, int length) {
         char[] c = s.toCharArray();
 
@@ -54,6 +59,8 @@ public class ElseUtils {
         return out.toString();
     }
 
+
+    // removes everything behind the '.'
     public static String removeFileEnding(String s) {
         char[] c = s.toCharArray();
 
@@ -68,6 +75,8 @@ public class ElseUtils {
         return out.toString();
     }
 
+
+    // converts a string (rgb (x1,x2,x3)) to a color
     public static Color stringToColor(String input) {
         Pattern c = Pattern.compile("rgb *\\( *([0-9]+), *([0-9]+), *([0-9]+) *\\)");
         Matcher m = c.matcher(input);

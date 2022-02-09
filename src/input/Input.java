@@ -7,6 +7,8 @@ public class Input implements KeyListener {
 
     private boolean[] pressed;
 
+    // tests if key is pressed / released
+
     public Input() {
         pressed = new boolean[255];
     }
