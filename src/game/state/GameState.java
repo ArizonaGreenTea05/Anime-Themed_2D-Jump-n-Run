@@ -28,7 +28,7 @@ public class GameState extends State {
 
         createMap(sMap, ground);
 
-        // player needs to be initialized as first, so it is at index 0 in gameObjects and it's position will not change, even if other gameObjects are added ore removed
+        // player needs to be initialized as first, so it is at index 0 in gameObjects, and it's position will not change, even if other gameObjects are added ore removed
         initializePlayer(sMap, ground);
 
         initializeNPCs(sMap, ground);

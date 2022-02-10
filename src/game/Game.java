@@ -6,7 +6,7 @@ import game.state.GameState;
 import game.state.State;
 import input.Input;
 import menu.Menu;
-import utils.ElseUtils;
+import utils.StringEditor;
 
 public class Game {
 
@@ -22,7 +22,7 @@ public class Game {
 
     public Game(String version) {
         input = new Input();
-        gameDisplay = new GameDisplay(input, "Jump'n'Run - "+ ElseUtils.makeNameNice(Menu.getGameTheme()) +" styled ", " | " + version + " |", this);
+        gameDisplay = new GameDisplay(input, "Jump'n'Run - "+ StringEditor.makeNameNice(Menu.getGameTheme()) +" styled ", " | " + version + " |", this);
 
         // loading screen initialized
         LoadingScreen loadingScreen = new LoadingScreen();

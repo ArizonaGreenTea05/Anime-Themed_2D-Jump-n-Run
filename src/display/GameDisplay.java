@@ -507,8 +507,8 @@ public class GameDisplay extends JFrame {
         pWonWindow.add(lScoreText);
         pWonWindow.add(lLifes);
         pWonWindow.add(lLifesText);
-        if(score > Double.parseDouble(ElseUtils.removeSpaces(lHighScore.getText()))){
-            lHighScore.setText(" " + ElseUtils.shorten(String.valueOf(score),4));
+        if(score > Double.parseDouble(StringEditor.removeSpaces(lHighScore.getText()))){
+            lHighScore.setText(" " + StringEditor.shorten(String.valueOf(score),4));
         }
         pWonWindow.setVisible(true);
     }
@@ -523,7 +523,7 @@ public class GameDisplay extends JFrame {
 
     public void setScoreLabel(double i) {
         score = i;
-        lScore.setText(" " + ElseUtils.shorten(String.valueOf(score),4));
+        lScore.setText(" " + StringEditor.shorten(String.valueOf(score),4));
     }
 
     public static double getScore(){

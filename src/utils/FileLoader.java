@@ -146,7 +146,7 @@ public class FileLoader {
             String[] out = contentsList.toArray(new String[0]);
 
             for (int i = 0; i < out.length; i++) {
-                out[i] = ElseUtils.removeFileEnding(out[i]);
+                out[i] = StringEditor.removeFileEnding(out[i]);
             }
 
             Arrays.sort(out);

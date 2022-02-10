@@ -5,7 +5,7 @@ import core.ScreenSize;
 import display.GameDisplay;
 import game.Game;
 import game.GameLoop;
-import utils.ElseUtils;
+import utils.StringEditor;
 import utils.FileLoader;
 
 import javax.swing.*;
@@ -230,7 +230,7 @@ public class Menu {
         lHighscore.setBackground(labelColor[colorSetting]);
         lHighscore.setBorder(border);
         lHighscore.setFont(new Font(textFont, Font.PLAIN, fontSize));
-        lHighscore.setText(" " + ElseUtils.shorten(String.valueOf(highscore),4));
+        lHighscore.setText(" " + StringEditor.shorten(String.valueOf(highscore),4));
 
         lScoreText.setBounds(menu.getWidth()-labelWidth1-labelWidth2-22, 27+4*labelHeight, labelWidth1, labelHeight);
         lScoreText.setOpaque(true);
@@ -245,7 +245,7 @@ public class Menu {
         lScore.setBackground(labelColor[colorSetting]);
         lScore.setBorder(border);
         lScore.setFont(new Font(textFont, Font.PLAIN, fontSize));
-        lScore.setText(" " + ElseUtils.shorten(String.valueOf(GameDisplay.getScore()),4));
+        lScore.setText(" " + StringEditor.shorten(String.valueOf(GameDisplay.getScore()),4));
         // -Status-Anzeige-
     }
 
@@ -430,7 +430,7 @@ public class Menu {
 
         for (int i = 0; i < gameThemes.length; i++) {
             // button initialized & added
-            bThemes[i] = new JButton(ElseUtils.makeNameNice(gameThemes[i]));
+            bThemes[i] = new JButton(StringEditor.makeNameNice(gameThemes[i]));
             bThemes[i].setBounds(menu.getWidth()/4,menu.getHeight()/10+i*(menu.getHeight()/12 + 10),width,height);
             bThemes[i].setFont(new Font(textFont, Font.PLAIN, bThemes[i].getHeight()/3));
             bThemes[i].setBackground(buttonColor[colorSetting]);
@@ -453,7 +453,7 @@ public class Menu {
 
         for (int i = 0; i < playerName.length; i++) {
             // button initialized & added
-            bPlayers[i] = new JButton(ElseUtils.makeNameNice(playerName[i]));
+            bPlayers[i] = new JButton(StringEditor.makeNameNice(playerName[i]));
             bPlayers[i].setBounds(menu.getWidth()/4,menu.getHeight()/10+i*(menu.getHeight()/12 + 10),width,height);
             bPlayers[i].setFont(new Font(textFont, Font.PLAIN, bPlayers[i].getHeight()/3));
             bPlayers[i].setBackground(buttonColor[colorSetting]);
@@ -468,7 +468,7 @@ public class Menu {
         // button bounds saved (later needed in GameDisplay.java)
         buttonBounds = bPlayers[0].getBounds();
         // label set
-        lTheme.setText(" " + ElseUtils.makeNameNice(getGameTheme()));
+        lTheme.setText(" " + StringEditor.makeNameNice(getGameTheme()));
         // menu updated
         menu.repaint();
     }
@@ -482,7 +482,7 @@ public class Menu {
 
         for (int i = 0; i < maps.length; i++) {
             // button initialized & added
-            bMaps[i] = new JButton(ElseUtils.makeNameNice(maps[i]));
+            bMaps[i] = new JButton(StringEditor.makeNameNice(maps[i]));
             bMaps[i].setBounds(menu.getWidth()/4,menu.getHeight()/10+i*(menu.getHeight()/12 + 10),width,height);
             bMaps[i].setFont(new Font(textFont, Font.PLAIN, bMaps[i].getHeight()/3));
             bMaps[i].setBackground(buttonColor[colorSetting]);
@@ -626,7 +626,7 @@ public class Menu {
         return e -> {
             // player name set
             name = i;
-            lPlayer.setText(" " + ElseUtils.makeNameNice(playerName[name]));
+            lPlayer.setText(" " + StringEditor.makeNameNice(playerName[name]));
             // player buttons removed
             remove(bPlayers);
             // back [to] themes button removed
@@ -644,7 +644,7 @@ public class Menu {
         return e -> {
             // map set
             map = i;
-            lMap.setText(" " + ElseUtils.makeNameNice(maps[map]));
+            lMap.setText(" " + StringEditor.makeNameNice(maps[map]));
             // map buttons removed
             remove(bMaps);
             // back [to] players button removed
@@ -676,7 +676,7 @@ public class Menu {
             }
         }
 
-        lHighscore.setText(" " + ElseUtils.shorten(String.valueOf(highscore),4));
+        lHighscore.setText(" " + StringEditor.shorten(String.valueOf(highscore),4));
     }
 
     private void setHighscore(){
@@ -692,7 +692,7 @@ public class Menu {
             FileLoader.save(String.valueOf(score),getMapName() + ".highscore", GAME_THEME_PATH + "/" + getGameTheme() + "/maps/");
             this.highscore = score;
         }
-        lHighscore.setText(" " + ElseUtils.shorten(String.valueOf(highscore),4));
+        lHighscore.setText(" " + StringEditor.shorten(String.valueOf(highscore),4));
     }
 
     private static void setPlayerNames(){
@@ -737,7 +737,7 @@ public class Menu {
 
     public static Color getBGColor(){
         String gameTheme = getGameTheme();
-        return ElseUtils.stringToColor(FileLoader.load(gameTheme + ".color", GAME_THEME_PATH + "/" + gameTheme + "/"));
+        return StringEditor.stringToColor(FileLoader.load(gameTheme + ".color", GAME_THEME_PATH + "/" + gameTheme + "/"));
     }
 
     public static Color getButtonColor(){
