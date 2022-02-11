@@ -148,7 +148,7 @@ public class NPCMaA extends MotionAndAbilities {
                         new Thread(() -> {
                             cooldownRunning = true;
                             try {
-                                Thread.sleep(400);
+                                Thread.sleep(300);
                             } catch (InterruptedException e) {
                                 e.printStackTrace();
                             }
@@ -156,7 +156,7 @@ public class NPCMaA extends MotionAndAbilities {
                             controller.setRequestingHit(true);
 
                             try {
-                                Thread.sleep(100);
+                                Thread.sleep(200);
                             } catch (InterruptedException e) {
                                 e.printStackTrace();
                             }

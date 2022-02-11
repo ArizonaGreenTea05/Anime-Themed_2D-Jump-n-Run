@@ -122,7 +122,7 @@ public class GameState extends State {
                     object = new NormalBlock(
                             relativePosition,
                             Block.TRANS_BRICKS,
-                            true
+                            false
                     );
                 } else if(letter.equals("P")){
                     object = new NormalBlock(
@@ -134,7 +134,7 @@ public class GameState extends State {
                     object = new NormalBlock(
                             relativePosition,
                             Block.TRANS_PLANKS,
-                            true
+                            false
                     );
                 } else if(letter.equals("g")){
                     object = new NormalBlock(

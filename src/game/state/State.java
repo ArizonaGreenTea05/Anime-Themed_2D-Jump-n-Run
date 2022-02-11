@@ -34,7 +34,9 @@ public abstract class State {
 // update methods
 
     public void updateObjects() {
-        gameObjects.forEach(GameObject::update);
+        for (int i = 0; i < gameObjects.size() && updatable; i++) {
+            gameObjects.get(i).update();
+        }
     }
 
     public void updateMap() {

@@ -115,7 +115,7 @@ public abstract class MotionAndAbilities {
                     // defining of top and bottom 'border'
                     // if top border of block < bottom border of player + 5 AND top border of block > bottom border of player - 2 (huge tolerance because of fall speed)
                     // -> y-position fits
-                    if (blockPosY < posY + thisGameObjectHeight + 5 && blockPosY > posY + thisGameObjectHeight - 2) {
+                    if (blockPosY < posY + thisGameObjectHeight + 4 && blockPosY > posY + thisGameObjectHeight - 4) {
                         // this game object set directly onto the block when in tolerance limit-> no bugging into block
                         position.setY(blockPosY - 64);
                         // has ground
@@ -158,7 +158,7 @@ public abstract class MotionAndAbilities {
 
                 // same as hasGround() just with top
                 if (blockPosX < posX + thisGameObjectWidth && blockPosX > posX - object.getSize().getWidth()+3) {
-                    if (blockPosY < posY - objectHeight + 2 && blockPosY > posY - objectHeight - 5) {
+                    if (blockPosY < posY - objectHeight + 2 && blockPosY > posY - objectHeight - 6) {
                         // if the action is not caused this object will cause it
                         if(actionCaused()) {
                             object.doActionOnContact(state);
