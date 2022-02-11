@@ -111,6 +111,30 @@ public class GameState extends State {
                                     Block.WALL_BLOCK,
                                     true
                             );
+                } else if(letter.equals("B")){
+                    object = new NormalBlock(
+                            relativePosition,
+                            Block.BRICKS,
+                            true
+                    );
+                } else if(letter.equals("b")){
+                    object = new NormalBlock(
+                            relativePosition,
+                            Block.TRANS_BRICKS,
+                            true
+                    );
+                } else if(letter.equals("P")){
+                    object = new NormalBlock(
+                            relativePosition,
+                            Block.PLANKS,
+                            true
+                    );
+                } else if(letter.equals("p")){
+                    object = new NormalBlock(
+                            relativePosition,
+                            Block.TRANS_PLANKS,
+                            true
+                    );
                 } else if(letter.equals("g")){
                     object = new NormalBlock(
                                     relativePosition,

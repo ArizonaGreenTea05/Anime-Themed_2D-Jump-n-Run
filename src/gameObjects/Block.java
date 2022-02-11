@@ -17,6 +17,10 @@ public abstract class Block extends GameObject {
     public static final String TRANS_GROUND_BLOCK = "trans_ground";
     public static final String WALL_BLOCK = "wall";
     public static final String TRANS_WALL_BLOCK = "trans_wall";
+    public static final String BRICKS = "brick";
+    public static final String TRANS_BRICKS = "trans_brick";
+    public static final String PLANKS = "planks";
+    public static final String TRANS_PLANKS = "trans_planks";
     public static final String ACTION_BLOCK = "action";
 
     private Image sprite;
