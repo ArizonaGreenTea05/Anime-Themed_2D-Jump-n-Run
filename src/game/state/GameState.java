@@ -41,7 +41,8 @@ public class GameState extends State {
             for (int j = 0; j < sMap[i].length-1; j++) {
                 String letter = sMap[i][j];
                 Position relativePosition = new Position((j-1)*64, ground-(i-1)*64);
-                if(letter.equalsIgnoreCase("P")){
+                // !, because it definetly won't be used as block
+                if(letter.equalsIgnoreCase("!")){
                     this.player = new Player(
                             new PlayerController(input),
                             new PlayerMaA(3.5),
