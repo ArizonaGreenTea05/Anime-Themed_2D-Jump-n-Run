@@ -62,26 +62,30 @@ public class GameState extends State {
             for (int j = 0; j < sMap[i].length-1; j++) {
                 String letter = sMap[i][j];
                 Position relativePosition = new Position((j-1)*64, ground-(i-1)*64);
-                if(letter.equalsIgnoreCase("E")){
+                try{
+                    int npc = Integer.parseInt(letter);
                     gameObjects.add(
                             new NPC(
                                     new NPCController(),
                                     new NPCMaA(1.5),
                                     relativePosition,
-                                    1,
+                                    npc,
                                     spriteLibrary,
                                     5,
                                     this
                             )
                     );
-                }else if(letter.equalsIgnoreCase("C")){
-                    gameObjects.add(
-                            new Coin(
-                                    relativePosition,
-                                    StaticEntity.COIN
-                            )
-                    );
+                } catch(Exception ignored){
+                    if(letter.equalsIgnoreCase("C")){
+                        gameObjects.add(
+                                new Coin(
+                                        relativePosition,
+                                        StaticEntity.COIN
+                                )
+                        );
+                    }
                 }
+
             }
         }
     }
