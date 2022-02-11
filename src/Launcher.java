@@ -6,3 +6,5 @@ public class Launcher {
         new Menu("V 1.2 - BETA");
     }
 }
+//TODO: 2 new NPCs for AoT (1 NPC per wall)
+//TODO: 2 new Players for AoT (Ymir & Historia)
