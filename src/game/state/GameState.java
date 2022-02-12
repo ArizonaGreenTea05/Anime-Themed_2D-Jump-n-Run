@@ -26,12 +26,11 @@ public class GameState extends State {
 
         String[][] sMap = FileLoader.loadMap();
 
-        createMap(sMap, ground);
-
         // player needs to be initialized as first, so it is at index 0 in gameObjects, and it's position will not change, even if other gameObjects are added ore removed
         initializePlayer(sMap, ground);
 
-        initializeNPCs(sMap, ground);
+        createMap(sMap, ground);
+
     }
 
     private void initializePlayer(String[][] sMap, int ground) {
@@ -56,16 +55,6 @@ public class GameState extends State {
             }
         }
     }
-    private void initializeNPCs(String[][] sMap, int ground) {
-
-        // searching through map and adding nps at defined position
-        for (int i = 0; i < sMap.length; i++) {
-            for (int j = 0; j < sMap[i].length-1; j++) {
-                String letter = sMap[i][j];
-                Position relativePosition = new Position((j-1)*64, ground-(i-1)*64);
-            }
-        }
-    }
 
 
     private void createMap(String[][] sMap, int ground) {
@@ -78,14 +67,15 @@ public class GameState extends State {
                 GameObject object = null;
                 try {
                     int npc = Integer.parseInt(letter);
-                    object = new NPC(
-                            new NPCController(),
-                            new NPCMaA(1.5),
-                            relativePosition,
-                            npc,
-                            spriteLibrary,
-                            5,
-                            this
+                        gameObjects.add(new NPC(
+                                new NPCController(),
+                                new NPCMaA(1.5),
+                                relativePosition,
+                                npc,
+                                spriteLibrary,
+                                5,
+                                this
+                        )
                     );
                 } catch (Exception ignored) {
                     if (letter.equals("C")) {
