@@ -63,30 +63,6 @@ public class GameState extends State {
             for (int j = 0; j < sMap[i].length-1; j++) {
                 String letter = sMap[i][j];
                 Position relativePosition = new Position((j-1)*64, ground-(i-1)*64);
-                try{
-                    int npc = Integer.parseInt(letter);
-                    gameObjects.add(
-                            new NPC(
-                                    new NPCController(),
-                                    new NPCMaA(1.5),
-                                    relativePosition,
-                                    npc,
-                                    spriteLibrary,
-                                    5,
-                                    this
-                            )
-                    );
-                } catch(Exception ignored){
-                    if(letter.equalsIgnoreCase("C")){
-                        gameObjects.add(
-                                new Coin(
-                                        relativePosition,
-                                        StaticEntity.COIN
-                                )
-                        );
-                    }
-                }
-
             }
         }
     }
@@ -98,67 +74,123 @@ public class GameState extends State {
         for (int i = 0; i < sMap.length; i++) {
             for (int j = 0; j < sMap[i].length-1; j++) {
                 String letter = sMap[i][j];
-                Position relativePosition = new Position((j-1)*64, ground-(i-1)*64);
+                Position relativePosition = new Position((j - 1) * 64, ground - (i - 1) * 64);
                 GameObject object = null;
-                if(letter.equals("G")){
-                    object = new NormalBlock(
-                                    relativePosition,
-                                    Block.GROUND_BLOCK,
-                                    true
-                            );
-                } else if(letter.equals("W")){
-                    object = new NormalBlock(
-                                    relativePosition,
-                                    Block.WALL_BLOCK,
-                                    true
-                            );
-                } else if(letter.equals("B")){
-                    object = new NormalBlock(
+                try {
+                    int npc = Integer.parseInt(letter);
+                    object = new NPC(
+                            new NPCController(),
+                            new NPCMaA(1.5),
                             relativePosition,
-                            Block.BRICKS,
-                            true
+                            npc,
+                            spriteLibrary,
+                            5,
+                            this
                     );
-                } else if(letter.equals("b")){
-                    object = new NormalBlock(
-                            relativePosition,
-                            Block.TRANS_BRICKS,
-                            false
-                    );
-                } else if(letter.equals("P")){
-                    object = new NormalBlock(
-                            relativePosition,
-                            Block.PLANKS,
-                            true
-                    );
-                } else if(letter.equals("p")){
-                    object = new NormalBlock(
-                            relativePosition,
-                            Block.TRANS_PLANKS,
-                            false
-                    );
-                } else if(letter.equals("g")){
-                    object = new NormalBlock(
-                                    relativePosition,
-                                    Block.TRANS_GROUND_BLOCK,
-                                    false
-                            );
-                } else if(letter.equals("w")){
-                    object = new NormalBlock(
-                                    relativePosition,
-                                    Block.TRANS_WALL_BLOCK,
-                                    false
-                            );
-                } else if(letter.equalsIgnoreCase("A")){
-                    object = new ActionBlock(
-                                    relativePosition,
-                                    Block.ACTION_BLOCK
-                            );
-                } else if(letter.equalsIgnoreCase("F")){
-                    object = new FinishBlock(
-                                    relativePosition,
-                                    Block.GROUND_BLOCK
-                            );
+                } catch (Exception ignored) {
+                    if (letter.equals("C")) {
+                        try {
+                            int type = Integer.parseInt(sMap[i][j + 1]);
+                            if (type == 1) {
+                                object = new twoXtwo(
+                                        relativePosition,
+                                        CustomBlock.C1
+                                );
+                            } else if (type == 2) {
+                                object = new twoXtwo(
+                                        relativePosition,
+                                        CustomBlock.C2
+                                );
+                            } else if (type == 3) {
+                                object = new twoXtwo(
+                                        relativePosition,
+                                        CustomBlock.C3
+                                );
+                            }
+                            j++;
+                        } catch (Exception ignored2) {}
+                    } else if (letter.equals("G")) {
+                        object = new NormalBlock(
+                                relativePosition,
+                                Block.GROUND_BLOCK,
+                                true
+                        );
+                    } else if (letter.equals("W")) {
+                        object = new NormalBlock(
+                                relativePosition,
+                                Block.WALL_BLOCK,
+                                true
+                        );
+                    } else if (letter.equals("B")) {
+                        object = new NormalBlock(
+                                relativePosition,
+                                Block.BRICKS,
+                                true
+                        );
+                    } else if (letter.equals("b")) {
+                        object = new NormalBlock(
+                                relativePosition,
+                                Block.TRANS_BRICKS,
+                                false
+                        );
+                    } else if (letter.equals("P")) {
+                        object = new NormalBlock(
+                                relativePosition,
+                                Block.PLANKS,
+                                true
+                        );
+                    } else if (letter.equals("p")) {
+                        object = new NormalBlock(
+                                relativePosition,
+                                Block.TRANS_PLANKS,
+                                false
+                        );
+                    } else if (letter.equals("g")) {
+                        object = new NormalBlock(
+                                relativePosition,
+                                Block.TRANS_GROUND_BLOCK,
+                                false
+                        );
+                    } else if (letter.equals("w")) {
+                        object = new NormalBlock(
+                                relativePosition,
+                                Block.TRANS_WALL_BLOCK,
+                                false
+                        );
+                    } else if (letter.equals("A")) {
+                        object = new ActionBlock(
+                                relativePosition,
+                                Block.ACTION_BLOCK
+                        );
+                    } else if (letter.equals("F")) {
+                        object = new FinishBlock(
+                                relativePosition,
+                                Block.GROUND_BLOCK
+                        );
+
+                    }  else if (letter.equals("l")) {
+                        object = new NormalBlock(
+                                relativePosition,
+                                Block.LEAVES,
+                                false
+                        );
+
+                    }  else if (letter.equals("T")) {
+                        object = new NormalBlock(
+                                relativePosition,
+                                Block.TREE,
+                                true
+                        );
+
+                    } else if (letter.equalsIgnoreCase("*")) {
+                        object = new Coin(
+                                relativePosition,
+                                StaticEntity.COIN
+                        );
+
+                    }
                 }
+
 
                 if(object!=null) {
                     mapObjects.add(object);

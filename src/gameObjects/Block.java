@@ -22,6 +22,8 @@ public abstract class Block extends GameObject {
     public static final String PLANKS = "planks";
     public static final String TRANS_PLANKS = "trans_planks";
     public static final String ACTION_BLOCK = "action";
+    public static final String TREE = "tree";
+    public static final String LEAVES = "leaves";
 
     private Image sprite;
     protected boolean actionUsed = false;
