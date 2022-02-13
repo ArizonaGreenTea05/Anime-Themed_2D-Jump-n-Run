@@ -5,9 +5,9 @@ import game.state.State;
 
 import java.awt.*;
 
-public class ActionBlock extends Block{
+public class CoinBlock extends Block{
 
-    public ActionBlock(Position position, String texture){
+    public CoinBlock(Position position, String texture){
         super(position, texture);
         solid = true;
     }
@@ -38,7 +38,7 @@ public class ActionBlock extends Block{
             state.setUpdatable(false);
             state.getGameObjects().add(
                     new Coin(
-                            new Position(position.intX(), position.intY() - 66),
+                            new Position(position.intX(), position.intY() - 64),
                             StaticEntity.COIN
                     )
             );

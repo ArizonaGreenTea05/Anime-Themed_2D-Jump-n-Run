@@ -58,7 +58,6 @@ public class GameState extends State {
 
 
     private void createMap(String[][] sMap, int ground) {
-
         // searching through map and adding blocks at defined positions
         for (int i = 0; i < sMap.length; i++) {
             for (int j = 0; j < sMap[i].length-1; j++) {
@@ -147,8 +146,8 @@ public class GameState extends State {
                                 Block.TRANS_WALL_BLOCK,
                                 false
                         );
-                    } else if (letter.equals("A")) {
-                        object = new ActionBlock(
+                    } else if (letter.equals("?")) {
+                        object = new CoinBlock(
                                 relativePosition,
                                 Block.ACTION_BLOCK
                         );
