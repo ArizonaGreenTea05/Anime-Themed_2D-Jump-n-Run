@@ -6,4 +6,3 @@ public class Launcher {
         new Menu("V 1.2 - BETA");
     }
 }
-//TODO: new Player for AoT (Historia)
