@@ -1,11 +1,15 @@
 package display;
 
+import core.Position;
 import core.ScreenSize;
+import core.Size;
 import menu.Menu;
 import utils.FileLoader;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.util.Objects;
 
 public class LoadingScreen extends JFrame implements Runnable{
     private final JLabel background = new JLabel();
@@ -44,8 +48,17 @@ public class LoadingScreen extends JFrame implements Runnable{
         int width = getWidth()/4;
         int height = getHeight()/12;
 
+        BufferedImage img = (BufferedImage) FileLoader.loadImage("loading","/loading/");
+
         for (int i = 0; i < loadingIMGs.length; i++) {
-            loadingIMGs[i] = FileLoader.loadIcon("loading_" + i, "/loading/", height, height);
+            loadingIMGs[i] = new ImageIcon(
+                    img.getSubimage(
+                            0,
+                            i*500,
+                            500,
+                            500
+                    ).getScaledInstance(height, height, Image.SCALE_DEFAULT)
+            );
         }
 
         loading.setOpaque(true);
