@@ -19,7 +19,6 @@ public class LoadingScreen extends JFrame implements Runnable{
     public LoadingScreen(){
         setSize(ScreenSize.getWidth(),ScreenSize.getHeight());
         setTitle("...loading...");
-        setIconImage(FileLoader.loadImage("loading_0", "/loading/"));
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
         setUndecorated(true);
         setResizable(false);
@@ -48,17 +47,17 @@ public class LoadingScreen extends JFrame implements Runnable{
         int width = getWidth()/4;
         int height = getHeight()/12;
 
-        BufferedImage img = (BufferedImage) FileLoader.loadImage("loading","/loading/");
+        BufferedImage fullImg = (BufferedImage) FileLoader.loadImage("loading","/loading/");
 
         for (int i = 0; i < loadingIMGs.length; i++) {
-            loadingIMGs[i] = new ImageIcon(
-                    img.getSubimage(
-                            0,
-                            i*500,
-                            500,
-                            500
-                    ).getScaledInstance(height, height, Image.SCALE_DEFAULT)
-            );
+            Image subImg = fullImg.getSubimage(
+                    0,
+                    i*500,
+                    500,
+                    500
+            ).getScaledInstance(height, height, Image.SCALE_DEFAULT);
+            setIconImage(subImg);
+            loadingIMGs[i] = new ImageIcon(subImg);
         }
 
         loading.setOpaque(true);
