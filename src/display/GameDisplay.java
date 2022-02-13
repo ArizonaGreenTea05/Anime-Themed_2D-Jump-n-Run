@@ -90,7 +90,7 @@ public class GameDisplay extends JFrame {
         this.height = ScreenSize.getHeight();
         this.GAME_VERSION = version;
 
-        initializeMenu(title);
+        initializeDisplay(title);
 
         this.renderer = new Renderer();
 
@@ -137,7 +137,7 @@ public class GameDisplay extends JFrame {
 
 // initializer methods
 
-    private void initializeMenu(String title) {
+    private void initializeDisplay(String title) {
         setTitle(title + GAME_VERSION);
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
         setResizable(false);

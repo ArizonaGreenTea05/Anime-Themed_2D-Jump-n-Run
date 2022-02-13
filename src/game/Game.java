@@ -22,7 +22,7 @@ public class Game {
 
     public Game(String version) {
         input = new Input();
-        gameDisplay = new GameDisplay(input, "Jump'n'Run - "+ StringEditor.makeNameNice(Menu.getGameTheme()) +" styled ", " | " + version + " |", this);
+        gameDisplay = new GameDisplay(input, "2D Jump'n'Run", " | " + version + " |", this);
 
         // loading screen initialized
         LoadingScreen loadingScreen = new LoadingScreen();

@@ -159,7 +159,7 @@ public class Menu {
 
     private void initializeMenu() {
         menu.setSize(width,height);
-        menu.setTitle("GameMenu   | " + GAME_VERSION + " |");
+        menu.setTitle("GameMenu  | " + GAME_VERSION + " |");
         menu.setIconImage(FileLoader.loadImage("sakura_icon", "/"));
         menu.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
         menu.setUndecorated(true);
