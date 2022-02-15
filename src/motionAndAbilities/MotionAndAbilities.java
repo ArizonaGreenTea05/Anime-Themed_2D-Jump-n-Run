@@ -32,6 +32,7 @@ public abstract class MotionAndAbilities {
     protected GameObject thisGameObject;
     protected Size thisGameObjectSize;
     static int playerPosInList;
+    static int lowestBlockPos;
 
     protected Controller controller;
     protected boolean falling;

@@ -39,7 +39,7 @@ public class PlayerMaA extends MotionAndAbilities {
         int topBorder = ScreenSize.getTopBorder();
         int bottomBorder = ScreenSize.getBottomBorder();
         int screenHeight = ScreenSize.getHeight();
-        int lowestBlockPos = (int) state.getLowestBlock().getPosition().getY();
+        lowestBlockPos = (int) state.getLowestBlock().getPosition().getY();
 
 
 

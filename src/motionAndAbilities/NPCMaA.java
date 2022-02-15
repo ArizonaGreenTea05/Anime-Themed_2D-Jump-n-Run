@@ -50,7 +50,7 @@ public class NPCMaA extends MotionAndAbilities {
             gravity = 0;
         }
 
-        if(y > screenHeight + 64){
+        if(y > lowestBlockPos + 64){
             thisGameObject.subtractLifes(1);
         }
 
