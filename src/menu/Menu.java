@@ -675,7 +675,7 @@ public class Menu {
                 FileLoader.save(String.valueOf(score), map + ".highscore", GAME_THEME_PATH + "/" + gameTheme + "/maps/");
             }
         }
-
+        setHighscore();
         lHighscore.setText(" " + StringEditor.shorten(String.valueOf(highscore),4));
     }
 
