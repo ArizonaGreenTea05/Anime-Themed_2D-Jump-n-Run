@@ -170,9 +170,9 @@ public class NPCMaA extends MotionAndAbilities {
             }
             // if next block in direction of looking is not existent it jumps over the gap
             if(hasGround()){
-                if(thisGameObject.getDirection() == L && !hasGround(-thisGameObjectWidth/2)){
+                if(thisGameObject.getDirection() == L && (!hasGround(-thisGameObjectWidth/2) || !leftSpace())){
                     controller.setRequestingJump(true);
-                } else if(thisGameObject.getDirection() == R && !hasGround(thisGameObjectWidth/2)){
+                } else if(thisGameObject.getDirection() == R && (!hasGround(thisGameObjectWidth/2) || !rightSpace())){
                     controller.setRequestingJump(true);
                 }
             }
@@ -184,6 +184,10 @@ public class NPCMaA extends MotionAndAbilities {
             // if player sprints entity also sprints
             controller.setRequestingSprint(player.getController().isRequestingSprint());
 
+        } else {
+            controller.setRequestingLeft(false);
+            controller.setRequestingRight(false);
+            controller.setRequestingJump(false);
         }
     }
 

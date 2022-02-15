@@ -195,7 +195,6 @@ public class Menu {
                 lInfo[i].setBounds(x2, posY, labelWidth2, labelHeight);
                 line++;
             }
-            System.out.println(posY);
             lInfo[i].setOpaque(true);
             lInfo[i].setForeground(textColor[colorSetting]);
             lInfo[i].setBackground(labelColor[colorSetting]);
