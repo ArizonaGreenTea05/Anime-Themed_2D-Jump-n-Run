@@ -230,7 +230,7 @@ public class Menu {
         lHighscore.setBackground(labelColor[colorSetting]);
         lHighscore.setBorder(border);
         lHighscore.setFont(new Font(textFont, Font.PLAIN, fontSize));
-        lHighscore.setText(" " + StringEditor.shorten(String.valueOf(highscore),4));
+        lHighscore.setText(String.format(" %.1f", highscore));
 
         lScoreText.setBounds(menu.getWidth()-labelWidth1-labelWidth2-22, 27+4*labelHeight, labelWidth1, labelHeight);
         lScoreText.setOpaque(true);
@@ -245,7 +245,7 @@ public class Menu {
         lScore.setBackground(labelColor[colorSetting]);
         lScore.setBorder(border);
         lScore.setFont(new Font(textFont, Font.PLAIN, fontSize));
-        lScore.setText(" " + StringEditor.shorten(String.valueOf(GameDisplay.getScore()),4));
+        lScore.setText(String.format(" %.1f", GameDisplay.getScore()));
         // -Status-Anzeige-
     }
 
@@ -676,7 +676,7 @@ public class Menu {
             }
         }
         setHighscore();
-        lHighscore.setText(" " + StringEditor.shorten(String.valueOf(highscore),4));
+        lHighscore.setText(String.format(" %.1f", highscore));
     }
 
     private void setHighscore(){
@@ -692,7 +692,7 @@ public class Menu {
             FileLoader.save(String.valueOf(score),getMapName() + ".highscore", GAME_THEME_PATH + "/" + getGameTheme() + "/maps/");
             this.highscore = score;
         }
-        lHighscore.setText(" " + StringEditor.shorten(String.valueOf(highscore),4));
+        lHighscore.setText(String.format(" %.1f", highscore));
     }
 
     private static void setPlayerNames(){

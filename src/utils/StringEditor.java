@@ -41,22 +41,6 @@ public class StringEditor {
         return out.toString();
     }
 
-    // shortens string to a specific length
-    public static String shorten(String s, int length) {
-        char[] c = s.toCharArray();
-
-        if (length > c.length) {
-            return s;
-        }
-
-        StringBuilder out = new StringBuilder();
-        for (int i = 0; i < length; i++) {
-            out.append(c[i]);
-        }
-
-        return out.toString();
-    }
-
 
     // removes everything behind the '.'
     public static String removeFileEnding(String s) {
