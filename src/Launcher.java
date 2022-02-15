@@ -3,6 +3,6 @@ public class Launcher {
     // Launcher-class -> launches the menu
     public static void main(String[] args) {
         // defining game-version (which is shown in title)
-        new Menu("V 1.3 - Facharbeit Pre-Release");
+        new Menu("V 1.3.1 - Facharbeit Pre-Release");
     }
 }

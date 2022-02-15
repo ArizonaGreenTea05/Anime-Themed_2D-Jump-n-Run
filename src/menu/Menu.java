@@ -88,16 +88,17 @@ public class Menu {
     public static int labelWidth1;
     public static int labelWidth2;
     private static double highscore;
-    private static final JLabel lThemeText = new JLabel(" Theme:");
-    private static final JLabel lTheme = new JLabel("");
-    private static final JLabel lPlayerText = new JLabel(" Character:");
-    private static final JLabel lPlayer = new JLabel("");
-    private static final JLabel lMapText = new JLabel(" Map:");
-    private static final JLabel lMap = new JLabel("");
-    private static final JLabel lHighscoreText = new JLabel(" Highscore:");
-    private static final JLabel lHighscore = new JLabel("");
-    private static final JLabel lScoreText = new JLabel(" Score:");
-    private static final JLabel lScore = new JLabel("");
+    private static final JLabel[] lInfo = new JLabel[10];
+    private static final int THEME_TEXT = 0;
+    private static final int THEME = 1;
+    private static final int PLAYER_TEXT = 2;
+    private static final int PLAYER = 3;
+    private static final int MAP_TEXT = 4;
+    private static final int MAP = 5;
+    private static final int HIGHSCORE_TEXT = 6;
+    private static final int HIGHSCORE = 7;
+    private static final int SCORE_TEXT = 8;
+    private static final int SCORE = 9;
 
 
 
@@ -135,8 +136,6 @@ public class Menu {
         this.height = ScreenSize.getHeight();
         this.GAME_VERSION = version;
 
-        setHighscore();
-
         initializeMenu();
 
         initializeButtons();
@@ -150,6 +149,8 @@ public class Menu {
         initializeBackground();
 
         addAll();
+
+        setHighscore();
 
         menu.setVisible(true);
     }
@@ -169,96 +170,54 @@ public class Menu {
     }
 
     private void initializeLabels() {
+
         // Status-Anzeige
         labelHeight = menu.getHeight()/32;
         labelWidth1 = labelHeight*4;
         labelWidth2 = (int) ((double) labelHeight*6.3);
         fontSize = labelHeight-13;
 
-        lThemeText.setBounds(menu.getWidth()-labelWidth1-labelWidth2-22, 35, labelWidth1, labelHeight);
-        lThemeText.setOpaque(true);
-        lThemeText.setForeground(textColor[colorSetting]);
-        lThemeText.setBackground(labelColor[colorSetting]);
-        lThemeText.setBorder(border);
-        lThemeText.setFont(new Font(textFont, Font.PLAIN, fontSize));
+        lInfo[THEME_TEXT] = new JLabel(" Theme:");
+        lInfo[PLAYER_TEXT] = new JLabel(" Character:");
+        lInfo[MAP_TEXT] = new JLabel(" Map:");
+        lInfo[HIGHSCORE_TEXT] = new JLabel(" Highscore:");
+        lInfo[SCORE_TEXT] = new JLabel(" Score:");
 
-        lTheme.setBounds(lThemeText.getX()+labelWidth1-1, 35, labelWidth2, labelHeight);
-        lTheme.setOpaque(true);
-        lTheme.setForeground(textColor[colorSetting]);
-        lTheme.setBackground(labelColor[colorSetting]);
-        lTheme.setBorder(border);
-        lTheme.setFont(new Font(textFont, Font.PLAIN, fontSize));
+        int x1 = menu.getWidth()-labelWidth1-labelWidth2-22;
+        int x2 = x1+labelWidth1-1;
+        int line = 0;
+        for (int i = 0; i < lInfo.length; i++) {
+            int posY = 35 - line * 2 + line * labelHeight;
+            if(i % 2 == 0) {
+                lInfo[i].setBounds(x1, posY, labelWidth1, labelHeight);
+            } else {
+                lInfo[i] = new JLabel("");
+                lInfo[i].setBounds(x2, posY, labelWidth2, labelHeight);
+                line++;
+            }
+            System.out.println(posY);
+            lInfo[i].setOpaque(true);
+            lInfo[i].setForeground(textColor[colorSetting]);
+            lInfo[i].setBackground(labelColor[colorSetting]);
+            lInfo[i].setBorder(border);
+            lInfo[i].setFont(new Font(textFont, Font.PLAIN, fontSize));
+        }
 
-        lPlayerText.setBounds(menu.getWidth()-labelWidth1-labelWidth2-22, 33+labelHeight, labelWidth1, labelHeight);
-        lPlayerText.setOpaque(true);
-        lPlayerText.setForeground(textColor[colorSetting]);
-        lPlayerText.setBackground(labelColor[colorSetting]);
-        lPlayerText.setBorder(border);
-        lPlayerText.setFont(new Font(textFont, Font.PLAIN, fontSize));
-
-        lPlayer.setBounds(lPlayerText.getX()+labelWidth1-1, 33+labelHeight, labelWidth2, labelHeight);
-        lPlayer.setOpaque(true);
-        lPlayer.setForeground(textColor[colorSetting]);
-        lPlayer.setBackground(labelColor[colorSetting]);
-        lPlayer.setBorder(border);
-        lPlayer.setFont(new Font(textFont, Font.PLAIN, fontSize));
-
-        lMapText.setBounds(menu.getWidth()-labelWidth1-labelWidth2-22, 31+2*labelHeight, labelWidth1, labelHeight);
-        lMapText.setOpaque(true);
-        lMapText.setForeground(textColor[colorSetting]);
-        lMapText.setBackground(labelColor[colorSetting]);
-        lMapText.setBorder(border);
-        lMapText.setFont(new Font(textFont, Font.PLAIN, fontSize));
-
-        lMap.setBounds(lMapText.getX()+labelWidth1-1, 31+2*labelHeight, labelWidth2, labelHeight);
-        lMap.setOpaque(true);
-        lMap.setForeground(textColor[colorSetting]);
-        lMap.setBackground(labelColor[colorSetting]);
-        lMap.setBorder(border);
-        lMap.setFont(new Font(textFont, Font.PLAIN, fontSize));
-
-        lHighscoreText.setBounds(menu.getWidth()-labelWidth1-labelWidth2-22, 29+3*labelHeight, labelWidth1, labelHeight);
-        lHighscoreText.setOpaque(true);
-        lHighscoreText.setForeground(textColor[colorSetting]);
-        lHighscoreText.setBackground(labelColor[colorSetting]);
-        lHighscoreText.setBorder(border);
-        lHighscoreText.setFont(new Font(textFont, Font.PLAIN, fontSize));
-
-        lHighscore.setBounds(lHighscoreText.getX()+labelWidth1-1, 29+3*labelHeight, labelWidth2, labelHeight);
-        lHighscore.setOpaque(true);
-        lHighscore.setForeground(textColor[colorSetting]);
-        lHighscore.setBackground(labelColor[colorSetting]);
-        lHighscore.setBorder(border);
-        lHighscore.setFont(new Font(textFont, Font.PLAIN, fontSize));
-        lHighscore.setText(String.format(" %.1f", highscore));
-
-        lScoreText.setBounds(menu.getWidth()-labelWidth1-labelWidth2-22, 27+4*labelHeight, labelWidth1, labelHeight);
-        lScoreText.setOpaque(true);
-        lScoreText.setForeground(textColor[colorSetting]);
-        lScoreText.setBackground(labelColor[colorSetting]);
-        lScoreText.setBorder(border);
-        lScoreText.setFont(new Font(textFont, Font.PLAIN, fontSize));
-
-        lScore.setBounds(lScoreText.getX()+labelWidth1-1, 27+4*labelHeight, labelWidth2, labelHeight);
-        lScore.setOpaque(true);
-        lScore.setForeground(textColor[colorSetting]);
-        lScore.setBackground(labelColor[colorSetting]);
-        lScore.setBorder(border);
-        lScore.setFont(new Font(textFont, Font.PLAIN, fontSize));
-        lScore.setText(String.format(" %.1f", GameDisplay.getScore()));
+        lInfo[HIGHSCORE].setText(String.format(" %.1f", highscore));
+        lInfo[SCORE].setText(String.format(" %.1f", GameDisplay.getScore()));
         // -Status-Anzeige-
     }
 
     private void addAll() {
 
         // bei Farbwechsel wird vorheriger Punkt beibehalten
-        if(!lMap.getText().equals("")) {
+        if(!lInfo[MAP].getText().equals("")) {
             menu.add(bStartGame);
             menu.add(bBack[MAPS]);
-        } else if(!lPlayer.getText().equals("")) {
+        } else if(!lInfo[PLAYER].getText().equals("")) {
             addMaps();
             menu.add(bBack[PLAYERS]);
-        } else if(!lTheme.getText().equals("")) {
+        } else if(!lInfo[THEME].getText().equals("")) {
             addPlayers();
             menu.add(bBack[THEMES]);
         } else {
@@ -270,20 +229,16 @@ public class Menu {
         menu.add(pControls);
         menu.add(bShowControls);
         menu.add(bResetHighscore);
-        menu.add(lTheme);
-        lTheme.setVisible(true);
-        menu.add(lThemeText);
-        menu.add(lPlayer);
-        lPlayer.setVisible(true);
-        menu.add(lPlayerText);
-        menu.add(lMap);
-        lMap.setVisible(true);
-        menu.add(lMapText);
-        menu.add(lHighscore);
-        lHighscore.setVisible(true);
-        menu.add(lHighscoreText);
-        menu.add(lScore);
-        menu.add(lScoreText);
+        for (int i = 0; i < lInfo.length; i++) {
+            menu.add(lInfo[i]);
+        }
+        /*
+        lInfo[THEME].setVisible(true);
+        lInfo[PLAYER].setVisible(true);
+        lInfo[MAP].setVisible(true);
+        lInfo[HIGHSCORE].setVisible(true);
+
+         */
         menu.add(bChangeColor);
         menu.add(bExit);
     }
@@ -371,8 +326,8 @@ public class Menu {
     }
 
     private void initializePanels() {
-        int themeTextX = lThemeText.getX();
-        int themeTextY = lThemeText.getY();
+        int themeTextX = lInfo[THEME_TEXT].getX();
+        int themeTextY = lInfo[THEME_TEXT].getY();
         Rectangle bounds = new Rectangle(themeTextX, themeTextY, width-themeTextX - 20, bShowControls.getY() - 2*themeTextY);
 
         pControls.setVisible(controlsShown);
@@ -468,7 +423,7 @@ public class Menu {
         // button bounds saved (later needed in GameDisplay.java)
         buttonBounds = bPlayers[0].getBounds();
         // label set
-        lTheme.setText(" " + StringEditor.makeNameNice(getGameTheme()));
+        lInfo[THEME].setText(" " + StringEditor.makeNameNice(getGameTheme()));
         // menu updated
         menu.repaint();
     }
@@ -561,7 +516,7 @@ public class Menu {
             // player buttons removed
             remove(bPlayers);
             // theme text removed
-            lTheme.setText("");
+            lInfo[THEME].setText("");
             // theme buttons added
             addThemes();
             // back [to] themes button removed
@@ -576,7 +531,7 @@ public class Menu {
             // map buttons removed
             remove(bMaps);
             // player text removed
-            lPlayer.setText("");
+            lInfo[PLAYER].setText("");
             // highscore for map reset
             setHighscore();
             // back [to] players button removed
@@ -591,7 +546,7 @@ public class Menu {
     private ActionListener getActionListenerBackMaps() {
         return e -> {
             // map text removed
-            lMap.setText("");
+            lInfo[MAP].setText("");
             // start button removed
             menu.remove(bStartGame);
             // back [to] maps button removed
@@ -626,7 +581,7 @@ public class Menu {
         return e -> {
             // player name set
             name = i;
-            lPlayer.setText(" " + StringEditor.makeNameNice(playerName[name]));
+            lInfo[PLAYER].setText(" " + StringEditor.makeNameNice(playerName[name]));
             // player buttons removed
             remove(bPlayers);
             // back [to] themes button removed
@@ -644,7 +599,7 @@ public class Menu {
         return e -> {
             // map set
             map = i;
-            lMap.setText(" " + StringEditor.makeNameNice(maps[map]));
+            lInfo[MAP].setText(" " + StringEditor.makeNameNice(maps[map]));
             // map buttons removed
             remove(bMaps);
             // back [to] players button removed
@@ -676,7 +631,7 @@ public class Menu {
             }
         }
         setHighscore();
-        lHighscore.setText(String.format(" %.1f", highscore));
+        lInfo[HIGHSCORE].setText(String.format(" %.1f", highscore));
     }
 
     private void setHighscore(){
@@ -692,7 +647,7 @@ public class Menu {
             FileLoader.save(String.valueOf(score),getMapName() + ".highscore", GAME_THEME_PATH + "/" + getGameTheme() + "/maps/");
             this.highscore = score;
         }
-        lHighscore.setText(String.format(" %.1f", highscore));
+        lInfo[HIGHSCORE].setText(String.format(" %.1f", highscore));
     }
 
     private static void setPlayerNames(){
@@ -707,24 +662,8 @@ public class Menu {
 
 // getter methods
 
-    public static JLabel getHighscore(){
-        return lHighscore;
-    }
-
-    public static JLabel getThemeLabel() {
-        return lTheme;
-    }
-
-    public static JLabel getPlayerLabel() {
-        return lPlayer;
-    }
-
-    public static JLabel getMapLabel(){
-        return lMap;
-    }
-
-    public static JLabel getScore() {
-        return lScore;
+    public static JLabel[] getInfo(){
+        return lInfo;
     }
 
     public static String getPlayerName(){

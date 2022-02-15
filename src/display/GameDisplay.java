@@ -38,9 +38,7 @@ public class GameDisplay extends JFrame {
 
 // panels
 
-    private final JPanel pFailedWindow = new JPanel();
-    private final JPanel pPauseWindow = new JPanel();
-    private final JPanel pWonWindow = new JPanel();
+    private final JPanel[] pWindow = new JPanel[3];
     private final int FAILED = 0;
     private final int PAUSE = 1;
     private final int WON = 2;
@@ -49,22 +47,23 @@ public class GameDisplay extends JFrame {
 
 // labels
 
-
+    private static final JLabel lFps = new JLabel();
     private static final JLabel[] lHeadline = new JLabel[3];
     private static double score = 0;
-    private static final JLabel lThemeText = new JLabel(" Theme:");
-    private static final JLabel lTheme = Menu.getThemeLabel();
-    private static final JLabel lPlayerText = new JLabel(" Character:");
-    private static final JLabel lPlayer = Menu.getPlayerLabel();
-    private static final JLabel lMapText = new JLabel(" Map:");
-    private static final JLabel lMap = Menu.getMapLabel();
-    private static final JLabel lHighScoreText = new JLabel(" Highscore:");
-    private static final JLabel lHighScore = Menu.getHighscore();
-    private static final JLabel lScoreText = new JLabel(" Score:");
-    private static final JLabel lScore = Menu.getScore();
-    private static final JLabel lLifesText = new JLabel(" Lifes:");
-    private static final JLabel lLifes = new JLabel(" 5/5");
-    private static final JLabel lFps = new JLabel();
+    private static JLabel[] lInfo;
+    private static final int THEME_TEXT = 0;
+    private static final int THEME = 1;
+    private static final int PLAYER_TEXT = 2;
+    private static final int PLAYER = 3;
+    private static final int MAP_TEXT = 4;
+    private static final int MAP = 5;
+    private static final int HIGHSCORE_TEXT = 6;
+    private static final int HIGHSCORE = 7;
+    private static final int SCORE_TEXT = 8;
+    private static final int SCORE = 9;
+    private static final int LIFES_TEXT = 10;
+    private static final int LIFES = 11;
+
 
 
 
@@ -159,20 +158,14 @@ public class GameDisplay extends JFrame {
     private void initializePanels() {
         Rectangle panelBounds = new Rectangle(1, 1, width-2, height-2);
 
-        pPauseWindow.setVisible(false);
-        pPauseWindow.setBounds(panelBounds);
-        pPauseWindow.setLayout(null);
-        pPauseWindow.setBackground(bgColor);
+        for (int i = 0; i < pWindow.length; i++) {
+            pWindow[i] = new JPanel();
+            pWindow[i].setVisible(false);
+            pWindow[i].setBounds(panelBounds);
+            pWindow[i].setLayout(null);
+            pWindow[i].setBackground(bgColor);
+        }
 
-        pFailedWindow.setVisible(false);
-        pFailedWindow.setBounds(panelBounds);
-        pFailedWindow.setLayout(null);
-        pFailedWindow.setBackground(bgColor);
-
-        pWonWindow.setVisible(false);
-        pWonWindow.setBounds(panelBounds);
-        pWonWindow.setLayout(null);
-        pWonWindow.setBackground(bgColor);
     }
 
 
@@ -212,7 +205,7 @@ public class GameDisplay extends JFrame {
 
         for (int i = 0; i < bExit.length; i++) {
             bExit[i] = new JButton("EXIT");
-            bExit[i].setBounds((pFailedWindow.getWidth() - bounds.width) / 2, pFailedWindow.getHeight() / 2, bounds.width, bounds.height);
+            bExit[i].setBounds((pWindow[FAILED].getWidth() - bounds.width) / 2, pWindow[FAILED].getHeight() / 2, bounds.width, bounds.height);
             bExit[i].setFont(new Font(font, Font.PLAIN, bExit[i].getHeight()/3*2));
             bExit[i].setBackground(buttonColor);
             bExit[i].setForeground(textColor);
@@ -223,7 +216,7 @@ public class GameDisplay extends JFrame {
 
         for (int i = 0; i < bRestart.length; i++) {
             bRestart[i] = new JButton("RESTART");
-            bRestart[i].setBounds((pPauseWindow.getWidth()-bounds.width)/2, (int) (bExit[PAUSE].getY() - bExit[PAUSE].getHeight()*1.25), bounds.width, bounds.height);
+            bRestart[i].setBounds((pWindow[PAUSE].getWidth()-bounds.width)/2, (int) (bExit[PAUSE].getY() - bExit[PAUSE].getHeight()*1.25), bounds.width, bounds.height);
             bRestart[i].setFont(new Font(font, Font.PLAIN, bRestart[i].getHeight()/3*2));
             bRestart[i].setBackground(buttonColor);
             bRestart[i].setForeground(textColor);
@@ -233,7 +226,7 @@ public class GameDisplay extends JFrame {
         }
 
         bResume = new JButton("RESUME");
-        bResume.setBounds((pPauseWindow.getWidth()-bounds.width)/2, (int) (bExit[PAUSE].getY() - bExit[PAUSE].getHeight()*2.5), bounds.width, bounds.height);
+        bResume.setBounds((pWindow[PAUSE].getWidth()-bounds.width)/2, (int) (bExit[PAUSE].getY() - bExit[PAUSE].getHeight()*2.5), bounds.width, bounds.height);
         bResume.setFont(new Font(font, Font.PLAIN, bResume.getHeight()/3*2));
         bResume.setBackground(buttonColor);
         bResume.setForeground(textColor);
@@ -245,6 +238,14 @@ public class GameDisplay extends JFrame {
 
 
     private void initializeLabels() {
+        JLabel[] menuInfo = Menu.getInfo();
+        JLabel[] lifesInfo = new JLabel[]{new JLabel(" Lifes:"), new JLabel(" 5/5")};
+        lInfo = new JLabel[menuInfo.length + lifesInfo.length];
+
+        System.arraycopy(menuInfo, 0, lInfo, 0, menuInfo.length);
+        System.arraycopy(lifesInfo, 0, lInfo, menuInfo.length, lifesInfo.length);
+
+
 
         int gap = 2;
 
@@ -252,82 +253,42 @@ public class GameDisplay extends JFrame {
         int labelWidth1 = Menu.labelWidth2;
         int labelWidth2 = Menu.labelWidth2;
 
-        lThemeText.setBounds(ScreenSize.getWidth()-labelWidth1-labelWidth2-22, 5 , labelWidth1, labelHeight);
-        lThemeText.setOpaque(true);
-        lThemeText.setBackground(bgColor);
-        lThemeText.setForeground(textColor);
-        lThemeText.setBorder(border);
-        lThemeText.setFont(lTheme.getFont());
+        int line = 0;
+        for (int i = 0; i < lInfo.length;i++) {
+            int posY = 5 + line * gap + line * labelHeight;
 
-        lTheme.setBounds(ScreenSize.getWidth()-labelWidth2-20, 5 , labelWidth2, labelHeight);
-        lTheme.setBorder(border);
-        lTheme.setBackground(bgColor);
+            if(i % 2 == 0) {
+                lInfo[i].setBounds(ScreenSize.getWidth() - labelWidth1 - labelWidth2 - 22, posY, labelWidth1, labelHeight);
+            } else {
+                lInfo[i].setBounds(ScreenSize.getWidth()-labelWidth2-20, posY, labelWidth2, labelHeight);
+                line++;
+            }
+            lInfo[i].setOpaque(true);
+            lInfo[i].setBackground(bgColor);
+            lInfo[i].setForeground(textColor);
+            lInfo[i].setBorder(border);
+            lInfo[i].setFont(lInfo[THEME].getFont());
+        }
 
-        lPlayerText.setBounds(ScreenSize.getWidth()-labelWidth1-labelWidth2-22,5 + gap + labelHeight , labelWidth1, labelHeight);
-        lPlayerText.setOpaque(true);
-        lPlayerText.setBackground(bgColor);
-        lPlayerText.setForeground(textColor);
-        lPlayerText.setBorder(border);
-        lPlayerText.setFont(lTheme.getFont());
 
-        lPlayer.setBounds(ScreenSize.getWidth()-labelWidth2-20, 5 + gap +labelHeight , labelWidth2, labelHeight);
-        lPlayer.setBorder(border);
-        lPlayer.setBackground(bgColor);
+        scoreTextPos.setBounds(lInfo[SCORE_TEXT].getBounds());
+        lInfo[SCORE_TEXT].setBounds(lInfo[0].getBounds());
 
-        lMapText.setBounds(ScreenSize.getWidth()-labelWidth1-labelWidth2-22,5 + 2*gap + 2*labelHeight , labelWidth1, labelHeight);
-        lMapText.setOpaque(true);
-        lMapText.setBackground(bgColor);
-        lMapText.setForeground(textColor);
-        lMapText.setBorder(border);
-        lMapText.setFont(lTheme.getFont());
+        scorePos.setBounds(lInfo[SCORE].getBounds());
+        lInfo[SCORE].setBounds(lInfo[1].getBounds());
 
-        lMap.setBounds(ScreenSize.getWidth()-labelWidth2-20, 5 + 2*gap +2*labelHeight , labelWidth2, labelHeight);
-        lMap.setBorder(border);
-        lMap.setBackground(bgColor);
+        lifesTextPos.setBounds(lInfo[LIFES_TEXT].getBounds());
+        lInfo[LIFES_TEXT].setBounds(lInfo[2].getBounds());
 
-        lHighScoreText.setBounds(ScreenSize.getWidth()-labelWidth1-labelWidth2-22,5 + 3*gap + 3*labelHeight , labelWidth1, labelHeight);
-        lHighScoreText.setOpaque(true);
-        lHighScoreText.setBackground(bgColor);
-        lHighScoreText.setForeground(textColor);
-        lHighScoreText.setBorder(border);
-        lHighScoreText.setFont(lTheme.getFont());
+        lifesPos.setBounds(lInfo[LIFES].getBounds());
+        lInfo[LIFES].setBounds(lInfo[3].getBounds());
 
-        lHighScore.setBounds(ScreenSize.getWidth()-labelWidth2-20, 5 + 3*gap + 3*labelHeight , labelWidth2, labelHeight);
-        lHighScore.setBorder(border);
-        lHighScore.setBackground(bgColor);
 
-        lScoreText.setBounds(lThemeText.getBounds());
-        lScoreText.setOpaque(true);
-        lScoreText.setBackground(bgColor);
-        lScoreText.setForeground(textColor);
-        lScoreText.setBorder(border);
-        lScoreText.setFont(lTheme.getFont());
-        scoreTextPos.setBounds(ScreenSize.getWidth()-labelWidth1-labelWidth2-22,5 + 4*gap + 4*labelHeight , labelWidth1, labelHeight);
 
-        lScore.setBounds(lTheme.getBounds());
-        lScore.setBorder(border);
-        lScore.setBackground(bgColor);
-        scorePos.setBounds(ScreenSize.getWidth()-labelWidth2-20, 5 + 4*gap + 4*labelHeight , labelWidth2, labelHeight);
-
-        lLifesText.setBounds(lPlayerText.getBounds());
-        lLifesText.setOpaque(true);
-        lLifesText.setBackground(bgColor);
-        lLifesText.setForeground(textColor);
-        lLifesText.setBorder(border);
-        lLifesText.setFont(lTheme.getFont());
-        lifesTextPos.setBounds(ScreenSize.getWidth()-labelWidth1-labelWidth2-22,5 + 5*gap + 5*labelHeight , labelWidth1, labelHeight);
-
-        lLifes.setBounds(lPlayer.getBounds());
-        lLifes.setOpaque(true);
-        lLifes.setBorder(border);
-        lLifes.setBackground(bgColor);
-        lLifes.setForeground(textColor);
-        lLifes.setFont(lScore.getFont());
-        lifesPos.setBounds(ScreenSize.getWidth()-labelWidth2-20, 5 + 5*gap + 5*labelHeight , labelWidth2, labelHeight);
 
         for (int i = 0; i < lHeadline.length; i++) {
             lHeadline[i] = new JLabel();
-            lHeadline[i].setBounds(0, 50, pFailedWindow.getWidth(), pFailedWindow.getHeight()/5);
+            lHeadline[i].setBounds(0, 50, pWindow[FAILED].getWidth(), pWindow[FAILED].getHeight()/5);
             lHeadline[i].setFont(new Font("Consolas", Font.PLAIN, lHeadline[i].getHeight()/2));
             lHeadline[i].setForeground(textColor);
             lHeadline[i].setHorizontalAlignment(SwingConstants.CENTER);
@@ -336,7 +297,7 @@ public class GameDisplay extends JFrame {
         lHeadline[PAUSE].setText("PAUSE");
         lHeadline[WON].setText("YOU WON");
 
-        lFps.setBounds(bPause.getX(), bPause.getY() + bPause.getHeight()-1, lPlayerText.getHeight()*4, lPlayerText.getHeight());
+        lFps.setBounds(bPause.getX(), bPause.getY() + bPause.getHeight()-1, lInfo[PLAYER_TEXT].getHeight()*4, lInfo[PLAYER_TEXT].getHeight());
         lFps.setFont(new Font(Menu.textFont, Font.PLAIN, lFps.getHeight()/3*2));
         lFps.setOpaque(true);
         lFps.setBackground(bgColor);
@@ -347,40 +308,40 @@ public class GameDisplay extends JFrame {
 
 
     private void addAll() {
-        pFailedWindow.add(lHeadline[FAILED]);
-        pFailedWindow.add(bRestart[FAILED]);
-        pFailedWindow.add(bExit[FAILED]);
-        add(pFailedWindow);
-        pPauseWindow.add(lHeadline[PAUSE]);
-        pPauseWindow.add(bRestart[PAUSE]);
-        pPauseWindow.add(bResume);
-        pPauseWindow.add(bExit[PAUSE]);
-        add(pPauseWindow);
-        pWonWindow.add(lHeadline[WON]);
-        pWonWindow.add(bRestart[WON]);
-        pWonWindow.add(bExit[WON]);
-        add(pWonWindow);
+        pWindow[FAILED].add(lHeadline[FAILED]);
+        pWindow[FAILED].add(bRestart[FAILED]);
+        pWindow[FAILED].add(bExit[FAILED]);
+        add(pWindow[FAILED]);
+        pWindow[PAUSE].add(lHeadline[PAUSE]);
+        pWindow[PAUSE].add(bRestart[PAUSE]);
+        pWindow[PAUSE].add(bResume);
+        pWindow[PAUSE].add(bExit[PAUSE]);
+        add(pWindow[PAUSE]);
+        pWindow[WON].add(lHeadline[WON]);
+        pWindow[WON].add(bRestart[WON]);
+        pWindow[WON].add(bExit[WON]);
+        add(pWindow[WON]);
         add(lFps);
-        add(lTheme);
-        lTheme.setVisible(false);
-        add(lThemeText);
-        lThemeText.setVisible(false);
-        add(lPlayer);
-        lPlayer.setVisible(false);
-        add(lPlayerText);
-        lPlayerText.setVisible(false);
-        add(lMap);
-        lMap.setVisible(false);
-        add(lMapText);
-        lMapText.setVisible(false);
-        add(lHighScore);
-        lHighScore.setVisible(false);
-        add(lHighScoreText);
-        lHighScoreText.setVisible(false);
-        add(lScore);
-        add(lScoreText);
-        add(lLifes);
-        add(lLifesText);
+        add(lInfo[THEME]);
+        lInfo[THEME].setVisible(false);
+        add(lInfo[THEME_TEXT]);
+        lInfo[THEME_TEXT].setVisible(false);
+        add(lInfo[PLAYER]);
+        lInfo[PLAYER].setVisible(false);
+        add(lInfo[PLAYER_TEXT]);
+        lInfo[PLAYER_TEXT].setVisible(false);
+        add(lInfo[MAP]);
+        lInfo[MAP].setVisible(false);
+        add(lInfo[MAP_TEXT]);
+        lInfo[MAP_TEXT].setVisible(false);
+        add(lInfo[HIGHSCORE]);
+        lInfo[HIGHSCORE].setVisible(false);
+        add(lInfo[HIGHSCORE_TEXT]);
+        lInfo[HIGHSCORE_TEXT].setVisible(false);
+        add(lInfo[SCORE]);
+        add(lInfo[SCORE_TEXT]);
+        add(lInfo[LIFES]);
+        add(lInfo[LIFES_TEXT]);
         add(bPause);
         add(bInfo);
         add(canvas);
@@ -421,7 +382,7 @@ public class GameDisplay extends JFrame {
         return e-> {
             game.stopGameLoop();
             new Thread(new GameLoop(game)).start();
-            pPauseWindow.setVisible(false);
+            pWindow[PAUSE].setVisible(false);
             bPause.setEnabled(true);
             bInfo.setEnabled(true);
         };
@@ -435,7 +396,7 @@ public class GameDisplay extends JFrame {
         GameLoop.setRunning(false);
         bPause.setEnabled(false);
         bInfo.setEnabled(false);
-        pPauseWindow.setVisible(true);
+        pWindow[PAUSE].setVisible(true);
     }
 
     private ActionListener getActionListenerInfo() {
@@ -443,7 +404,7 @@ public class GameDisplay extends JFrame {
     }
 
     public void doInfo() {
-        if(lTheme.isVisible()) {
+        if(lInfo[THEME].isVisible()) {
             hideInfo();
         } else {
             showInfo();
@@ -451,34 +412,24 @@ public class GameDisplay extends JFrame {
     }
 
     private void hideInfo() {
-        lTheme.setVisible(false);
-        lThemeText.setVisible(false);
-        lPlayer.setVisible(false);
-        lPlayerText.setVisible(false);
-        lMap.setVisible(false);
-        lMapText.setVisible(false);
-        lHighScore.setVisible(false);
-        lHighScoreText.setVisible(false);
-        lScore.setBounds(lTheme.getBounds());
-        lScoreText.setBounds(lThemeText.getBounds());
-        lLifes.setBounds(lPlayer.getBounds());
-        lLifesText.setBounds(lPlayerText.getBounds());
+        for (int i = 0; i < lInfo.length-4; i++) {
+            lInfo[i].setVisible(false);
+        }
+        lInfo[SCORE].setBounds(lInfo[THEME].getBounds());
+        lInfo[SCORE_TEXT].setBounds(lInfo[THEME_TEXT].getBounds());
+        lInfo[LIFES].setBounds(lInfo[PLAYER].getBounds());
+        lInfo[LIFES_TEXT].setBounds(lInfo[PLAYER_TEXT].getBounds());
         bInfo.setText("show info");
     }
 
     private void showInfo() {
-        lTheme.setVisible(true);
-        lThemeText.setVisible(true);
-        lPlayer.setVisible(true);
-        lPlayerText.setVisible(true);
-        lMap.setVisible(true);
-        lMapText.setVisible(true);
-        lHighScore.setVisible(true);
-        lHighScoreText.setVisible(true);
-        lScore.setBounds(scorePos);
-        lScoreText.setBounds(scoreTextPos);
-        lLifes.setBounds(lifesPos);
-        lLifesText.setBounds(lifesTextPos);
+        for (int i = 0; i < lInfo.length-4; i++) {
+            lInfo[i].setVisible(true);
+        }
+        lInfo[SCORE].setBounds(scorePos);
+        lInfo[SCORE_TEXT].setBounds(scoreTextPos);
+        lInfo[LIFES].setBounds(lifesPos);
+        lInfo[LIFES_TEXT].setBounds(lifesTextPos);
         bInfo.setText("hide info");
     }
 
@@ -487,30 +438,21 @@ public class GameDisplay extends JFrame {
         bPause.setEnabled(false);
         bInfo.setEnabled(false);
         GameLoop.setRunning(false);
-        pFailedWindow.setVisible(true);
+        pWindow[FAILED].setVisible(true);
     }
 
     public void showWon(){
         bPause.setEnabled(false);
         bInfo.setEnabled(false);
         GameLoop.setRunning(false);
-        if(!lTheme.isVisible()) {showInfo();}
-        pWonWindow.add(lTheme);
-        pWonWindow.add(lThemeText);
-        pWonWindow.add(lPlayer);
-        pWonWindow.add(lPlayerText);
-        pWonWindow.add(lMap);
-        pWonWindow.add(lMapText);
-        pWonWindow.add(lHighScore);
-        pWonWindow.add(lHighScoreText);
-        pWonWindow.add(lScore);
-        pWonWindow.add(lScoreText);
-        pWonWindow.add(lLifes);
-        pWonWindow.add(lLifesText);
-        if(score > Double.parseDouble(StringEditor.removeSpaces(lHighScore.getText()))){
-            lHighScore.setText(String.format(" %.1f", score));
+        if(!lInfo[THEME].isVisible()) {showInfo();}
+        for (JLabel jLabel : lInfo) {
+            pWindow[WON].add(jLabel);
         }
-        pWonWindow.setVisible(true);
+        if(score > Double.parseDouble(StringEditor.removeSpaces(lInfo[HIGHSCORE].getText()))){
+            lInfo[HIGHSCORE].setText(String.format(" %.1f", score));
+        }
+        pWindow[WON].setVisible(true);
     }
 
     public void setFPS(int frames){
@@ -518,12 +460,12 @@ public class GameDisplay extends JFrame {
     }
 
     public static void setLifes(String lifes){
-        lLifes.setText(" " + lifes);
+        lInfo[LIFES].setText(" " + lifes);
     }
 
     public void setScoreLabel(double i) {
         score = i;
-        lScore.setText(String.format(" %.1f", score));
+        lInfo[SCORE].setText(String.format(" %.1f", score));
     }
 
     public static double getScore(){
