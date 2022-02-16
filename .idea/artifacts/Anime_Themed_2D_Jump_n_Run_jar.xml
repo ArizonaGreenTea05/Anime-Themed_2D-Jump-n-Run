@@ -1,0 +1,11 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="Anime-Themed_2D-Jump-n-Run:jar">
+    <output-path>$PROJECT_DIR$</output-path>
+    <root id="archive" name="Anime-Themed_2D-Jump-n-Run.jar">
+      <element id="directory" name="META-INF">
+        <element id="file-copy" path="$PROJECT_DIR$/META-INF/MANIFEST.MF" />
+      </element>
+      <element id="module-output" name="Anime-Themed_2D-Jump-n-Run" />
+    </root>
+  </artifact>
+</component>
