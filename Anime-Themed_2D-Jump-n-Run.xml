@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<launch4jConfig>
+  <dontWrapJar>false</dontWrapJar>
+  <headerType>gui</headerType>
+  <jar>D:\IdeaProjects\test java game\Anime-Themed_2D-Jump-n-Run.jar</jar>
+  <outfile>D:\IdeaProjects\test java game\Anime-Themed_2D-Jump-n-Run.exe</outfile>
+  <errTitle>requirements:  JRE 1.8.0_321-b07;  JDK 17.0.2</errTitle>
+  <cmdLine></cmdLine>
+  <chdir>.</chdir>
+  <priority>normal</priority>
+  <downloadUrl>http://java.com/download</downloadUrl>
+  <supportUrl></supportUrl>
+  <stayAlive>false</stayAlive>
+  <restartOnCrash>false</restartOnCrash>
+  <manifest></manifest>
+  <icon>D:\IdeaProjects\test java game\sakura_icon.ico</icon>
+  <singleInstance>
+    <mutexName>Anime-Themed_2D-Jump-n-Run</mutexName>
+    <windowTitle>Anime-Themed_2D-Jump-n-Run</windowTitle>
+  </singleInstance>
+  <jre>
+    <path></path>
+    <bundledJre64Bit>false</bundledJre64Bit>
+    <bundledJreAsFallback>false</bundledJreAsFallback>
+    <minVersion>1.8.0_321</minVersion>
+    <maxVersion></maxVersion>
+    <jdkPreference>preferJre</jdkPreference>
+    <runtimeBits>64/32</runtimeBits>
+  </jre>
+  <versionInfo>
+    <fileVersion>1.3.2.0</fileVersion>
+    <txtFileVersion>1.3.2</txtFileVersion>
+    <fileDescription>Facharbeits-Release of  &quot;Anime-Themed_2D-Jump-n-Run&quot;</fileDescription>
+    <copyright>NIL</copyright>
+    <productVersion>1.3.2.0</productVersion>
+    <txtProductVersion>1.3.2</txtProductVersion>
+    <productName>Anime-Themed_2D-Jump-n-Run</productName>
+    <companyName>Tobias Schälte - Marienschule Opladen</companyName>
+    <internalName>Anime-Themed_2D-Jump-n-Run</internalName>
+    <originalFilename>Anime-Themed_2D-Jump-n-Run.exe</originalFilename>
+    <trademarks></trademarks>
+    <language>ENGLISH_US</language>
+  </versionInfo>
+  <messages>
+    <startupErr>An error occured while starting the abblication.</startupErr>
+    <bundledJreErr>requirements: 
+  JRE 1.8.0_321-b07 
+  JDK 17.0.2</bundledJreErr>
+    <jreVersionErr>requirements: 
+  JRE 1.8.0_321-b07 
+  JDK 17.0.2</jreVersionErr>
+    <launcherErr>The registry refers to a nonexistent Java Runtime Environment installation or the runtime is corrupted.</launcherErr>
+    <instanceAlreadyExistsMsg>An application instance is already running.</instanceAlreadyExistsMsg>
+  </messages>
+</launch4jConfig>

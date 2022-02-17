@@ -170,9 +170,9 @@ public class NPCMaA extends MotionAndAbilities {
             }
             // if next block in direction of looking is not existent it jumps over the gap
             if(hasGround()){
-                if(thisGameObject.getDirection() == L && (!hasGround(-thisGameObjectWidth/2) || !leftSpace())){
+                if(thisGameObject.getDirection() == L && !hasGround(-thisGameObjectWidth/2)){
                     controller.setRequestingJump(true);
-                } else if(thisGameObject.getDirection() == R && (!hasGround(thisGameObjectWidth/2) || !rightSpace())){
+                } else if(thisGameObject.getDirection() == R && !hasGround(thisGameObjectWidth/2)){
                     controller.setRequestingJump(true);
                 }
             }
