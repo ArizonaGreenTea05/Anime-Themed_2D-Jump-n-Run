@@ -2,8 +2,8 @@
 <launch4jConfig>
   <dontWrapJar>false</dontWrapJar>
   <headerType>gui</headerType>
-  <jar>D:\IdeaProjects\test java game\Anime-Themed_2D-Jump-n-Run.jar</jar>
-  <outfile>D:\IdeaProjects\test java game\Anime-Themed_2D-Jump-n-Run.exe</outfile>
+  <jar>D:\IdeaProjects\Anime-Themed_2D-Jump-n-Run\Anime-Themed_2D-Jump-n-Run.jar</jar>
+  <outfile>D:\IdeaProjects\Anime-Themed_2D-Jump-n-Run\Anime-Themed_2D-Jump-n-Run.exe</outfile>
   <errTitle>requirements:  JRE 1.8.0_321-b07;  JDK 17.0.2</errTitle>
   <cmdLine></cmdLine>
   <chdir>.</chdir>
@@ -13,7 +13,7 @@
   <stayAlive>false</stayAlive>
   <restartOnCrash>false</restartOnCrash>
   <manifest></manifest>
-  <icon>D:\IdeaProjects\test java game\sakura_icon.ico</icon>
+  <icon>D:\IdeaProjects\Anime-Themed_2D-Jump-n-Run\resources\sakura_icon.ico</icon>
   <singleInstance>
     <mutexName>Anime-Themed_2D-Jump-n-Run</mutexName>
     <windowTitle>Anime-Themed_2D-Jump-n-Run</windowTitle>

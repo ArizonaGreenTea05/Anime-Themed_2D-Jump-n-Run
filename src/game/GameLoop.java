@@ -63,7 +63,7 @@ public class GameLoop implements Runnable {
 
                 printStats();
 
-                if (score == 0) {
+                if (score <= 0) {
                     failed();
                 }
         }
