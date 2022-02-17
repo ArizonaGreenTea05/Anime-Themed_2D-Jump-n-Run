@@ -24,24 +24,24 @@ public class GameState extends State {
 
         int ground = ScreenSize.getGround();
 
-        String[][] sMap = FileLoader.loadMap();
+        char[][] cMap = FileLoader.loadMap();
 
         // player needs to be initialized as first, so it is at index 0 in gameObjects, and it's position will not change, even if other gameObjects are added ore removed
-        initializePlayer(sMap, ground);
+        initializePlayer(cMap, ground);
 
-        createMap(sMap, ground);
+        createMap(cMap, ground);
 
     }
 
-    private void initializePlayer(String[][] sMap, int ground) {
+    private void initializePlayer(char[][] cMap, int ground) {
 
         // searching through map and adding player at defined position
-        for (int i = 0; i < sMap.length; i++) {
-            for (int j = 0; j < sMap[i].length-1; j++) {
-                String letter = sMap[i][j];
+        for (int i = 0; i < cMap.length; i++) {
+            for (int j = 0; j < cMap[i].length-1; j++) {
+                char letter = cMap[i][j];
                 Position relativePosition = new Position((j-1)*64, ground-(i-1)*64);
                 // !, because it definetly won't be used as block
-                if(letter.equalsIgnoreCase("!")){
+                if(letter == '!'){
                     this.player = new Player(
                             new PlayerController(input),
                             new PlayerMaA(3.5),
@@ -57,15 +57,15 @@ public class GameState extends State {
     }
 
 
-    private void createMap(String[][] sMap, int ground) {
+    private void createMap(char[][] cMap, int ground) {
         // searching through map and adding blocks at defined positions
-        for (int i = 0; i < sMap.length; i++) {
-            for (int j = 0; j < sMap[i].length-1; j++) {
-                String letter = sMap[i][j];
+        for (int i = 0; i < cMap.length; i++) {
+            for (int j = 0; j < cMap[i].length-1; j++) {
+                char letter = cMap[i][j];
                 Position relativePosition = new Position((j - 1) * 64, ground - (i - 1) * 64);
                 GameObject object = null;
                 try {
-                    int npc = Integer.parseInt(letter);
+                    int npc = Integer.parseInt(String.valueOf(letter));
                         gameObjects.add(new NPC(
                                 new NPCController(),
                                 new NPCMaA(1.5),
@@ -77,9 +77,9 @@ public class GameState extends State {
                         )
                     );
                 } catch (Exception ignored) {
-                    if (letter.equals("C")) {
+                    if (letter == 'C') {
                         try {
-                            int type = Integer.parseInt(sMap[i][j + 1]);
+                            int type = Integer.parseInt(String.valueOf(cMap[i][j + 1]));
                             if (type == 1) {
                                 object = new twoXtwo(
                                         relativePosition,
@@ -98,80 +98,80 @@ public class GameState extends State {
                             }
                             j++;
                         } catch (Exception ignored2) {}
-                    } else if (letter.equals("G")) {
+                    } else if (letter == 'G') {
                         object = new NormalBlock(
                                 relativePosition,
                                 Block.GROUND_BLOCK,
                                 true
                         );
-                    } else if (letter.equals("W")) {
+                    } else if (letter == 'W') {
                         object = new NormalBlock(
                                 relativePosition,
                                 Block.WALL_BLOCK,
                                 true
                         );
-                    } else if (letter.equals("B")) {
+                    } else if (letter == 'B') {
                         object = new NormalBlock(
                                 relativePosition,
                                 Block.BRICKS,
                                 true
                         );
-                    } else if (letter.equals("b")) {
+                    } else if (letter == 'b') {
                         object = new NormalBlock(
                                 relativePosition,
                                 Block.TRANS_BRICKS,
                                 false
                         );
-                    } else if (letter.equals("P")) {
+                    } else if (letter == 'P') {
                         object = new NormalBlock(
                                 relativePosition,
                                 Block.PLANKS,
                                 true
                         );
-                    } else if (letter.equals("p")) {
+                    } else if (letter == 'p') {
                         object = new NormalBlock(
                                 relativePosition,
                                 Block.TRANS_PLANKS,
                                 false
                         );
-                    } else if (letter.equals("g")) {
+                    } else if (letter == 'g') {
                         object = new NormalBlock(
                                 relativePosition,
                                 Block.TRANS_GROUND_BLOCK,
                                 false
                         );
-                    } else if (letter.equals("w")) {
+                    } else if (letter == 'w') {
                         object = new NormalBlock(
                                 relativePosition,
                                 Block.TRANS_WALL_BLOCK,
                                 false
                         );
-                    } else if (letter.equals("?")) {
+                    } else if (letter == '?') {
                         object = new CoinBlock(
                                 relativePosition,
                                 Block.ACTION_BLOCK
                         );
-                    } else if (letter.equals("F")) {
+                    } else if (letter == 'F') {
                         object = new FinishBlock(
                                 relativePosition,
                                 Block.GROUND_BLOCK
                         );
 
-                    }  else if (letter.equals("l")) {
+                    }  else if (letter == 'l') {
                         object = new NormalBlock(
                                 relativePosition,
                                 Block.LEAVES,
                                 false
                         );
 
-                    }  else if (letter.equals("T")) {
+                    }  else if (letter == 'T') {
                         object = new NormalBlock(
                                 relativePosition,
                                 Block.TREE,
                                 true
                         );
 
-                    } else if (letter.equalsIgnoreCase("*")) {
+                    } else if (letter == '*') {
                         object = new Coin(
                                 relativePosition,
                                 StaticEntity.COIN

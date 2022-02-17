@@ -42,33 +42,32 @@ public class PlayerMaA extends MotionAndAbilities {
         lowestBlockPos = (int) state.getLowestBlock().getPosition().getY();
 
 
-
-        // if position is 64p above the ground falling is set true
-        // if position is above the ground and up is not requested falling is set true
+        // if position is higher than the maximal jump-height above the last-touched ground: falling is set true
+        // if position is above the ground and up is not requested: falling is set true
+        // if there is no space above the player: falling is set true
         if(y < maxJumpPos || (!controller.isRequestingUp() && !hasGround()) || !topSpace()){
             falling = true;
         }
 
-        // if player has ground falling and gravity are reset
+        // if player has ground: falling and gravity are reset
         if(hasGround()){
             falling = false;
             gravity = 0;
         }
 
-        // if player is below screen it dies
+        // if player is below screen: dies
         if(y > screenHeight + 64){
             thisGameObject.subtractLifes(1);
         }
 
         if(falling) {
-            // if player is falling gravity gets stronger, player can not sit
+            // if player is falling: gravity gets stronger, player can not sit
             gravity += 0.1;
             sitting = false;
-
             // fall speed is defined
             double fallSpeed = getFallSpeed(gravity);
             // either map or player is moved, depending on position if player
-            // if lowest block is reached, map is not moved anymore
+            // if lowest block is reached: map is not moved anymore
             if(y >= bottomBorder && lowestBlockPos > screenHeight) {
                 moveMap(new Vector2D(0,-fallSpeed));
             } else {
@@ -76,22 +75,17 @@ public class PlayerMaA extends MotionAndAbilities {
             }
         }
 
-
-        // if player wants to jump and is not falling
+        // if player wants to jump and is not falling:
         if(controller.isRequestingUp() && !falling) {
-
             // player can not sit
             sitting = false;
-
-            // if player has ground x position is saved (for knowing how high to jump)
+            // if player has ground: x position is saved (for knowing how high to jump)
             if(hasGround()) {
                 savePosYJump = (int) Math.round(y);
                 maxJumpPos = savePosYJump-jumpHeight;
             }
-
             // gravity (in this case used as inverted gravity for jump speed) gets stronger
             gravity += 0.1;
-
             // either map or player is moved, depending on position if player
             double jumpSpeed = getFallSpeed(gravity);
             if(y <= topBorder) {
@@ -101,6 +95,7 @@ public class PlayerMaA extends MotionAndAbilities {
                 deltaY -= jumpSpeed;
             }
         }
+
 
         // if player wants to sprint it sprints
         // if it does not it does not

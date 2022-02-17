@@ -42,6 +42,7 @@ public class FileLoader {
         String input = null;
         
         File file = new File("resources/" + path + filename);
+
         if(!file.exists()){
             System.err.println("ERROR! file '" + filename + "' not found");
             return null;
@@ -57,8 +58,8 @@ public class FileLoader {
     }
 
 
-// load a map in a 2D string array
-    public static String[][] loadMap(){
+// load a map in a 2D char array
+    public static char[][] loadMap(){
         String theme = Menu.getGameTheme();
         String map = Menu.getMapName();
         String path = "game/themes/" + theme + "/maps/" + map + ".map";
@@ -68,20 +69,15 @@ public class FileLoader {
         String[] temp2 = new String[temp1.length];
 
 
-        //turning array upside down, so index 0 is the ground
+        //turning array "upside down", so index 0 equals the lowest row of blocks
         for (int i = 0; i < temp2.length; i++) {
             temp2[i] = temp1[temp2.length-1-i];
         }
 
-        char[][] cTemp1 = new char[temp2.length][temp2[0].length()];
-        String[][] out = new String[cTemp1.length][cTemp1[0].length];
-
-        for (int i = 0; i < cTemp1.length; i++) {
-            cTemp1[i] = temp2[i].toCharArray();
-
-            for (int j = 0; j < cTemp1[i].length-1; j++) {
-                out[i][j] = String.valueOf(cTemp1[i][j]);
-            }
+        // creating 2D-array that contains map split into single characters
+        char[][] out = new char[temp2.length][temp2[0].length()];
+        for (int i = 0; i < out.length; i++) {
+            out[i] = temp2[i].toCharArray();
         }
 
         return out;
@@ -113,45 +109,54 @@ public class FileLoader {
     public static final int ALL = 0;
     public static final int SPECIFIC = 1;
 
-    // load all files-/folder-names in this folder
+    // load all file-/folder-names in this folder
     public static String[] loadFileNames(String path){
         return loadFileNames(path, "", SPECIFIC);
     }
 
-    /*
-    if specifiyIgnore == ALL
-        every file name that contains 'ignore' is not loaded
-    if specifiyIgnore == SPECIFIC
-        every name that equals 'ignore' is not loaded
-     */
+    // load all file-/folder-names in this folder beside the defined "ignore"-files
     public static String[] loadFileNames(String path, String ignore, int specifyIgnore){
 
         File directoryPath = new File("resources/" + path);
 
         try {
+            // saves all file names from this directory
             String[] contents = directoryPath.list();
+            // list used because it is easier to add items to it -> less code & faster
             List<String> contentsList = new LinkedList<>();
 
             for (int i = 0; i < contents.length; i++) {
+
                 if (specifyIgnore == SPECIFIC) {
+                    // if specifiyIgnore == SPECIFIC:
+                    // every name that equals 'ignore' will not be loaded
                     if (!contents[i].equals(ignore)) {
+                        // if content does not need to be ignored: is added to list
                         contentsList.add(contents[i]);
                     }
                 } else {
+                    // if specifiyIgnore == ALL:
+                    // every file name that contains 'ignore' will not be loaded
                     if (!contents[i].contains(ignore)) {
+                        // if content does not need to be ignored: is added to list
                         contentsList.add(contents[i]);
                     }
                 }
             }
+            // list is converted to String
             String[] out = contentsList.toArray(new String[0]);
 
             for (int i = 0; i < out.length; i++) {
+                // file endings are removed
                 out[i] = StringEditor.removeFileEnding(out[i]);
             }
 
+            // file names are sorted
             Arrays.sort(out);
+
             return out;
-        } catch (NullPointerException npe){
+
+        } catch (NullPointerException npee){
             System.err.println("ERROR! failed to load files from '" + path + "'");
         }
         return null;

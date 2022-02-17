@@ -9,17 +9,27 @@ public class StringEditor {
     // removes underscores (replaces with space), makes every first letter to capital
     public static String makeNameNice(String s) {
         char[] c = s.toCharArray();
-        StringBuilder out = new StringBuilder("" + (char) (c[0] - 32));
+        StringBuilder out = new StringBuilder();
+
+        // if first character is letter it gets capitalized
+        if(c[0] >= 97 && c[0] <= 122){
+            out.append((char) (c[0] - 32));
+        } else {
+            // else it is just added to String
+            out.append(c[0]);
+        }
 
         for (int i = 1; i < c.length; i++) {
+            // if character is no underscore it is just added to String
             if (c[i] != '_') {
                 out.append(c[i]);
             } else {
+                // if character is an underscore it gets replaced by space
+                out.append(" ");
                 if (c[i + 1] >= 97 && c[i + 1] <= 122) {
-                    out.append(" ").append((char) (c[i + 1] - 32));
+                    // if the next character is a letter it gets capitalized
+                    out.append((char) (c[i + 1] - 32));
                     i++;
-                } else {
-                    out.append(" ");
                 }
             }
         }
@@ -34,6 +44,7 @@ public class StringEditor {
 
         for (int i = 1; i < c.length; i++) {
             if (c[i] != ' ') {
+                // if character is not space it gets added to String
                 out.append(c[i]);
             }
         }
