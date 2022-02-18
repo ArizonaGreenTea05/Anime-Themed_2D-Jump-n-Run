@@ -7,7 +7,7 @@ import java.awt.*;
 
 public class CoinBlock extends Block{
 
-    public CoinBlock(Position position, String texture){
+    public CoinBlock(Position position, int texture){
         super(position, texture);
         solid = true;
     }

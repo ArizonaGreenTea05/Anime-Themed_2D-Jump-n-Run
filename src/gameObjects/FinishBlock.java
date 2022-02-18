@@ -7,7 +7,7 @@ import java.awt.*;
 
 public class FinishBlock extends Block{
 
-    public FinishBlock(Position position, String texture){
+    public FinishBlock(Position position, int texture){
         super(position, texture);
         solid = true;
     }

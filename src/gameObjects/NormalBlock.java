@@ -7,7 +7,7 @@ import java.awt.*;
 
 public class NormalBlock extends Block{
 
-    public NormalBlock(Position position, String texture, boolean solid){
+    public NormalBlock(Position position, int texture, boolean solid){
         super(position, texture);
         this.solid = solid;
     }
