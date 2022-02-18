@@ -19,7 +19,7 @@ public abstract class State {
     protected List<GameObject> mapObjects;
     protected SpriteLibrary spriteLibrary;
     protected Input input;
-    private Game game;
+    private static Game game;
     private boolean updatable = true;
 
     public State(Input input, Game game){

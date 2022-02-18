@@ -89,4 +89,7 @@ public abstract class MovingEntity extends GameObject {
     public Controller getController(){
         return controller;
     }
+
+    @Override
+    public void resetSprites(){}
 }

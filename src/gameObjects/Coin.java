@@ -8,7 +8,7 @@ import java.awt.*;
 
 public class Coin extends StaticEntity{
 
-    public Coin(Position position, String texture){
+    public Coin(Position position, int texture){
         super(position, texture);
         solid = false;
     }

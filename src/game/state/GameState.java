@@ -80,20 +80,20 @@ public class GameState extends State {
                     if (letter == 'C') {
                         try {
                             int type = Integer.parseInt(String.valueOf(cMap[i][j + 1]));
-                            if (type == 1) {
+                            if (type == 0) {
                                 object = new twoXtwo(
                                         relativePosition,
-                                        CustomBlock.C1
+                                        type
+                                );
+                            } else if (type == 1) {
+                                object = new twoXtwo(
+                                        relativePosition,
+                                        type
                                 );
                             } else if (type == 2) {
                                 object = new twoXtwo(
                                         relativePosition,
-                                        CustomBlock.C2
-                                );
-                            } else if (type == 3) {
-                                object = new twoXtwo(
-                                        relativePosition,
-                                        CustomBlock.C3
+                                        type
                                 );
                             }
                             j++;

@@ -6,7 +6,7 @@ import game.state.State;
 import java.awt.*;
 
 public class twoXtwo extends CustomBlock{
-    public twoXtwo(Position position, String texture) {
+    public twoXtwo(Position position, int texture) {
         super(128, 128, position, texture);
         solid = true;
     }

@@ -5,6 +5,7 @@ import core.ScreenSize;
 import display.GameDisplay;
 import game.Game;
 import game.GameLoop;
+import gameObjects.GameObject;
 import utils.StringEditor;
 import utils.FileLoader;
 
@@ -13,6 +14,7 @@ import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.awt.event.ActionListener;
+import java.util.List;
 import java.util.Objects;
 
 public class Menu {
@@ -500,6 +502,8 @@ public class Menu {
             new Thread(() ->{
                 // start button can't be used anymore
                 bStartGame.setEnabled(false);
+
+                resetSprites();
                 // game loop is created
                 GameLoop gameLoop = new GameLoop(new Game(GAME_VERSION));
                 // menu is disposed
@@ -722,5 +726,14 @@ public class Menu {
         for (Component component : components) {
             menu.remove(component);
         }
+    }
+
+    private void resetSprites() {
+        try {
+            List<GameObject> mapObjects = Game.getState().getMapObjects();
+            for (GameObject mapObject : mapObjects) {
+                mapObject.resetSprites();
+            }
+        }catch(Exception ignored){}
     }
 }

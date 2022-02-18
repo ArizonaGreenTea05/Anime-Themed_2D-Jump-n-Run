@@ -6,19 +6,24 @@ import core.Position;
 import motionAndAbilities.MotionAndAbilities;
 
 import java.awt.*;
+import java.util.Arrays;
 
 public abstract class CustomBlock extends GameObject {
 
     private Image sprite;
-    public static final String C1 = "c1";
-    public static final String C2 = "c2";
-    public static final String C3 = "c3";
+    private static Image[] staticSprites = new Image[3];
 
-    public CustomBlock(int width, int height, Position position, String texture) {
+    public CustomBlock(int width, int height, Position position, int texture) {
         super(width, height, position.intX(), position.intY());
         this.width = width;
         this.height = height;
-        sprite = loadSprite(texture);
+
+
+        // loads sprite of given texture
+        if(staticSprites[texture] == null) {
+            staticSprites[texture] = loadSprite("c" + texture);
+        }
+        sprite =  staticSprites[texture];
     }
 
     @Override
@@ -76,4 +81,11 @@ public abstract class CustomBlock extends GameObject {
     public Controller getController(){
         return null;
     }
+
+    @Override
+    public void resetSprites(){
+        Arrays.fill(staticSprites, null);
+        sprite = null;
+    }
+
 }

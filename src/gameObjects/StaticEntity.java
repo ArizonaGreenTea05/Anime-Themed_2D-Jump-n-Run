@@ -6,6 +6,7 @@ import motionAndAbilities.MotionAndAbilities;
 import core.Position;
 
 import java.awt.*;
+import java.util.Arrays;
 
 
 // child class of MovingEntity;
@@ -13,13 +14,20 @@ import java.awt.*;
 
 public abstract class StaticEntity extends GameObject {
 
-    public static final String COIN = "coin";
+    public static final int COIN = 0;
 
     private Image sprite;
+    private static Image[] staticSprites = new Image[1];
 
-    public StaticEntity(Position position, String texture) {
+    public StaticEntity(Position position, int texture) {
         super(64,64, position.intX(), position.intY());
-        sprite = loadSprite(texture);
+        sprite = loadSprite("se" + texture);
+
+        // loads sprite of given texture
+        if(staticSprites[texture] == null) {
+            staticSprites[texture] = loadSprite("c" + texture);
+        }
+        sprite =  staticSprites[texture];
     }
 
     @Override
@@ -82,6 +90,12 @@ public abstract class StaticEntity extends GameObject {
     @Override
     public Controller getController(){
         return null;
+    }
+
+    @Override
+    public void resetSprites(){
+        Arrays.fill(staticSprites, null);
+        sprite = null;
     }
 
 }

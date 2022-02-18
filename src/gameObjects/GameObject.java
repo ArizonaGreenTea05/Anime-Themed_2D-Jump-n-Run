@@ -86,4 +86,6 @@ public abstract class GameObject {
     public abstract void subtractLifes(int i);
 
     public abstract Controller getController();
+
+    public abstract void resetSprites();
 }

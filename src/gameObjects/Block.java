@@ -6,6 +6,7 @@ import core.Position;
 import motionAndAbilities.MotionAndAbilities;
 
 import java.awt.*;
+import java.util.Arrays;
 
 
 // child class of MovingEntity;
@@ -25,7 +26,7 @@ public abstract class Block extends GameObject {
     public static final int TREE = 9;
     public static final int LEAVES = 10;
 
-    protected Image sprite;
+    private Image sprite;
     private static Image[] staticSprites = new Image[11];
     protected boolean actionUsed = false;
 
@@ -99,6 +100,12 @@ public abstract class Block extends GameObject {
     @Override
     public Controller getController(){
         return null;
+    }
+
+    @Override
+    public void resetSprites(){
+        Arrays.fill(staticSprites, null);
+        sprite = null;
     }
 
 

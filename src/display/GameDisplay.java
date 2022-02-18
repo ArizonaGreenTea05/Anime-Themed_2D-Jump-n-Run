@@ -2,6 +2,7 @@ package display;
 
 import game.Game;
 import game.GameLoop;
+import gameObjects.GameObject;
 import utils.*;
 import core.ScreenSize;
 import game.state.State;
@@ -13,6 +14,7 @@ import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferStrategy;
+import java.util.List;
 
 
 public class GameDisplay extends JFrame {
@@ -211,7 +213,7 @@ public class GameDisplay extends JFrame {
             bExit[i].setForeground(textColor);
             bExit[i].setBorder(border);
             bExit[i].setFocusable(false);
-            bExit[i].addActionListener(getActionListenerBack(i));
+            bExit[i].addActionListener(getActionListenerExit(i));
         }
 
         for (int i = 0; i < bRestart.length; i++) {
@@ -351,7 +353,7 @@ public class GameDisplay extends JFrame {
 
 // action listeners
 
-    private ActionListener getActionListenerBack(int i) {
+    private ActionListener getActionListenerExit(int i) {
         if(i == FAILED || i == PAUSE) {
             return e -> {
                 game.getGameLoop().resetScore();
