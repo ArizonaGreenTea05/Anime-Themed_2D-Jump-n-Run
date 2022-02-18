@@ -13,25 +13,30 @@ import java.awt.*;
 
 public abstract class Block extends GameObject {
 
-    public static final String GROUND_BLOCK = "ground";
-    public static final String TRANS_GROUND_BLOCK = "trans_ground";
-    public static final String WALL_BLOCK = "wall";
-    public static final String TRANS_WALL_BLOCK = "trans_wall";
-    public static final String BRICKS = "brick";
-    public static final String TRANS_BRICKS = "trans_brick";
-    public static final String PLANKS = "planks";
-    public static final String TRANS_PLANKS = "trans_planks";
-    public static final String ACTION_BLOCK = "action";
-    public static final String TREE = "tree";
-    public static final String LEAVES = "leaves";
+    public static final int GROUND_BLOCK = 0;
+    public static final int TRANS_GROUND_BLOCK = 1;
+    public static final int WALL_BLOCK = 2;
+    public static final int TRANS_WALL_BLOCK = 3;
+    public static final int BRICKS = 4;
+    public static final int TRANS_BRICKS = 5;
+    public static final int PLANKS = 6;
+    public static final int TRANS_PLANKS = 7;
+    public static final int ACTION_BLOCK = 8;
+    public static final int TREE = 9;
+    public static final int LEAVES = 10;
 
-    private Image sprite;
+    protected Image sprite;
+    private static Image[] staticSprites = new Image[11];
     protected boolean actionUsed = false;
 
-    public Block(Position position, String texture) {
+    public Block(Position position, int texture) {
         super(64, 64, position.intX(), position.intY());
+
         // loads sprite of given texture
-        sprite = loadSprite(texture);
+        if(staticSprites[texture] == null) {
+            staticSprites[texture] = loadSprite(String.valueOf(texture));
+        }
+        sprite =  staticSprites[texture];
     }
 
     @Override
