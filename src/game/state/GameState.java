@@ -172,9 +172,11 @@ public class GameState extends State {
                         );
 
                     } else if (letter == '*') {
-                        object = new Coin(
+                        gameObjects.add(
+                                new Coin(
                                 relativePosition,
                                 StaticEntity.COIN
+                            )
                         );
 
                     }

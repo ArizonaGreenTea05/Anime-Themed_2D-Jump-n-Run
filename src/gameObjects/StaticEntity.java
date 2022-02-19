@@ -21,11 +21,10 @@ public abstract class StaticEntity extends GameObject {
 
     public StaticEntity(Position position, int texture) {
         super(64,64, position.intX(), position.intY());
-        sprite = loadSprite("se" + texture);
 
         // loads sprite of given texture
         if(staticSprites[texture] == null) {
-            staticSprites[texture] = loadSprite("c" + texture);
+            staticSprites[texture] = loadSprite("se" + texture);
         }
         sprite =  staticSprites[texture];
     }

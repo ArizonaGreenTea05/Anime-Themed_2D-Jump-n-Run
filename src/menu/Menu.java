@@ -734,6 +734,10 @@ public class Menu {
             for (GameObject mapObject : mapObjects) {
                 mapObject.resetSprites();
             }
+            List<GameObject> gameObjects = Game.getState().getGameObjects();
+            for (GameObject gameObject : gameObjects) {
+                gameObject.resetSprites();
+            }
         }catch(Exception ignored){}
     }
 }
