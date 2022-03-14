@@ -66,12 +66,12 @@ public class Menu {
 // buttons
 
     private JButton bStartGame;
-    private JLabel[] lHeaders = new JLabel[3];
+    private final JLabel[] lHeaders = new JLabel[3];
     private JButton[] bThemes;
     private JButton[] bPlayers;
     private JButton[] bMaps;
 
-    private JButton[] bBack = new JButton[3];
+    private final JButton[] bBack = new JButton[3];
     private final int PLAYERS = 0;
     private final int THEMES = 1;
     private final int MAPS = 2;
@@ -231,8 +231,8 @@ public class Menu {
         menu.add(pControls);
         menu.add(bShowControls);
         menu.add(bResetHighscore);
-        for (int i = 0; i < lInfo.length; i++) {
-            menu.add(lInfo[i]);
+        for (JLabel jLabel : lInfo) {
+            menu.add(jLabel);
         }
         menu.add(bChangeColor);
         menu.add(bExit);
@@ -481,9 +481,7 @@ public class Menu {
 // action listeners
 
     private ActionListener getActionListenerResetHighscores() {
-        return e -> {
-            resetHighscores();
-        };
+        return e -> resetHighscores();
     }
 
     private ActionListener getActionListenerShowControls() {
