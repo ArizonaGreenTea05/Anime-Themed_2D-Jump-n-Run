@@ -58,7 +58,7 @@ public class Menu {
 
 // font
 
-    public static int fontSize;
+    public static int labelFontSize;
     public static final String textFont = "Comic Sans MS";
 
 
@@ -66,6 +66,7 @@ public class Menu {
 // buttons
 
     private JButton bStartGame;
+    private JLabel[] lHeaders = new JLabel[3];
     private JButton[] bThemes;
     private JButton[] bPlayers;
     private JButton[] bMaps;
@@ -177,7 +178,7 @@ public class Menu {
         labelHeight = menu.getHeight()/32;
         labelWidth1 = labelHeight*4;
         labelWidth2 = (int) ((double) labelHeight*6.3);
-        fontSize = labelHeight-13;
+        labelFontSize = labelHeight-13;
 
         lInfo[THEME_TEXT] = new JLabel(" Theme:");
         lInfo[PLAYER_TEXT] = new JLabel(" Character:");
@@ -201,7 +202,7 @@ public class Menu {
             lInfo[i].setForeground(textColor[colorSetting]);
             lInfo[i].setBackground(labelColor[colorSetting]);
             lInfo[i].setBorder(border);
-            lInfo[i].setFont(new Font(textFont, Font.PLAIN, fontSize));
+            lInfo[i].setFont(new Font(textFont, Font.PLAIN, labelFontSize));
         }
 
         lInfo[HIGHSCORE].setText(String.format(" %.1f", highscore));
@@ -216,13 +217,13 @@ public class Menu {
             menu.add(bStartGame);
             menu.add(bBack[MAPS]);
         } else if(!lInfo[PLAYER].getText().equals("")) {
-            addMaps();
+            addbMaps();
             menu.add(bBack[PLAYERS]);
         } else if(!lInfo[THEME].getText().equals("")) {
-            addPlayers();
+            addbPlayers();
             menu.add(bBack[THEMES]);
         } else {
-            addThemes();
+            addbThemes();
         }
 
 
@@ -233,13 +234,6 @@ public class Menu {
         for (int i = 0; i < lInfo.length; i++) {
             menu.add(lInfo[i]);
         }
-        /*
-        lInfo[THEME].setVisible(true);
-        lInfo[PLAYER].setVisible(true);
-        lInfo[MAP].setVisible(true);
-        lInfo[HIGHSCORE].setVisible(true);
-
-         */
         menu.add(bChangeColor);
         menu.add(bExit);
     }
@@ -377,46 +371,64 @@ public class Menu {
 
 // adder methods
 
-    private void addThemes(){
+    private void addbThemes(){
         // length initialized
         bThemes = new JButton[gameThemes.length];
         // height & width initialized
         int height = menu.getHeight()/12;
         int width = height*10;
+        int fontSize = height/3;
 
-        for (int i = 0; i < gameThemes.length; i++) {
-            // button initialized & added
-            bThemes[i] = new JButton(StringEditor.makeNameNice(gameThemes[i]));
-            bThemes[i].setBounds(menu.getWidth()/4,menu.getHeight()/10+i*(menu.getHeight()/12 + 10),width,height);
-            bThemes[i].setFont(new Font(textFont, Font.PLAIN, bThemes[i].getHeight()/3));
-            bThemes[i].setBackground(buttonColor[colorSetting]);
-            bThemes[i].setForeground(textColor[colorSetting]);
-            bThemes[i].setBorder(border);
-            bThemes[i].addActionListener(getActionListenerThemes(i));
-            menu.add(bThemes[i]);
+        for (int i = -1; i < gameThemes.length; i++) {
+            if(i < 0){
+                lHeaders[THEMES] = new JLabel("CHOOSE A THEME", SwingConstants.CENTER);
+                lHeaders[THEMES].setBounds(menu.getWidth()/4,menu.getHeight()/10+i*(menu.getHeight()/12 + 10),width,height);
+                lHeaders[THEMES].setFont(new Font(textFont + " bold", Font.PLAIN, fontSize+2));
+                lHeaders[THEMES].setForeground(textColor[colorSetting]);
+                menu.add(lHeaders[THEMES]);
+            } else {
+                // button initialized & added
+                bThemes[i] = new JButton(StringEditor.makeNameNice(gameThemes[i]));
+                bThemes[i].setBounds(menu.getWidth() / 4, menu.getHeight() / 10 + i * (menu.getHeight() / 12 + 10), width, height);
+                bThemes[i].setFont(new Font(textFont, Font.PLAIN, fontSize));
+                bThemes[i].setBackground(buttonColor[colorSetting]);
+                bThemes[i].setForeground(textColor[colorSetting]);
+                bThemes[i].setBorder(border);
+                bThemes[i].addActionListener(getActionListenerThemes(i));
+                menu.add(bThemes[i]);
+            }
         }
 
         // menu updated
         menu.repaint();
     }
 
-    private void addPlayers(){
+    private void addbPlayers(){
         // length initialized
         bPlayers = new JButton[playerName.length];
         // height & width initialized
         int height = menu.getHeight()/12;
         int width = height*10;
+        int fontSize = height/3;
 
-        for (int i = 0; i < playerName.length; i++) {
-            // button initialized & added
-            bPlayers[i] = new JButton(StringEditor.makeNameNice(playerName[i]));
-            bPlayers[i].setBounds(menu.getWidth()/4,menu.getHeight()/10+i*(menu.getHeight()/12 + 10),width,height);
-            bPlayers[i].setFont(new Font(textFont, Font.PLAIN, bPlayers[i].getHeight()/3));
-            bPlayers[i].setBackground(buttonColor[colorSetting]);
-            bPlayers[i].setForeground(textColor[colorSetting]);
-            bPlayers[i].setBorder(border);
-            bPlayers[i].addActionListener(getActionListenerPlayers(i));
-            menu.add(bPlayers[i]);
+        for (int i = -1; i < playerName.length; i++) {
+            if(i < 0) {
+                lHeaders[PLAYERS] = new JLabel("CHOOSE A PLAYER", SwingConstants.CENTER);
+                lHeaders[PLAYERS].setBounds(menu.getWidth() / 4, menu.getHeight() / 10 + i * (menu.getHeight() / 12 + 10), width, height);
+                lHeaders[PLAYERS].setFont(new Font(textFont + " bold", Font.PLAIN, fontSize+2));
+                lHeaders[PLAYERS].setForeground(textColor[colorSetting]);
+                menu.add(lHeaders[PLAYERS]);
+            } else {
+                // button initialized & added
+                bPlayers[i] = new JButton(StringEditor.makeNameNice(playerName[i]));
+                bPlayers[i].setBounds(menu.getWidth() / 4, menu.getHeight() / 10 + i * (menu.getHeight() / 12 + 10), width, height);
+                bPlayers[i].setFont(new Font(textFont, Font.PLAIN, fontSize));
+                bPlayers[i].setBackground(buttonColor[colorSetting]);
+                bPlayers[i].setForeground(textColor[colorSetting]);
+                bPlayers[i].setBorder(border);
+                bPlayers[i].addActionListener(getActionListenerPlayers(i));
+                menu.add(bPlayers[i]);
+            }
         }
 
         // back [to] themes button added
@@ -429,23 +441,32 @@ public class Menu {
         menu.repaint();
     }
 
-    private void addMaps(){
+    private void addbMaps(){
         // length initialized
         bMaps = new JButton[maps.length];
         // height & width initialized
-        int width = menu.getWidth()/2;
         int height = menu.getHeight()/12;
+        int width = height*10;
+        int fontSize = height/3;
 
-        for (int i = 0; i < maps.length; i++) {
-            // button initialized & added
-            bMaps[i] = new JButton(StringEditor.makeNameNice(maps[i]));
-            bMaps[i].setBounds(menu.getWidth()/4,menu.getHeight()/10+i*(menu.getHeight()/12 + 10),width,height);
-            bMaps[i].setFont(new Font(textFont, Font.PLAIN, bMaps[i].getHeight()/3));
-            bMaps[i].setBackground(buttonColor[colorSetting]);
-            bMaps[i].setForeground(textColor[colorSetting]);
-            bMaps[i].setBorder(border);
-            bMaps[i].addActionListener(getActionListenerMaps(i));
-            menu.add(bMaps[i]);
+        for (int i = -1; i < maps.length; i++) {
+            if(i < 0) {
+                lHeaders[MAPS] = new JLabel("CHOOSE A MAP", SwingConstants.CENTER);
+                lHeaders[MAPS].setBounds(menu.getWidth() / 4, menu.getHeight() / 10 + i * (menu.getHeight() / 12 + 10), width, height);
+                lHeaders[MAPS].setFont(new Font(textFont + " bold", Font.PLAIN, fontSize+2));
+                lHeaders[MAPS].setForeground(textColor[colorSetting]);
+                menu.add(lHeaders[MAPS]);
+            } else {
+                // button initialized & added
+                bMaps[i] = new JButton(StringEditor.makeNameNice(maps[i]));
+                bMaps[i].setBounds(menu.getWidth() / 4, menu.getHeight() / 10 + i * (menu.getHeight() / 12 + 10), width, height);
+                bMaps[i].setFont(new Font(textFont, Font.PLAIN, fontSize));
+                bMaps[i].setBackground(buttonColor[colorSetting]);
+                bMaps[i].setForeground(textColor[colorSetting]);
+                bMaps[i].setBorder(border);
+                bMaps[i].addActionListener(getActionListenerMaps(i));
+                menu.add(bMaps[i]);
+            }
         }
 
         // back [to] players button added
@@ -518,10 +539,11 @@ public class Menu {
         return e-> {
             // player buttons removed
             remove(bPlayers);
+            menu.remove(lHeaders[PLAYERS]);
             // theme text removed
             lInfo[THEME].setText("");
             // theme buttons added
-            addThemes();
+            addbThemes();
             // back [to] themes button removed
             menu.remove(bBack[THEMES]);
             // menu updated
@@ -533,6 +555,7 @@ public class Menu {
         return e -> {
             // map buttons removed
             remove(bMaps);
+            menu.remove(lHeaders[MAPS]);
             // player text removed
             lInfo[PLAYER].setText("");
             // highscore for map reset
@@ -542,7 +565,7 @@ public class Menu {
             // menu updated
             menu.repaint();
             // players added
-            addPlayers();
+            addbPlayers();
         };
     }
 
@@ -557,7 +580,7 @@ public class Menu {
             // menu updated
             menu.repaint();
             // map buttons added
-            addMaps();
+            addbMaps();
         };
     }
 
@@ -571,8 +594,9 @@ public class Menu {
             setMaps();
             // the´me buttons removed
             remove(bThemes);
+            menu.remove(lHeaders[THEMES]);
             // player buttons added
-            addPlayers();
+            addbPlayers();
             // back [to] themes button added
             menu.add(bBack[THEMES]);
             // menu updated
@@ -587,10 +611,11 @@ public class Menu {
             lInfo[PLAYER].setText(" " + StringEditor.makeNameNice(playerName[name]));
             // player buttons removed
             remove(bPlayers);
+            menu.remove(lHeaders[PLAYERS]);
             // back [to] themes button removed
             menu.remove(bBack[THEMES]);
             // map buttons added
-            addMaps();
+            addbMaps();
             // back [to] players button added
             menu.add(bBack[PLAYERS]);
             // menu updated
@@ -605,6 +630,7 @@ public class Menu {
             lInfo[MAP].setText(" " + StringEditor.makeNameNice(maps[map]));
             // map buttons removed
             remove(bMaps);
+            menu.remove(lHeaders[MAPS]);
             // back [to] players button removed
             menu.remove(bBack[PLAYERS]);
             // highscore of map set
