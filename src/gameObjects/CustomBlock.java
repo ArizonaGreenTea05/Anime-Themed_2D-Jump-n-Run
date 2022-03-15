@@ -11,7 +11,7 @@ import java.util.Arrays;
 public abstract class CustomBlock extends GameObject {
 
     private Image sprite;
-    private static Image[] staticSprites = new Image[3];
+    private static final Image[] staticSprites = new Image[3];
 
     public CustomBlock(int width, int height, Position position, int texture) {
         super(width, height, position.intX(), position.intY());

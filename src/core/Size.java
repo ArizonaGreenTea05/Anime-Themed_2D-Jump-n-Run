@@ -2,8 +2,8 @@ package core;
 
 public class Size {
 
-    private int width;
-    private int height;
+    private final int width;
+    private final int height;
 
     // size of game objects
 

@@ -27,7 +27,7 @@ public abstract class Block extends GameObject {
     public static final int LEAVES = 10;
 
     private Image sprite;
-    private static Image[] staticSprites = new Image[11];
+    private static final Image[] staticSprites = new Image[11];
     protected boolean actionUsed = false;
 
     public Block(Position position, int texture) {

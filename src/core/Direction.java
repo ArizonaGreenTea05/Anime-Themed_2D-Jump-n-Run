@@ -11,7 +11,7 @@ public enum Direction {
     O(3),
     D(4);
 
-    private int animationRow;
+    private final int animationRow;
 
     Direction(int animationRow){
         this.animationRow = animationRow;

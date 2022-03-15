@@ -39,7 +39,7 @@ public class FileLoader {
     }
 
     public static String load(String filename, String path){
-        String input = null;
+        String input;
         
         File file = new File("resources/" + path + filename);
 
@@ -125,21 +125,21 @@ public class FileLoader {
             // list used because it is easier to add items to it -> less code & faster
             List<String> contentsList = new LinkedList<>();
 
-            for (int i = 0; i < contents.length; i++) {
+            for (String content : contents) {
 
                 if (specifyIgnore == SPECIFIC) {
                     // if specifiyIgnore == SPECIFIC:
                     // every name that equals 'ignore' will not be loaded
-                    if (!contents[i].equals(ignore)) {
+                    if (!content.equals(ignore)) {
                         // if content does not need to be ignored: is added to list
-                        contentsList.add(contents[i]);
+                        contentsList.add(content);
                     }
                 } else {
                     // if specifiyIgnore == ALL:
                     // every file name that contains 'ignore' will not be loaded
-                    if (!contents[i].contains(ignore)) {
+                    if (!content.contains(ignore)) {
                         // if content does not need to be ignored: is added to list
-                        contentsList.add(contents[i]);
+                        contentsList.add(content);
                     }
                 }
             }

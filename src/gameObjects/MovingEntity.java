@@ -3,7 +3,6 @@ package gameObjects;
 import controller.Controller;
 import core.Direction;
 import core.Position;
-import core.ScreenSize;
 import motionAndAbilities.MotionAndAbilities;
 import game.state.State;
 import gfx.AnimationManager;
@@ -21,7 +20,7 @@ public abstract class MovingEntity extends GameObject {
     protected AnimationManager animationManager;
     protected int lifes;
     protected int maxLifes;
-    private MotionAndAbilities mAndA;
+    private final MotionAndAbilities mAndA;
     private Direction direction;
     protected State state;
 

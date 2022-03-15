@@ -4,12 +4,7 @@ import display.GameDisplay;
 import display.LoadingScreen;
 import game.state.GameState;
 import game.state.State;
-import gameObjects.GameObject;
 import input.Input;
-import menu.Menu;
-import utils.StringEditor;
-
-import java.util.List;
 
 public class Game {
 

@@ -7,7 +7,7 @@ import java.util.Map;
 
 public class SpriteLibrary {
 
-    private Map<String, SpriteSet> units;
+    private final Map<String, SpriteSet> units;
 
     public SpriteLibrary() {
         units = new HashMap<>();

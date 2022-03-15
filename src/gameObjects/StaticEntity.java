@@ -17,7 +17,7 @@ public abstract class StaticEntity extends GameObject {
     public static final int COIN = 0;
 
     private Image sprite;
-    private static Image[] staticSprites = new Image[1];
+    private static final Image[] staticSprites = new Image[1];
 
     public StaticEntity(Position position, int texture) {
         super(64,64, position.intX(), position.intY());

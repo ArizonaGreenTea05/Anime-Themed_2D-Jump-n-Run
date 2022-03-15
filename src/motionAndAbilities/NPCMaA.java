@@ -1,7 +1,6 @@
 package motionAndAbilities;
 import controller.Controller;
 import core.Position;
-import core.ScreenSize;
 import core.Vector2D;
 import game.state.State;
 
@@ -38,8 +37,6 @@ public class NPCMaA extends MotionAndAbilities {
 
         x = position.getX();
         y = position.getY();
-
-        int screenHeight = ScreenSize.getHeight();
 
         if(y < savePosYJump-jumpHeight || (!controller.isRequestingUp() && !hasGround()) || !topSpace()){
             falling = true;

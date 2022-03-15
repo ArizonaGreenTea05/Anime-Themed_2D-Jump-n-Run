@@ -1,15 +1,12 @@
 package display;
 
-import core.Position;
 import core.ScreenSize;
-import core.Size;
 import menu.Menu;
 import utils.FileLoader;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.util.Objects;
 
 public class LoadingScreen extends JFrame implements Runnable{
     private final JLabel background = new JLabel();
@@ -82,5 +79,6 @@ public class LoadingScreen extends JFrame implements Runnable{
                 }
                 loading.setIcon(image);
             }
-        }}
+        }
+    }
 }
