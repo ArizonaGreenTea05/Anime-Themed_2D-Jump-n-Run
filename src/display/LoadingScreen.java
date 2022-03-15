@@ -44,7 +44,7 @@ public class LoadingScreen extends JFrame implements Runnable{
         int width = getWidth()/4;
         int height = getHeight()/12;
 
-        BufferedImage fullImg = (BufferedImage) FileLoader.loadImage("loading","/loading/");
+        BufferedImage fullImg = (BufferedImage) FileLoader.loadImage(String.valueOf(Menu.colorSetting),"/loading/");
 
         for (int i = 0; i < loadingIMGs.length; i++) {
             Image subImg = fullImg.getSubimage(
