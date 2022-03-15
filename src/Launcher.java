@@ -2,7 +2,7 @@ import menu.Menu;
 public class Launcher {
 
     // defining game-version (which is shown in title)
-    static String version = "V 1.3.2 - Facharbeits-Release";
+    static String version = "V 1.3.3";
 
     // Launcher-class -> launches the menu
     public static void main(String[] args) {
